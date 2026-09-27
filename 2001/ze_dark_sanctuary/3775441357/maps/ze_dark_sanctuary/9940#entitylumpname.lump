@@ -12,7 +12,7 @@
     "damagecap": "20",
     "damage": "-150",
     "master": "",
-    "filtername": "[PR#]CT",
+    "filtername": "[PR#]my_filter",
     "spawnflags": "4097",
     "globalname": "",
     "StartDisabled": "1",
@@ -46,6 +46,22 @@
         "input": "KeyValue",
         "param": "speed 1",
         "delay": 1,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "!activator",
+        "input": "setdamagefilter",
+        "param": "[PR#]doro_wudi",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnEndTouch",
+        "target": "!activator",
+        "input": "setdamagefilter",
+        "param": "",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -594,7 +610,7 @@
         "output": "OnHurtPlayer",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 0.1",
+        "param": "speed 0.05",
         "delay": 0,
         "limit": -1
       },
