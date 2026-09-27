@@ -2434,6 +2434,36 @@
     "_template_lump_ent_index": "34"
   },
   {
+    "vscripts": "",
+    "targetname": "[PR#]einzelspiess2",
+    "parentname": "[PR#]einzelspiess1",
+    "parentAttachmentName": "",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "StartDisabled": "0",
+    "globalname": "",
+    "spawnflags": "1",
+    "filtername": "",
+    "master": "",
+    "damage": "5000",
+    "damagecap": "20",
+    "damagetype": "4",
+    "damagemodel": "0",
+    "forgivedelay": "3.000000",
+    "nodmgforce": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "thinkalways": "0",
+    "classname": "trigger_hurt",
+    "origin": "-349.000000 -7776.000000 -1984.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "5564",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/einzelspiess2_5564.vmdl",
+    "_template_lump_ent_index": "35"
+  },
+  {
     "targetname": "[PR#]fallblockvorflur2",
     "vscripts": "",
     "parentname": "",
@@ -2482,7 +2512,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4599",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/fallblockvorflur2_4599.vmdl",
-    "_template_lump_ent_index": "35"
+    "_template_lump_ent_index": "36"
   },
   {
     "targetname": "[PR#]fallblockvorflur1",
@@ -2533,7 +2563,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4304",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/fallblockvorflur1_4304.vmdl",
-    "_template_lump_ent_index": "36"
+    "_template_lump_ent_index": "37"
   },
   {
     "targetname": "[PR#]hochblock1",
@@ -2584,7 +2614,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4414",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/hochblock1_4414.vmdl",
-    "_template_lump_ent_index": "37"
+    "_template_lump_ent_index": "38"
   },
   {
     "targetname": "[PR#]hochblock2",
@@ -2635,7 +2665,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4412",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/hochblock2_4412.vmdl",
-    "_template_lump_ent_index": "38"
+    "_template_lump_ent_index": "39"
   },
   {
     "targetname": "[PR#]dreispiess1",
@@ -2686,7 +2716,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4563",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/dreispiess1_4563.vmdl",
-    "_template_lump_ent_index": "39"
+    "_template_lump_ent_index": "40"
   },
   {
     "AllowMovableNavMeshDockingOnEntireEntity": "0",
@@ -2727,7 +2757,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7567",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrwall2_7567.vmdl",
-    "_template_lump_ent_index": "40"
+    "_template_lump_ent_index": "41"
   },
   {
     "AllowMovableNavMeshDockingOnEntireEntity": "0",
@@ -2768,7 +2798,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7627",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrwall2_7627.vmdl",
-    "_template_lump_ent_index": "41"
+    "_template_lump_ent_index": "42"
   },
   {
     "AllowMovableNavMeshDockingOnEntireEntity": "0",
@@ -2809,7 +2839,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7857",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrwall2_7857.vmdl",
-    "_template_lump_ent_index": "42"
+    "_template_lump_ent_index": "43"
   },
   {
     "wait": "1.000000",
@@ -2831,7 +2861,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9582",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9582.vmdl",
-    "_template_lump_ent_index": "43",
+    "_template_lump_ent_index": "44",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -2887,7 +2917,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9593",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9593.vmdl",
-    "_template_lump_ent_index": "44",
+    "_template_lump_ent_index": "45",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -2943,7 +2973,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9596",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9596.vmdl",
-    "_template_lump_ent_index": "45",
+    "_template_lump_ent_index": "46",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -2999,7 +3029,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9599",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9599.vmdl",
-    "_template_lump_ent_index": "46",
+    "_template_lump_ent_index": "47",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -3055,7 +3085,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9602",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9602.vmdl",
-    "_template_lump_ent_index": "47",
+    "_template_lump_ent_index": "48",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -3111,7 +3141,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9605",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9605.vmdl",
-    "_template_lump_ent_index": "48",
+    "_template_lump_ent_index": "49",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -3159,7 +3189,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9608",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9608.vmdl",
-    "_template_lump_ent_index": "49",
+    "_template_lump_ent_index": "50",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -3215,7 +3245,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9611",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drkk_9611.vmdl",
-    "_template_lump_ent_index": "50",
+    "_template_lump_ent_index": "51",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -3255,7 +3285,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9588",
-    "_template_lump_ent_index": "51",
+    "_template_lump_ent_index": "52",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3303,7 +3333,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9595",
-    "_template_lump_ent_index": "52",
+    "_template_lump_ent_index": "53",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3351,7 +3381,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9598",
-    "_template_lump_ent_index": "53",
+    "_template_lump_ent_index": "54",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3399,7 +3429,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9601",
-    "_template_lump_ent_index": "54",
+    "_template_lump_ent_index": "55",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3447,7 +3477,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9604",
-    "_template_lump_ent_index": "55",
+    "_template_lump_ent_index": "56",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3495,7 +3525,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9607",
-    "_template_lump_ent_index": "56",
+    "_template_lump_ent_index": "57",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3543,7 +3573,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9610",
-    "_template_lump_ent_index": "57",
+    "_template_lump_ent_index": "58",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3591,7 +3621,7 @@
     "angles": "-0.000000 -90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9613",
-    "_template_lump_ent_index": "58",
+    "_template_lump_ent_index": "59",
     "connections": [
       {
         "output": "OnHitMin",
@@ -3662,7 +3692,7 @@
     "angles": "0.000000 -179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9620",
-    "_template_lump_ent_index": "59"
+    "_template_lump_ent_index": "60"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3699,7 +3729,7 @@
     "angles": "0.000000 -179.999969 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9621",
-    "_template_lump_ent_index": "60"
+    "_template_lump_ent_index": "61"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3736,7 +3766,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9623",
-    "_template_lump_ent_index": "61"
+    "_template_lump_ent_index": "62"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3773,7 +3803,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9624",
-    "_template_lump_ent_index": "62"
+    "_template_lump_ent_index": "63"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3810,7 +3840,7 @@
     "angles": "-0.000000 0.000000 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9625",
-    "_template_lump_ent_index": "63"
+    "_template_lump_ent_index": "64"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3847,7 +3877,7 @@
     "angles": "-0.000000 -90.000000 25.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9626",
-    "_template_lump_ent_index": "64"
+    "_template_lump_ent_index": "65"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3884,7 +3914,7 @@
     "angles": "-0.000000 90.000008 25.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9627",
-    "_template_lump_ent_index": "65"
+    "_template_lump_ent_index": "66"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3921,7 +3951,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9628",
-    "_template_lump_ent_index": "66"
+    "_template_lump_ent_index": "67"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3958,7 +3988,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9629",
-    "_template_lump_ent_index": "67"
+    "_template_lump_ent_index": "68"
   },
   {
     "depth_render_offset": "0.125000",
@@ -3995,7 +4025,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9630",
-    "_template_lump_ent_index": "68"
+    "_template_lump_ent_index": "69"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4032,7 +4062,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9631",
-    "_template_lump_ent_index": "69"
+    "_template_lump_ent_index": "70"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4069,7 +4099,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9632",
-    "_template_lump_ent_index": "70"
+    "_template_lump_ent_index": "71"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4106,7 +4136,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9633",
-    "_template_lump_ent_index": "71"
+    "_template_lump_ent_index": "72"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4143,7 +4173,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9634",
-    "_template_lump_ent_index": "72"
+    "_template_lump_ent_index": "73"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4180,7 +4210,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9635",
-    "_template_lump_ent_index": "73"
+    "_template_lump_ent_index": "74"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4217,7 +4247,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9636",
-    "_template_lump_ent_index": "74"
+    "_template_lump_ent_index": "75"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4254,7 +4284,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9637",
-    "_template_lump_ent_index": "75"
+    "_template_lump_ent_index": "76"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4291,7 +4321,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9638",
-    "_template_lump_ent_index": "76"
+    "_template_lump_ent_index": "77"
   },
   {
     "depth_render_offset": "0.125000",
@@ -4328,7 +4358,7 @@
     "angles": "0.000000 -179.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9639",
-    "_template_lump_ent_index": "77"
+    "_template_lump_ent_index": "78"
   },
   {
     "filtername": "",
@@ -4349,7 +4379,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7527",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger1_7527.vmdl",
-    "_template_lump_ent_index": "78",
+    "_template_lump_ent_index": "79",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4405,7 +4435,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12495",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger1_12495.vmdl",
-    "_template_lump_ent_index": "79",
+    "_template_lump_ent_index": "80",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4452,7 +4482,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7533",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger2_7533.vmdl",
-    "_template_lump_ent_index": "80",
+    "_template_lump_ent_index": "81",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4524,7 +4554,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9578",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger2_9578.vmdl",
-    "_template_lump_ent_index": "81",
+    "_template_lump_ent_index": "82",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4555,7 +4585,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7680",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtriggerfinal_7680.vmdl",
-    "_template_lump_ent_index": "82",
+    "_template_lump_ent_index": "83",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4615,7 +4645,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7531",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger3_7531.vmdl",
-    "_template_lump_ent_index": "83",
+    "_template_lump_ent_index": "84",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4651,7 +4681,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12406",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger3_12406.vmdl",
-    "_template_lump_ent_index": "84"
+    "_template_lump_ent_index": "85"
   },
   {
     "wait": "1.000000",
@@ -4673,7 +4703,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8148",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8148.vmdl",
-    "_template_lump_ent_index": "85",
+    "_template_lump_ent_index": "86",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4705,7 +4735,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8149",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8149.vmdl",
-    "_template_lump_ent_index": "86",
+    "_template_lump_ent_index": "87",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4737,7 +4767,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8151",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8151.vmdl",
-    "_template_lump_ent_index": "87",
+    "_template_lump_ent_index": "88",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4769,7 +4799,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8153",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8153.vmdl",
-    "_template_lump_ent_index": "88",
+    "_template_lump_ent_index": "89",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4820,7 +4850,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9559",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiff3c_9559.vmdl",
-    "_template_lump_ent_index": "89"
+    "_template_lump_ent_index": "90"
   },
   {
     "AllowMovableNavMeshDockingOnEntireEntity": "0",
@@ -4861,7 +4891,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9561",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiff4c_9561.vmdl",
-    "_template_lump_ent_index": "90"
+    "_template_lump_ent_index": "91"
   },
   {
     "wait": "1.000000",
@@ -4883,7 +4913,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12328",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtg_12328.vmdl",
-    "_template_lump_ent_index": "91",
+    "_template_lump_ent_index": "92",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4939,7 +4969,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7953",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drstarttp_7953.vmdl",
-    "_template_lump_ent_index": "92",
+    "_template_lump_ent_index": "93",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4979,7 +5009,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9571",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drdiff2finish_9571.vmdl",
-    "_template_lump_ent_index": "93",
+    "_template_lump_ent_index": "94",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5019,7 +5049,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9573",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drdiff3finish_9573.vmdl",
-    "_template_lump_ent_index": "94",
+    "_template_lump_ent_index": "95",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5067,7 +5097,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9049",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drtrespawn1_9049.vmdl",
-    "_template_lump_ent_index": "95",
+    "_template_lump_ent_index": "96",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5099,7 +5129,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9056",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drtrespawn2_9056.vmdl",
-    "_template_lump_ent_index": "96",
+    "_template_lump_ent_index": "97",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5131,7 +5161,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8007",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdeathtrigger_8007.vmdl",
-    "_template_lump_ent_index": "97",
+    "_template_lump_ent_index": "98",
     "connections": [
       {
         "output": "OnEndTouch",
@@ -5163,7 +5193,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9590",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drcount_9590.vmdl",
-    "_template_lump_ent_index": "98",
+    "_template_lump_ent_index": "99",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5266,7 +5296,7 @@
     "angles": "0.000000 -179.999954 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11851",
-    "_template_lump_ent_index": "99"
+    "_template_lump_ent_index": "100"
   },
   {
     "depth_render_offset": "0.125000",
@@ -5303,7 +5333,7 @@
     "angles": "0.000000 -179.999924 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12441",
-    "_template_lump_ent_index": "100"
+    "_template_lump_ent_index": "101"
   },
   {
     "depth_render_offset": "0.125000",
@@ -5340,6 +5370,6 @@
     "angles": "0.000000 -179.999893 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12442",
-    "_template_lump_ent_index": "101"
+    "_template_lump_ent_index": "102"
   }
 ]
