@@ -3,11 +3,21 @@
 
 [
   {
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
     "wait": "1.000000",
     "filtername": "[PR#]Boss2_TargetFilter",
     "spawnflags": "1",
+    "globalname": "",
     "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
     "targetname": "[PR#]Omega_F_Normal_Attack_Trigger",
     "classname": "trigger_multiple",
     "origin": "2862.500000 -2894.250000 622.500000",

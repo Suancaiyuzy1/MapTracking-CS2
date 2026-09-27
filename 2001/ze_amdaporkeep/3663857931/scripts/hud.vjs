@@ -802,6 +802,58 @@ Instance.OnWeaponDrop(({ weapon }) => {
 });
 
 // =========================================================
+// 13.5 玩家阵亡：清掉该玩家身上的 HUD
+// =========================================================
+Instance.OnPlayerKill(({ player }) => {
+    if (!player || !player.IsValid()) return;
+
+    let controller = null;
+    try {
+        controller = player.GetOriginalPlayerController
+            ? player.GetOriginalPlayerController()
+            : null;
+    } catch (e) {
+        controller = null;
+    }
+    if (!controller) {
+        try {
+            controller = player.GetPlayerController
+                ? player.GetPlayerController()
+                : null;
+        } catch (e) {
+            controller = null;
+        }
+    }
+    if (!controller || !controller.IsValid()) return;
+
+    const playerSlot = controller.GetPlayerSlot();
+    if (playerSlot < 0) return;
+
+    ClearAllHUDForPlayer(playerSlot);
+
+    for (const itemName in ITEM_OWNER) {
+        if (ITEM_OWNER[itemName] === playerSlot) {
+            ITEM_OWNER[itemName] = -1;
+        }
+    }
+
+    delete PENDING_HUD_STATE[playerSlot];
+    PENDING_PLAYERS.delete(playerSlot);
+});
+
+Instance.OnPlayerDisconnect(({ playerSlot }) => {
+    if (playerSlot < 0) return;
+    ClearAllHUDForPlayer(playerSlot);
+    for (const itemName in ITEM_OWNER) {
+        if (ITEM_OWNER[itemName] === playerSlot) {
+            ITEM_OWNER[itemName] = -1;
+        }
+    }
+    delete PENDING_HUD_STATE[playerSlot];
+    PENDING_PLAYERS.delete(playerSlot);
+});
+
+// =========================================================
 // 14. 武士 Ulti
 // =========================================================
 Instance.OnScriptInput("Samurai_Ulti", () => {

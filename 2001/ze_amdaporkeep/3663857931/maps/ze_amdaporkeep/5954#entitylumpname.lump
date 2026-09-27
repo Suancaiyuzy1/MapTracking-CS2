@@ -3,10 +3,21 @@
 
 [
   {
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
     "wait": "1.000000",
+    "filtername": "",
     "spawnflags": "4097",
+    "globalname": "",
     "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
     "targetname": "[PR#]Omega_All_Trigger",
     "classname": "trigger_multiple",
     "origin": "2862.500000 -2926.250000 652.000000",
