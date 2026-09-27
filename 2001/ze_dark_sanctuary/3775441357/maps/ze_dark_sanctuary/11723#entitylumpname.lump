@@ -3,36 +3,6 @@
 
 [
   {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "0",
-    "damagecap": "20",
-    "damage": "25",
-    "master": "",
-    "filtername": "",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]lv3_dk_skill_du",
-    "classname": "trigger_hurt",
-    "origin": "-231.500000 -411.500000 -711.500000",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "11724",
-    "model": "maps/ze_dark_sanctuary/entities/lv3_dk_skill_du_11724.vmdl",
-    "_template_lump_ent_index": "0"
-  },
-  {
     "cpoint7_parent": "0",
     "cpoint6_parent": "0",
     "cpoint5_parent": "0",
@@ -127,7 +97,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11718",
-    "_template_lump_ent_index": "1"
+    "_template_lump_ent_index": "0"
   },
   {
     "cpoint7_parent": "0",
@@ -224,7 +194,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11735",
-    "_template_lump_ent_index": "2"
+    "_template_lump_ent_index": "1"
   },
   {
     "cpoint7_parent": "0",
@@ -321,7 +291,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11736",
-    "_template_lump_ent_index": "3"
+    "_template_lump_ent_index": "2"
   },
   {
     "touchoutputperentitydelay": "0.000000",
@@ -380,12 +350,12 @@
     "targetname": "[PR#]lv3_dk_skill_du_hitbox",
     "vscripts": "",
     "classname": "func_physbox",
-    "origin": "0.000000 0.000000 0.000000",
+    "origin": "0.000000 0.000000 -21.000000",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11721",
     "model": "maps/ze_dark_sanctuary/entities/lv3_dk_skill_du_hitbox_11721.vmdl",
-    "_template_lump_ent_index": "4",
+    "_template_lump_ent_index": "3",
     "connections": [
       {
         "output": "OnBreak",
@@ -398,7 +368,7 @@
       {
         "output": "OnBreak",
         "target": "[PR#]lv3_dk_skill_du",
-        "input": "Kill",
+        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
