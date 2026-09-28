@@ -1016,6 +1016,14 @@
         "param": "",
         "delay": 4.300000190734863,
         "limit": 1
+      },
+      {
+        "output": "OnMapSpawn",
+        "target": "[PR#]lyrics script",
+        "input": "RunScriptInput",
+        "param": "ResetLyrics",
+        "delay": 0.009999999776482582,
+        "limit": 1
       }
     ]
   },
@@ -12655,6 +12663,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]lyrics script",
+        "input": "RunScriptInput",
+        "param": "StartLyrics",
+        "delay": 3,
+        "limit": -1
       }
     ]
   },
@@ -12711,7 +12727,7 @@
         "output": "OnCase01",
         "target": "[PR#][CONSOLE]",
         "input": "Command",
-        "param": "say \u003C!\u003E \u73FE\u4EE3\u7DE8 : Theme Music \u300E\u5FC3\u30CE\u30AB\u30B2\u30ED\u30A6\u300F \u003C!\u003E",
+        "param": "say \u003C!\u003E \u73FE\u4EE3\u7DE8 : Theme Music \u300E\u5FC3\u306E\u30AB\u30B2\u30ED\u30A6\u300F \u003C!\u003E",
         "delay": 3,
         "limit": 1
       },
@@ -52678,7 +52694,7 @@
     "color": "0 0 0",
     "fullbright": "1",
     "enabled": "1",
-    "message": "\n\u60AA\u9B54\u57CE\u30C9\u30E9\u30AD\u30E5\u30E9 \u84BC\u6708\u306E\u5341\u5B57\u67B6 - \u7425\u73C0\u306E\u539F\u98A8\u666F\n\nYuli Audio Craft - \u304B\u3064\u3066\u306E\u8056\u57DF\n\nSuno AI - \u5FC3\u30CE\u30AB\u30B2\u30ED\u30A6",
+    "message": "\n\u60AA\u9B54\u57CE\u30C9\u30E9\u30AD\u30E5\u30E9 \u84BC\u6708\u306E\u5341\u5B57\u67B6 - \u7425\u73C0\u306E\u539F\u98A8\u666F\n\nYuli Audio Craft - \u304B\u3064\u3066\u306E\u8056\u57DF\n\nSuno AI - \u5FC3\u306E\u30AB\u30B2\u30ED\u30A6",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -52714,7 +52730,7 @@
     "color": "255 255 255",
     "fullbright": "1",
     "enabled": "1",
-    "message": "\n\u60AA\u9B54\u57CE\u30C9\u30E9\u30AD\u30E5\u30E9 \u84BC\u6708\u306E\u5341\u5B57\u67B6 - \u7425\u73C0\u306E\u539F\u98A8\u666F\n\nYuli Audio Craft - \u304B\u3064\u3066\u306E\u8056\u57DF\n\nSuno AI - \u5FC3\u30CE\u30AB\u30B2\u30ED\u30A6",
+    "message": "\n\u60AA\u9B54\u57CE\u30C9\u30E9\u30AD\u30E5\u30E9 \u84BC\u6708\u306E\u5341\u5B57\u67B6 - \u7425\u73C0\u306E\u539F\u98A8\u666F\n\nYuli Audio Craft - \u304B\u3064\u3066\u306E\u8056\u57DF\n\nSuno AI - \u5FC3\u306E\u30AB\u30B2\u30ED\u30A6",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -52954,5 +52970,24 @@
     "angles": "0.000000 270.000031 90.000076",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "17281"
+  },
+  {
+    "observable": "1",
+    "layout": "panorama/layout/custom_game/hmn_lyrics.xml",
+    "targetname": "[PR#]hmn_lyrics_hud",
+    "classname": "custom_hud_layout",
+    "origin": "1376.000000 2848.000000 144.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "17385"
+  },
+  {
+    "cs_script": "maps/scripts/hmn_lyrics.vjs",
+    "targetname": "[PR#]lyrics script",
+    "classname": "point_script",
+    "origin": "1376.000000 2832.000000 144.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "17386"
   }
 ]
