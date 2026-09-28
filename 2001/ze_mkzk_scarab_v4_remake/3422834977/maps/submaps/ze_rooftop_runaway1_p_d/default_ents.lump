@@ -9128,7 +9128,7 @@
         "target": "[PR#]nuke_sound",
         "input": "StartSound",
         "param": "",
-        "delay": 8,
+        "delay": 6,
         "limit": 1
       },
       {
@@ -9136,7 +9136,7 @@
         "target": "[PR#]nuke_hurt",
         "input": "Enable",
         "param": "",
-        "delay": 8,
+        "delay": 6,
         "limit": 1
       },
       {
@@ -9144,7 +9144,7 @@
         "target": "[PR#]nuke_fade",
         "input": "Fade",
         "param": "",
-        "delay": 8,
+        "delay": 6,
         "limit": 1
       },
       {
@@ -9152,15 +9152,7 @@
         "target": "[PR#]zr_toggle_respawn",
         "input": "Trigger",
         "param": "",
-        "delay": 8.199999809265137,
-        "limit": 1
-      },
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]sm_finaltg",
-        "input": "Enable",
-        "param": "",
-        "delay": 1,
+        "delay": 6.199999809265137,
         "limit": 1
       }
     ]
@@ -9268,6 +9260,14 @@
         "output": "OnPressed",
         "target": "[PR#]sm_door2",
         "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]sm_finaltg",
+        "input": "Enable",
         "param": "",
         "delay": 0,
         "limit": 1
@@ -14724,7 +14724,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 1.10",
+        "param": "speed 1.12",
         "delay": 0,
         "limit": -1
       },
@@ -14826,7 +14826,7 @@
         "target": "[PR#]mgrunpush",
         "input": "Disable",
         "param": "",
-        "delay": 5,
+        "delay": 5.199999809265137,
         "limit": 1
       },
       {
@@ -14850,7 +14850,7 @@
         "target": "[PR#]sm_ttp",
         "input": "Disable",
         "param": "",
-        "delay": 4.599999904632568,
+        "delay": 4.800000190734863,
         "limit": 1
       },
       {
@@ -15190,7 +15190,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 1.00",
+        "param": "speed 1.06",
         "delay": 0,
         "limit": -1
       },
@@ -15551,7 +15551,7 @@
         "target": "[PR#]sm_tptg1",
         "input": "Enable",
         "param": "",
-        "delay": 9.199999809265137,
+        "delay": 9.800000190734863,
         "limit": 1
       },
       {
@@ -15692,7 +15692,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "runspeed 1.20",
+        "param": "runspeed 1.24",
         "delay": 0,
         "limit": -1
       }

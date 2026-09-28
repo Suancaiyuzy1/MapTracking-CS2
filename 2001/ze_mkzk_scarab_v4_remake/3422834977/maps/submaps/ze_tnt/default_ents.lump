@@ -150531,6 +150531,14 @@
         "param": "-8",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTimer",
+        "target": "[PR#]potato_maker",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -151127,7 +151135,7 @@
   },
   {
     "InitialDelay": "0.000000",
-    "RefireTime": "0.100000",
+    "RefireTime": "0.050000",
     "UpperRandomBound": "0.000000",
     "LowerRandomBound": "0.000000",
     "PauseAfterFiring": "0",
