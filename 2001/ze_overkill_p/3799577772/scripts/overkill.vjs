@@ -3750,6 +3750,10 @@ Instance.OnScriptInput("Ammo", (data) => {
         Instance.EntFireAtTarget({ target: secondary, input: "SetAmmoAmount", value: "999" });
     }
 });
+Instance.OnScriptInput("Teleport1", ({ activator }) => {
+    const ent = Instance.FindEntityByName("des3_12");
+    activator.Teleport({ position: ent.GetAbsOrigin() });
+});
 function removeObject(array, object) {
     const index = array.indexOf(object);
     if (index === -1)

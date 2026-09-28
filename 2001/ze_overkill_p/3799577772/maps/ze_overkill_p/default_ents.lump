@@ -12911,7 +12911,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "keyvalue",
-        "param": "gravity 0.5",
+        "param": "gravity 0.4",
         "delay": 0,
         "limit": -1
       }

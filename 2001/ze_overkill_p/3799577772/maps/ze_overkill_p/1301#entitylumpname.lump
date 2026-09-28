@@ -78,11 +78,7 @@
     "_template_lump_ent_index": "1"
   },
   {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "0",
-    "landmark": "",
-    "target": "[PR#]des3_12",
+    "wait": "1.000000",
     "filtername": "",
     "spawnflags": "1",
     "globalname": "",
@@ -95,13 +91,23 @@
     "parentname": "",
     "vscripts": "",
     "targetname": "[PR#]edd_true_telebottom",
-    "classname": "trigger_teleport",
+    "classname": "trigger_multiple",
     "origin": "-2496.000000 -6160.000000 -8432.000000",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1268",
     "model": "maps/ze_overkill_p/entities/edd_true_telebottom_1268.vmdl",
-    "_template_lump_ent_index": "2"
+    "_template_lump_ent_index": "2",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]script_overkill",
+        "input": "RunScriptInput",
+        "param": "Teleport1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "check_if_dest_clear_for_player": "0",
