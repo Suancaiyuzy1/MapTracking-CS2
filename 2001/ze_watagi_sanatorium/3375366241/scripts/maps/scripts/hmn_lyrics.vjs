@@ -462,7 +462,7 @@ async function StartLyrics()
     // ----------------------------------------------
 
     SetLyricsForAllPlayers(
-        "力を抱いて (チカラヲﾀﾞｲﾃ)"
+        "力を抱いて (チカラヲダイテ)"
     );
 
 
