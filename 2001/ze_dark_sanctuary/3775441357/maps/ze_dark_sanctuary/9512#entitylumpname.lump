@@ -98,7 +98,7 @@
       },
       {
         "output": "OnPlayerPickup",
-        "target": "[PR#]langren_mk",
+        "target": "[PR#]houzi_mk",
         "input": "ForceSpawn",
         "param": "",
         "delay": 1,
