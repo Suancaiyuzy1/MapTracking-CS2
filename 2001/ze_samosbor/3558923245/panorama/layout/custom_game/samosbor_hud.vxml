@@ -3,444 +3,1024 @@
 <!-- xml reconstructed from compiled AST -->
 <root>
     <styles>
-        <include src="s2r://panorama/layout/custom_game/samosbor_hud.vcss_c" />
+        <include src="s2r://panorama/layout/custom_game/samosbor_hud.vcss" />
     </styles>
     <Panel class="Root">
         <Panel id="score_overlay" class="score_overlay">
-            <Button id="menu_open_btn" class="menu_open_btn">
-                <Label class="menu_open_btn_text" text="MENU" />
+            <Button id="menu_open_btn" class="gm_open_btn">
+                <Label class="gm_open_text" text="MENU" hittest="false" />
             </Button>
-            <Label class="cursor_hint" text="PRESS CTRL TO ENABLE CURSOR" />
+            <Label id="lang_cursor_hint" class="gm_cursor_hint" text="PRESS CTRL TO ENABLE CURSOR" />
         </Panel>
         <Panel id="hint_container" class="hint_container">
             <Label id="hint_text" class="hint_text" text="{s:txt}" />
         </Panel>
+        <Panel id="kill_icon" class="kill_icon" hittest="false">
+            <Image class="ki_layer ki_glow" src="s2r://panorama/layout/custom_game/icons/kill/kill_glow_png.vtex" hittest="false" />
+            <Image class="ki_layer ki_core" src="s2r://panorama/layout/custom_game/icons/kill/kill_core_png.vtex" hittest="false" />
+            <Image class="ki_layer ki_ring" src="s2r://panorama/layout/custom_game/icons/kill/kill_ring_png.vtex" hittest="false" />
+            <Image class="ki_layer ki_shards" src="s2r://panorama/layout/custom_game/icons/kill/kill_shards_png.vtex" hittest="false" />
+        </Panel>
+        <Panel id="buff_vote_container" class="buff_vote_container">
+            <Panel class="buff_vote_overlay" />
+            <Panel class="buff_vote_head" hittest="false">
+                <Label class="buff_vote_title" text="CHOOSE YOUR ADVANTAGE" />
+                <Label class="buff_vote_sub" text="选择你的增益 · ONE BUFF PER TEAM" />
+            </Panel>
+            <Panel class="buff_row">
+                <Button id="buff_card_1" class="buff_card">
+                    <Panel class="bc_rivet bc_rivet_tl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_tr" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_bl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_br" hittest="false" />
+                    <Panel class="bc_face" hittest="false">
+                        <Panel id="buff_1_regen" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_regen_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+1 HP · 8s" />
+                            <Label class="bc_name" text="REGENERATION" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Restore 1 health every 8 seconds" />
+                            <Label class="bc_desc_cn" text="每8秒恢复1点生命值" />
+                        </Panel>
+                        <Panel id="buff_1_knife" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_knife_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="1 HIT · ZM DMG +50%" />
+                            <Label class="bc_name" text="BUTCHER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Knife RMB kills zombies in one hit, but zombies hit harder" />
+                            <Label class="bc_desc_cn" text="小刀右键一击必杀僵尸，但僵尸伤害提高" />
+                        </Panel>
+                        <Panel id="buff_1_speed" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_speed_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+20%" />
+                            <Label class="bc_name" text="ADRENALINE" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Humans move 20% faster" />
+                            <Label class="bc_desc_cn" text="人类移动速度提高20%" />
+                        </Panel>
+                        <Panel id="buff_1_beacon" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_beacon_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="2 × 50 HP" />
+                            <Label class="bc_name" text="BEACONS" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Two random humans heal everyone nearby, but have 50 HP" />
+                            <Label class="bc_desc_cn" text="两名随机人类成为信标，靠近可回血，但信标只有50生命" />
+                        </Panel>
+                        <Panel id="buff_1_frenzy" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_frenzy_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="12s · 30–45s" />
+                            <Label class="bc_name" text="KNIFE FRENZY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 30–45s knife RMB kills zombies in one hit for 12 seconds" />
+                            <Label class="bc_desc_cn" text="每30-45秒触发12秒小刀右键一击必杀" />
+                        </Panel>
+                        <Panel id="buff_1_sprint" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_sprint_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-200 HP · +20%" />
+                            <Label class="bc_name" text="HUNGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Less health, but much faster" />
+                            <Label class="bc_desc_cn" text="生命值-200，但移动速度更快" />
+                        </Panel>
+                        <Panel id="buff_1_swarm" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_swarm_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="×2" />
+                            <Label class="bc_name" text="SWARM" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombie items spawn twice as often" />
+                            <Label class="bc_desc_cn" text="僵尸物品刷新速度翻倍" />
+                        </Panel>
+                        <Panel id="buff_1_streak" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_streak_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+50 HP / KILL" />
+                            <Label class="bc_name" text="PREDATOR" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every human killed gives +50 health and more speed. Kept after death" />
+                            <Label class="bc_desc_cn" text="每击杀一名人类+50生命并提速，死亡后保留" />
+                        </Panel>
+                        <Panel id="buff_1_stealth" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_stealth_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="0 MOVE → 0%" />
+                            <Label class="bc_name" text="STALKER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Standing still slowly turns you invisible" />
+                            <Label class="bc_desc_cn" text="静止不动时逐渐隐身" />
+                        </Panel>
+                        <Panel id="buff_1_scarcity" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scarcity_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-1" />
+                            <Label class="bc_name" text="SCARCITY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="One less canister on every floor" />
+                            <Label class="bc_desc_cn" text="每层罐子数量-1" />
+                        </Panel>
+                        <Panel id="buff_1_fog" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_fog_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="FOG +" />
+                            <Label class="bc_name" text="DENSE FOG" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Thicker fog, humans see much less" />
+                            <Label class="bc_desc_cn" text="雾气更浓，人类视野更短" />
+                        </Panel>
+                        <Panel id="buff_1_scavenger" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scavenger_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="7 → 50% · -40 HP" />
+                            <Label class="bc_name" text="SCAVENGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 7th zombie killed has a 50% chance to drop a random item, but humans have 40 less health" />
+                            <Label class="bc_desc_cn" text="每击杀7只僵尸有50%几率掉落随机物品，但人类生命值-40" />
+                        </Panel>
+                        <Panel id="buff_1_shrink" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_shrink_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-300 HP · +10%" />
+                            <Label class="bc_name" text="CRAWLER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombies are 30% smaller and 10% faster, but have 300 less health" />
+                            <Label class="bc_desc_cn" text="僵尸体型缩小30%，速度提高10%，但生命值-300" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="bc_picked" hittest="false">
+                        <Label class="bc_picked_text" text="SELECTED" />
+                    </Panel>
+                </Button>
+                <Button id="buff_card_2" class="buff_card">
+                    <Panel class="bc_rivet bc_rivet_tl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_tr" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_bl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_br" hittest="false" />
+                    <Panel class="bc_face" hittest="false">
+                        <Panel id="buff_2_regen" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_regen_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+1 HP · 8s" />
+                            <Label class="bc_name" text="REGENERATION" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Restore 1 health every 8 seconds" />
+                            <Label class="bc_desc_cn" text="每8秒恢复1点生命值" />
+                        </Panel>
+                        <Panel id="buff_2_knife" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_knife_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="1 HIT · ZM DMG +50%" />
+                            <Label class="bc_name" text="BUTCHER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Knife RMB kills zombies in one hit, but zombies hit harder" />
+                            <Label class="bc_desc_cn" text="小刀右键一击必杀僵尸，但僵尸伤害提高" />
+                        </Panel>
+                        <Panel id="buff_2_speed" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_speed_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+20%" />
+                            <Label class="bc_name" text="ADRENALINE" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Humans move 20% faster" />
+                            <Label class="bc_desc_cn" text="人类移动速度提高20%" />
+                        </Panel>
+                        <Panel id="buff_2_beacon" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_beacon_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="2 × 50 HP" />
+                            <Label class="bc_name" text="BEACONS" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Two random humans heal everyone nearby, but have 50 HP" />
+                            <Label class="bc_desc_cn" text="两名随机人类成为信标，靠近可回血，但信标只有50生命" />
+                        </Panel>
+                        <Panel id="buff_2_frenzy" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_frenzy_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="12s · 30–45s" />
+                            <Label class="bc_name" text="KNIFE FRENZY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 30–45s knife RMB kills zombies in one hit for 12 seconds" />
+                            <Label class="bc_desc_cn" text="每30-45秒触发12秒小刀右键一击必杀" />
+                        </Panel>
+                        <Panel id="buff_2_sprint" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_sprint_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-200 HP · +20%" />
+                            <Label class="bc_name" text="HUNGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Less health, but much faster" />
+                            <Label class="bc_desc_cn" text="生命值-200，但移动速度更快" />
+                        </Panel>
+                        <Panel id="buff_2_swarm" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_swarm_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="×2" />
+                            <Label class="bc_name" text="SWARM" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombie items spawn twice as often" />
+                            <Label class="bc_desc_cn" text="僵尸物品刷新速度翻倍" />
+                        </Panel>
+                        <Panel id="buff_2_streak" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_streak_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+50 HP / KILL" />
+                            <Label class="bc_name" text="PREDATOR" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every human killed gives +50 health and more speed. Kept after death" />
+                            <Label class="bc_desc_cn" text="每击杀一名人类+50生命并提速，死亡后保留" />
+                        </Panel>
+                        <Panel id="buff_2_stealth" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_stealth_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="0 MOVE → 0%" />
+                            <Label class="bc_name" text="STALKER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Standing still slowly turns you invisible" />
+                            <Label class="bc_desc_cn" text="静止不动时逐渐隐身" />
+                        </Panel>
+                        <Panel id="buff_2_scarcity" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scarcity_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-1" />
+                            <Label class="bc_name" text="SCARCITY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="One less canister on every floor" />
+                            <Label class="bc_desc_cn" text="每层罐子数量-1" />
+                        </Panel>
+                        <Panel id="buff_2_fog" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_fog_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="FOG +" />
+                            <Label class="bc_name" text="DENSE FOG" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Thicker fog, humans see much less" />
+                            <Label class="bc_desc_cn" text="雾气更浓，人类视野更短" />
+                        </Panel>
+                        <Panel id="buff_2_scavenger" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scavenger_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="7 → 50% · -40 HP" />
+                            <Label class="bc_name" text="SCAVENGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 7th zombie killed has a 50% chance to drop a random item, but humans have 40 less health" />
+                            <Label class="bc_desc_cn" text="每击杀7只僵尸有50%几率掉落随机物品，但人类生命值-40" />
+                        </Panel>
+                        <Panel id="buff_2_shrink" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_shrink_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-300 HP · +10%" />
+                            <Label class="bc_name" text="CRAWLER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombies are 30% smaller and 10% faster, but have 300 less health" />
+                            <Label class="bc_desc_cn" text="僵尸体型缩小30%，速度提高10%，但生命值-300" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="bc_picked" hittest="false">
+                        <Label class="bc_picked_text" text="SELECTED" />
+                    </Panel>
+                </Button>
+                <Button id="buff_card_3" class="buff_card">
+                    <Panel class="bc_rivet bc_rivet_tl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_tr" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_bl" hittest="false" />
+                    <Panel class="bc_rivet bc_rivet_br" hittest="false" />
+                    <Panel class="bc_face" hittest="false">
+                        <Panel id="buff_3_regen" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_regen_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+1 HP · 8s" />
+                            <Label class="bc_name" text="REGENERATION" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Restore 1 health every 8 seconds" />
+                            <Label class="bc_desc_cn" text="每8秒恢复1点生命值" />
+                        </Panel>
+                        <Panel id="buff_3_knife" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_knife_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="1 HIT · ZM DMG +50%" />
+                            <Label class="bc_name" text="BUTCHER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Knife RMB kills zombies in one hit, but zombies hit harder" />
+                            <Label class="bc_desc_cn" text="小刀右键一击必杀僵尸，但僵尸伤害提高" />
+                        </Panel>
+                        <Panel id="buff_3_speed" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_speed_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+20%" />
+                            <Label class="bc_name" text="ADRENALINE" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Humans move 20% faster" />
+                            <Label class="bc_desc_cn" text="人类移动速度提高20%" />
+                        </Panel>
+                        <Panel id="buff_3_beacon" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_beacon_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="2 × 50 HP" />
+                            <Label class="bc_name" text="BEACONS" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Two random humans heal everyone nearby, but have 50 HP" />
+                            <Label class="bc_desc_cn" text="两名随机人类成为信标，靠近可回血，但信标只有50生命" />
+                        </Panel>
+                        <Panel id="buff_3_frenzy" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_frenzy_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="12s · 30–45s" />
+                            <Label class="bc_name" text="KNIFE FRENZY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 30–45s knife RMB kills zombies in one hit for 12 seconds" />
+                            <Label class="bc_desc_cn" text="每30-45秒触发12秒小刀右键一击必杀" />
+                        </Panel>
+                        <Panel id="buff_3_sprint" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_sprint_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-200 HP · +20%" />
+                            <Label class="bc_name" text="HUNGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Less health, but much faster" />
+                            <Label class="bc_desc_cn" text="生命值-200，但移动速度更快" />
+                        </Panel>
+                        <Panel id="buff_3_swarm" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_swarm_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="×2" />
+                            <Label class="bc_name" text="SWARM" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombie items spawn twice as often" />
+                            <Label class="bc_desc_cn" text="僵尸物品刷新速度翻倍" />
+                        </Panel>
+                        <Panel id="buff_3_streak" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_streak_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="+50 HP / KILL" />
+                            <Label class="bc_name" text="PREDATOR" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every human killed gives +50 health and more speed. Kept after death" />
+                            <Label class="bc_desc_cn" text="每击杀一名人类+50生命并提速，死亡后保留" />
+                        </Panel>
+                        <Panel id="buff_3_stealth" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_stealth_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="0 MOVE → 0%" />
+                            <Label class="bc_name" text="STALKER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Standing still slowly turns you invisible" />
+                            <Label class="bc_desc_cn" text="静止不动时逐渐隐身" />
+                        </Panel>
+                        <Panel id="buff_3_scarcity" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scarcity_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-1" />
+                            <Label class="bc_name" text="SCARCITY" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="One less canister on every floor" />
+                            <Label class="bc_desc_cn" text="每层罐子数量-1" />
+                        </Panel>
+                        <Panel id="buff_3_fog" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_fog_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="FOG +" />
+                            <Label class="bc_name" text="DENSE FOG" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Thicker fog, humans see much less" />
+                            <Label class="bc_desc_cn" text="雾气更浓，人类视野更短" />
+                        </Panel>
+                        <Panel id="buff_3_scavenger" class="bc_body bc_team_ct" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="LIQUIDATOR PROTOCOL" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_scavenger_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="7 → 50% · -40 HP" />
+                            <Label class="bc_name" text="SCAVENGER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Every 7th zombie killed has a 50% chance to drop a random item, but humans have 40 less health" />
+                            <Label class="bc_desc_cn" text="每击杀7只僵尸有50%几率掉落随机物品，但人类生命值-40" />
+                        </Panel>
+                        <Panel id="buff_3_shrink" class="bc_body bc_team_t" hittest="false">
+                            <Panel class="bc_stripe" hittest="false" />
+                            <Label class="bc_type" text="SAMOSBOR MUTATION" />
+                            <Panel class="bc_emblem" hittest="false">
+                                <Panel class="bc_emblem_ring" hittest="false" />
+                                <Image class="bc_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_shrink_png.vtex" hittest="false" />
+                            </Panel>
+                            <Label class="bc_stat" text="-300 HP · +10%" />
+                            <Label class="bc_name" text="CRAWLER" />
+                            <Panel class="bc_divider" hittest="false" />
+                            <Label class="bc_desc" text="Zombies are 30% smaller and 10% faster, but have 300 less health" />
+                            <Label class="bc_desc_cn" text="僵尸体型缩小30%，速度提高10%，但生命值-300" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="bc_picked" hittest="false">
+                        <Label class="bc_picked_text" text="SELECTED" />
+                    </Panel>
+                </Button>
+            </Panel>
+            <Panel class="buff_timer_box" hittest="false">
+                <Label id="buff_vote_timer" class="buff_vote_timer" text="{s:time_left}" />
+            </Panel>
+        </Panel>
+        <Panel id="knife_frenzy_banner" class="knife_frenzy_banner" hittest="false">
+            <Panel class="kf_fill" hittest="false" />
+            <Panel class="kf_row" hittest="false">
+                <Image class="kf_icon" src="s2r://panorama/layout/custom_game/icons/buffs/buff_frenzy_png.vtex" hittest="false" />
+                <Label class="kf_text" text="KNIFE FRENZY · 小刀狂热" />
+            </Panel>
+        </Panel>
         <Panel id="big_menu" class="big_menu">
-            <Panel class="big_menu_panel">
-                <Panel class="big_menu_header">
-                    <Panel class="big_menu_tabs">
-                        <Button id="tab_btn_map_stats" class="tab_btn">
-                            <Label class="tab_btn_text" text="MAP STATS" />
+            <Panel class="gm_panel">
+                <Panel class="gm_pattern" hittest="false" />
+                <Panel class="gm_inner_frame" hittest="false" />
+                <Image class="gm_corner gm_corner_tl" src="s2r://panorama/layout/custom_game/icons/menu/menu_corner_png.vtex" hittest="false" />
+                <Image class="gm_corner gm_corner_tr" src="s2r://panorama/layout/custom_game/icons/menu/menu_corner_png.vtex" hittest="false" />
+                <Image class="gm_corner gm_corner_bl" src="s2r://panorama/layout/custom_game/icons/menu/menu_corner_png.vtex" hittest="false" />
+                <Image class="gm_corner gm_corner_br" src="s2r://panorama/layout/custom_game/icons/menu/menu_corner_png.vtex" hittest="false" />
+                <Panel class="gm_header">
+                    <Image class="gm_header_sheen" src="s2r://panorama/layout/custom_game/icons/menu/menu_sheen_png.vtex" hittest="false" />
+                    <Panel class="gm_brand" hittest="false">
+                        <Image class="gm_brand_emblem" src="s2r://panorama/layout/custom_game/icons/menu/menu_emblem_png.vtex" />
+                        <Panel class="gm_brand_text">
+                            <Label class="gm_brand_title" text="SAMOSBOR" />
+                            <Label class="gm_brand_sub" text="GIGA-KHRUSHCHEVKA · RESIDENT TERMINAL" />
+                        </Panel>
+                    </Panel>
+                    <Panel class="gm_tabs">
+                        <Button id="tab_btn_map_stats" class="gm_tab">
+                            <Label class="gm_tab_text" text="MAP STATS" hittest="false" />
                         </Button>
-                        <Button id="tab_btn_skin_menu" class="tab_btn">
-                            <Label class="tab_btn_text" text="SKIN MENU" />
+                        <Button id="tab_btn_skin_menu" class="gm_tab">
+                            <Label class="gm_tab_text" text="SKINS" hittest="false" />
                         </Button>
-                        <Button id="tab_btn_admin_room" class="tab_btn">
-                            <Label class="tab_btn_text" text="MAP SETTINGS" />
+                        <Button id="tab_btn_admin_room" class="gm_tab">
+                            <Label class="gm_tab_text" text="MAP SETTINGS" hittest="false" />
                         </Button>
                     </Panel>
-                    <Button id="menu_close_btn" class="menu_close_btn">
-                        <Label class="menu_close_text" text="X" />
+                    <Button id="menu_close_btn" class="gm_close">
+                        <Panel class="gm_close_x gm_close_x_a" hittest="false" />
+                        <Panel class="gm_close_x gm_close_x_b" hittest="false" />
                     </Button>
                 </Panel>
-                <Panel class="big_menu_body">
-                    <Panel id="tab_page_map_stats" class="tab_page">
-                        <Panel class="ms_wrap">
-                            <Panel class="ms_left">
-                                <Label class="col_header" text="MAP STATISTICS" />
-                                <Label class="ms_group" text="WAYS GENERATED" />
-                                <Panel class="ms_ways">
-                                    <Panel class="ms_way_box">
-                                        <Label class="ms_way_title" text="1 WAY" />
-                                        <Label id="ms_way1" class="ms_way_val" text="{s:val}" />
+                <Panel class="gm_body">
+                    <Panel id="tab_page_map_stats" class="gm_page">
+                        <Panel class="gm_cols">
+                            <Panel class="gm_col">
+                                <Panel class="gm_section" hittest="false">
+                                    <Panel class="gm_section_line" />
+                                    <Panel class="gm_section_gem" />
+                                    <Label class="gm_section_text" text="ROUTES GENERATED" />
+                                    <Panel class="gm_section_gem" />
+                                    <Panel class="gm_section_line" />
+                                </Panel>
+                                <Panel class="gm_ways">
+                                    <Panel class="gm_way">
+                                        <Label id="ms_way1" class="gm_way_val" text="{s:val}" />
+                                        <Label class="gm_way_title" text="1 WAY" />
                                     </Panel>
-                                    <Panel class="ms_way_box">
-                                        <Label class="ms_way_title" text="2 WAYS" />
-                                        <Label id="ms_way2" class="ms_way_val" text="{s:val}" />
+                                    <Panel class="gm_way">
+                                        <Label id="ms_way2" class="gm_way_val" text="{s:val}" />
+                                        <Label class="gm_way_title" text="2 WAYS" />
                                     </Panel>
-                                    <Panel class="ms_way_box">
-                                        <Label class="ms_way_title" text="3 WAYS" />
-                                        <Label id="ms_way3" class="ms_way_val" text="{s:val}" />
+                                    <Panel class="gm_way">
+                                        <Label id="ms_way3" class="gm_way_val" text="{s:val}" />
+                                        <Label class="gm_way_title" text="3 WAYS" />
                                     </Panel>
-                                    <Panel class="ms_way_box">
-                                        <Label class="ms_way_title" text="4 WAYS" />
-                                        <Label id="ms_way4" class="ms_way_val" text="{s:val}" />
+                                    <Panel class="gm_way">
+                                        <Label id="ms_way4" class="gm_way_val" text="{s:val}" />
+                                        <Label class="gm_way_title" text="4 WAYS" />
                                     </Panel>
                                 </Panel>
-                                <Label class="ms_group" text="BEST TIMES" />
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="EASY — NORMAL ENDING" />
-                                    <Label id="ms_rec_en2" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_section" hittest="false">
+                                    <Panel class="gm_section_line" />
+                                    <Panel class="gm_section_gem" />
+                                    <Label class="gm_section_text" text="BEST TIMES" />
+                                    <Panel class="gm_section_gem" />
+                                    <Panel class="gm_section_line" />
                                 </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="EASY — TRUE ENDING" />
-                                    <Label id="ms_rec_et2" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="EASY — NORMAL ENDING" />
+                                    <Label id="ms_rec_en2" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="NORMAL — NORMAL ENDING" />
-                                    <Label id="ms_rec_nn" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="EASY — TRUE ENDING" />
+                                    <Label id="ms_rec_et2" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="NORMAL — TRUE ENDING" />
-                                    <Label id="ms_rec_nt" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="NORMAL — NORMAL ENDING" />
+                                    <Label id="ms_rec_nn" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="EXTREME — NORMAL ENDING" />
-                                    <Label id="ms_rec_en" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="NORMAL — TRUE ENDING" />
+                                    <Label id="ms_rec_nt" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="EXTREME — TRUE ENDING" />
-                                    <Label id="ms_rec_et" class="ms_row_val ms_time" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="EXTREME — NORMAL ENDING" />
+                                    <Label id="ms_rec_en" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
-                                <Label class="ms_group" text="TOTALS" />
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="RUNS STARTED" />
-                                    <Label id="ms_runs" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="RUNS COMPLETED" />
-                                    <Label id="ms_wins" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="FLOORS CLEARED" />
-                                    <Label id="ms_floors" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="TRAPS DEFUSED" />
-                                    <Label id="ms_traps" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="BOTTLES COLLECTED" />
-                                    <Label id="ms_bottles" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="BOTTLES SPENT" />
-                                    <Label id="ms_bottles_spent" class="ms_row_val" text="{s:val}" />
-                                </Panel>
-                                <Panel class="ms_row">
-                                    <Label class="ms_row_key" text="SLOT MACHINE SPINS" />
-                                    <Label id="ms_spins" class="ms_row_val" text="{s:val}" />
+                                <Panel class="gm_row">
+                                    <Label class="gm_row_key" text="EXTREME — TRUE ENDING" />
+                                    <Label id="ms_rec_et" class="gm_row_val gm_time" text="{s:val}" />
                                 </Panel>
                             </Panel>
-                            <Panel class="ms_right">
-                                <Label class="col_header" text="LIQUIDATION MODE RANKING (UNAVAILABLE)" />
-                                <Label class="ms_sub" text="" />
-                                <Panel class="ms_top_head">
-                                    <Label class="ms_th_rank" text="#" />
-                                    <Label class="ms_th_name" text="PLAYER" />
-                                    <Label class="ms_th_val" text="" />
+                            <Panel class="gm_col">
+                                <Panel class="gm_section" hittest="false">
+                                    <Panel class="gm_section_line" />
+                                    <Panel class="gm_section_gem" />
+                                    <Label class="gm_section_text" text="SERVER TOTALS" />
+                                    <Panel class="gm_section_gem" />
+                                    <Panel class="gm_section_line" />
                                 </Panel>
-                                <Panel id="ms_top_1" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="1" />
-                                    <Label id="ms_top_name_1" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_1" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_2" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="2" />
-                                    <Label id="ms_top_name_2" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_2" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_3" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="3" />
-                                    <Label id="ms_top_name_3" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_3" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_4" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="4" />
-                                    <Label id="ms_top_name_4" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_4" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_5" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="5" />
-                                    <Label id="ms_top_name_5" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_5" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_6" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="6" />
-                                    <Label id="ms_top_name_6" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_6" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_7" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="7" />
-                                    <Label id="ms_top_name_7" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_7" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_8" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="8" />
-                                    <Label id="ms_top_name_8" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_8" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_9" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="9" />
-                                    <Label id="ms_top_name_9" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_9" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                                <Panel id="ms_top_10" class="ms_top_row">
-                                    <Label class="ms_tr_rank" text="10" />
-                                    <Label id="ms_top_name_10" class="ms_tr_name" text="{s:val}" />
-                                    <Label id="ms_top_val_10" class="ms_tr_val" text="{s:val}" />
-                                </Panel>
-                            </Panel>
-                        </Panel>
-                    </Panel>
-                    <Panel id="tab_page_skin_menu" class="tab_page">
-                        <Panel class="skins_wrap">
-                            <Label class="col_header" text="SKINS" />
-                            <Label id="skins_hint" class="skins_hint" text="{s:txt}" />
-                            <Panel class="skins_grid">
-                                <Panel class="skin_slot">
-                                    <Button id="skin_card_rurune" class="skin_card">
-                                        <Panel class="skin_img skin_img_rurune" />
-                                        <Panel class="skin_foot">
-                                            <Label class="skin_name" text="RURUNE" />
-                                            <Label id="skin_state_rurune" class="skin_state" text="{s:txt}" />
+                                <Panel class="gm_tiles">
+                                    <Panel class="gm_tile_row">
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_runs" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="RUNS STARTED" />
                                         </Panel>
-                                    </Button>
-                                    <Panel class="skin_badge skin_badge_mapper">
-                                        <Label class="skin_badge_text" text="MAPPER" />
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_wins" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="RUNS COMPLETED" />
+                                        </Panel>
                                     </Panel>
-                                </Panel>
-                                <Panel class="skin_slot">
-                                    <Button id="skin_card_ghostcandy" class="skin_card">
-                                        <Panel class="skin_img skin_img_ghostcandy" />
-                                        <Panel class="skin_foot">
-                                            <Label class="skin_name" text="KIPFEL GHOSTCANDY" />
-                                            <Label id="skin_state_ghostcandy" class="skin_state" text="{s:txt}" />
+                                    <Panel class="gm_tile_row">
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_floors" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="FLOORS CLEARED" />
                                         </Panel>
-                                    </Button>
-                                    <Panel class="skin_badge skin_badge_sponsor">
-                                        <Label class="skin_badge_text" text="SPONSOR" />
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_traps" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="TRAPS DEFUSED" />
+                                        </Panel>
                                     </Panel>
-                                </Panel>
-                                <Panel class="skin_slot">
-                                    <Button id="skin_card_cherry" class="skin_card">
-                                        <Panel class="skin_img skin_img_cherry" />
-                                        <Panel class="skin_foot">
-                                            <Label class="skin_name" text="KIPFEL CHERRY" />
-                                            <Label id="skin_state_cherry" class="skin_state" text="{s:txt}" />
+                                    <Panel class="gm_tile_row">
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_bottles" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="BOTTLES COLLECTED" />
                                         </Panel>
-                                    </Button>
-                                    <Panel class="skin_badge skin_badge_sponsor">
-                                        <Label class="skin_badge_text" text="SPONSOR" />
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_bottles_spent" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="BOTTLES SPENT" />
+                                        </Panel>
+                                    </Panel>
+                                    <Panel class="gm_tile_row">
+                                        <Panel class="gm_tile">
+                                            <Label id="ms_spins" class="gm_tile_val" text="{s:val}" />
+                                            <Label class="gm_tile_key" text="SLOT MACHINE SPINS" />
+                                        </Panel>
                                     </Panel>
                                 </Panel>
                             </Panel>
                         </Panel>
                     </Panel>
-                    <Panel id="tab_page_admin_room" class="tab_page">
-                        <Panel class="admin_wrap">
-                            <Panel class="admin_col">
-                                <Label class="col_header" text="VALUES" />
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="HEALTH" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_hp_sub1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-1" />
-                                        </Button>
-                                        <Button id="admin_hp_sub5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-5" />
-                                        </Button>
-                                        <Label id="admin_val_hp" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_hp_add5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+5" />
-                                        </Button>
-                                        <Button id="admin_hp_add1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+1" />
-                                        </Button>
+                    <Panel id="tab_page_skin_menu" class="gm_page">
+                        <Panel class="gm_skins_wrap">
+                            <Panel class="gm_section" hittest="false">
+                                <Panel class="gm_section_line" />
+                                <Panel class="gm_section_gem" />
+                                <Label class="gm_section_text" text="WARDROBE" />
+                                <Panel class="gm_section_gem" />
+                                <Panel class="gm_section_line" />
+                            </Panel>
+                            <Label id="skins_hint" class="gm_skins_hint" text="{s:txt}" />
+                            <Panel class="gm_skins">
+                                <Panel class="gm_skin_slot">
+                                    <Button id="skin_card_rurune" class="gm_skin">
+                                        <Panel class="gm_skin_img skin_img_rurune" hittest="false" />
+                                        <Panel class="gm_skin_foot" hittest="false">
+                                            <Label class="gm_skin_name" text="RURUNE" />
+                                            <Label id="skin_state_rurune" class="gm_skin_state" text="{s:txt}" />
+                                        </Panel>
+                                    </Button>
+                                    <Panel class="gm_badge gm_badge_mapper" hittest="false">
+                                        <Label class="gm_badge_text" text="MAPPER" />
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="MAX HEALTH" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_maxhp_sub1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-1" />
-                                        </Button>
-                                        <Button id="admin_maxhp_sub5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-5" />
-                                        </Button>
-                                        <Label id="admin_val_maxhp" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_maxhp_add5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+5" />
-                                        </Button>
-                                        <Button id="admin_maxhp_add1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+1" />
-                                        </Button>
+                                <Panel class="gm_skin_slot">
+                                    <Button id="skin_card_ghostcandy" class="gm_skin">
+                                        <Panel class="gm_skin_img skin_img_ghostcandy" hittest="false" />
+                                        <Panel class="gm_skin_foot" hittest="false">
+                                            <Label class="gm_skin_name" text="KIPFEL GHOSTCANDY" />
+                                            <Label id="skin_state_ghostcandy" class="gm_skin_state" text="{s:txt}" />
+                                        </Panel>
+                                    </Button>
+                                    <Panel class="gm_badge gm_badge_sponsor" hittest="false">
+                                        <Label class="gm_badge_text" text="SPONSOR" />
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="MAX FLOORS" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_maxfloors_sub1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-1" />
-                                        </Button>
-                                        <Label id="admin_val_maxfloors" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_maxfloors_add1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+1" />
-                                        </Button>
+                                <Panel class="gm_skin_slot">
+                                    <Button id="skin_card_cherry" class="gm_skin">
+                                        <Panel class="gm_skin_img skin_img_cherry" hittest="false" />
+                                        <Panel class="gm_skin_foot" hittest="false">
+                                            <Label class="gm_skin_name" text="KIPFEL CHERRY" />
+                                            <Label id="skin_state_cherry" class="gm_skin_state" text="{s:txt}" />
+                                        </Panel>
+                                    </Button>
+                                    <Panel class="gm_badge gm_badge_sponsor" hittest="false">
+                                        <Label class="gm_badge_text" text="SPONSOR" />
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="TRAPS %" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_traps_sub1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-1" />
-                                        </Button>
-                                        <Button id="admin_traps_sub5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-5" />
-                                        </Button>
-                                        <Label id="admin_val_traps" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_traps_add5" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+5" />
-                                        </Button>
-                                        <Button id="admin_traps_add1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+1" />
-                                        </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="SAMOSBOR TIME" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_samosbortime_sub60" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-60" />
-                                        </Button>
-                                        <Label id="admin_val_samosbortime" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_samosbortime_add60" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+60" />
-                                        </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="SAMOSBOR DAMAGE" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_samosbordamage_sub1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="-1" />
-                                        </Button>
-                                        <Label id="admin_val_samosbordamage" class="admin_val" text="{s:val}" />
-                                        <Button id="admin_samosbordamage_add1" class="admin_btn admin_btn_step">
-                                            <Label class="admin_btn_text" text="+1" />
-                                        </Button>
+                                <Panel class="gm_skin_slot">
+                                    <Button id="skin_card_hero" class="gm_skin">
+                                        <Panel class="gm_skin_img skin_img_hero" hittest="false" />
+                                        <Panel class="gm_skin_foot" hittest="false">
+                                            <Label class="gm_skin_name" text="ELEVATOR HERO" />
+                                            <Label id="skin_state_hero" class="gm_skin_state" text="{s:txt}" />
+                                        </Panel>
+                                    </Button>
+                                    <Panel class="gm_badge gm_badge_winner" hittest="false">
+                                        <Label class="gm_badge_text" text="WINNER" />
                                     </Panel>
                                 </Panel>
                             </Panel>
-                            <Panel class="admin_col">
-                                <Label class="col_header" text="TOGGLES" />
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="EXIT GLOW" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_exitglow_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                        </Panel>
+                    </Panel>
+                    <Panel id="tab_page_admin_room" class="gm_page">
+                        <Panel class="gm_cols">
+                            <Panel class="gm_col">
+                                <Panel class="gm_section" hittest="false">
+                                    <Panel class="gm_section_line" />
+                                    <Panel class="gm_section_gem" />
+                                    <Label class="gm_section_text" text="VALUES" />
+                                    <Panel class="gm_section_gem" />
+                                    <Panel class="gm_section_line" />
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="HEALTH" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_hp_sub5" class="gm_step">
+                                            <Label class="gm_step_text" text="-5" hittest="false" />
                                         </Button>
-                                        <Button id="admin_exitglow_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_hp_sub1" class="gm_step">
+                                            <Label class="gm_step_text" text="-1" hittest="false" />
+                                        </Button>
+                                        <Label id="admin_val_hp" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_hp_add1" class="gm_step">
+                                            <Label class="gm_step_text" text="+1" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_hp_add5" class="gm_step">
+                                            <Label class="gm_step_text" text="+5" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="LIGHTNING STRIKES" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_lightningstrikes_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="MAX HEALTH" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_maxhp_sub5" class="gm_step">
+                                            <Label class="gm_step_text" text="-5" hittest="false" />
                                         </Button>
-                                        <Button id="admin_lightningstrikes_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_maxhp_sub1" class="gm_step">
+                                            <Label class="gm_step_text" text="-1" hittest="false" />
                                         </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="FALL DAMAGE" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_falldamage_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                        <Label id="admin_val_maxhp" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_maxhp_add1" class="gm_step">
+                                            <Label class="gm_step_text" text="+1" hittest="false" />
                                         </Button>
-                                        <Button id="admin_falldamage_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_maxhp_add5" class="gm_step">
+                                            <Label class="gm_step_text" text="+5" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="FAKE EXITS" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_fakeexits_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="MAX FLOORS" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_maxfloors_sub1" class="gm_step">
+                                            <Label class="gm_step_text" text="-1" hittest="false" />
                                         </Button>
-                                        <Button id="admin_fakeexits_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
-                                        </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="DEAD END CHUNKS" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_deadendchunks_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
-                                        </Button>
-                                        <Button id="admin_deadendchunks_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Label id="admin_val_maxfloors" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_maxfloors_add1" class="gm_step">
+                                            <Label class="gm_step_text" text="+1" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="MINI BOSSES" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_minibosses_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="TRAPS %" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_traps_sub5" class="gm_step">
+                                            <Label class="gm_step_text" text="-5" hittest="false" />
                                         </Button>
-                                        <Button id="admin_minibosses_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_traps_sub1" class="gm_step">
+                                            <Label class="gm_step_text" text="-1" hittest="false" />
                                         </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="EXTREME MODE" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_extrememode_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                        <Label id="admin_val_traps" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_traps_add1" class="gm_step">
+                                            <Label class="gm_step_text" text="+1" hittest="false" />
                                         </Button>
-                                        <Button id="admin_extrememode_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_traps_add5" class="gm_step">
+                                            <Label class="gm_step_text" text="+5" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="VIP MODE" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_vipmode_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="SAMOSBOR TIME" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_samosbortime_sub60" class="gm_step">
+                                            <Label class="gm_step_text" text="-60" hittest="false" />
                                         </Button>
-                                        <Button id="admin_vipmode_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
-                                        </Button>
-                                    </Panel>
-                                </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="CHUNKS SHUFFLE" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_chunksshuffle_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
-                                        </Button>
-                                        <Button id="admin_chunksshuffle_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Label id="admin_val_samosbortime" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_samosbortime_add60" class="gm_step">
+                                            <Label class="gm_step_text" text="+60" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="SAMOSBOR TIMER" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_samosbortimer_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="SAMOSBOR DAMAGE" />
+                                    <Panel class="gm_stepper">
+                                        <Button id="admin_samosbordamage_sub1" class="gm_step">
+                                            <Label class="gm_step_text" text="-1" hittest="false" />
                                         </Button>
-                                        <Button id="admin_samosbortimer_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Label id="admin_val_samosbordamage" class="gm_step_val" text="{s:val}" />
+                                        <Button id="admin_samosbordamage_add1" class="gm_step">
+                                            <Label class="gm_step_text" text="+1" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
-                                <Panel class="admin_row">
-                                    <Label class="admin_row_label" text="ELEVATOR HUMANS CHECK" />
-                                    <Panel class="admin_ctrl">
-                                        <Button id="admin_elevatorhumanscheck_off" class="admin_btn admin_btn_off">
-                                            <Label class="admin_btn_text" text="OFF" />
+                                <Button id="admin_reset" class="gm_reset">
+                                    <Label class="gm_reset_text" text="RESET TO DEFAULT" hittest="false" />
+                                </Button>
+                            </Panel>
+                            <Panel class="gm_col">
+                                <Panel class="gm_section" hittest="false">
+                                    <Panel class="gm_section_line" />
+                                    <Panel class="gm_section_gem" />
+                                    <Label class="gm_section_text" text="TOGGLES" />
+                                    <Panel class="gm_section_gem" />
+                                    <Panel class="gm_section_line" />
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="EXIT GLOW" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_exitglow_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
                                         </Button>
-                                        <Button id="admin_elevatorhumanscheck_on" class="admin_btn admin_btn_on">
-                                            <Label class="admin_btn_text" text="ON" />
+                                        <Button id="admin_exitglow_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="LIGHTNING STRIKES" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_lightningstrikes_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_lightningstrikes_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="FALL DAMAGE" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_falldamage_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_falldamage_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="FAKE EXITS" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_fakeexits_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_fakeexits_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="DEAD END CHUNKS" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_deadendchunks_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_deadendchunks_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="MINI BOSSES" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_minibosses_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_minibosses_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="EXTREME MODE" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_extrememode_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_extrememode_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="VIP MODE" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_vipmode_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_vipmode_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="CHUNKS SHUFFLE" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_chunksshuffle_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_chunksshuffle_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="SAMOSBOR TIMER" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_samosbortimer_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_samosbortimer_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
+                                        </Button>
+                                    </Panel>
+                                </Panel>
+                                <Panel class="gm_set_row">
+                                    <Label class="gm_set_label" text="ELEVATOR HUMANS CHECK" />
+                                    <Panel class="gm_switch">
+                                        <Button id="admin_elevatorhumanscheck_off" class="gm_sw gm_sw_off">
+                                            <Label class="gm_sw_text" text="OFF" hittest="false" />
+                                        </Button>
+                                        <Button id="admin_elevatorhumanscheck_on" class="gm_sw gm_sw_on">
+                                            <Label class="gm_sw_text" text="ON" hittest="false" />
                                         </Button>
                                     </Panel>
                                 </Panel>
                             </Panel>
                         </Panel>
-                        <Button id="admin_reset" class="admin_reset_btn">
-                            <Label class="admin_reset_text" text="RESET TO DEFAULT" />
-                        </Button>
-                        <Label class="admin_noaccess" text="YOU CANNOT INTERACT WITH THIS PANEL" />
+                        <Label id="lang_admin_noaccess" class="gm_noaccess" text="ONLY MAPPERS AND LEADERS CAN CHANGE THESE SETTINGS" />
                     </Panel>
                 </Panel>
             </Panel>
