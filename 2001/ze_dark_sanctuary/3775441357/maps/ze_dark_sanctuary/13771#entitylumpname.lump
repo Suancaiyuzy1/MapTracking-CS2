@@ -274,9 +274,9 @@
     "parentname": "",
     "targetname": "[PR#]dj_model",
     "classname": "prop_dynamic",
-    "origin": "74.589355 -14.029785 67.719971",
-    "angles": "-0.000000 -90.000000 -179.999969",
-    "scales": "28.988846 32.634804 31.528032",
+    "origin": "74.588379 -2.030273 35.719971",
+    "angles": "-89.999977 179.999985 0.000000",
+    "scales": "64.065353 72.122917 69.676956",
     "hammerUniqueId": "13542",
     "_template_lump_ent_index": "4"
   },
@@ -433,7 +433,7 @@
         "target": "[PR#]djmove_mk",
         "input": "ForceSpawn",
         "param": "",
-        "delay": 0,
+        "delay": 1,
         "limit": -1
       },
       {
@@ -441,7 +441,7 @@
         "target": "[PR#]dj_move",
         "input": "Open",
         "param": "",
-        "delay": 0.009999999776482582,
+        "delay": 1.0099999904632568,
         "limit": -1
       },
       {
@@ -458,6 +458,30 @@
         "input": "Start",
         "param": "",
         "delay": 10,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]dj_model",
+        "input": "SetAnimationNotLooping",
+        "param": "atk1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]dao1",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 1.100000023841858,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]dao1",
+        "input": "StopSound",
+        "param": "",
+        "delay": 3,
         "limit": -1
       }
     ]

@@ -48597,7 +48597,7 @@
         "target": "[PR#]huaibiao_par2",
         "input": "Kill",
         "param": "",
-        "delay": 6.5,
+        "delay": 7,
         "limit": -1
       },
       {
@@ -48605,7 +48605,7 @@
         "target": "[PR#]huaibiao_hurt",
         "input": "Kill",
         "param": "",
-        "delay": 6.5,
+        "delay": 7,
         "limit": -1
       },
       {
@@ -66919,6 +66919,14 @@
         "param": "",
         "delay": 4,
         "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]cj_model",
+        "input": "SetAnimationNotLooping",
+        "param": "take_001",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -67013,6 +67021,14 @@
         "param": "",
         "delay": 5,
         "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]hj_model",
+        "input": "SetAnimationNotLooping",
+        "param": "take_2",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -67083,7 +67099,7 @@
     "hammerUniqueId": "13539"
   },
   {
-    "filtername": "[PR#]xqy_filter",
+    "filtername": "[PR#]fw_filter",
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
@@ -70812,7 +70828,7 @@
     "classname": "prop_dynamic",
     "origin": "-6032.000000 -1697.876953 3839.000000",
     "angles": "0.000000 270.000000 0.000000",
-    "scales": "72.191399 72.191399 72.191399",
+    "scales": "77.966713 77.966713 77.966713",
     "hammerUniqueId": "13685"
   },
   {
@@ -71807,7 +71823,7 @@
     "classname": "prop_dynamic",
     "origin": "-5510.000000 1140.000000 4107.000000",
     "angles": "0.000000 89.999969 0.000000",
-    "scales": "43.374870 43.374870 43.374870",
+    "scales": "82.611778 82.611778 82.611778",
     "hammerUniqueId": "13708"
   },
   {
@@ -71950,7 +71966,7 @@
     "classname": "prop_dynamic",
     "origin": "-5608.000000 10294.542969 6428.003906",
     "angles": "0.000000 179.999954 0.000000",
-    "scales": "43.374870 43.374870 43.374870",
+    "scales": "75.038528 75.038528 75.038528",
     "hammerUniqueId": "13711"
   },
   {
