@@ -648,7 +648,7 @@ const HUD_ALL_PANELS = [
     "knife_frenzy_banner",
 ];
 
-const VERSION = "29/09/26";
+const VERSION = "30/09/26";
 
 
 
@@ -1053,8 +1053,8 @@ let isVoteForChangingModeSucceeded = false;
 
 let isVotingForMode = false;
 
-let isEasyMode = true;
-let isNormalMode = false;
+let isEasyMode = false;
+let isNormalMode = true;
 let isExtremeMode = false;
 let isSurvivalMode = false;
 let MapEntrancesCount = 0;
@@ -1102,7 +1102,7 @@ const MODE_DEFS = [
     { enabled: false, name: "LIQUIDATION MODE", desc: "Survive as long as possible. Find the canister and escape the floor." },
 ];
 
-let activeModeIndex = 0;
+let activeModeIndex = 1;
 
 let currentButtonModes = ComputeInitialButtonModes();
 let previousActiveModeIndexHolder = 0;
@@ -2339,7 +2339,7 @@ Instance.OnActivate(async () => {
 
         Instance.Msg(`Event payload: ${value.value}`);
 
-        const steamid = ParseSteamId64(value.value);
+        const steamid = data.steam_id ?? null;
         const slot = data.userid ?? null;
 
         if(steamid && slot != null)
@@ -5164,12 +5164,6 @@ function Delay(callback, delaySeconds) {
         time: Instance.GetGameTime() + delaySeconds,
         callback: callback
     });
-}
-
-function ParseSteamId64(raw)
-{
-    const m = /"steam_id"\s*:\s*"?(\d{15,20})"?/.exec(raw ?? "");
-    return m ? m[1] : null;
 }
 
 function GetSteamID(slot)
