@@ -87,6 +87,14 @@
         "param": "run",
         "delay": 0.009999999776482582,
         "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]redknight_model",
+        "input": "StartGlowing",
+        "param": "",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -266,8 +274,8 @@
     "use_animgraph": "1",
     "disablelowviolence": "0",
     "solid": "0",
-    "glowteam": "-1",
-    "glowcolor": "0 0 0",
+    "glowteam": "3",
+    "glowcolor": "255 0 0",
     "glowrangemin": "0",
     "glowrange": "0",
     "glowstate": "0",
