@@ -68,7 +68,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "targetname monster",
+        "param": "targetname Human_Item_Monster",
         "delay": 0,
         "limit": 1
       },

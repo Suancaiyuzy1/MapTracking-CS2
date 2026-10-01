@@ -51,6 +51,34 @@ function getPlayerPawn(entity) {
 }
 
 /**
+ * 判断玩家（activator 或其 pawn）的 targetname 是否匹配给定前缀。
+ * 尾部 "*" 视为通配，等价于 startsWith 前缀匹配。
+ * 回合刷新后玩家 targetname 重置为空字符串，空字符串不会匹配任何非空前缀，因此正常继续剥离。
+ * @param {Entity} activator 触发输入的玩家实体
+ * @param {CSPlayerPawn} pawn 玩家 Pawn
+ * @param {string} prefix 需要匹配的前缀，如 "Zombie_Item" 或 "Human_Item"
+ * @returns {boolean} 是否应跳过处理
+ */
+function playerNameMatchesPrefix(activator, pawn, prefix) {
+    const entities = [];
+    if (activator) entities.push(["activator", activator]);
+    if (pawn && pawn !== activator) entities.push(["pawn", pawn]);
+
+    for (const [label, entity] of entities) {
+        if (!entity || typeof entity.GetEntityName !== 'function') {
+            Instance.Msg(`[strip] playerNameMatchesPrefix: ${label} 无 GetEntityName 方法，跳过`);
+            continue;
+        }
+        const name = entity.GetEntityName();
+        Instance.Msg(`[strip] playerNameMatchesPrefix: ${label} targetname = "${name}"，匹配前缀 "${prefix}"`);
+        if (typeof name === 'string' && name.startsWith(prefix)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+/**
  * 剥离玩家身上的近战武器（刀）。
  * @param {CSPlayerPawn} playerPawn
  */
@@ -108,7 +136,13 @@ Instance.OnScriptInput("striphuman", (inputData) => {
     Instance.Msg(`[strip] striphuman: 玩家阵营 = ${team} (需要 CT=${TEAM_CT})`);
 
     if (team === TEAM_CT) {
-        Instance.Msg("[strip] striphuman: 阵营匹配 CT，执行剥离");
+        // 阵营检测通过后，检测玩家 targetname
+        // 若带有 Human_Item* 前缀，则不做任何处理
+        if (playerNameMatchesPrefix(activator, pawn, "Human_Item")) {
+            Instance.Msg("[strip] striphuman: 玩家 targetname 匹配 Human_Item*，跳过剥离");
+            return;
+        }
+        Instance.Msg("[strip] striphuman: 阵营匹配 CT 且玩家 targetname 不匹配 Human_Item*，执行剥离");
         stripKnife(pawn);
     } else {
         Instance.Msg("[strip] striphuman: 阵营不匹配，跳过");
@@ -139,7 +173,13 @@ Instance.OnScriptInput("stripzombie", (inputData) => {
     Instance.Msg(`[strip] stripzombie: 玩家阵营 = ${team} (需要 T=${TEAM_T})`);
 
     if (team === TEAM_T) {
-        Instance.Msg("[strip] stripzombie: 阵营匹配 T，执行剥离");
+        // 阵营检测通过后，检测玩家 targetname
+        // 若带有 Zombie_Item* 前缀，则不做任何处理
+        if (playerNameMatchesPrefix(activator, pawn, "Zombie_Item")) {
+            Instance.Msg("[strip] stripzombie: 玩家 targetname 匹配 Zombie_Item*，跳过剥离");
+            return;
+        }
+        Instance.Msg("[strip] stripzombie: 阵营匹配 T 且玩家 targetname 不匹配 Zombie_Item*，执行剥离");
         stripKnife(pawn);
     } else {
         Instance.Msg("[strip] stripzombie: 阵营不匹配，跳过");
