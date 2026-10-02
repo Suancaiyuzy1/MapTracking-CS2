@@ -1609,9 +1609,9 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "[PR#]global_script",
-        "input": "RunScriptInput",
-        "param": "Drop",
+        "target": "[PR#]client_command",
+        "input": "Command",
+        "param": "slot3",
         "delay": 0,
         "limit": -1
       },

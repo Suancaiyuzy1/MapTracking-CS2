@@ -695,7 +695,7 @@
         "input": "FireUser1",
         "param": "",
         "delay": 0,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnPressed",
@@ -703,7 +703,7 @@
         "input": "AddOutput",
         "param": "OnUser1\u003Elevel_case\u003EInValue\u003E2\u003E0\u003E1",
         "delay": 0.019999999552965164,
-        "limit": 1
+        "limit": -1
       }
     ]
   },
@@ -756,7 +756,7 @@
         "input": "FireUser1",
         "param": "",
         "delay": 0,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnPressed",
@@ -764,7 +764,7 @@
         "input": "AddOutput",
         "param": "OnUser1\u003Elevel_case\u003EInValue\u003E3\u003E0\u003E1",
         "delay": 0.019999999552965164,
-        "limit": 1
+        "limit": -1
       }
     ]
   },
@@ -825,7 +825,7 @@
         "input": "FireUser1",
         "param": "",
         "delay": 0,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnPressed",
@@ -833,7 +833,7 @@
         "input": "AddOutput",
         "param": "OnUser1\u003Elevel_case\u003EInValue\u003E1\u003E0\u003E1",
         "delay": 0.019999999552965164,
-        "limit": 1
+        "limit": -1
       }
     ]
   },
@@ -40925,15 +40925,6 @@
     "hammerUniqueId": "4502"
   },
   {
-    "cs_script": "scripts/drop.vjs",
-    "targetname": "[PR#]global_script",
-    "classname": "point_script",
-    "origin": "-360.000000 3168.000000 -248.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "4503"
-  },
-  {
     "farz": "5000.000000",
     "fadetime": "0.000000",
     "fogverticalexponent": "2.000000",
@@ -41062,7 +41053,7 @@
     "cs_script": "scripts/map_script.vjs",
     "targetname": "[PR#]global_script2",
     "classname": "point_script",
-    "origin": "-360.000000 3168.000000 -232.000000",
+    "origin": "-360.000000 3168.000000 -248.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "33659"

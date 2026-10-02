@@ -210,26 +210,10 @@
       },
       {
         "output": "OnCase02",
-        "target": "!self",
-        "input": "FireUser1",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnUser1",
         "target": "[PR#]relay_lilith_extreme_anima_ingest",
         "input": "Trigger",
         "param": "",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnUser1",
-        "target": "!self",
-        "input": "AddOutput",
-        "param": "OnCase02\u003E!self\u003EFireUser1\u003E\u003E0\u003E1",
-        "delay": 30,
         "limit": -1
       }
     ]
@@ -1386,7 +1370,7 @@
     "damagemodel": "0",
     "damagetype": "512",
     "damagecap": "20",
-    "damage": "2",
+    "damage": "3",
     "master": "",
     "filtername": "[PR#]filter_humans",
     "spawnflags": "1",
@@ -1409,18 +1393,10 @@
     "_template_lump_ent_index": "17",
     "connections": [
       {
-        "output": "OnStartTouch",
-        "target": "[PR#]global_script",
-        "input": "RunScriptInput",
-        "param": "Drop",
-        "delay": 0,
-        "limit": -1
-      },
-      {
         "output": "OnHurtPlayer",
         "target": "[PR#]Lilith_Hp",
         "input": "Add",
-        "param": "1.2",
+        "param": "1",
         "delay": 0,
         "limit": -1
       },
@@ -1454,6 +1430,14 @@
         "input": "Disable",
         "param": "",
         "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]client_command",
+        "input": "Command",
+        "param": "slot3",
+        "delay": 0,
         "limit": -1
       }
     ]

@@ -250,7 +250,7 @@
         "target": "[PR#]lilith_rock_model\u00260000",
         "input": "SetAnimationNotLooping",
         "param": "liliths_model",
-        "delay": 0.10000000149011612,
+        "delay": 0.019999999552965164,
         "limit": 1
       }
     ]

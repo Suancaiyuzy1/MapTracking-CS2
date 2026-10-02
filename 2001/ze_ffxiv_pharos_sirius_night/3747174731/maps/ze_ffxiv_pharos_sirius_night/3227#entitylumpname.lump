@@ -184,7 +184,7 @@
         "target": "[PR#]human_rock_model",
         "input": "SetAnimationNotLooping",
         "param": "cinephys",
-        "delay": 0.10000000149011612,
+        "delay": 0.019999999552965164,
         "limit": 1
       }
     ]

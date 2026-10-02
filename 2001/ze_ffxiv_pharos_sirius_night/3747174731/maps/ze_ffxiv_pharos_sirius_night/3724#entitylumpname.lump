@@ -734,6 +734,14 @@
         "param": "run",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]client_command",
+        "input": "Command",
+        "param": "slot3",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
