@@ -275,7 +275,7 @@ Instance.OnScriptInput("speed_fix_zm", (stuff) => {
     for (const player of players) {
 
         if (player?.IsValid() && player.GetTeamNumber() === 2) {
-            Instance.EntFireAtTarget({ target: player, input: "KeyValue", value: "speed " + 1.05 });
+            Instance.EntFireAtTarget({ target: player, input: "KeyValue", value: "speed " + 1.0 });
         }
     }
 });
