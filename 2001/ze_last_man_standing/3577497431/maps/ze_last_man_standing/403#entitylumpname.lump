@@ -356,7 +356,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "targetname zombie_vortigaunt",
+        "param": "targetname Zombie_Item_vortigaunt",
         "delay": 0,
         "limit": -1
       },

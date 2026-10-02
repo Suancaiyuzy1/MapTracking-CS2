@@ -480,7 +480,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "targetname zombie_antlion",
+        "param": "targetname Zombie_Item_antlion",
         "delay": 0,
         "limit": -1
       },

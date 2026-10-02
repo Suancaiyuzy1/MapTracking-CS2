@@ -816,7 +816,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "targetname zombie_predator",
+        "param": "targetname Zombie_Item_predator",
         "delay": 0,
         "limit": -1
       },

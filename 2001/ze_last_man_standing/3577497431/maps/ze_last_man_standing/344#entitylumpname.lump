@@ -463,7 +463,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "targetname zombie_summoner",
+        "param": "targetname Zombie_Item_summoner",
         "delay": 0,
         "limit": -1
       },
