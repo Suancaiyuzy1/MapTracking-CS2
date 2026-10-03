@@ -3,8 +3,8 @@
 <!-- xml reconstructed from compiled AST -->
 <root>
     <styles>
-        <include src="s2r://panorama/styles/custom_game/welcome.vcss_c" />
-        <include src="s2r://panorama/styles/custom_game/crop_sizes.vcss_c" />
+        <include src="s2r://panorama/styles/custom_game/welcome.vcss" />
+        <include src="s2r://panorama/styles/custom_game/crop_sizes.vcss" />
     </styles>
     <Panel class="Root" hittest="false">
         <Panel id="lyric_card" class="Hidden" hittest="false">
