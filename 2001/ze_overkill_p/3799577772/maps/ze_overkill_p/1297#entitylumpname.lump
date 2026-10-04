@@ -1648,6 +1648,14 @@
         "param": "",
         "delay": 5,
         "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]tp_afk3_01_fix",
+        "input": "FireUser1",
+        "param": "",
+        "delay": 5,
+        "limit": 1
       }
     ]
   },

@@ -5,7 +5,7 @@
   {
     "PassthroughCaller": "0",
     "FastRetrigger": "0",
-    "TriggerOnce": "0",
+    "TriggerOnce": "1",
     "StartDisabled": "1",
     "targetname": "[PR#]dogma_relay",
     "vscripts": "",
