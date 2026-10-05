@@ -511,6 +511,153 @@
     ]
   },
   {
+    "filtername": "[PR#]Filter_Humans",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]Stage23_Lowtown_Trigger_2",
+    "classname": "trigger_once",
+    "origin": "17904.000000 14122.000000 6633.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1256",
+    "model": "maps/ze_rabanastre_royal/entities/stage23_lowtown_trigger_2_1256.vmdl",
+    "_template_lump_ent_index": "5",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Rabanastre_Gate04",
+        "input": "Open",
+        "param": "",
+        "delay": 20,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Map_Command",
+        "input": "Command",
+        "param": "say \u003C Defend!We almost leave the Lowtown soon! \u003E",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Map_Command",
+        "input": "Command",
+        "param": "say \u003C 5 seconds \u003E",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]TP_ZM_Crystall_Button",
+        "input": "Unlock",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]TP_Sobel_Button",
+        "input": "Unlock",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Sobel_Button_2",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Explosion_Maker",
+        "input": "ForceSpawnAtEntityOrigin",
+        "param": "Map_Fire_Particle_1",
+        "delay": 25,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Explosion_Maker",
+        "input": "ForceSpawnAtEntityOrigin",
+        "param": "[PR#]Crates_Fire_Particle_2",
+        "delay": 5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Explosion_Maker",
+        "input": "ForceSpawnAtEntityOrigin",
+        "param": "[PR#]Crates_Fire_Particle_3",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Crates_Fire_Particle_2",
+        "input": "Start",
+        "param": "",
+        "delay": 5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Crates_Fire_Particle_3",
+        "input": "Start",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Map_Fire_Particle_1",
+        "input": "start",
+        "param": "",
+        "delay": 25,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "check_if_dest_clear_for_player": "0",
+    "UseLandmarkAngles": "1",
+    "CheckDestIfClearForPlayer": "0",
+    "mirror_player": "0",
+    "use_landmark_angles": "1",
+    "landmark": "",
+    "target": "[PR#]TD_ZM_Water",
+    "filtername": "",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]TP_Lowtown_1",
+    "classname": "trigger_teleport",
+    "origin": "17648.000000 18099.500000 6633.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1137",
+    "model": "maps/ze_rabanastre_royal/entities/tp_lowtown_1_1137.vmdl",
+    "_template_lump_ent_index": "6"
+  },
+  {
     "steamaudio_geometry_mode": "0",
     "expand_render_bounds_to_include_cloth": "0",
     "animgraph2_identifier": "",
@@ -585,6 +732,149 @@
     "angles": "-0.000000 -179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2786",
-    "_template_lump_ent_index": "5"
+    "_template_lump_ent_index": "7"
+  },
+  {
+    "check_if_dest_clear_for_player": "0",
+    "UseLandmarkAngles": "1",
+    "CheckDestIfClearForPlayer": "0",
+    "mirror_player": "0",
+    "use_landmark_angles": "1",
+    "landmark": "",
+    "target": "[PR#]TD_ZM_Water",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]TP_Lowtown_2",
+    "classname": "trigger_teleport",
+    "origin": "16592.000000 20916.000000 6633.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1126",
+    "model": "maps/ze_rabanastre_royal/entities/tp_lowtown_2_1126.vmdl",
+    "_template_lump_ent_index": "8"
+  },
+  {
+    "check_if_dest_clear_for_player": "0",
+    "UseLandmarkAngles": "1",
+    "CheckDestIfClearForPlayer": "0",
+    "mirror_player": "0",
+    "use_landmark_angles": "1",
+    "landmark": "",
+    "target": "[PR#]TD_ZM_Crystall",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]TP_Lowtown_3",
+    "classname": "trigger_teleport",
+    "origin": "15728.000000 20909.000000 6563.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1096",
+    "model": "maps/ze_rabanastre_royal/entities/tp_lowtown_3_1096.vmdl",
+    "_template_lump_ent_index": "9"
+  },
+  {
+    "filtername": "[PR#]Filter_Humans",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "0",
+    "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]Stage23_Lowtown_Trigger_1",
+    "classname": "trigger_once",
+    "origin": "17504.000000 21129.000000 6633.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1289",
+    "model": "maps/ze_rabanastre_royal/entities/stage23_lowtown_trigger_1_1289.vmdl",
+    "_template_lump_ent_index": "10",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Map_Command",
+        "input": "Command",
+        "param": "say \u003C The arena will open in 40 seconds \u003E",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Map_Command",
+        "input": "Command",
+        "param": "say \u003C 5 seconds \u003E",
+        "delay": 35,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Zeromus_Metal_Breakable",
+        "input": "Kill",
+        "param": "",
+        "delay": 40,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Zeromus_Trigger_Push",
+        "input": "Enable",
+        "param": "",
+        "delay": 40,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Rabanastre_Gate04",
+        "input": "Close",
+        "param": "",
+        "delay": 10,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]TP_Stage23",
+        "input": "Enable",
+        "param": "",
+        "delay": 10,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Zeromus_HP_Add_Trigger_Stage2",
+        "input": "Enable",
+        "param": "",
+        "delay": 40,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Zeromus_HP_Add_Trigger_Stage3",
+        "input": "Enable",
+        "param": "",
+        "delay": 40,
+        "limit": 1
+      }
+    ]
   }
 ]
