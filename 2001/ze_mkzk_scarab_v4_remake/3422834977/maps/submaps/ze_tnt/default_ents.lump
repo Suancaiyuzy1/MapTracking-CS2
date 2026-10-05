@@ -129709,6 +129709,14 @@
         "param": "",
         "delay": 3,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_2",
+        "delay": 4,
+        "limit": -1
       }
     ]
   },
@@ -129948,6 +129956,22 @@
         "param": "",
         "delay": 75.0999984741211,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_3",
+        "delay": 4,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_4",
+        "delay": 6.5,
+        "limit": -1
       }
     ]
   },
@@ -130107,6 +130131,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_5",
+        "delay": 4,
+        "limit": -1
       }
     ]
   },
@@ -130137,6 +130169,14 @@
         "input": "Disable",
         "param": "",
         "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_6",
+        "delay": 4,
         "limit": -1
       }
     ]
@@ -150472,6 +150512,14 @@
         "input": "Enable",
         "param": "",
         "delay": 12,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_7",
+        "delay": 4,
         "limit": -1
       }
     ]

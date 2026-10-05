@@ -2976,7 +2976,7 @@
     "connections": [
       {
         "output": "OnTrue",
-        "target": "[PR#]mgmode3",
+        "target": "[PR#]mgmode6",
         "input": "Trigger",
         "param": "",
         "delay": 5,
@@ -8082,7 +8082,7 @@
     "color": "180 180 180",
     "fullbright": "1",
     "enabled": "1",
-    "message": "\u6309\u4E0B\u9759\u6B65\u952E\u83B7\u5F97\u52A0\u901F\uFF0C\u4F46\u8FC7\u5EA6\u4F7F\u7528\u53EF\u80FD\u4F1A\u88AB\u8098\u51FB",
+    "message": "\u70B9\u6309\u9759\u6B65\u952E\u5F00\u542F\u52A0\u901F\uFF0C\u4F46\u8FC7\u5EA6\u4F7F\u7528\u53EF\u80FD\u4F1A\u88AB\u8098\u51FB",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -8414,6 +8414,14 @@
         "param": "",
         "delay": 0.5,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "dr_1",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -8507,7 +8515,7 @@
         "target": "[PR#]mghidetimer4",
         "input": "Enable",
         "param": "",
-        "delay": 6,
+        "delay": 9,
         "limit": -1
       },
       {
@@ -8515,7 +8523,7 @@
         "target": "[PR#]mghidetext",
         "input": "Enable",
         "param": "",
-        "delay": 6,
+        "delay": 9,
         "limit": -1
       },
       {
@@ -8620,6 +8628,14 @@
         "input": "PickRandomShuffle",
         "param": "",
         "delay": 0.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "hide_1",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -9599,6 +9615,14 @@
         "target": "[PR#]mkzk_run_temp",
         "input": "ForceSpawn",
         "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "run_1",
         "delay": 0,
         "limit": -1
       }
@@ -11487,8 +11511,8 @@
   },
   {
     "max": "900",
-    "min": "-100",
-    "startvalue": "80",
+    "min": "0",
+    "startvalue": "76",
     "StartDisabled": "0",
     "vscripts": "",
     "targetname": "[PR#]mghidecounter",
@@ -11510,6 +11534,14 @@
         "output": "OnGetValue",
         "target": "[PR#]mghidewin",
         "input": "SetValueCompare",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]mghidetimer4",
+        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -13874,6 +13906,38 @@
         "param": "Say \u5F53\u524D\u96BE\u5EA6\uFF1A\u5012\u6597",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_2",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_3",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase04",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_4",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -14580,6 +14644,30 @@
         "input": "Trigger",
         "param": "",
         "delay": 53.79999923706055,
+        "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_2",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_3",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -22310,6 +22398,38 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_2",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_3",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase04",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "diff_4",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -23397,6 +23517,30 @@
         "param": "",
         "delay": 0.5,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 12,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 12,
+        "limit": 1
       }
     ]
   },
@@ -23635,14 +23779,6 @@
         "input": "Open",
         "param": "",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]bruecke1",
-        "input": "Open",
-        "param": "",
-        "delay": 3,
         "limit": -1
       },
       {
@@ -25592,6 +25728,46 @@
         "param": "",
         "delay": 62.20000076293945,
         "limit": -1
+      },
+      {
+        "output": "OnTrue",
+        "target": "[PR#]mg5timer2",
+        "input": "Enable",
+        "param": "",
+        "delay": 11,
+        "limit": -1
+      },
+      {
+        "output": "OnTrue",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_7",
+        "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrue",
+        "target": "[PR#]mg5timer2",
+        "input": "Disable",
+        "param": "",
+        "delay": 60.5,
+        "limit": 1
+      },
+      {
+        "output": "OnTrue",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_6",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnFalse",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_5",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -26256,6 +26432,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_4",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -26299,7 +26483,7 @@
         "output": "OnTrigger",
         "target": "[PR#]servercommand1",
         "input": "Command",
-        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u5E2E\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
+        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u534F\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
         "delay": 0,
         "limit": -1
       },
@@ -26307,7 +26491,7 @@
         "output": "OnTrigger",
         "target": "[PR#]servercommand1",
         "input": "Command",
-        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u5E2E\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
+        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u534F\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
         "delay": 0,
         "limit": -1
       },
@@ -26323,7 +26507,15 @@
         "output": "OnTrigger",
         "target": "[PR#]servercommand1",
         "input": "Command",
-        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u5E2E\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
+        "param": "Say \u0022\u5173\u5361\u8FDB\u5EA6\u505C\u6EDE\uFF0C\u6B63\u5728\u534F\u52A9\u4EBA\u7C7B\u63A8\u8FDB...\u0022",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_3",
         "delay": 0,
         "limit": -1
       }
@@ -26801,6 +26993,14 @@
         "input": "StartSpawnGroupLoad",
         "param": "",
         "delay": 0.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_1",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -27470,34 +27670,6 @@
     "hammerUniqueId": "11661"
   },
   {
-    "InitialValue": "1",
-    "vscripts": "",
-    "targetname": "[PR#]mg5b2",
-    "classname": "logic_branch",
-    "origin": "-416.000000 2720.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "11666",
-    "connections": [
-      {
-        "output": "OnTrue",
-        "target": "[PR#]mg5b2case",
-        "input": "PickRandomShuffle",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnFalse",
-        "target": "[PR#]mg5tp2",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "wait": "1.000000",
     "filtername": "[PR#]ct",
     "spawnflags": "1",
@@ -27531,152 +27703,6 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "speed 1.1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "Case32": "",
-    "Case31": "",
-    "Case30": "",
-    "Case29": "",
-    "Case28": "",
-    "Case27": "",
-    "Case26": "",
-    "Case25": "",
-    "Case24": "",
-    "Case23": "",
-    "Case22": "",
-    "Case21": "",
-    "Case20": "",
-    "Case19": "",
-    "Case18": "",
-    "Case17": "",
-    "Case16": "",
-    "Case15": "",
-    "Case14": "",
-    "Case13": "",
-    "Case12": "",
-    "Case11": "",
-    "Case10": "",
-    "Case09": "",
-    "Case08": "",
-    "Case07": "",
-    "Case06": "",
-    "Case05": "",
-    "Case04": "",
-    "Case03": "",
-    "Case02": "",
-    "Case01": "",
-    "vscripts": "",
-    "targetname": "[PR#]mg5b2case",
-    "classname": "logic_case",
-    "origin": "-448.000000 2720.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "11689",
-    "connections": [
-      {
-        "output": "OnCase02",
-        "target": "[PR#]mg5tp2",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnCase01",
-        "target": "[PR#]mg5tp2b",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "InitialValue": "0",
-    "vscripts": "",
-    "targetname": "[PR#]mg5b3",
-    "classname": "logic_branch",
-    "origin": "-480.000000 2720.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "11690",
-    "connections": [
-      {
-        "output": "OnTrue",
-        "target": "[PR#]mg5b3case",
-        "input": "PickRandomShuffle",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnFalse",
-        "target": "[PR#]mg5tp3",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "Case32": "",
-    "Case31": "",
-    "Case30": "",
-    "Case29": "",
-    "Case28": "",
-    "Case27": "",
-    "Case26": "",
-    "Case25": "",
-    "Case24": "",
-    "Case23": "",
-    "Case22": "",
-    "Case21": "",
-    "Case20": "",
-    "Case19": "",
-    "Case18": "",
-    "Case17": "",
-    "Case16": "",
-    "Case15": "",
-    "Case14": "",
-    "Case13": "",
-    "Case12": "",
-    "Case11": "",
-    "Case10": "",
-    "Case09": "",
-    "Case08": "",
-    "Case07": "",
-    "Case06": "",
-    "Case05": "",
-    "Case04": "",
-    "Case03": "",
-    "Case02": "",
-    "Case01": "",
-    "vscripts": "",
-    "targetname": "[PR#]mg5b3case",
-    "classname": "logic_case",
-    "origin": "-512.000000 2720.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "11691",
-    "connections": [
-      {
-        "output": "OnCase02",
-        "target": "[PR#]mg5tp3",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnCase01",
-        "target": "[PR#]mg5tp3b",
-        "input": "TeleportToCurrentPos",
-        "param": "",
         "delay": 0,
         "limit": -1
       }
@@ -27737,7 +27763,7 @@
     "vscripts": "",
     "targetname": "[PR#]mg5random",
     "classname": "logic_case",
-    "origin": "-544.000000 2720.000000 0.000000",
+    "origin": "-224.000000 2752.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11818",
@@ -27747,7 +27773,7 @@
         "target": "[PR#]hurt",
         "input": "Hurt",
         "param": "",
-        "delay": 0,
+        "delay": 1.5,
         "limit": -1
       },
       {
@@ -27915,6 +27941,14 @@
         "target": "[PR#]none",
         "input": "Test",
         "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_2",
         "delay": 0,
         "limit": -1
       }
@@ -31816,6 +31850,22 @@
         "param": "",
         "delay": 25,
         "limit": -1
+      },
+      {
+        "output": "OnMapSpawn",
+        "target": "[PR#]script_exit",
+        "input": "RunScriptInput",
+        "param": "hint21",
+        "delay": 1.600000023841858,
+        "limit": 1
+      },
+      {
+        "output": "OnMapSpawn",
+        "target": "[PR#]servercommand1",
+        "input": "Command",
+        "param": "sv_disable_radar 1",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -35078,7 +35128,7 @@
     "vscripts": "",
     "targetname": "[PR#]mg5relay",
     "classname": "logic_relay",
-    "origin": "-576.000000 2720.000000 0.000000",
+    "origin": "-256.000000 2752.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12251",
@@ -36155,6 +36205,14 @@
         "param": "gravity 0.48",
         "delay": 1,
         "limit": -1
+      },
+      {
+        "output": "OnUser1",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "slot_reward",
+        "delay": 1,
+        "limit": -1
       }
     ]
   },
@@ -37209,6 +37267,14 @@
         "param": "0",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "hide_2_2",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -37247,6 +37313,14 @@
         "param": "max_health 450",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "hide_2_3",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -37261,7 +37335,7 @@
     "color": "169 169 169",
     "fullbright": "1",
     "enabled": "1",
-    "message": "\u6309\u4E0B\u9759\u6B65\u952E\u83B7\u5F97\u52A0\u901F\n\u8FC7\u5EA6\u4F7F\u7528\u4F1A\u88AB\u8098\u51FB",
+    "message": "\u70B9\u6309\u9759\u6B65\u952E\u5F00\u542F\u52A0\u901F\n\u8FC7\u5EA6\u4F7F\u7528\u4F1A\u88AB\u8098\u51FB",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -37453,6 +37527,14 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "gravity 1.00",
+        "delay": 1,
+        "limit": -1
+      },
+      {
+        "output": "OnUser1",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "slot_reward",
         "delay": 1,
         "limit": -1
       }
@@ -37671,6 +37753,14 @@
         "target": "!activator",
         "input": "AddContext",
         "param": "reward:1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "hide_2_4",
         "delay": 0,
         "limit": -1
       }
@@ -40578,6 +40668,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "hide_2_1",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -41861,5 +41959,64 @@
     "hammerUniqueId": "12533",
     "worldName": "maps\\ze_mkzk_scarab_v4_remake",
     "entityLumpName": "12533#entityLumpName"
+  },
+  {
+    "observable": "0",
+    "layout": "panorama/layout/custom_game/game_text.xml",
+    "targetname": "[PR#]game_text_hud",
+    "classname": "custom_hud_layout",
+    "origin": "-32.000000 2768.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12534"
+  },
+  {
+    "cs_script": "scripts/ze_mkzk_scarab_hud.vjs",
+    "targetname": "[PR#]script_hud",
+    "classname": "point_script",
+    "origin": "-32.000000 2752.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12535"
+  },
+  {
+    "max": "100",
+    "min": "0",
+    "startvalue": "16",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]mg5counter",
+    "classname": "math_counter",
+    "origin": "-320.000000 2752.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12536"
+  },
+  {
+    "InitialDelay": "0.000000",
+    "RefireTime": "1.000000",
+    "UpperRandomBound": "0.000000",
+    "LowerRandomBound": "0.000000",
+    "PauseAfterFiring": "0",
+    "UseRandomTime": "0",
+    "spawnflags": "0",
+    "StartDisabled": "1",
+    "vscripts": "",
+    "targetname": "[PR#]mg5timer2",
+    "classname": "logic_timer",
+    "origin": "-288.000000 2752.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12537",
+    "connections": [
+      {
+        "output": "OnTimer",
+        "target": "[PR#]mg5counter",
+        "input": "Add",
+        "param": "-1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]

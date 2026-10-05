@@ -39517,6 +39517,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -39577,6 +39585,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
         "delay": 0,
         "limit": 1
       }
@@ -39665,6 +39681,14 @@
         "param": "0",
         "delay": 7,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -39702,6 +39726,14 @@
         "input": "Trigger",
         "param": "",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0.30000001192092896,
         "limit": 1
       }
     ]
@@ -39755,6 +39787,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
         "delay": 0,
         "limit": 1
       }
@@ -39811,6 +39851,14 @@
         "param": "",
         "delay": 7,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -39863,6 +39911,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
         "delay": 0,
         "limit": 1
       }
@@ -39926,6 +39982,14 @@
         "input": "SetValue",
         "param": "0",
         "delay": 3,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
         "limit": 1
       }
     ]
@@ -40061,6 +40125,14 @@
         "param": "1",
         "delay": 15,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40163,6 +40235,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40208,6 +40288,14 @@
         "input": "Trigger",
         "param": "",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 1,
         "limit": 1
       }
     ]
@@ -40279,6 +40367,14 @@
         "param": "0",
         "delay": 8,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40317,6 +40413,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 1,
+        "limit": 1
       }
     ]
   },
@@ -40354,6 +40458,14 @@
         "input": "Trigger",
         "param": "",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 1,
         "limit": 1
       }
     ]
@@ -40409,6 +40521,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40447,6 +40567,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0.5,
+        "limit": 1
       }
     ]
   },
@@ -40464,7 +40592,7 @@
     "vscripts": "",
     "targetname": "[PR#]mg5tg",
     "classname": "trigger_once",
-    "origin": "0.000000 -9568.000000 -1120.000000",
+    "origin": "0.000000 -9632.000000 -1120.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "16365",
@@ -40499,6 +40627,14 @@
         "target": "[PR#]mg5b3",
         "input": "SetValue",
         "param": "1",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
         "delay": 0,
         "limit": 1
       }
@@ -40555,6 +40691,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40591,6 +40735,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
         "delay": 0,
         "limit": 1
       }
@@ -40639,6 +40791,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40685,6 +40845,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40721,6 +40889,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
         "delay": 0,
         "limit": 1
       }
@@ -40761,6 +40937,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -40796,6 +40980,22 @@
         "output": "OnStartTouch",
         "target": "[PR#]mg5tp3tp6b",
         "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mg5kill",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": 1
@@ -40835,6 +41035,14 @@
         "target": "[PR#]mg5kill",
         "input": "Trigger",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
         "delay": 0,
         "limit": 1
       }
@@ -40919,5 +41127,597 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "16385",
     "model": "maps/submaps/ze_wang/entities/mg5wall_16385.vmdl"
+  },
+  {
+    "filtername": "[PR#]ct",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mg5tg",
+    "classname": "trigger_once",
+    "origin": "0.000000 -1856.000000 -656.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16387",
+    "model": "maps/submaps/ze_wang/entities/mg5tg_16387.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mg5kill",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_inside",
+        "delay": 0,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "filtername": "[PR#]ct",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mg5tg",
+    "classname": "trigger_once",
+    "origin": "0.000000 -2256.000000 -1168.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16389",
+    "model": "maps/submaps/ze_wang/entities/mg5tg_16389.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mg5kill",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "wang_outside",
+        "delay": 0,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "filtername": "[PR#]ct",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "",
+    "classname": "trigger_once",
+    "origin": "0.000000 -2016.000000 -1228.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16391",
+    "model": "maps/submaps/ze_wang/entities/unnamed_16391.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1",
+        "input": "Open",
+        "param": "",
+        "delay": 3,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 3.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 3,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 4.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 4,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 5.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 6,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 6.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 7,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 7.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 8,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 8.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 9,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 9.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 10,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 10.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 11,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 11.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 12,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 12.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 13,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 13.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 14,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 14.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 15.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 16,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 16.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 17,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 17.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 18,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 18.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 19,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 19.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1soun1",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 21,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 20.5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 20,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]bruecke1sound2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 21.5,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "InitialValue": "1",
+    "vscripts": "",
+    "targetname": "[PR#]mg5b2",
+    "classname": "logic_branch",
+    "origin": "-416.000000 2720.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16393",
+    "connections": [
+      {
+        "output": "OnTrue",
+        "target": "[PR#]mg5b2case",
+        "input": "PickRandomShuffle",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnFalse",
+        "target": "[PR#]mg5tp2",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "Case32": "",
+    "Case31": "",
+    "Case30": "",
+    "Case29": "",
+    "Case28": "",
+    "Case27": "",
+    "Case26": "",
+    "Case25": "",
+    "Case24": "",
+    "Case23": "",
+    "Case22": "",
+    "Case21": "",
+    "Case20": "",
+    "Case19": "",
+    "Case18": "",
+    "Case17": "",
+    "Case16": "",
+    "Case15": "",
+    "Case14": "",
+    "Case13": "",
+    "Case12": "",
+    "Case11": "",
+    "Case10": "",
+    "Case09": "",
+    "Case08": "",
+    "Case07": "",
+    "Case06": "",
+    "Case05": "",
+    "Case04": "",
+    "Case03": "",
+    "Case02": "",
+    "Case01": "",
+    "vscripts": "",
+    "targetname": "[PR#]mg5b2case",
+    "classname": "logic_case",
+    "origin": "-448.000000 2720.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16394",
+    "connections": [
+      {
+        "output": "OnCase02",
+        "target": "[PR#]mg5tp2",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]mg5tp2b",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "InitialValue": "0",
+    "vscripts": "",
+    "targetname": "[PR#]mg5b3",
+    "classname": "logic_branch",
+    "origin": "-480.000000 2720.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16395",
+    "connections": [
+      {
+        "output": "OnTrue",
+        "target": "[PR#]mg5b3case",
+        "input": "PickRandomShuffle",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnFalse",
+        "target": "[PR#]mg5tp3",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "Case32": "",
+    "Case31": "",
+    "Case30": "",
+    "Case29": "",
+    "Case28": "",
+    "Case27": "",
+    "Case26": "",
+    "Case25": "",
+    "Case24": "",
+    "Case23": "",
+    "Case22": "",
+    "Case21": "",
+    "Case20": "",
+    "Case19": "",
+    "Case18": "",
+    "Case17": "",
+    "Case16": "",
+    "Case15": "",
+    "Case14": "",
+    "Case13": "",
+    "Case12": "",
+    "Case11": "",
+    "Case10": "",
+    "Case09": "",
+    "Case08": "",
+    "Case07": "",
+    "Case06": "",
+    "Case05": "",
+    "Case04": "",
+    "Case03": "",
+    "Case02": "",
+    "Case01": "",
+    "vscripts": "",
+    "targetname": "[PR#]mg5b3case",
+    "classname": "logic_case",
+    "origin": "-512.000000 2720.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "16396",
+    "connections": [
+      {
+        "output": "OnCase02",
+        "target": "[PR#]mg5tp3",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]mg5tp3b",
+        "input": "TeleportToCurrentPos",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
