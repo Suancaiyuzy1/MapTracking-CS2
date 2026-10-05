@@ -268,7 +268,7 @@
         "output": "OnCase04",
         "target": "[PR#]item_treasurechest_makershenqi\u00260000",
         "input": "KeyValue",
-        "param": "EntityTemplate Item_littleheal_temp1",
+        "param": "EntityTemplate item_littlewall_temp1",
         "delay": 0,
         "limit": -1
       },
@@ -309,6 +309,14 @@
         "target": "[PR#]item_treasurechest_makershenqi\u00260000",
         "input": "KeyValue",
         "param": "EntityTemplate Item_mine_temp1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase09",
+        "target": "[PR#]item_treasurechest_makershenqi\u00260000",
+        "input": "KeyValue",
+        "param": "EntityTemplate item_littlelaser_temp1",
         "delay": 0,
         "limit": -1
       }

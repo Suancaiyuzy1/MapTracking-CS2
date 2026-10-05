@@ -1869,14 +1869,6 @@
     "connections": [
       {
         "output": "OnHitMin",
-        "target": "[PR#]item_heromaker",
-        "input": "ForceSpawn",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
         "target": "[PR#]item_hero",
         "input": "KillHierarchy",
         "param": "",

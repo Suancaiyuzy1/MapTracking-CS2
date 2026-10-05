@@ -199,14 +199,6 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]item_fog_phys",
-        "input": "SetParent",
-        "param": "",
-        "delay": 3.299999952316284,
-        "limit": 1
-      },
-      {
-        "output": "OnSpawn",
         "target": "[PR#]item_fog_par1",
         "input": "Kill",
         "param": "",
@@ -223,26 +215,10 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]item_fog_phys",
-        "input": "Kill",
-        "param": "",
-        "delay": 11.5,
-        "limit": 1
-      },
-      {
-        "output": "OnSpawn",
         "target": "[PR#]item_fog_usedspr",
         "input": "Kill",
         "param": "",
         "delay": 11.5,
-        "limit": 1
-      },
-      {
-        "output": "OnSpawn",
-        "target": "[PR#]item_fog_usedspr",
-        "input": "Start",
-        "param": "",
-        "delay": 3.5,
         "limit": 1
       }
     ]
@@ -344,7 +320,6 @@
     ]
   },
   {
-    "flag_as_weather": "0",
     "cpoint7_parent": "0",
     "cpoint6_parent": "0",
     "cpoint5_parent": "0",
@@ -423,7 +398,7 @@
     "snapshot_mesh": "-1",
     "snapshot_file": "",
     "no_save": "0",
-    "start_active": "0",
+    "start_active": "1",
     "effect_name": "particles/ze_rt4_hessel_valley/yanwu3.vpcf",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
