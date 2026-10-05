@@ -806,7 +806,7 @@
         "target": "[PR#]ZM_Diabolos_Hollow_Magic_Hitobx",
         "input": "SetDamageFilter",
         "param": "[PR#]Filter_Team_Human",
-        "delay": 0.20000000298023224,
+        "delay": 0.23999999463558197,
         "limit": 1
       }
     ]
@@ -988,6 +988,86 @@
         "param": "",
         "delay": 2,
         "limit": 1
+      }
+    ]
+  },
+  {
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]ZM_Diabolos_Hollow_HP_Zone",
+    "classname": "game_zone_player",
+    "origin": "0.000000 -8.000000 -128.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9323",
+    "model": "maps/ze_amdaporkeep/entities/zm_diabolos_hollow_hp_zone_9323.vmdl",
+    "_template_lump_ent_index": "12",
+    "connections": [
+      {
+        "output": "OnPlayerOutZone",
+        "target": "[PR#]ZM_Diabolos_Hollow_HP_Filter",
+        "input": "TestActivator",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnUser1",
+        "target": "!self",
+        "input": "CountPlayersInZone",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnUser1",
+        "target": "!self",
+        "input": "Kill",
+        "param": "",
+        "delay": 0.20000000298023224,
+        "limit": 1
+      },
+      {
+        "output": "OnUser1",
+        "target": "[PR#]ZM_Diabolos_Hollow_HP_Filter",
+        "input": "Kill",
+        "param": "",
+        "delay": 0.20000000298023224,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
+    "filterteam": "3",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]ZM_Diabolos_Hollow_HP_Filter",
+    "classname": "filter_activator_team",
+    "origin": "0.000000 8.000000 -128.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9325",
+    "_template_lump_ent_index": "13",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]ZM_Diabolos_Hollow_Magic_Hp_Init",
+        "input": "Add",
+        "param": "2",
+        "delay": 0,
+        "limit": -1
       }
     ]
   }

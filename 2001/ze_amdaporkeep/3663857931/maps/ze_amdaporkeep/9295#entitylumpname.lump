@@ -3,9 +3,6 @@
 
 [
   {
-    "add_modifier": "",
-    "add_attribute": "",
-    "ResponseContext": "",
     "cpoint7_parent": "0",
     "cpoint6_parent": "0",
     "cpoint5_parent": "0",
@@ -85,7 +82,7 @@
     "snapshot_file": "",
     "no_save": "0",
     "start_active": "1",
-    "effect_name": "particles/teleport.vpcf",
+    "effect_name": "particles/spawn_teleport.vpcf",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
