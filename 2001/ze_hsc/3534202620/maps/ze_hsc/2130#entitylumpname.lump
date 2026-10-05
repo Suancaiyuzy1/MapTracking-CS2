@@ -7,6 +7,7 @@
     "FastRetrigger": "0",
     "TriggerOnce": "0",
     "StartDisabled": "0",
+    "vscripts": "",
     "targetname": "[PR#]Stage1_Relay",
     "classname": "logic_relay",
     "origin": "-18.000000 -1.972412 0.000000",
@@ -185,9 +186,9 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]Map_info_stage1",
-        "input": "Start",
-        "param": "",
+        "target": "[PR#]map_hud.js",
+        "input": "RunScriptInput",
+        "param": "stage1",
         "delay": 7,
         "limit": -1
       },

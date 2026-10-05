@@ -4,9 +4,17 @@
 [
   {
     "wait": "0.100000",
+    "filtername": "",
     "spawnflags": "1",
+    "globalname": "",
     "StartDisabled": "0",
     "useLocalOffset": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
     "targetname": "[PR#]lvl1_zm_atk_choose2",
     "classname": "trigger_multiple",
     "origin": "649.375000 20.000000 120.000000",

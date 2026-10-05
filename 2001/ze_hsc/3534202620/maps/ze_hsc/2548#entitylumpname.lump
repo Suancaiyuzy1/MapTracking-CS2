@@ -4,8 +4,15 @@
 [
   {
     "targetname": "[PR#]lvl3_meteortrigger",
+    "vscripts": "",
+    "parentname": "",
+    "parentAttachmentName": "",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.scales": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "StartDisabled": "0",
+    "globalname": "",
     "spawnflags": "4097",
     "filtername": "[PR#]filter_zm",
     "wait": "1.000000",
@@ -27,10 +34,18 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "removecontext",
-        "param": "filter_34_meteor_word",
-        "delay": 5.5,
+        "target": "[PR#]34_meteor_word_maker",
+        "input": "ForceSpawnAtEntityOrigin",
+        "param": "!activator",
+        "delay": 0.009999999776482582,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]34_meteor_word_trigger",
+        "input": "Kill",
+        "param": "",
+        "delay": 0.20000000298023224,
         "limit": 1
       },
       {
@@ -51,66 +66,10 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing in 5 Seconds",
-        "delay": 0.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing in 4 Seconds",
-        "delay": 1.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing in 3 Seconds",
-        "delay": 2.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing in 2 Seconds",
-        "delay": 3.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing in 1 Seconds",
-        "delay": 4.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "SetMessage",
-        "param": "Firing",
+        "target": "!activator",
+        "input": "removecontext",
+        "param": "filter_34_meteor_word",
         "delay": 5.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word",
-        "input": "Kill",
-        "param": "",
-        "delay": 6.5,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word_maker",
-        "input": "ForceSpawnAtEntityOrigin",
-        "param": "!activator",
-        "delay": 0.009999999776482582,
         "limit": 1
       },
       {
@@ -120,14 +79,6 @@
         "param": "",
         "delay": 5.699999809265137,
         "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]34_meteor_word_trigger",
-        "input": "Kill",
-        "param": "",
-        "delay": 0.20000000298023224,
-        "limit": 1
       }
     ]
   }
