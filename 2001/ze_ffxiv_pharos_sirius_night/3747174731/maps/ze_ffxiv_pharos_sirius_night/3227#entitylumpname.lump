@@ -12,7 +12,7 @@
     "spawnobject": "0",
     "nodamageforces": "0",
     "explosion": "0",
-    "material": "0",
+    "material": "8",
     "health": "0",
     "propdata": "0",
     "PerformanceMode": "PM_NORMAL",

@@ -681,11 +681,11 @@
         "limit": 1
       },
       {
-        "output": "OnAnimationDone",
+        "output": "OnUser1",
         "target": "[PR#]boss_attack_timer",
         "input": "Enable",
         "param": "",
-        "delay": 0,
+        "delay": 3,
         "limit": 1
       },
       {

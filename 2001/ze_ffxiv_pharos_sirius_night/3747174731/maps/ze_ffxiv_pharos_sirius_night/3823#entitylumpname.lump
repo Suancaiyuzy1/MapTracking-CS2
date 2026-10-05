@@ -429,9 +429,9 @@
       },
       {
         "output": "OnUser4",
-        "target": "[PR#]server_command",
-        "input": "Command",
-        "param": "say \u003C Tyrant IS GO BERSERK ... \u003E",
+        "target": "[PR#]Tyrant_Hp_Blocks",
+        "input": "FireUser1",
+        "param": "",
         "delay": 15,
         "limit": 1
       },
@@ -3145,7 +3145,7 @@
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 0.10000000149011612,
+        "delay": 0,
         "limit": 1
       },
       {
@@ -3225,6 +3225,14 @@
         "target": "[PR#]filter_nade",
         "input": "Kill",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnUser1",
+        "target": "[PR#]server_command",
+        "input": "Command",
+        "param": "say \u003C Tyrant IS GO BERSERK ... \u003E",
         "delay": 0,
         "limit": 1
       }

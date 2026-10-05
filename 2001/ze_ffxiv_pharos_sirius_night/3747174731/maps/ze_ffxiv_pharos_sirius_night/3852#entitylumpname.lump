@@ -592,9 +592,9 @@
       },
       {
         "output": "OnUser4",
-        "target": "[PR#]server_command",
-        "input": "Command",
-        "param": "say l Lilith l \u003C PATHETIC HUMANS ... \u003E",
+        "target": "[PR#]Lilith_Hp_Blocks",
+        "input": "FireUser1",
+        "param": "",
         "delay": 15,
         "limit": 1
       },
@@ -3916,7 +3916,7 @@
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 0.10000000149011612,
+        "delay": 0,
         "limit": 1
       },
       {
@@ -3932,6 +3932,14 @@
         "target": "[PR#]Lilith_Hpbar",
         "input": "FireUser4",
         "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnUser1",
+        "target": "[PR#]server_command",
+        "input": "Command",
+        "param": "say l Lilith l \u003C PATHETIC HUMANS ... \u003E",
         "delay": 0,
         "limit": 1
       }
