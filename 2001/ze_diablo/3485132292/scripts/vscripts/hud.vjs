@@ -5,18 +5,20 @@ import { Instance } from "cs_script/point_script";
 
 // 标题
 const TITLE_CONFIGS = [
-    { input: "Loading", text: "***Loading stage***", duration: 5, color: "color_orange" },
+    { input: "loading", text: "***Loading stage***", duration: 5, color: "color_orange" },
     { input: "kyo_text", text: "Now Entering Eldhaime Keep", duration: 4, color: "color_red" },
     { input: "diablo_text", text: "ZE_DIABLO", duration: 10, color: "color_red" },
     { input: "west_text", text: "Now Entering Westmarch", duration: 4, color: "color_red" },
     { input: "tris_text", text: "Now Entering Tristram", duration: 4, color: "color_red" },
     { input: "chain_text", text: "DESTROY THE CHAIN", duration: 15, color: "color_red" },
+    { input: "text_diablo", text: "Burning Hells, it's about time.", duration: 4, color: "color_red" },
 
     //azmo
     { input: "azmo_text1", text: "Butcher... Butchered...", duration: 3, color: "color_green" },
     { input: "azmo_text2", text: "Seal their fates! It is our hour!", duration: 5, color: "color_green" },
     { input: "azmo_text3", text: "Behold the might of Hell!", duration: 5, color: "color_green" },
     { input: "azmo_text4", text: "They cannot truly kill me. No one can!", duration: 5, color: "color_green" },
+    { input: "azmo_text5", text: "Soon you will all serve me!", duration: 3, color: "color_green" },
 
     //meph
     { input: "meph_run_text1", text: "Evil accepts no defeat...", duration: 3.25, color: "color_orange_1" },

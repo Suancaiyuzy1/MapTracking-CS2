@@ -3,7 +3,7 @@
 <!-- xml reconstructed from compiled AST -->
 <root>
     <styles>
-        <include src="s2r://panorama/styles/custom_game/hud.vcss_c" />
+        <include src="s2r://panorama/styles/custom_game/hud.vcss" />
     </styles>
     <Panel class="Root">
         <Label id="countdown_label" text="{s:countdown_text}" />
