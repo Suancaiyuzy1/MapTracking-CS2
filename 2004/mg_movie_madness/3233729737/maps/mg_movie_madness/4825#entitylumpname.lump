@@ -3,10 +3,18 @@
 
 [
   {
+    "hoverposeangles": "0.000000 0.000000 0.000000",
+    "hoverposeposition": "0.000000 0.000000 0.000000",
+    "hoverposeflags": "0",
+    "fluiddragscale": "1.000000",
+    "buoyancyscale": "1.000000",
+    "masscenteroffset": "0.000000 0.000000 0.000000",
+    "gamemass": "0",
+    "NoInterpolate": "0",
     "touchoutputperentitydelay": "0.000000",
     "ExploitableByPlayer": "0",
     "notsolid": "0",
-    "preferredcarryangles": "0.000000 0.000000 0.000000",
+    "preferredcarryangles": "0 0 0",
     "enableuseoutput": "0",
     "forcetoenablemotion": "0.000000",
     "damagetoenablemotion": "0",
@@ -44,7 +52,7 @@
     "angles": "-0.000000 6.576000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4470",
-    "model": "maps\\mg_movie_madness\\entities\\weapons_sheild_ts_4470.vmdl",
+    "model": "maps/mg_movie_madness/entities/weapons_sheild_ts_4470.vmdl",
     "_template_lump_ent_index": "0"
   },
   {
@@ -87,6 +95,8 @@
     ]
   },
   {
+    "MoveWithoutPushingBlockers": "0",
+    "NoInterpolate": "0",
     "solidbsp": "0",
     "dmg": "0",
     "volume": "10",
@@ -112,7 +122,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4826",
-    "model": "maps\\mg_movie_madness\\entities\\ts_lol_face1_4826.vmdl",
+    "model": "maps/mg_movie_madness/entities/ts_lol_face1_4826.vmdl",
     "_template_lump_ent_index": "2"
   }
 ]

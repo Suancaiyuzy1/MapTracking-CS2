@@ -3,6 +3,8 @@
 
 [
   {
+    "MoveWithoutPushingBlockers": "0",
+    "NoInterpolate": "0",
     "solidbsp": "0",
     "dmg": "0",
     "spawnflags": "577",
@@ -27,10 +29,11 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5005",
-    "model": "maps\\mg_movie_madness\\entities\\11bbbbbb3_5005.vmdl",
+    "model": "maps/mg_movie_madness/entities/11bbbbbb3_5005.vmdl",
     "_template_lump_ent_index": "0"
   },
   {
+    "check_if_dest_clear_for_player": "0",
     "mirror_player": "0",
     "use_landmark_angles": "0",
     "target": "[PR#]london",
@@ -43,7 +46,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5007",
-    "model": "maps\\mg_movie_madness\\entities\\11vick3_5007.vmdl",
+    "model": "maps/mg_movie_madness/entities/11vick3_5007.vmdl",
     "_template_lump_ent_index": "1",
     "connections": [
       {

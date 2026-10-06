@@ -3,6 +3,8 @@
 
 [
   {
+    "BreakableContentsType": "BC_DEFAULT",
+    "NoInterpolate": "0",
     "burstscale": "100.000000",
     "health": "0",
     "forcenpcexclude": "0",
@@ -65,7 +67,7 @@
     "targetname": "[PR#]cts1shart1\u00260000",
     "classname": "weapon_knife",
     "origin": "-128.400391 -23.020020 -31.390015",
-    "angles": "-0.000000 89.499985 0.000000",
+    "angles": "-0.000000 89.499992 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2468",
     "_template_lump_ent_index": "1",
@@ -90,7 +92,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "ModifySpeed",
-        "param": "1.800000",
+        "param": "1.8",
         "delay": 0,
         "limit": -1
       },

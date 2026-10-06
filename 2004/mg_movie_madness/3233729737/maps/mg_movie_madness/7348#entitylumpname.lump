@@ -3,6 +3,8 @@
 
 [
   {
+    "BreakableContentsType": "BC_DEFAULT",
+    "NoInterpolate": "0",
     "burstscale": "100.000000",
     "health": "0",
     "forcenpcexclude": "0",
@@ -44,7 +46,7 @@
     "targetname": "[PR#]model_poke",
     "classname": "prop_dynamic_override",
     "origin": "-13.605469 38.000977 189.544434",
-    "angles": "-89.999985 179.999954 0.000000",
+    "angles": "-89.999977 179.999954 0.000000",
     "scales": "4.000000 4.000000 4.000000",
     "hammerUniqueId": "5198",
     "_template_lump_ent_index": "0"
@@ -126,7 +128,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "ModifySpeed",
-        "param": "1.500000",
+        "param": "1.5",
         "delay": 0,
         "limit": -1
       },
