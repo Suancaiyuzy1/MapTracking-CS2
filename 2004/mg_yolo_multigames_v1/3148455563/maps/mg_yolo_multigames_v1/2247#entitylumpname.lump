@@ -122,6 +122,7 @@
     ]
   },
   {
+    "fluiddragscale": "1.000000",
     "hoverposeangles": "0.000000 0.000000 0.000000",
     "hoverposeposition": "0.000000 0.000000 0.000000",
     "hoverposeflags": "0",

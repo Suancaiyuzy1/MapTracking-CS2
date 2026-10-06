@@ -64,7 +64,7 @@
     "spawnflags": "1",
     "targetname": "[PR#]mc_creeper_knife\u00260000",
     "classname": "weapon_knife",
-    "origin": "1728.000000 464.000000 28.000000",
+    "origin": "1729.000000 464.000000 64.000000",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5375",
