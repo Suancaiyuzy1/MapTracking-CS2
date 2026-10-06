@@ -3,11 +3,18 @@
 
 [
   {
+    "hoverposeangles": "0.000000 0.000000 0.000000",
+    "hoverposeposition": "0.000000 0.000000 0.000000",
+    "hoverposeflags": "0",
+    "fluiddragscale": "1.000000",
+    "buoyancyscale": "1.000000",
+    "masscenteroffset": "0.000000 0.000000 0.000000",
+    "gamemass": "0",
     "NoInterpolate": "0",
     "touchoutputperentitydelay": "0.000000",
     "ExploitableByPlayer": "0",
     "notsolid": "0",
-    "preferredcarryangles": "0.000000 0.000000 0.000000",
+    "preferredcarryangles": "0 0 0",
     "enableuseoutput": "0",
     "forcetoenablemotion": "0.000000",
     "damagetoenablemotion": "0",
@@ -44,7 +51,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4068",
-    "model": "maps\\mg_jacks_multigames_v1\\entities\\build_block21_4068.vmdl",
+    "model": "maps/mg_jacks_multigames_v1/entities/build_block21_4068.vmdl",
     "_template_lump_ent_index": "0"
   }
 ]
