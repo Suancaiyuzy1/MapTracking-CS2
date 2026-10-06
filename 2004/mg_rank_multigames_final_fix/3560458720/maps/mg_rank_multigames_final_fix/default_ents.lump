@@ -6131,6 +6131,7 @@
     ]
   },
   {
+    "fluiddragscale": "1.000000",
     "preferredcarryangles": "0 0 0",
     "gibdir": "0 0 0",
     "fadescale": "1",
@@ -8727,7 +8728,8 @@
     "origin": "9661.562500 10811.957031 1848.150146",
     "angles": "89.999992 190.000015 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "3820"
+    "hammerUniqueId": "3820",
+    "nearclipplane": "1.000000"
   },
   {
     "precomputedsubfrusta": "6",
@@ -8755,6 +8757,8 @@
     "precomputedobbangles": "-1.000000 -2.000000 -18.999998",
     "precomputedobborigin": "-12800.639648 14726.158203 1999.675293",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -8825,6 +8829,8 @@
     "precomputedobbangles": "0.000000 -2.000000 0.000000",
     "precomputedobborigin": "-12171.607422 15014.273438 1867.646973",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -8895,6 +8901,8 @@
     "precomputedobbangles": "-0.000000 0.000000 21.000000",
     "precomputedobborigin": "-12480.025391 15074.460938 2679.672119",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -8965,6 +8973,8 @@
     "precomputedobbangles": "-0.000000 15.000000 0.000000",
     "precomputedobborigin": "-4808.134766 14232.006836 13699.113281",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9035,6 +9045,8 @@
     "precomputedobbangles": "-0.000000 15.000000 0.000000",
     "precomputedobborigin": "-4808.134766 14616.006836 13847.873047",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9105,6 +9117,8 @@
     "precomputedobbangles": "-0.000000 33.000000 0.000000",
     "precomputedobborigin": "-4809.634766 15382.996094 13841.488281",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9175,6 +9189,8 @@
     "precomputedobbangles": "-0.000000 15.000000 0.000000",
     "precomputedobborigin": "-4808.135254 15000.007812 13715.429688",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9245,6 +9261,8 @@
     "precomputedobbangles": "0.000000 -23.999998 0.000000",
     "precomputedobborigin": "-4810.366211 11161.099609 13775.869141",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9315,6 +9333,8 @@
     "precomputedobbangles": "-0.000000 45.000004 0.000000",
     "precomputedobborigin": "-4807.963867 11545.802734 13874.884766",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9385,6 +9405,8 @@
     "precomputedobbangles": "-1.000000 55.000000 0.000000",
     "precomputedobborigin": "-4805.469238 11931.681641 13882.357422",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9455,6 +9477,8 @@
     "precomputedobbangles": "-0.000000 15.000000 0.000000",
     "precomputedobborigin": "-4808.134766 12312.007812 13873.318359",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9525,6 +9549,8 @@
     "precomputedobbangles": "-0.000000 39.999996 0.000000",
     "precomputedobborigin": "-4812.875000 12691.875977 13870.208984",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9595,6 +9621,8 @@
     "precomputedobbangles": "0.000000 19.999998 -1.000000",
     "precomputedobborigin": "-4814.046875 13073.217773 13880.184570",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9665,6 +9693,8 @@
     "precomputedobbangles": "0.000000 -9.999998 0.000000",
     "precomputedobborigin": "-4816.083984 13465.625000 13884.492188",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9735,6 +9765,8 @@
     "precomputedobbangles": "0.000000 -34.999996 0.000000",
     "precomputedobborigin": "-4813.292480 13851.738281 13884.164062",
     "precomputedfieldsvalid": "1",
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9780,6 +9812,8 @@
     "hammerUniqueId": "3778"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9825,6 +9859,8 @@
     "hammerUniqueId": "3777"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9870,6 +9906,8 @@
     "hammerUniqueId": "3776"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9915,6 +9953,8 @@
     "hammerUniqueId": "3775"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -9960,6 +10000,8 @@
     "hammerUniqueId": "3774"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10005,6 +10047,8 @@
     "hammerUniqueId": "3773"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10050,6 +10094,8 @@
     "hammerUniqueId": "3772"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10095,6 +10141,8 @@
     "hammerUniqueId": "3771"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10140,6 +10188,8 @@
     "hammerUniqueId": "3770"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10185,6 +10235,8 @@
     "hammerUniqueId": "3769"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10230,6 +10282,8 @@
     "hammerUniqueId": "3768"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10275,6 +10329,8 @@
     "hammerUniqueId": "3767"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10320,6 +10376,8 @@
     "hammerUniqueId": "3766"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10365,6 +10423,8 @@
     "hammerUniqueId": "3765"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10410,6 +10470,8 @@
     "hammerUniqueId": "3764"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10455,6 +10517,8 @@
     "hammerUniqueId": "3763"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10500,6 +10564,8 @@
     "hammerUniqueId": "3762"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10545,6 +10611,8 @@
     "hammerUniqueId": "3761"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10590,6 +10658,8 @@
     "hammerUniqueId": "3760"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10635,6 +10705,8 @@
     "hammerUniqueId": "3759"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10680,6 +10752,8 @@
     "hammerUniqueId": "3758"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10725,6 +10799,8 @@
     "hammerUniqueId": "3757"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10770,6 +10846,8 @@
     "hammerUniqueId": "3756"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10815,6 +10893,8 @@
     "hammerUniqueId": "3755"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10860,6 +10940,8 @@
     "hammerUniqueId": "3754"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10905,6 +10987,8 @@
     "hammerUniqueId": "3753"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10950,6 +11034,8 @@
     "hammerUniqueId": "3752"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -10995,6 +11081,8 @@
     "hammerUniqueId": "3751"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11040,6 +11128,8 @@
     "hammerUniqueId": "3750"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11085,6 +11175,8 @@
     "hammerUniqueId": "3749"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11130,6 +11222,8 @@
     "hammerUniqueId": "3748"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11175,6 +11269,8 @@
     "hammerUniqueId": "3747"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11220,6 +11316,8 @@
     "hammerUniqueId": "3746"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11265,6 +11363,8 @@
     "hammerUniqueId": "3745"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11310,6 +11410,8 @@
     "hammerUniqueId": "3744"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11355,6 +11457,8 @@
     "hammerUniqueId": "3743"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11400,6 +11504,8 @@
     "hammerUniqueId": "3742"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11445,6 +11551,8 @@
     "hammerUniqueId": "3741"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11490,6 +11598,8 @@
     "hammerUniqueId": "3740"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11535,6 +11645,8 @@
     "hammerUniqueId": "3739"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11580,6 +11692,8 @@
     "hammerUniqueId": "3738"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11625,6 +11739,8 @@
     "hammerUniqueId": "3737"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11670,6 +11786,8 @@
     "hammerUniqueId": "3736"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11715,6 +11833,8 @@
     "hammerUniqueId": "3735"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11760,6 +11880,8 @@
     "hammerUniqueId": "3734"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11805,6 +11927,8 @@
     "hammerUniqueId": "3733"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11850,6 +11974,8 @@
     "hammerUniqueId": "3732"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11895,6 +12021,8 @@
     "hammerUniqueId": "3731"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11940,6 +12068,8 @@
     "hammerUniqueId": "3730"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -11985,6 +12115,8 @@
     "hammerUniqueId": "3729"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12030,6 +12162,8 @@
     "hammerUniqueId": "3728"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12075,6 +12209,8 @@
     "hammerUniqueId": "3727"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12120,6 +12256,8 @@
     "hammerUniqueId": "3726"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12165,6 +12303,8 @@
     "hammerUniqueId": "3725"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12210,6 +12350,8 @@
     "hammerUniqueId": "3724"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12255,6 +12397,8 @@
     "hammerUniqueId": "3723"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12300,6 +12444,8 @@
     "hammerUniqueId": "3722"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12345,6 +12491,8 @@
     "hammerUniqueId": "3721"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12390,6 +12538,8 @@
     "hammerUniqueId": "3720"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12435,6 +12585,8 @@
     "hammerUniqueId": "3719"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12480,6 +12632,8 @@
     "hammerUniqueId": "3718"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12525,6 +12679,8 @@
     "hammerUniqueId": "3717"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12570,6 +12726,8 @@
     "hammerUniqueId": "3716"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12615,6 +12773,8 @@
     "hammerUniqueId": "3715"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12660,6 +12820,8 @@
     "hammerUniqueId": "3714"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12705,6 +12867,8 @@
     "hammerUniqueId": "3713"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12750,6 +12914,8 @@
     "hammerUniqueId": "3712"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12795,6 +12961,8 @@
     "hammerUniqueId": "3711"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -12840,6 +13008,8 @@
     "hammerUniqueId": "3710"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -41231,7 +41401,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/sawedoff/weapon_shot_sawedoff_ag2.vmdl",
+    "model": "weapons/models/sawedoff/weapon_shot_sawedoff.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -41286,7 +41456,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/mag7/weapon_shot_mag7_ag2.vmdl",
+    "model": "weapons/models/mag7/weapon_shot_mag7.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -41341,7 +41511,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/nova/weapon_shot_nova_ag2.vmdl",
+    "model": "weapons/models/nova/weapon_shot_nova.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -41396,7 +41566,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/tec9/weapon_pist_tec9_ag2.vmdl",
+    "model": "weapons/models/tec9/weapon_pist_tec9.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -41451,7 +41621,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/fiveseven/weapon_pist_fiveseven_ag2.vmdl",
+    "model": "weapons/models/fiveseven/weapon_pist_fiveseven.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -41506,7 +41676,7 @@
     "ExplodeDamage": "0.000000",
     "disableshadows": "1",
     "skin": "0",
-    "model": "phase2/weapons/models/cz75a/weapon_pist_cz75a_ag2.vmdl",
+    "model": "weapons/models/cz75a/weapon_pist_cz75a.vmdl",
     "clientSideEntity": "0",
     "useLocalOffset": "0",
     "classname": "prop_dynamic_override",
@@ -49045,6 +49215,8 @@
     "model": "maps/mg_rank_multigames_final_fix/entities/underground_game_break_22941.vmdl"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49090,6 +49262,8 @@
     "hammerUniqueId": "22954"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49135,6 +49309,8 @@
     "hammerUniqueId": "22955"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49180,6 +49356,8 @@
     "hammerUniqueId": "22956"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49225,6 +49403,8 @@
     "hammerUniqueId": "22957"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49270,6 +49450,8 @@
     "hammerUniqueId": "22958"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49315,6 +49497,8 @@
     "hammerUniqueId": "22959"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49360,6 +49544,8 @@
     "hammerUniqueId": "22960"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49405,6 +49591,8 @@
     "hammerUniqueId": "22961"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49450,6 +49638,8 @@
     "hammerUniqueId": "22962"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49495,6 +49685,8 @@
     "hammerUniqueId": "22963"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49540,6 +49732,8 @@
     "hammerUniqueId": "22964"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49585,6 +49779,8 @@
     "hammerUniqueId": "22965"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49630,6 +49826,8 @@
     "hammerUniqueId": "22966"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49675,6 +49873,8 @@
     "hammerUniqueId": "22967"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49720,6 +49920,8 @@
     "hammerUniqueId": "22968"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49765,6 +49967,8 @@
     "hammerUniqueId": "22969"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49810,6 +50014,8 @@
     "hammerUniqueId": "22970"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49855,6 +50061,8 @@
     "hammerUniqueId": "22971"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49900,6 +50108,8 @@
     "hammerUniqueId": "22972"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49945,6 +50155,8 @@
     "hammerUniqueId": "22973"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -49990,6 +50202,8 @@
     "hammerUniqueId": "22974"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -50035,6 +50249,8 @@
     "hammerUniqueId": "22975"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -50080,6 +50296,8 @@
     "hammerUniqueId": "22976"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -50125,6 +50343,8 @@
     "hammerUniqueId": "22977"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -50170,6 +50390,8 @@
     "hammerUniqueId": "22978"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
@@ -50298,7 +50520,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 757.333313,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, 2272.0, 1680.0, 0.0,\n\t\t-757.333313, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 757.3333,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, 2272.0, 1680.0, 0.0,\n\t\t-757.3333, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 12.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50318,7 +50540,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -757.333313,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, -2272.0, 1680.0, 0.0,\n\t\t757.333313, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -757.3333,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, -2272.0, 1680.0, 0.0,\n\t\t757.3333, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 12.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50338,7 +50560,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -757.333313,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, -2272.0, 1680.0, 0.0,\n\t\t757.333313, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -757.3333,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, -2272.0, 1680.0, 0.0,\n\t\t757.3333, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 12.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50358,7 +50580,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -661.333374,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1984.0, 1728.0, 0.0,\n\t\t661.333374, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -661.3334,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1984.0, 1728.0, 0.0,\n\t\t661.3334, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50418,7 +50640,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -442.666656,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1328.0, 1728.0, 0.0,\n\t\t442.666656, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -442.66666,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1328.0, 1728.0, 0.0,\n\t\t442.66666, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50438,7 +50660,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -186.666656,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -560.0, 1728.0, 0.0,\n\t\t186.666656, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -186.66666,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -560.0, 1728.0, 0.0,\n\t\t186.66666, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50478,7 +50700,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -357.333374,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1072.0, 1728.0, 0.0,\n\t\t357.333374, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -357.33337,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1072.0, 1728.0, 0.0,\n\t\t357.33337, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50538,7 +50760,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -661.333374,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1984.0, 1728.0, 0.0,\n\t\t661.333374, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -661.3334,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1984.0, 1728.0, 0.0,\n\t\t661.3334, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50598,7 +50820,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -442.666656,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1328.0, 1728.0, 0.0,\n\t\t442.666656, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -442.66666,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1328.0, 1728.0, 0.0,\n\t\t442.66666, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50618,7 +50840,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -357.333374,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1072.0, 1728.0, 0.0,\n\t\t357.333374, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -357.33337,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -1072.0, 1728.0, 0.0,\n\t\t357.33337, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50658,7 +50880,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -186.666656,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -560.0, 1728.0, 0.0,\n\t\t186.666656, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, -186.66666,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, -560.0, 1728.0, 0.0,\n\t\t186.66666, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50718,7 +50940,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 16.003256,\n\t\t576.000061,\n\t],\n\t[\n\t\t0.0, 48.009766, 1728.0, 0.0,\n\t\t-16.003256, -576.000061, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 16.003256,\n\t\t576.00006,\n\t],\n\t[\n\t\t0.0, 48.009766, 1728.0, 0.0,\n\t\t-16.003256, -576.00006, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50738,7 +50960,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 186.669922,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 560.009766, 1728.0, 0.0,\n\t\t-186.669922, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 186.66992,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 560.00977, 1728.0, 0.0,\n\t\t-186.66992, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50758,7 +50980,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 101.336594,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 304.009766, 1728.0, 0.0,\n\t\t-101.336594, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 101.33659,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 304.00977, 1728.0, 0.0,\n\t\t-101.33659, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50778,7 +51000,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 272.003235,\n\t\t575.999939,\n\t],\n\t[\n\t\t0.0, 816.009766, 1728.0, 0.0,\n\t\t-272.003235, -575.999939, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 272.00323,\n\t\t575.99994,\n\t],\n\t[\n\t\t0.0, 816.00977, 1728.0, 0.0,\n\t\t-272.00323, -575.99994, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50798,7 +51020,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 357.336609,\n\t\t576.000061,\n\t],\n\t[\n\t\t0.0, 1072.009766, 1728.0, 0.0,\n\t\t-357.336609, -576.000061, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 357.3366,\n\t\t576.00006,\n\t],\n\t[\n\t\t0.0, 1072.0098, 1728.0, 0.0,\n\t\t-357.3366, -576.00006, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50818,7 +51040,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 442.669922,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1328.009766, 1728.0, 0.0,\n\t\t-442.669922, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 442.66992,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1328.0098, 1728.0, 0.0,\n\t\t-442.66992, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50838,7 +51060,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 528.003235,\n\t\t575.999939,\n\t],\n\t[\n\t\t0.0, 1584.009766, 1728.0, 0.0,\n\t\t-528.003235, -575.999939, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 528.00323,\n\t\t575.99994,\n\t],\n\t[\n\t\t0.0, 1584.0098, 1728.0, 0.0,\n\t\t-528.00323, -575.99994, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50858,7 +51080,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 608.003296,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1824.009766, 1728.0, 0.0,\n\t\t-608.003296, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 608.0033,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1824.0098, 1728.0, 0.0,\n\t\t-608.0033, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50878,7 +51100,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 661.336609,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1984.009766, 1728.0, 0.0,\n\t\t-661.336609, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 661.3366,\n\t\t576.0,\n\t],\n\t[\n\t\t0.0, 1984.0098, 1728.0, 0.0,\n\t\t-661.3366, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50898,7 +51120,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 16.003256,\n\t\t576.000061,\n\t],\n\t[\n\t\t-0.009766, 48.009766, 1728.0, 0.003255,\n\t\t-16.003256, -576.000061, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552085, 16.003256,\n\t\t576.00006,\n\t],\n\t[\n\t\t-0.009765625, 48.009766, 1728.0, 0.0032552085,\n\t\t-16.003256, -576.00006, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50918,7 +51140,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 186.669922,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009766, 560.009766, 1728.0, 0.003255,\n\t\t-186.669922, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552085, 186.66992,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009765625, 560.00977, 1728.0, 0.0032552085,\n\t\t-186.66992, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50938,7 +51160,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 101.336594,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009766, 304.009766, 1728.0, 0.003255,\n\t\t-101.336594, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552085, 101.33659,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009765625, 304.00977, 1728.0, 0.0032552085,\n\t\t-101.33659, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50958,7 +51180,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 272.003235,\n\t\t575.999939,\n\t],\n\t[\n\t\t-0.009766, 816.009766, 1728.0, 0.003255,\n\t\t-272.003235, -575.999939, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552083, 272.00323,\n\t\t575.99994,\n\t],\n\t[\n\t\t-0.009765625, 816.00977, 1728.0, 0.0032552083,\n\t\t-272.00323, -575.99994, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50978,7 +51200,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 357.336609,\n\t\t576.000061,\n\t],\n\t[\n\t\t-0.009766, 1072.009766, 1728.0, 0.003255,\n\t\t-357.336609, -576.000061, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552087, 357.3366,\n\t\t576.00006,\n\t],\n\t[\n\t\t-0.009765625, 1072.0098, 1728.0, 0.0032552087,\n\t\t-357.3366, -576.00006, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -50998,7 +51220,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 442.669922,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009766, 1328.009766, 1728.0, 0.003255,\n\t\t-442.669922, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552083, 442.66992,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009765625, 1328.0098, 1728.0, 0.0032552083,\n\t\t-442.66992, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -51018,7 +51240,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 528.003235,\n\t\t575.999939,\n\t],\n\t[\n\t\t-0.009766, 1584.009766, 1728.0, 0.003255,\n\t\t-528.003235, -575.999939, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552083, 528.00323,\n\t\t575.99994,\n\t],\n\t[\n\t\t-0.009765625, 1584.0098, 1728.0, 0.0032552083,\n\t\t-528.00323, -575.99994, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -51038,7 +51260,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 608.003296,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009766, 1824.009766, 1728.0, 0.003255,\n\t\t-608.003296, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552085, 608.0033,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009765625, 1824.0098, 1728.0, 0.0032552085,\n\t\t-608.0033, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -51058,7 +51280,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.003255, 661.336609,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009766, 1984.009766, 1728.0, 0.003255,\n\t\t-661.336609, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, -0.0032552085, 661.3366,\n\t\t576.0,\n\t],\n\t[\n\t\t-0.009765625, 1984.0098, 1728.0, 0.0032552085,\n\t\t-661.3366, -576.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 8.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -51078,7 +51300,7 @@
     "radius": "0.200000",
     "targetname": "[PR#]rope_show",
     "classname": "path_particle_rope",
-    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 757.333313,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, 2272.0, 1680.0, 0.0,\n\t\t-757.333313, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
+    "pathNodes": "[\n\t[\n\t\t0.0, 0.0, 0.0, 0.0,\n\t\t0.0, 0.0, 0.0, 757.3333,\n\t\t560.0,\n\t],\n\t[\n\t\t0.0, 2272.0, 1680.0, 0.0,\n\t\t-757.3333, -560.0, 0.0, 0.0,\n\t\t0.0,\n\t],\n]",
     "pathNodeRadiusScales": "[ 12.0, 12.0 ]",
     "closed_loop": "0",
     "pathNodePinsEnabled": "[ true, true ]",
@@ -52656,6 +52878,8 @@
     "hammerUniqueId": "212371"
   },
   {
+    "transmit_always": "0",
+    "bakespeculartocubemaps_scale": "1.000000",
     "fogstrength": "-5",
     "fog": "0",
     "fogshadows": "-1",
