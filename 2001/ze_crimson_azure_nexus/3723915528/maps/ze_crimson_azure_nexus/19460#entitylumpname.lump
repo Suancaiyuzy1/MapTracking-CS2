@@ -247,7 +247,7 @@
         "target": "[PR#]h_elec_button",
         "input": "Unlock",
         "param": "",
-        "delay": 60,
+        "delay": 35,
         "limit": -1
       },
       {
@@ -279,7 +279,7 @@
         "target": "[PR#]h_elec_par2",
         "input": "Start",
         "param": "",
-        "delay": 60,
+        "delay": 35,
         "limit": -1
       }
     ]

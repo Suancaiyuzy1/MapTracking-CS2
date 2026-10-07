@@ -95,6 +95,22 @@
         "param": "speed 1",
         "delay": 4,
         "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "!activator",
+        "input": "keyvalue",
+        "param": "speed 0",
+        "delay": 4.5,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "!activator",
+        "input": "keyvalue",
+        "param": "speed 1",
+        "delay": 5.5,
+        "limit": -1
       }
     ]
   },
