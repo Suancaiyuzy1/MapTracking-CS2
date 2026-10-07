@@ -9,8 +9,8 @@
     "stopsound": "",
     "startsound": "",
     "blockdamage": "0.000000",
-    "movedistance": "1800.000000",
-    "speed": "200",
+    "movedistance": "2800.000000",
+    "speed": "450",
     "MoveWithoutPushingBlockers": "0",
     "NoInterpolate": "0",
     "authoredposition": "0",
@@ -176,8 +176,8 @@
         "output": "OnSpawn",
         "target": "[PR#]king_laser_move",
         "input": "SetSpeed",
-        "param": "1400",
-        "delay": 0.5,
+        "param": "600",
+        "delay": 0.20000000298023224,
         "limit": -1
       },
       {
@@ -186,6 +186,22 @@
         "input": "Kill",
         "param": "",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]king_laser_move",
+        "input": "SetSpeed",
+        "param": "1000",
+        "delay": 0.4000000059604645,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]king_laser_move",
+        "input": "SetSpeed",
+        "param": "1400",
+        "delay": 0.75,
         "limit": -1
       }
     ]
