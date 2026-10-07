@@ -1675,7 +1675,7 @@ function SpawnHold() {
     print(msg);
     Instance.EntFireAtName({ name: "Client_all", input: "Command", value: `echo "${msg}"` });
     current++;
-    Instance.EntFireAtName({ name: "Current", input: "SetMessage", value: current });
+    Instance.EntFireAtName({ name: "Current", input: "SetMessage", value: current.toFixed(0) });
     if (current === total) {
         const curr = Instance.FindEntityByName("Current");
         Instance.EntFireAtTarget({ target: curr, input: "FireUser2" });
@@ -1713,11 +1713,11 @@ function TimeTimer() {
         if (timeSec)
             Instance.EntFireAtTarget({ target: timeSec, input: "FireUser4" });
     }
-    Instance.EntFireAtName({ name: "TimeMin", input: "SetMessage", value: timeMin });
+    Instance.EntFireAtName({ name: "TimeMin", input: "SetMessage", value: timeMin.toFixed(0) });
     if (timeSec < 10)
         Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: '0' + timeSec });
     else
-        Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: timeSec });
+        Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: timeSec.toFixed(0) });
 }
 function PlayerSound(player, templateName, killTime = 1) {
     const temp = Instance.FindEntityByName(templateName);
@@ -1899,13 +1899,13 @@ Instance.OnRoundStart(() => {
         SetupLevel1();
     else
         SetupLevel2();
-    Instance.EntFireAtName({ name: "Total", input: "SetMessage", value: total });
-    Instance.EntFireAtName({ name: "Current", input: "SetMessage", value: current });
-    Instance.EntFireAtName({ name: "TimeMin", input: "SetMessage", value: timeMin });
+    Instance.EntFireAtName({ name: "Total", input: "SetMessage", value: total.toFixed(0) });
+    Instance.EntFireAtName({ name: "Current", input: "SetMessage", value: current.toFixed(0) });
+    Instance.EntFireAtName({ name: "TimeMin", input: "SetMessage", value: timeMin.toFixed(0) });
     if (timeSec < 10)
         Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: '0' + timeSec });
     else
-        Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: timeSec });
+        Instance.EntFireAtName({ name: "TimeSec", input: "SetMessage", value: timeSec.toFixed(0) });
     setTimeout(SpawnHold, 0.1); // SpawnHold loops on it's own with internal setTimeout call
     // time display timers
     setInterval(TimeTimer, 1000);
