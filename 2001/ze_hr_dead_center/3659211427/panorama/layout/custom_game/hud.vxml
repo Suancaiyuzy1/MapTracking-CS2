@@ -3,7 +3,7 @@
 <!-- xml reconstructed from compiled AST -->
 <root>
     <styles>
-        <include src="s2r://panorama/styles/custom_game/hud.vcss_c" />
+        <include src="s2r://panorama/styles/custom_game/hud.vcss" />
     </styles>
     <Panel class="Root">
         <Panel id="choose_panel" class="ChoosePanel Hidden">
@@ -13,13 +13,13 @@
             <Panel class="ChooseBody">
                 <Button id="choose_normal_btn" class="ChooseBtn">
                     <Panel class="ChooseImgWrap">
-                        <Image class="ChooseImg" src="s2r://panorama/images/map_icons/choose_normal_png.vtex" texturewidth="256" textureheight="256" />
+                        <Image class="ChooseImg" src="s2r://panorama/images/map_icons/choose_normal_png.vtex" />
                     </Panel>
                     <Label class="ChooseLabel" text="普通感染者" />
                 </Button>
                 <Button id="choose_infected_btn" class="ChooseBtn">
                     <Panel class="ChooseImgWrap">
-                        <Image class="ChooseImg" src="s2r://panorama/images/map_icons/choose_infected_png.vtex" texturewidth="256" textureheight="256" />
+                        <Image class="ChooseImg" src="s2r://panorama/images/map_icons/choose_infected_png.vtex" />
                     </Panel>
                     <Label class="ChooseLabel" text="特殊感染者" />
                 </Button>
@@ -34,7 +34,7 @@
             </Panel>
             <Panel class="TankBody">
                 <Panel class="TankImgWrap">
-                    <Image class="TankImg" src="s2r://panorama/images/map_icons/tank_png.vtex" texturewidth="256" textureheight="256" />
+                    <Image class="TankImg" src="s2r://panorama/images/map_icons/tank_png.vtex" />
                 </Panel>
                 <Label id="tank_title" class="TankTitle" text="{s:tank_text}" />
             </Panel>
@@ -50,13 +50,13 @@
         <Panel id="pre_panel" class="PrePanel Hidden">
             <Panel class="PreBody">
                 <Panel class="PreImageBox">
-                    <Image id="pre_img_boomer" class="PreImg Hidden" src="s2r://panorama/images/map_icons/boomer_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_smoker" class="PreImg Hidden" src="s2r://panorama/images/map_icons/smoker_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_hunter" class="PreImg Hidden" src="s2r://panorama/images/map_icons/hunter_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_jockey" class="PreImg Hidden" src="s2r://panorama/images/map_icons/jockey_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_charger" class="PreImg Hidden" src="s2r://panorama/images/map_icons/charger_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_spitter" class="PreImg Hidden" src="s2r://panorama/images/map_icons/spitter_png.vtex" texturewidth="256" textureheight="256" />
-                    <Image id="pre_img_tank" class="PreImg Hidden" src="s2r://panorama/images/map_icons/tank_png.vtex" texturewidth="256" textureheight="256" />
+                    <Image id="pre_img_boomer" class="PreImg Hidden" src="s2r://panorama/images/map_icons/boomer_png.vtex" />
+                    <Image id="pre_img_smoker" class="PreImg Hidden" src="s2r://panorama/images/map_icons/smoker_png.vtex" />
+                    <Image id="pre_img_hunter" class="PreImg Hidden" src="s2r://panorama/images/map_icons/hunter_png.vtex" />
+                    <Image id="pre_img_jockey" class="PreImg Hidden" src="s2r://panorama/images/map_icons/jockey_png.vtex" />
+                    <Image id="pre_img_charger" class="PreImg Hidden" src="s2r://panorama/images/map_icons/charger_png.vtex" />
+                    <Image id="pre_img_spitter" class="PreImg Hidden" src="s2r://panorama/images/map_icons/spitter_png.vtex" />
+                    <Image id="pre_img_tank" class="PreImg Hidden" src="s2r://panorama/images/map_icons/tank_png.vtex" />
                 </Panel>
                 <Label id="pre_title" class="PreTitle" text="{s:pre_title}" />
                 <Label id="pre_hint" class="PreHint" text="{s:pre_hint}" />
