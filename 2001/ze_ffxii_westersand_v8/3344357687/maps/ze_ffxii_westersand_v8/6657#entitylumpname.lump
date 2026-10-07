@@ -3,6 +3,11 @@
 
 [
   {
+    "glowteam": "-1",
+    "glowcolor": "0 0 0",
+    "glowrangemin": "0",
+    "glowrange": "0",
+    "glowstate": "0",
     "CanBePickedUp": "1",
     "spawnflags": "1",
     "lightmapstatic": "0",
@@ -15,7 +20,11 @@
     "renderamt": "0",
     "rendermode": "kRenderTransTexture",
     "renderfx": "kRenderFxNone",
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
     "targetname": "[PR#]For_Inv_Knife\u00260000",
+    "vscripts": "",
     "classname": "weapon_knife",
     "origin": "-0.047852 0.038086 -0.000038",
     "angles": "-0.000000 0.000000 0.000000",
