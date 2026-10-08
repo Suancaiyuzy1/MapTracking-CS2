@@ -1145,7 +1145,7 @@
   {
     "max": "424",
     "min": "0",
-    "startvalue": "8",
+    "startvalue": "10",
     "StartDisabled": "0",
     "vscripts": "",
     "targetname": "[PR#]Ultima_Weapon_HP_attack",
@@ -3182,7 +3182,7 @@
   {
     "max": "424",
     "min": "0",
-    "startvalue": "8",
+    "startvalue": "10",
     "StartDisabled": "0",
     "vscripts": "",
     "targetname": "[PR#]Ultima_Weapon_HP_int",
@@ -3404,7 +3404,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]Ultima_Weapon_HP_attack",
         "input": "Add",
-        "param": "5.9",
+        "param": "7",
         "delay": 0,
         "limit": -1
       },
@@ -3412,7 +3412,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]Ultima_Weapon_HP_int",
         "input": "Add",
-        "param": "5.9",
+        "param": "7",
         "delay": 0,
         "limit": -1
       }

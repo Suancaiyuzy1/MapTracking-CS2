@@ -309,24 +309,16 @@
         "target": "[PR#]relay_Ultimate_Ref_rain_Lyrics",
         "input": "Trigger",
         "param": "",
-        "delay": 0.009999999776482582,
+        "delay": 0.019999999552965164,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]relay_Ultimate_StarRingChild_Lyrics",
-        "input": "CancelPending",
-        "param": "",
+        "target": "[PR#]music_js",
+        "input": "RunScriptInput",
+        "param": "refrain_end",
         "delay": 0.009999999776482582,
-        "limit": 1
-      },
-      {
-        "output": "OnUser1",
-        "target": "[PR#]Ultimate_StarRingChild_*",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 0.009999999776482582,
-        "limit": 1
+        "limit": -1
       }
     ]
   },
