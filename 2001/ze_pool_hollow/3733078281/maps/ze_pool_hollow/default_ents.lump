@@ -11492,6 +11492,14 @@
         "param": "",
         "delay": 15,
         "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]hud_counter_tri",
+        "input": "Enable",
+        "param": "",
+        "delay": 14.899999618530273,
+        "limit": 1
       }
     ]
   },
@@ -14926,10 +14934,10 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]eEXBUT",
-        "input": "Press",
+        "target": "[PR#]hud_counter_tri",
+        "input": "Enable",
         "param": "",
-        "delay": 29,
+        "delay": 29.5,
         "limit": 1
       }
     ]
@@ -20490,5 +20498,55 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "3798",
     "model": "maps/ze_pool_hollow/entities/unnamed_3798.vmdl"
+  },
+  {
+    "cs_script": "scripts/map_progress.vjs",
+    "targetname": "[PR#]progress_1",
+    "classname": "point_script",
+    "origin": "2314.000000 -109.125603 150.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "3799"
+  },
+  {
+    "observable": "0",
+    "layout": "panorama/layout/custom_game/progress_board.xml",
+    "targetname": "[PR#]progress_board",
+    "classname": "custom_hud_layout",
+    "origin": "2346.000000 -109.125603 148.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "3800"
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "[PR#]CT",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "1.000000 1.000000 1.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "targetname": "[PR#]hud_counter_tri",
+    "vscripts": "",
+    "classname": "trigger_multiple",
+    "origin": "2438.000000 -227.000000 164.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "3802",
+    "model": "maps/ze_pool_hollow/entities/hud_counter_tri_3802.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]progress_1",
+        "input": "RunScriptInput",
+        "param": "map_clear",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
