@@ -15307,23 +15307,23 @@
         "target": "[PR#]Elidibus_Wall",
         "input": "SetDamageFilter",
         "param": "[PR#]Filter_Team_Human",
-        "delay": 3.0199999809265137,
+        "delay": 3,
         "limit": 1
       },
       {
-        "output": "OnUser2",
+        "output": "OnUser1",
         "target": "[PR#]Temp_Boss_HP_Filter",
         "input": "ForceSpawn",
         "param": "",
-        "delay": 2,
+        "delay": 1,
         "limit": 1
       },
       {
-        "output": "OnUser2",
+        "output": "OnUser1",
         "target": "[PR#]Boss_HP_Filter",
         "input": "AddOutput",
         "param": "OnPass\u003EBoss_HP_Case\u003EInValue\u003E2\u003E0\u003E-1",
-        "delay": 2.0999999046325684,
+        "delay": 1.100000023841858,
         "limit": 1
       }
     ]
