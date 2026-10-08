@@ -222,9 +222,9 @@
     "LagCompensate": "0",
     "randomizecycle": "0",
     "IdleAnimationLoopMode": "ANIM_LOOP_MODE_LOOPING",
-    "IdleAnim": "xingqiuyi",
+    "IdleAnim": "stay",
     "StartingAnimationLoopMode": "ANIM_LOOP_MODE_LOOPING",
-    "StartingAnim": "xingqiuyi",
+    "StartingAnim": "stay",
     "use_animgraph": "1",
     "disablelowviolence": "0",
     "solid": "0",
@@ -274,8 +274,8 @@
     "parentname": "",
     "targetname": "[PR#]dj_model",
     "classname": "prop_dynamic",
-    "origin": "74.588379 -2.030273 35.719971",
-    "angles": "-89.999977 179.999985 0.000000",
+    "origin": "74.588379 -2.029785 3.719971",
+    "angles": "-0.000000 -90.000000 0.000000",
     "scales": "64.065353 72.122917 69.676956",
     "hammerUniqueId": "13542",
     "_template_lump_ent_index": "4"
@@ -485,5 +485,21 @@
         "limit": -1
       }
     ]
+  },
+  {
+    "MeasureType": "0",
+    "TargetScale": "1.000000",
+    "TargetReference": "[PR#]dj_dynamic",
+    "Target": "[PR#]dj_model",
+    "MeasureReference": "[PR#]dj_dynamic",
+    "MeasureTarget": "[PR#]dj_dynamic",
+    "vscripts": "",
+    "targetname": "[PR#]dj_mm",
+    "classname": "logic_measure_movement",
+    "origin": "-76.442871 3.976074 8.595947",
+    "angles": "-0.000000 179.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13546",
+    "_template_lump_ent_index": "8"
   }
 ]
