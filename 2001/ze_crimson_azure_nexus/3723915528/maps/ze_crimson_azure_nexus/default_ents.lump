@@ -41472,7 +41472,7 @@
     "bouncescale": "2.000000",
     "rendertocubemaps": "1",
     "directlight": "1",
-    "brightness": "2.000000",
+    "brightness": "1.000000",
     "color": "246 180 131",
     "enabled": "1",
     "classname": "light_environment",
@@ -71041,7 +71041,7 @@
     ]
   },
   {
-    "filterattribute": "76561198970580895",
+    "filterattribute": "76561198970580985",
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
