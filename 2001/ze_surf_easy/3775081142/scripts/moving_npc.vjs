@@ -37,7 +37,7 @@ const boss_config = {
     stuck_check_time: 1.0,      // 卡住检测时间 (秒)
     reverse_push_force: 8000,   // 反向推力大小
 
-    tickrate: 0.10,             // 更新间隔
+    tickrate: 0.125,            // 更新间隔 (对齐到 64tick = 8 tick = 0.125s，满足 interval >= 0.1)
 };
 
 // ==================== 工具函数 ====================
@@ -96,6 +96,10 @@ function AlignToTickrate(delay) {
     const ticks = Math.round(delay / Server_tickInterval);
     return ticks * Server_tickInterval;
 }
+
+/** 主循环节拍（对齐到 tick）
+ *  0.125s @64tick = 8 tick，>=0.1 满足 cs_script 审查规则 */
+const Boss_tick_interval = AlignToTickrate(boss_config.tickrate);
 
 // ==================== Boss控制类 ====================
 class RionBossController {
@@ -335,7 +339,7 @@ class RionBossController {
         Instance.Msg("[RionBoss] 🧹 Boss已清理，下回合可通过 bossstart 重新激活\n");
     }
 
-    /** 查找最近的敌方玩家 */
+    /** 随机索敌：从「队伍=track_team、存活、且在索敌半径内」的玩家里随机挑一个 */
     findTarget() {
         // 确保实体有效
         if (!this.validateEntity()) {
@@ -343,30 +347,21 @@ class RionBossController {
         }
 
         const players = Instance.FindEntitiesByClass("player");
-        let bestTarget = null;
-        let bestDist = Infinity;
+        const origin = this.physbox.GetAbsOrigin();
+        const candidates = [];
 
         for (let player of players) {
             if (!player?.IsValid()) continue;
 
-            const team = player.GetTeamNumber();
-            const isAlive = player.IsAlive();
-            const health = player.GetHealth();
+            if (player.GetTeamNumber() !== boss_config.track_team) continue;
+            if (!player.IsAlive() || player.GetHealth() <= 0) continue;
+            if (CalculateDistance(origin, player.GetAbsOrigin()) > this.search_radius) continue;
 
-            if (team === boss_config.track_team && isAlive && health > 0) {
-                const dist = CalculateDistance(
-                    this.physbox.GetAbsOrigin(),
-                    player.GetAbsOrigin()
-                );
-
-                if (dist <= this.search_radius && dist < bestDist) {
-                    bestDist = dist;
-                    bestTarget = player;
-                }
-            }
+            candidates.push(player);
         }
 
-        return bestTarget;
+        if (candidates.length === 0) return null;
+        return candidates[Math.floor(Math.random() * candidates.length)];
     }
 
     /** 检查目标是否有效 */
@@ -624,36 +619,44 @@ class RionBossController {
         }
     }
 
-    /** 启动循环 - 使用SetThink注册回调 */
+    /** 启动循环：think 回调已在模块加载时用 SetThink(bossThink) 注册好，
+     *  这里只负责打开运行开关；不要再在这里 SetThink，否则会
+     *  "Callback 'Think' already registered"。 */
     startLoop() {
-        if (this.is_running) {
-            return;
-        }
         this.is_running = true;
-
-        const interval = AlignToTickrate(this.tickrate);
-
-        // 使用SetThink注册回调
-        Instance.SetThink(() => {
-            try {
-                if (!this.is_running || !this.is_active) {
-                    // 即使不活跃，也保持下一帧调度，以便重新初始化
-                    Instance.SetNextThink(Instance.GetGameTime() + interval);
-                    return;
-                }
-                this.update();
-                Instance.SetNextThink(Instance.GetGameTime() + interval);
-            } catch (e) {
-                Instance.Msg("[RionBoss] ❌ 更新循环异常: " + e + "\n");
-                Instance.SetNextThink(Instance.GetGameTime() + interval);
-            }
-        });
-        Instance.SetNextThink(Instance.GetGameTime());
     }
 }
 
 // ==================== 全局变量 ====================
 let boss = null;
+
+/** 主循环 think 回调：必须是**顶层具名函数**。
+ *  原因：原先写成「类方法内、闭包捕获 this 的箭头函数」传给 Instance.SetThink，
+ *  引擎会报 "Method point_script.SetThink invoked with bad callback value"（见 console.log），
+ *  回调注册不上 → SetNextThink 排了也没人调 → 主循环不跑 → boss 完全不动。
+ *  这里改成顶层具名函数（与 stg.js / 官方 cs_script_demo 一致），状态统一走模块级 `boss`。 */
+function bossThink() {
+    const interval = Boss_tick_interval;
+    if (!boss) {
+        Instance.SetNextThink(Instance.GetGameTime() + interval);
+        return;
+    }
+    try {
+        if (!boss.is_running || !boss.is_active) {
+            Instance.SetNextThink(Instance.GetGameTime() + interval);
+            return;
+        }
+        boss.update();
+        Instance.SetNextThink(Instance.GetGameTime() + interval);
+    } catch (e) {
+        Instance.Msg("[RionBoss] ❌ 更新循环异常: " + e + "\n");
+        Instance.SetNextThink(Instance.GetGameTime() + interval);
+    }
+}
+
+// think 回调只注册一次（重复注册会报 "Callback 'Think' already registered"）
+Instance.SetThink(bossThink);
+Instance.SetNextThink(Instance.GetGameTime());
 
 // ==================== 事件绑定 ====================
 
