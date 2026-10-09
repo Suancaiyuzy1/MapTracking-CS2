@@ -190,9 +190,9 @@ let WarmupUnderPos = []
 Instance.OnScriptInput("LowPlayersMode", (_input) => {
 
 	let human_num = GetHumans().length
-	if(human_num<30 || failNum > 7){
+	if(human_num<30 || failNum > 5){
 		ForceZomibeHp =500 + human_num*300;
-		ForceZomibeHpAdd = (-1-human_num/30)*failNum;
+		ForceZomibeHpAdd = (-1-human_num/30)*failNum*2;
 		Instance.EntFireAtTarget({ target: self, input: "runscriptinput", value: "ForceHPLoop",delay:1});	
 	
 	}
