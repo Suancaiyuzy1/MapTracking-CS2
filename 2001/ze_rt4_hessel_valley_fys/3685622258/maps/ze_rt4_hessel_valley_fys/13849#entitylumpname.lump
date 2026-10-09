@@ -21,7 +21,7 @@
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 9.5,
+        "delay": 9,
         "limit": -1
       },
       {

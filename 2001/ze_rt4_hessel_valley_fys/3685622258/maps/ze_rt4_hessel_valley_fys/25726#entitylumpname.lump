@@ -1579,7 +1579,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 7,
+        "delay": 6.5,
         "limit": -1
       },
       {
@@ -1715,7 +1715,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 8,
+        "delay": 6,
         "limit": -1
       },
       {
@@ -1732,22 +1732,6 @@
         "input": "Deactivate",
         "param": "",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_hero_hpcounter",
-        "input": "Add",
-        "param": "2",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_hero_hpcounter",
-        "input": "GetValue",
-        "param": "",
-        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]

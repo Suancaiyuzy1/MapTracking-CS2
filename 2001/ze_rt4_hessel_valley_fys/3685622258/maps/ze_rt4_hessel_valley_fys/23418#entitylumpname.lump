@@ -9,8 +9,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "8",
-    "damagecap": "230",
-    "damage": "230",
+    "damagecap": "220",
+    "damage": "220",
     "master": "",
     "filtername": "[PR#]CT",
     "spawnflags": "4097",
@@ -326,6 +326,14 @@
         "input": "StopSound",
         "param": "",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]player_selfexplosion",
+        "input": "keyvalues",
+        "param": "gravity 1",
+        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]
@@ -662,6 +670,14 @@
         "input": "Kill",
         "param": "",
         "delay": 11.300000190734863,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]player_selfexplosion",
+        "input": "keyvalues",
+        "param": "gravity 1",
+        "delay": 12,
         "limit": -1
       }
     ]

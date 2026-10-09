@@ -2,29 +2,29 @@
 // https://github.com/Kxnrl
 
 // =====================================================
-// 脚本名称：item_cycler.vjs（使用子实体定位父武器）
+// 脚本名称：item_cycler.vjs（巡回神器 - 固定传送点）
 // 功能：按 E 键时，按优先级将掉落的神器传送到 item_carl_target 面前。
-//       通过子实体 func_button 找到父级武器实体，无视拾取后名称丢失问题。
+//       每按一次传送一个掉落物品，按照轮询顺序选择。
 // 触发：调用脚本输入 "cycle_items"（例如按钮输出）
 // =====================================================
 
 import { Instance } from "cs_script/point_script";
 
 // ----- 配置区 -----
-// 优先级列表（子实体名称，顺序即巡回顺序）
-const BUTTON_PRIORITY = [
-    "Item_health_button",       // 奶
-    "ZombieSucker_Button",      // 虹吸
-    "Item_Water_Button",        // 水瀑
-    "Item_wind_button",         // 直线风
-    "Item_barrier_XButton",     // 壁垒
-    "Item_blackhole_Button",    // 黑洞
-    "Item_Rashomon_button",     // 罗生门
-    "ice_button",               // 冰刺
-    "Item_Thunder_Button",      // 闪电
+// 优先级列表：越靠前优先级越高
+const ITEM_PRIORITY = [
+    "Item_health_gun",
+    "ZombieSucker_Weapon",
+    "Item_Water_gun",
+    "Item_wind_gun",
+    "Item_barrier_gun",
+    "Item_blackhole_gun",
+    "Item_Rashomon_gun",
+    "ice_elite",
+    "Item_Thunder_gun",
 ];
 
-// 固定传送目标实体名称
+// 固定传送目标实体名称（改为 item_carl_target）
 const TARGET_ENTITY = "item_carl_target";
 
 // 传送距离（面前多少单位）
@@ -41,43 +41,26 @@ const COOLDOWN_TIME = 0.5;
 
 // ----- 状态 -----
 let cooldownUntil = 0;
+let currentIndex = 0;
 
-// 通过按钮实体查找父级武器实体
-function getWeaponByButton(buttonName) {
-    const button = Instance.FindEntityByName(buttonName);
-    if (!button?.IsValid()) return null;
+// 判断神器是否处于“掉落”状态
+function isItemDropped(itemName) {
+    const item = Instance.FindEntityByName(itemName);
+    if (!item?.IsValid()) return false;
 
-    // 获取父实体（即武器）
-    const parent = button.GetParent();
-    if (parent?.IsValid()) {
-        return parent;
-    }
-    return null;
-}
-
-// 判断武器是否被任何存活玩家持有
-function isWeaponHeld(weapon) {
-    if (!weapon?.IsValid()) return false;
-
-    const players = Instance.FindEntitiesByClass("player");
-    for (const player of players) {
-        if (!player?.IsValid() || !player.IsAlive()) continue;
-
-        // 检查所有武器槽
-        for (let slot = 0; slot < 6; slot++) {
-            const held = player.FindWeaponBySlot(slot);
-            if (held === weapon) {
-                return true; // 在玩家手中
-            }
+    try {
+        const owner = item.GetOwner();
+        if (owner?.IsValid() && owner.IsAlive()) {
+            return false;
         }
-    }
-    return false; // 不在任何玩家手中
+    } catch (e) {}
+    return true;
 }
 
-// 将武器传送到固定实体面前
-function teleportWeaponToTarget(weapon) {
+// 将物品传送到固定实体面前
+function teleportItemToFixedEntity(item) {
     const targetEntity = Instance.FindEntityByName(TARGET_ENTITY);
-    if (!targetEntity?.IsValid() || !weapon?.IsValid()) return false;
+    if (!targetEntity?.IsValid() || !item?.IsValid()) return false;
 
     const origin = targetEntity.GetAbsOrigin();
     if (!origin) return false;
@@ -101,7 +84,7 @@ function teleportWeaponToTarget(weapon) {
         z: origin.z + forward.z * FORWARD_DISTANCE + GROUND_OFFSET
     };
 
-    weapon.Teleport({ position: targetPos, velocity: { x: 0, y: 0, z: 0 } });
+    item.Teleport({ position: targetPos, velocity: { x: 0, y: 0, z: 0 } });
     return true;
 }
 
@@ -110,24 +93,21 @@ Instance.OnScriptInput("cycle_items", (event) => {
     const now = Instance.GetGameTime();
     if (now < cooldownUntil) return;
 
-    if (BUTTON_PRIORITY.length === 0) {
-        Instance.Msg("[巡回] 按钮优先级列表为空。");
+    if (ITEM_PRIORITY.length === 0) {
+        Instance.Msg("[巡回] 优先级列表为空。");
         return;
     }
 
     let foundAny = false;
+    for (let i = 0; i < ITEM_PRIORITY.length; i++) {
+        const idx = (currentIndex + i) % ITEM_PRIORITY.length;
+        const itemName = ITEM_PRIORITY[idx];
 
-    // 按照顺序检查每个按钮对应的武器
-    for (let i = 0; i < BUTTON_PRIORITY.length; i++) {
-        const buttonName = BUTTON_PRIORITY[i];
-        const weapon = getWeaponByButton(buttonName);
-
-        if (!weapon) continue; // 没有对应武器，跳过
-
-        // 如果武器不在任何玩家手中，则视为掉落
-        if (!isWeaponHeld(weapon)) {
-            if (teleportWeaponToTarget(weapon)) {
-                Instance.Msg("[巡回] 成功传送 " + buttonName + " 对应的神器到 " + TARGET_ENTITY + " 前方");
+        if (isItemDropped(itemName)) {
+            const item = Instance.FindEntityByName(itemName);
+            if (teleportItemToFixedEntity(item)) {
+                Instance.Msg("[巡回] 成功传送 " + itemName + " 到 " + TARGET_ENTITY + " 前方");
+                currentIndex = (idx + 1) % ITEM_PRIORITY.length;
                 foundAny = true;
                 cooldownUntil = now + CYCLE_INTERVAL;
                 break;
@@ -136,6 +116,7 @@ Instance.OnScriptInput("cycle_items", (event) => {
     }
 
     if (!foundAny) {
+        currentIndex = 0;
         cooldownUntil = now + COOLDOWN_TIME;
         Instance.Msg("[巡回] 没有掉落的神器需要巡回");
     }
@@ -143,10 +124,12 @@ Instance.OnScriptInput("cycle_items", (event) => {
 
 // 状态重置
 Instance.OnScriptInput("reset_cycler", () => {
+    currentIndex = 0;
     cooldownUntil = 0;
     Instance.Msg("[巡回] 状态已重置");
 });
 
 Instance.OnRoundStart(() => {
+    currentIndex = 0;
     cooldownUntil = 0;
 });

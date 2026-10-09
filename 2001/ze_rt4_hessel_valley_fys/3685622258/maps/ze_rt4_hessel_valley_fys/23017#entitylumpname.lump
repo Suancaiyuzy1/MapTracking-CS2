@@ -122,6 +122,13 @@
     ]
   },
   {
+    "Negated": "1",
+    "spawnflags": "0",
+    "health": "0",
+    "target": "",
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
     "PassthroughCaller": "0",
     "FastRetrigger": "0",
     "TriggerOnce": "0",
@@ -155,7 +162,7 @@
         "output": "OnTrigger",
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "SetDamage",
-        "param": "120",
+        "param": "160",
         "delay": 0,
         "limit": -1
       },
@@ -164,7 +171,7 @@
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "Enable",
         "param": "",
-        "delay": 0.10000000149011612,
+        "delay": 0.20000000298023224,
         "limit": -1
       },
       {
@@ -172,7 +179,7 @@
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "Disable",
         "param": "",
-        "delay": 0.4000000059604645,
+        "delay": 0.5,
         "limit": -1
       },
       {
@@ -338,7 +345,7 @@
         "output": "OnTrigger",
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "SetDamage",
-        "param": "50",
+        "param": "80",
         "delay": 0,
         "limit": -1
       },

@@ -69,7 +69,7 @@
         "target": "[PR#]Item_thunder_hurt",
         "input": "KillHierarchy",
         "param": "",
-        "delay": 5.5,
+        "delay": 6.5,
         "limit": -1
       },
       {

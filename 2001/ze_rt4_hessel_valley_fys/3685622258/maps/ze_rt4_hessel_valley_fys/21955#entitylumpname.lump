@@ -274,7 +274,7 @@
         "target": "[PR#]Item_wind_push",
         "input": "Disable",
         "param": "",
-        "delay": 6,
+        "delay": 6.5,
         "limit": -1
       },
       {

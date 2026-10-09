@@ -61,8 +61,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "8",
-    "damagecap": "54",
-    "damage": "54",
+    "damagecap": "20",
+    "damage": "44",
     "master": "",
     "filtername": "[PR#]CT",
     "spawnflags": "1",
@@ -82,17 +82,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23578",
     "model": "maps/ze_rt4_hessel_valley_fys/entities/zombie_laser_3hurt_23578.vmdl",
-    "_template_lump_ent_index": "1",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]script_blade",
-        "input": "RunScriptInput",
-        "param": "ps_blade",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "_template_lump_ent_index": "1"
   },
   {
     "PassthroughCaller": "0",

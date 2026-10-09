@@ -43,6 +43,14 @@
         "param": "speed 1",
         "delay": 10,
         "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "keyvalues",
+        "param": "speed 1.5",
+        "delay": 5,
+        "limit": 1
       }
     ]
   }

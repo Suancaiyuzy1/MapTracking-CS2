@@ -262,7 +262,7 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "movetype 2",
-        "delay": 4,
+        "delay": 3.5,
         "limit": -1
       },
       {

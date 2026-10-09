@@ -223,7 +223,7 @@
         "target": "[PR#]Item_Revolver_blackhole_push",
         "input": "KillHierarchy",
         "param": "",
-        "delay": 6,
+        "delay": 6.5,
         "limit": -1
       },
       {

@@ -4095,7 +4095,7 @@
     "local.scales": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "classname": "info_teleport_destination",
-    "origin": "-3696.000000 5984.000000 -6160.000000",
+    "origin": "-3664.000000 5984.000000 -6160.000000",
     "angles": "0.000000 357.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1672"
@@ -8807,9 +8807,9 @@
     "precomputedobbextent4": "624.308838 605.412109 443.234741",
     "precomputedobbangles4": "-5.000000 43.999992 3.000000",
     "precomputedobborigin4": "-12702.300781 6018.639160 -3172.254150",
-    "precomputedobbextent3": "609.923828 617.594238 500.757202",
-    "precomputedobbangles3": "4.000000 -45.000000 6.000000",
-    "precomputedobborigin3": "-12710.467773 7653.250000 -2906.885254",
+    "precomputedobbextent3": "609.923828 620.562256 497.435303",
+    "precomputedobbangles3": "3.999999 -45.000000 7.000000",
+    "precomputedobborigin3": "-12713.949219 7649.779785 -2907.005859",
     "precomputedobbextent2": "583.908203 306.181641 489.722290",
     "precomputedobbangles2": "-1.000000 -1.000000 -46.000000",
     "precomputedobborigin2": "-12657.558594 6976.276367 -2571.050781",
@@ -8821,9 +8821,9 @@
     "precomputedobborigin0": "-12256.722656 6830.465820 -3054.675293",
     "precomputedboundsmaxs": "-11810.544922 8006.716797 -2389.052734",
     "precomputedboundsmins": "-13537.412109 5644.939941 -3637.160645",
-    "precomputedobbextent": "863.433594 1196.804199 492.682373",
-    "precomputedobbangles": "-0.000000 0.000000 8.999999",
-    "precomputedobborigin": "-12673.978516 6827.524414 -3034.776855",
+    "precomputedobbextent": "869.395020 1197.696777 488.003296",
+    "precomputedobbangles": "-1.000000 0.000000 9.999998",
+    "precomputedobborigin": "-12671.884766 6829.007812 -3047.050049",
     "precomputedfieldsvalid": "1",
     "transmit_always": "0",
     "bakespeculartocubemaps_scale": "1.000000",
@@ -8974,9 +8974,9 @@
     "precomputedobbextent5": "398.909058 385.268921 394.970215",
     "precomputedobbangles5": "0.000000 -45.000004 0.000000",
     "precomputedobborigin5": "-5186.409180 -712.354736 -4061.303223",
-    "precomputedobbextent4": "392.754395 195.928955 252.689697",
+    "precomputedobbextent4": "392.754395 195.928955 227.814697",
     "precomputedobbangles4": "-0.000000 0.000000 0.000000",
-    "precomputedobborigin4": "-4632.019043 -918.866455 -4203.510742",
+    "precomputedobborigin4": "-4632.019043 -918.866455 -4228.385742",
     "precomputedobbextent3": "400.052856 398.440674 393.151733",
     "precomputedobbangles3": "0.000000 -45.000004 0.000000",
     "precomputedobborigin3": "-4633.139648 -157.468262 -4063.030273",
@@ -9461,9 +9461,9 @@
     "precomputedobbextent1": "232.008057 232.059357 115.603027",
     "precomputedobbangles1": "-0.000000 0.000000 0.000000",
     "precomputedobborigin1": "-5591.999023 -735.970947 -4340.540527",
-    "precomputedobbextent0": "605.407104 607.778931 792.618164",
+    "precomputedobbextent0": "605.407104 571.016724 792.618164",
     "precomputedobbangles0": "45.000000 0.000001 -34.999996",
-    "precomputedobborigin0": "-4616.994629 -690.574951 -4105.081055",
+    "precomputedobborigin0": "-4631.904785 -660.461182 -4119.991211",
     "precomputedboundsmaxs": "-4092.028809 752.011230 -3072.685547",
     "precomputedboundsmins": "-6023.295410 -1114.816772 -4456.427734",
     "precomputedobbextent": "965.633301 933.414001 691.871094",
@@ -9968,9 +9968,9 @@
     "precomputedobbextent2": "233.117188 204.966309 118.512329",
     "precomputedobbangles2": "-5.000000 -5.000000 -45.000004",
     "precomputedobborigin2": "-12660.346680 7680.295410 -2514.700439",
-    "precomputedobbextent1": "660.347656 187.395996 520.524902",
-    "precomputedobbangles1": "-4.000000 -2.000000 -47.999996",
-    "precomputedobborigin1": "-12672.887695 7482.937500 -3213.852295",
+    "precomputedobbextent1": "656.657227 522.295532 179.877441",
+    "precomputedobbangles1": "-6.000000 -4.999999 39.999992",
+    "precomputedobborigin1": "-12664.284180 7461.558105 -3192.459961",
     "precomputedobbextent0": "337.307129 614.506836 427.047363",
     "precomputedobbangles0": "-0.000000 45.000000 13.999998",
     "precomputedobborigin0": "-12031.465820 7572.402344 -2886.216064",
@@ -12791,6 +12791,54 @@
         "param": "",
         "delay": 1,
         "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_roxy_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_yaolan_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_tlbk_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_roxy_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_yaolan_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_tlbk_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
       }
     ]
   },
@@ -16107,6 +16155,14 @@
         "param": "",
         "delay": 2.799999952316284,
         "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_whitehole_hurt",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -16160,6 +16216,14 @@
         "input": "Enable",
         "param": "",
         "delay": 3,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_whitehole_hurt",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
         "limit": 1
       }
     ]
@@ -25191,6 +25255,14 @@
         "param": "",
         "delay": 0.30000001192092896,
         "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]hero_dead",
+        "input": "StartSound",
+        "param": "",
+        "delay": 0.20000000298023224,
+        "limit": -1
       }
     ]
   },
@@ -25261,6 +25333,14 @@
         "input": "Kill",
         "param": "",
         "delay": 0.30000001192092896,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]hero_dead",
+        "input": "StartSound",
+        "param": "",
+        "delay": 0.20000000298023224,
         "limit": -1
       }
     ]
@@ -26350,7 +26430,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 20,
+        "delay": 18,
         "limit": -1
       },
       {
@@ -26589,7 +26669,7 @@
         "target": "[PR#]gaoda_relay3",
         "input": "Enable",
         "param": "",
-        "delay": 20,
+        "delay": 18,
         "limit": -1
       }
     ]
@@ -29650,7 +29730,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_12_door_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -29842,7 +29922,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_1_break_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -30071,7 +30151,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_break_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -30386,7 +30466,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_1_break_2_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -30862,7 +30942,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_13_break_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -31255,7 +31335,7 @@
         "output": "OnLessThan",
         "target": "[PR#]level1_door1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -31805,7 +31885,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_1_break_3_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -32084,7 +32164,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_1_break_4_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -32481,7 +32561,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_13_tracktrain_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -32602,14 +32682,6 @@
         "input": "Enable",
         "param": "",
         "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
-        "target": "[PR#]Item_whitehole_hurt",
-        "input": "Enable",
-        "param": "",
-        "delay": 1,
         "limit": -1
       }
     ]
@@ -32866,7 +32938,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_door_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -33196,7 +33268,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_break_2_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -33503,7 +33575,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_break_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -33873,7 +33945,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_break_3_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -34203,7 +34275,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_break_4_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -34537,7 +34609,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_door_2_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -34852,7 +34924,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_break_4_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -35205,7 +35277,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_break_5_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -35673,7 +35745,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_2_break_6_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -35842,7 +35914,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_move_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -36188,7 +36260,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_3_break_1_counter_1",
         "input": "SetValue",
-        "param": "10",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -36624,6 +36696,14 @@
         "param": "",
         "delay": 10,
         "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]follow_script",
+        "input": "RunScriptInput",
+        "param": "lock_carry",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -36907,7 +36987,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_3_break_5_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -37186,7 +37266,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_4_break_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -37516,7 +37596,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_4_break_3_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -37897,7 +37977,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_4_door_2_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -39294,7 +39374,7 @@
         "target": "[PR#]zm_sq_door",
         "input": "Break",
         "param": "",
-        "delay": 15,
+        "delay": 8,
         "limit": 1
       },
       {
@@ -43640,9 +43720,9 @@
     "nodmgforce": "0",
     "forgivedelay": "3.000000",
     "damagemodel": "0",
-    "damagetype": "8",
+    "damagetype": "0",
     "damagecap": "20",
-    "damage": "100000",
+    "damage": "10000",
     "master": "",
     "filtername": "",
     "spawnflags": "1",
@@ -48558,6 +48638,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]Health_user",
+        "input": "KeyValue",
+        "param": "health 180",
+        "delay": 3,
+        "limit": -1
       }
     ]
   },
@@ -53244,7 +53332,7 @@
     "vscripts": "",
     "targetname": "[PR#]zz_tp_1",
     "classname": "point_teleport",
-    "origin": "5776.000000 11584.000000 -2296.000000",
+    "origin": "5776.000000 11528.000000 -2296.000000",
     "angles": "0.000000 180.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "21435"
@@ -60817,7 +60905,7 @@
     "color": "255 255 255",
     "fullbright": "1",
     "enabled": "1",
-    "message": "\u5E38\u9646\u8309\u5B50_Official        \u840C\u7231         Rainmisty \n\n\u9707\u60CA\u6211\u4E24\u8F88\u5B50     \u5929\u82B1\u6CA1\u6709\u677F        Asada Shino\n\n\u5361\u5361\u7F57       \u4E00\u6761\u54B8\u9C7C\u3001      \u5E7D\u7075\u730E\u624B\n\n\u6A31\u5C0F\u8DEF \u5170        ouououou",
+    "message": "\u5E38\u9646\u8309\u5B50_Official        \u840C\u7231         Rainmisty \n\n\u9707\u60CA\u6211\u4E24\u8F88\u5B50     \u5929\u82B1\u6CA1\u6709\u677F        Asada Shino\n\n\u5361\u5361\u7F57       \u4E00\u6761\u54B8\u9C7C\u3001      \u5E7D\u7075\u730E\u624B\n\n\u6A31\u5C0F\u8DEF \u5170       ouououou",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -66918,7 +67006,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_treasurechest_maker3",
     "classname": "env_entity_maker",
-    "origin": "558.000000 -344.997040 -4012.999756",
+    "origin": "558.000000 -1576.000000 -4012.999756",
     "angles": "0.000000 89.999954 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "22629"
@@ -68413,7 +68501,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_treasurechest_maker3",
     "classname": "env_entity_maker",
-    "origin": "4723.108887 -2198.458008 -4941.000000",
+    "origin": "4723.108887 -3744.000000 -4941.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "22896"
@@ -68434,7 +68522,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_treasurechest_maker3",
     "classname": "env_entity_maker",
-    "origin": "4668.175781 -1898.000000 -4941.000000",
+    "origin": "4668.175781 -2760.000000 -4941.000000",
     "angles": "0.000000 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "22900"
@@ -68602,7 +68690,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_treasurechest_maker3",
     "classname": "env_entity_maker",
-    "origin": "401.228760 -780.000000 -4013.000000",
+    "origin": "288.000000 -1676.000000 -4013.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "22930"
@@ -69099,7 +69187,7 @@
     "vscripts": "",
     "targetname": "[PR#]zm_sq_tp_4",
     "classname": "point_teleport",
-    "origin": "5717.000000 10664.000000 -2096.000000",
+    "origin": "5712.000000 10664.000000 -2096.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23143"
@@ -69118,7 +69206,7 @@
     "vscripts": "",
     "targetname": "[PR#]zm_sq_tp_5",
     "classname": "point_teleport",
-    "origin": "5717.000000 10736.000977 -2096.000000",
+    "origin": "5712.000000 10736.000977 -2096.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23144"
@@ -69137,7 +69225,7 @@
     "vscripts": "",
     "targetname": "[PR#]zm_sq_tp_6",
     "classname": "point_teleport",
-    "origin": "5717.000000 10807.000000 -2096.000000",
+    "origin": "5712.000000 10807.000000 -2096.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23145"
@@ -73944,16 +74032,8 @@
         "output": "OnStartTouch",
         "target": "[PR#]boss_hp_counter",
         "input": "Add",
-        "param": "360",
+        "param": "350",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]laser_money3000",
-        "input": "AddMoneyPlayer",
-        "param": "",
-        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]
@@ -74240,7 +74320,7 @@
     "vscripts": "",
     "targetname": "[PR#]zm_sq_tp_7",
     "classname": "point_teleport",
-    "origin": "5717.000000 10879.000000 -2096.000000",
+    "origin": "5712.000000 10879.000000 -2096.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23955"
@@ -76368,10 +76448,10 @@
     "connections": [
       {
         "output": "OnPass",
-        "target": "[PR#]item_rock_guanbi_relay",
-        "input": "Trigger",
+        "target": "[PR#]item_rock_branch",
+        "input": "Test",
         "param": "",
-        "delay": 0.019999999552965164,
+        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]
@@ -76655,7 +76735,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_rock_guanbi_relay",
     "classname": "logic_relay",
-    "origin": "10456.000000 11638.665039 -6191.000000",
+    "origin": "10168.000000 11638.665039 -6191.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23634",
@@ -76665,15 +76745,7 @@
         "target": "[PR#]item_rock_button",
         "input": "Unlock",
         "param": "",
-        "delay": 30,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Zom_rock_particle",
-        "input": "Stop",
-        "param": "",
-        "delay": 0.029999999329447746,
+        "delay": 10,
         "limit": -1
       },
       {
@@ -76694,10 +76766,34 @@
       },
       {
         "output": "OnTrigger",
+        "target": "[PR#]item_rock_counter",
+        "input": "Subtract",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]item_rock_counter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]Zom_rock_particle",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
         "target": "[PR#]Zom_rock_particle",
         "input": "Start",
         "param": "",
-        "delay": 30.030000686645508,
+        "delay": 10,
         "limit": -1
       }
     ]
@@ -78185,15 +78281,6 @@
     "entityLumpName": "23732#entityLumpName"
   },
   {
-    "cs_script": "scripts/vscripts/item_zm_drop.vjs",
-    "targetname": "[PR#]Zombie_Position_script",
-    "classname": "point_script",
-    "origin": "10335.394531 12063.261719 -6238.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "23737"
-  },
-  {
     "spawnflags": "0",
     "Case32": "",
     "Case31": "",
@@ -78366,30 +78453,6 @@
         "input": "Enable",
         "param": "",
         "delay": 15,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_phys",
-        "input": "Kill",
-        "param": "",
-        "delay": 15,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_usedspr",
-        "input": "Kill",
-        "param": "",
-        "delay": 15,
-        "limit": -1
-      },
-      {
-        "output": "OnSpawn",
-        "target": "[PR#]item_fog_fogrelay",
-        "input": "Trigger",
-        "param": "",
-        "delay": 0.20000000298023224,
         "limit": -1
       }
     ]
@@ -79928,11 +79991,11 @@
     "Template14": "",
     "Template13": "",
     "Template12": "",
-    "Template11": "",
-    "Template10": "",
-    "Template09": "",
-    "Template08": "",
-    "Template07": "",
+    "Template11": "[PR#]item_rock_counter",
+    "Template10": "[PR#]item_rock_branch",
+    "Template09": "[PR#]item_rock_timer",
+    "Template08": "[PR#]Item_rock_text2",
+    "Template07": "[PR#]Item_rock_text1",
     "Template06": "[PR#]item_rock_template_maker",
     "Template05": "[PR#]item_rock_push",
     "Template04": "[PR#]Zom_rock_particle",
@@ -80501,6 +80564,15 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "24113"
+  },
+  {
+    "cs_script": "scripts/vscripts/item_zm_drop.vjs",
+    "targetname": "[PR#]Zombie_Position_script",
+    "classname": "point_script",
+    "origin": "10335.394531 12063.261719 -6238.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "23737"
   },
   {
     "cs_script": "scripts/vscripts/chaos.vjs",
@@ -81561,9 +81633,9 @@
     "model": "maps/ze_rt4_hessel_valley_fys/entities/item_jugg_rightpush_24355.vmdl"
   },
   {
-    "add_modifier": "",
-    "add_attribute": "",
     "ResponseContext": "",
+    "add_attribute": "",
+    "add_modifier": "",
     "MeasureType": "0",
     "TargetScale": "1.000000",
     "TargetReference": "[PR#]wk_dynamic",
@@ -84451,22 +84523,6 @@
       {
         "output": "OnBreak",
         "target": "[PR#]target_boss",
-        "input": "KeyValue",
-        "param": "targetname player_none",
-        "delay": 1,
-        "limit": 1
-      },
-      {
-        "output": "OnBreak",
-        "target": "[PR#]target_boss_v2",
-        "input": "KeyValue",
-        "param": "targetname player_none",
-        "delay": 1,
-        "limit": 1
-      },
-      {
-        "output": "OnBreak",
-        "target": "[PR#]target_boss",
         "input": "SetDamagefilter",
         "param": "[PR#]zm_filter",
         "delay": 0.019999999552965164,
@@ -84518,6 +84574,38 @@
         "input": "Trigger",
         "param": "",
         "delay": 0.10000000149011612,
+        "limit": 1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]target_boss",
+        "input": "KeyValue",
+        "param": "movetype 2",
+        "delay": 1.100000023841858,
+        "limit": -1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]target_boss_v2",
+        "input": "KeyValue",
+        "param": "movetype 2",
+        "delay": 1.100000023841858,
+        "limit": -1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]target_boss",
+        "input": "KeyValue",
+        "param": "targetname player_none",
+        "delay": 1.2000000476837158,
+        "limit": 1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]target_boss_v2",
+        "input": "KeyValue",
+        "param": "targetname player_none",
+        "delay": 1.2000000476837158,
         "limit": 1
       }
     ]
@@ -84894,9 +84982,9 @@
     "hammerUniqueId": "24522"
   },
   {
-    "max": "14800",
+    "max": "13000",
     "min": "0",
-    "startvalue": "2000",
+    "startvalue": "1500",
     "StartDisabled": "0",
     "vscripts": "",
     "targetname": "[PR#]boss_hp_counter",
@@ -84944,6 +85032,14 @@
         "input": "Kill",
         "param": "",
         "delay": 0.20000000298023224,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]follow_script",
+        "input": "RunScriptInput",
+        "param": "unlock_carry",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -87284,7 +87380,7 @@
     "vscripts": "",
     "targetname": "[PR#]zm_sq_tp_9",
     "classname": "point_teleport",
-    "origin": "5717.000000 10963.000000 -2096.000000",
+    "origin": "5712.000000 10963.000000 -2096.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23957"
@@ -87432,45 +87528,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "25.000000 25.000000 25.000000",
     "hammerUniqueId": "24634"
-  },
-  {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "1",
-    "TriggerOnce": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]item_fog_fogrelay",
-    "classname": "logic_relay",
-    "origin": "10512.000000 13612.000000 -6132.437012",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "24648",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_usedspr",
-        "input": "Kill",
-        "param": "",
-        "delay": 11.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_phys",
-        "input": "Kill",
-        "param": "",
-        "delay": 11.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_fogmaker",
-        "input": "ForceSpawnAtEntityOrigin",
-        "param": "[PR#]item_fog_par1",
-        "delay": 3.5999999046325684,
-        "limit": -1
-      }
-    ]
   },
   {
     "cpoint7_parent": "0",
@@ -88078,11 +88135,19 @@
       },
       {
         "output": "OnHitMin",
+        "target": "[PR#]follow_script",
+        "input": "RunScriptInput",
+        "param": "lock_carry",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
         "target": "[PR#]Item_whitehole_hurt",
         "input": "Enable",
         "param": "",
         "delay": 15,
-        "limit": -1
+        "limit": 1
       }
     ]
   },
@@ -88264,7 +88329,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_24_door_3_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -88548,6 +88613,54 @@
         "input": "SetValue",
         "param": "30",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_roxy_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_yaolan_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_tlbk_hpcounter",
+        "input": "SetValue",
+        "param": "[PR#]1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_roxy_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_yaolan_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]item_tlbk_hpcounter",
+        "input": "GetValue",
+        "param": "",
+        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]
@@ -89550,7 +89663,7 @@
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 5,
+        "delay": 12,
         "limit": 1
       },
       {
@@ -89734,7 +89847,7 @@
         "output": "OnLessThan",
         "target": "[PR#]lv_4_door_1_counter_1",
         "input": "SetValue",
-        "param": "12",
+        "param": "13",
         "delay": 0,
         "limit": -1
       },
@@ -89839,6 +89952,14 @@
         "input": "Enable",
         "param": "",
         "delay": 10,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]follow_script",
+        "input": "RunScriptInput",
+        "param": "lock_carry",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -90250,10 +90371,10 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]lv_4_brush",
+        "target": "[PR#]level4_brush",
         "input": "Kill",
         "param": "",
-        "delay": 12.199999809265137,
+        "delay": 10,
         "limit": 1
       }
     ]
@@ -90834,9 +90955,9 @@
     "precomputedobbextent5": "67.587646 136.043335 132.071777",
     "precomputedobbangles5": "-0.000000 0.000000 0.000000",
     "precomputedobborigin5": "7099.474609 1791.977173 -5571.957520",
-    "precomputedobbextent4": "328.134766 201.916260 295.896484",
+    "precomputedobbextent4": "328.134766 201.916260 295.892090",
     "precomputedobbangles4": "0.000000 -45.000004 0.000000",
-    "precomputedobborigin4": "7257.250000 1417.285400 -5408.288086",
+    "precomputedobborigin4": "7257.250000 1417.285400 -5408.283691",
     "precomputedobbextent3": "132.277100 599.553223 132.314697",
     "precomputedobbangles3": "-0.000000 0.000000 0.000000",
     "precomputedobborigin3": "7164.043945 2392.490723 -5571.999023",
@@ -94825,9 +94946,9 @@
     "precomputedobbextent5": "100.921509 207.800537 130.665283",
     "precomputedobbangles5": "45.000000 0.000000 -8.000000",
     "precomputedobborigin5": "-3641.354004 6834.114746 -6062.717773",
-    "precomputedobbextent4": "284.491455 399.614258 297.291504",
-    "precomputedobbangles4": "6.000000 -6.999999 -1.000000",
-    "precomputedobborigin4": "-3400.239746 6394.908691 -5912.885254",
+    "precomputedobbextent4": "284.234863 399.619141 295.934570",
+    "precomputedobbangles4": "7.000000 -7.000000 -0.000000",
+    "precomputedobborigin4": "-3394.978516 6391.618652 -5908.152344",
     "precomputedobbextent3": "310.183350 402.337891 353.487305",
     "precomputedobbangles3": "-7.000000 -4.000000 45.000004",
     "precomputedobborigin3": "-3481.138184 7323.016113 -6008.561523",
@@ -96956,61 +97077,6 @@
     "model": "maps/ze_rt4_hessel_valley_fys/entities/zm_sq_door2_25795.vmdl"
   },
   {
-    "wait": "1.000000",
-    "filtername": "[PR#]item_hero_textfilter",
-    "spawnflags": "5128",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]hero_text_trigger",
-    "classname": "trigger_multiple",
-    "origin": "-6105.500000 9259.000000 -5304.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25796",
-    "model": "maps/ze_rt4_hessel_valley_fys/entities/hero_text_trigger_25796.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]item_hero_hpcounter",
-        "input": "Subtract",
-        "param": "5",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]item_hero_hpcounter",
-        "input": "GetValue",
-        "param": "",
-        "delay": 0.10000000149011612,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "filtername": "[PR#]item_hero_phys",
     "Negated": "0",
     "clientSideEntity": "0",
@@ -97324,16 +97390,41 @@
     "model": "maps/ze_rt4_hessel_valley_fys/entities/unnamed_25826.vmdl"
   },
   {
+    "check_if_dest_clear_for_player": "0",
+    "mirror_player": "0",
+    "use_landmark_angles": "0",
+    "landmark": "",
+    "target": "[PR#]lv_12_destination_2",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "",
+    "classname": "trigger_teleport",
+    "origin": "1117.515869 7138.711914 -5383.382324",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "25828",
+    "model": "maps/ze_rt4_hessel_valley_fys/entities/unnamed_25828.vmdl"
+  },
+  {
     "filterattribute": "76561199030926072",
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]MySteamID39",
     "classname": "filter_activator_attribute_int",
-    "origin": "7231.000000 12494.000000 -1968.000000",
+    "origin": "7232.000000 12494.000000 -1968.000000",
     "angles": "0.000000 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25828"
+    "hammerUniqueId": "25830"
   },
   {
     "NoInterpolate": "0",
@@ -97369,33 +97460,21 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "targetname": "[PR#]lv_4_brush",
+    "targetname": "[PR#]level4_brush",
     "vscripts": "",
     "classname": "func_brush",
     "origin": "7656.000000 1684.000000 -5360.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25829",
-    "model": "maps/ze_rt4_hessel_valley_fys/entities/lv_4_brush_25829.vmdl"
-  },
-  {
-    "PawnSubclass": "",
-    "IsMaster": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]item_tlbk_des",
-    "classname": "info_player_start",
-    "origin": "8000.000000 13035.000000 -6196.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25830"
+    "hammerUniqueId": "25839",
+    "model": "maps/ze_rt4_hessel_valley_fys/entities/level4_brush_25839.vmdl"
   },
   {
     "check_if_dest_clear_for_player": "0",
     "mirror_player": "0",
     "use_landmark_angles": "0",
     "landmark": "",
-    "target": "[PR#]item_tlbk_des",
+    "target": "[PR#]item_tlbk_tp_des1",
     "filtername": "[PR#]MySteamID7",
     "spawnflags": "4097",
     "globalname": "",
@@ -97407,50 +97486,46 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]item_tlb_tele1",
+    "targetname": "[PR#]item_tlbk_tp1",
     "classname": "trigger_teleport",
-    "origin": "7376.000000 11856.688477 -2039.754639",
+    "origin": "5866.000000 11664.000000 -2245.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25832",
-    "model": "maps/ze_rt4_hessel_valley_fys/entities/item_tlb_tele1_25832.vmdl",
+    "hammerUniqueId": "25841",
+    "model": "maps/ze_rt4_hessel_valley_fys/entities/item_tlbk_tp1_25841.vmdl",
     "connections": [
       {
         "output": "OnStartTouch",
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 0.20000000298023224,
+        "delay": 0.10000000149011612,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]item_tlb_tele2",
-        "input": "enable",
+        "target": "[PR#]item_tlbk_tp2",
+        "input": "Enable",
         "param": "",
-        "delay": 1,
+        "delay": 1.2000000476837158,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]item_tlbk_tp2",
+        "input": "Kill",
+        "param": "",
+        "delay": 3,
         "limit": -1
       }
     ]
-  },
-  {
-    "PawnSubclass": "",
-    "IsMaster": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]item_tlbk_des2",
-    "classname": "info_player_start",
-    "origin": "6095.334961 12563.000000 -2114.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25834"
   },
   {
     "check_if_dest_clear_for_player": "0",
     "mirror_player": "0",
     "use_landmark_angles": "0",
     "landmark": "",
-    "target": "[PR#]item_tlbk_des2",
+    "target": "[PR#]item_tlbk_tp_des2",
     "filtername": "",
     "spawnflags": "4097",
     "globalname": "",
@@ -97462,22 +97537,36 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]item_tlb_tele2",
+    "targetname": "[PR#]item_tlbk_tp2",
     "classname": "trigger_teleport",
-    "origin": "9490.226562 13189.463867 -6029.754883",
+    "origin": "8008.000000 13036.000000 -6298.250000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25835",
-    "model": "maps/ze_rt4_hessel_valley_fys/entities/item_tlb_tele2_25835.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Kill",
-        "param": "",
-        "delay": 2,
-        "limit": -1
-      }
-    ]
+    "hammerUniqueId": "25843",
+    "model": "maps/ze_rt4_hessel_valley_fys/entities/item_tlbk_tp2_25843.vmdl"
+  },
+  {
+    "PawnSubclass": "",
+    "IsMaster": "0",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]item_tlbk_tp_des1",
+    "classname": "info_player_start",
+    "origin": "8010.091797 13036.000000 -6196.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "25845"
+  },
+  {
+    "PawnSubclass": "",
+    "IsMaster": "0",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]item_tlbk_tp_des2",
+    "classname": "info_player_start",
+    "origin": "6088.233398 12551.592773 -2160.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "25847"
   }
 ]

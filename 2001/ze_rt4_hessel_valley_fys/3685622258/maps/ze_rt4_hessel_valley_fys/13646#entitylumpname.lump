@@ -251,7 +251,7 @@
         "target": "[PR#]Item_Rashomon_move",
         "input": "KillHierarchy",
         "param": "",
-        "delay": 7,
+        "delay": 6.5,
         "limit": -1
       },
       {

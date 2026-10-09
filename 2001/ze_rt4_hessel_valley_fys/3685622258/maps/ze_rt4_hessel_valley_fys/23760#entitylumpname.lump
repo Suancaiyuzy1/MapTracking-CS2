@@ -175,7 +175,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_fog_relay1",
     "classname": "logic_relay",
-    "origin": "-88.000000 88.000000 -24.000000",
+    "origin": "-40.250000 0.675781 -24.000000",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23745",
@@ -187,15 +187,15 @@
         "input": "Kill",
         "param": "",
         "delay": 3.5,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnSpawn",
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 3.700000047683716,
-        "limit": 1
+        "delay": 4,
+        "limit": -1
       },
       {
         "output": "OnSpawn",
@@ -203,7 +203,7 @@
         "input": "Kill",
         "param": "",
         "delay": 3.5,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnSpawn",
@@ -211,15 +211,15 @@
         "input": "Kill",
         "param": "",
         "delay": 3.5,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnSpawn",
         "target": "[PR#]item_fog_usedspr",
         "input": "Kill",
         "param": "",
-        "delay": 11.5,
-        "limit": 1
+        "delay": 16,
+        "limit": -1
       }
     ]
   },
@@ -267,7 +267,7 @@
         "input": "Kill",
         "param": "",
         "delay": 0,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnTrigger",
@@ -299,22 +299,6 @@
         "input": "Kill",
         "param": "",
         "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_fogrelay",
-        "input": "CancelPending",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]item_fog_fogrelay",
-        "input": "CancelPending",
-        "param": "",
-        "delay": 0.30000001192092896,
         "limit": -1
       }
     ]
@@ -406,7 +390,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]item_fog_par1",
+    "parentname": "[PR#]item_fog_box",
     "vscripts": "",
     "targetname": "[PR#]item_fog_usedspr",
     "classname": "info_particle_system",

@@ -2,20 +2,20 @@
 // https://github.com/Kxnrl
 
 // =====================================================
-// 脚本名称：follow.vjs（仅禁止捕获 T 阵营僵尸）
+// 脚本名称：follow.vjs（完整版，僵尸限制 + 共享黑名单）
 // 功能：拾取 item_shell 时自动启动，Shift+右键 抓人，最多6人。
-//       目标为 T 阵营（僵尸）时无法被捕获。
+//       僵尸（T阵营）不能使用载客功能；乘客变僵尸自动掉落。
 //       共享黑名单防止同一玩家被多个神器捕获。
 // 触发：武器 item_shell 输出：
 //       OnPlayerPickup → follow_script → RunScriptInput → connect_item0100
 // 要求：武器实体名 = item_shell
 //       锚点实体名 = Custom_Item0100_Box_1 ~ _6
-// 注意：僵尸阵营编号 = 2（T），人类 = 3（CT）
+// 注意：僵尸阵营编号默认为 2（T）。如果你的服务器僵尸是 CT，请改 ZOMBIE_TEAM 为 3
 // =====================================================
 
 import { CSGearSlot, CSInputs, CSPlayerPawn, Instance } from "cs_script/point_script";
 
-// ★ 僵尸阵营编号（T 阵营）
+// ★ 僵尸阵营编号（通常 T = 2，CT = 3）
 const ZOMBIE_TEAM = 2;
 
 // ---------- 辅助函数 ----------
@@ -63,11 +63,11 @@ function getAimTarget(owner) {
     return null;
 }
 
-// ============ 全局共享黑名单（与 roxy 脚本保持一致） ============
-if (!("g_FollowBlackList" in globalThis)) {
-    globalThis.g_FollowBlackList = new Map();
+// ============ 全局共享黑名单（与 roxy 脚本共用，使用传统全局变量写法） ============
+if (typeof g_FollowBlackList === "undefined") {
+    g_FollowBlackList = new Map();
 }
-const sharedBlackList = globalThis.g_FollowBlackList;
+const sharedBlackList = g_FollowBlackList;
 
 // ============ 管理器 ============
 class FollowManager {
@@ -164,7 +164,7 @@ class FollowItem {
         if (!activator?.IsValid() || activator === this.owner) return;
         if (FollowManager.isBlocked(activator)) return;
 
-        // ★ 唯一僵尸限制：目标为 T 阵营（僵尸）时无法捕获
+        // ★ 禁止捕获僵尸
         if (activator.GetTeamNumber() === ZOMBIE_TEAM) return;
 
         let emptySlot = -1;
@@ -208,11 +208,19 @@ class FollowItem {
     }
 
     update() {
+        // 如果主人不存在或死亡，重新同步
         if (!this.owner?.IsValid() || !this.owner.IsAlive()) {
             this.syncOwnerFromBase();
         }
         if (!this.owner?.IsValid() || !this.owner.IsAlive()) {
             if (this.targets.some(t => t?.IsValid())) this.destroy();
+            return;
+        }
+
+        // ★ 如果主人是僵尸，释放所有乘客并销毁系统
+        if (this.owner.GetTeamNumber() === ZOMBIE_TEAM) {
+            Instance.Msg("[Follow] 主人是僵尸，释放所有乘客");
+            this.destroy();
             return;
         }
 
@@ -233,6 +241,13 @@ class FollowItem {
             const t = this.targets[i];
             if (!t?.IsValid()) { if (t) this.releaseSlot(i); continue; }
             if (!t.IsAlive()) { this.releaseSlot(i); continue; }
+
+            // ★ 如果乘客变成僵尸，立即释放
+            if (t.GetTeamNumber() === ZOMBIE_TEAM) {
+                Instance.Msg("[Follow] 乘客变成僵尸，释放");
+                this.releaseSlot(i);
+                continue;
+            }
 
             if (t.IsInputPressed(CSInputs.WALK)) {
                 const escapee = t;
@@ -266,7 +281,7 @@ class FollowItem {
     }
 }
 
-// ============ 全局 Think（0.04 秒更新） ============
+// ============ 全局 Think（0.02 秒更新） ============
 Instance.SetThink(() => {
     FollowManager.cleanup();
     for (const [name, item] of FollowManager.instances.entries()) {
@@ -276,7 +291,7 @@ Instance.SetThink(() => {
             FollowManager.instances.delete(name);
         }
     }
-    Instance.SetNextThink(Instance.GetGameTime() + 0.04);
+    Instance.SetNextThink(Instance.GetGameTime() + 0.02);
 });
 Instance.SetNextThink(Instance.GetGameTime());
 

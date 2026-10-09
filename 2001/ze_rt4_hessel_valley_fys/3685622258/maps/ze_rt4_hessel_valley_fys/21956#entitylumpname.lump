@@ -290,7 +290,7 @@
         "target": "[PR#]ice_hurt",
         "input": "Disable",
         "param": "",
-        "delay": 7,
+        "delay": 6.5,
         "limit": -1
       },
       {
@@ -314,7 +314,7 @@
         "target": "[PR#]ice_eff",
         "input": "Stop",
         "param": "",
-        "delay": 7,
+        "delay": 6.5,
         "limit": -1
       },
       {
@@ -537,7 +537,7 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "movetype 2",
-        "delay": 5,
+        "delay": 4.5,
         "limit": -1
       },
       {
