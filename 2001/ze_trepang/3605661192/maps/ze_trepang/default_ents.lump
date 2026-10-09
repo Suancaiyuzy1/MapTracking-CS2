@@ -913,10 +913,6 @@
     "lightingorigin": "",
     "solid": "6",
     "rendertocubemaps": "1",
-    "forceclosed": "1",
-    "health": "200",
-    "soundcloseoverride": "Door.de_vertigo_full_close",
-    "soundopenoverride": "Door.de_vertigo_start_open",
     "rendercolor": "255 255 255",
     "disableshadows": "0",
     "skin": "default",
@@ -1058,8 +1054,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.066",
-    "emissive": "0",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -1131,8 +1125,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.066",
-    "emissive": "0",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -1374,7 +1366,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -1446,7 +1437,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -3974,7 +3964,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4046,8 +4035,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.066",
-    "emissive": "0",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4119,7 +4106,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4191,7 +4177,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4263,8 +4248,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.066",
-    "emissive": "0",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4336,7 +4319,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4408,7 +4390,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -4480,7 +4461,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1.007",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -15188,7 +15168,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15331,7 +15310,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15545,7 +15523,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15688,7 +15665,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15760,7 +15736,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15832,7 +15807,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -15904,7 +15878,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -23904,34 +23877,18 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
+        "target": "[PR#]msg_LH10",
         "input": "Start",
         "param": "",
         "delay": 30,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]msg_LH10",
+        "input": "DestroyImmediately",
+        "param": "",
+        "delay": 32,
         "limit": 1
       },
       {
@@ -24366,7 +24323,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -24447,7 +24403,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -24528,7 +24483,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -27988,70 +27942,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]trg_tp_zm_maintenance_shortcut",
-        "input": "Enable",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde is approaching your position. Expected arrival: 15 seconds \u003C\u003C\u003C",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde appeared. \u003C\u003C\u003C",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH15",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 18,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]zmtp_assist02",
-        "input": "Trigger",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]relay_door_hint15",
         "input": "Trigger",
         "param": "",
@@ -31193,11 +31083,8 @@
     "parentname": "",
     "lightingorigin": "",
     "solid": "6",
-    "opendir": "2",
     "spawnflags": "0",
     "rendertocubemaps": "1",
-    "soundlockedoverride": "DoorHandles.Locked1",
-    "soundmoveoverride": "Door.de_nuke_move_01",
     "rendercolor": "255 255 255",
     "disableshadows": "0",
     "skin": "default",
@@ -31267,11 +31154,8 @@
     "parentname": "",
     "lightingorigin": "",
     "solid": "6",
-    "opendir": "1",
     "spawnflags": "0",
     "rendertocubemaps": "1",
-    "soundlockedoverride": "DoorHandles.Locked1",
-    "soundmoveoverride": "Door.de_nuke_move_01",
     "rendercolor": "255 255 255",
     "disableshadows": "0",
     "skin": "default",
@@ -32638,258 +32522,6 @@
     "angles": "-89.714264 270.004974 -90.004967",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "95213"
-  },
-  {
-    "steamaudio_geometry_mode": "0",
-    "expand_render_bounds_to_include_cloth": "0",
-    "clothScale": "1.000000",
-    "StartDisabled": "0",
-    "forcenpcexclude": "0",
-    "CreateNavObstacle": "0",
-    "interactExclude": "",
-    "interactWith": "",
-    "interactAs": "",
-    "AnimateOnServer": "0",
-    "LagCompensate": "0",
-    "randomizecycle": "0",
-    "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "IdleAnim": "",
-    "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "StartingAnim": "",
-    "use_animgraph": "1",
-    "disablelowviolence": "0",
-    "glowteam": "-1",
-    "glowcolor": "255 0 0",
-    "glowrangemin": "0",
-    "glowrange": "0",
-    "glowstate": "0",
-    "lightmapstatic": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "BreakableContentsParticleOverride": "",
-    "BreakableContentsPropGroupOverride": "",
-    "BreakableContentsType": "BC_DEFAULT",
-    "burstlocation": "",
-    "burstscale": "100.000000",
-    "pressuredelay": "0.000000",
-    "spawnflags": "0",
-    "NoInterpolate": "0",
-    "PerformanceMode": "PM_NORMAL",
-    "ExplodeRadius": "0.000000",
-    "ExplodeDamage": "0.000000",
-    "damagefilter": "",
-    "targetname": "[PR#]zmtp_flare02",
-    "vscripts": "",
-    "animgraph2_identifier": "",
-    "add_modifier": "",
-    "add_attribute": "",
-    "bodygroups": "",
-    "globalname": "",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "lightingorigin": "",
-    "rendertocubemaps": "1",
-    "disableshadows": "0",
-    "solid": "6",
-    "skin": "default",
-    "rendercolor": "255 255 255",
-    "model": "models/glowstick_red.vmdl",
-    "classname": "prop_dynamic",
-    "origin": "8900.000000 1441.000000 -4012.483887",
-    "angles": "0.000000 315.000000 -90.000000",
-    "scales": "0.014000 0.014000 0.015295",
-    "hammerUniqueId": "95228"
-  },
-  {
-    "cpoint7_parent": "0",
-    "cpoint6_parent": "0",
-    "cpoint5_parent": "0",
-    "cpoint4_parent": "0",
-    "cpoint3_parent": "0",
-    "cpoint2_parent": "0",
-    "cpoint1_parent": "0",
-    "cpoint63": "",
-    "cpoint62": "",
-    "cpoint61": "",
-    "cpoint60": "",
-    "cpoint59": "",
-    "cpoint58": "",
-    "cpoint57": "",
-    "cpoint56": "",
-    "cpoint55": "",
-    "cpoint54": "",
-    "cpoint53": "",
-    "cpoint52": "",
-    "cpoint51": "",
-    "cpoint50": "",
-    "cpoint49": "",
-    "cpoint48": "",
-    "cpoint47": "",
-    "cpoint46": "",
-    "cpoint45": "",
-    "cpoint44": "",
-    "cpoint43": "",
-    "cpoint42": "",
-    "cpoint41": "",
-    "cpoint40": "",
-    "cpoint39": "",
-    "cpoint38": "",
-    "cpoint37": "",
-    "cpoint36": "",
-    "cpoint35": "",
-    "cpoint34": "",
-    "cpoint33": "",
-    "cpoint32": "",
-    "cpoint31": "",
-    "cpoint30": "",
-    "cpoint29": "",
-    "cpoint28": "",
-    "cpoint27": "",
-    "cpoint26": "",
-    "cpoint25": "",
-    "cpoint24": "",
-    "cpoint23": "",
-    "cpoint22": "",
-    "cpoint21": "",
-    "cpoint20": "",
-    "cpoint19": "",
-    "cpoint18": "",
-    "cpoint17": "",
-    "cpoint16": "",
-    "cpoint15": "",
-    "cpoint14": "",
-    "cpoint13": "",
-    "cpoint12": "",
-    "cpoint11": "",
-    "cpoint10": "",
-    "cpoint9": "",
-    "cpoint8": "",
-    "cpoint7": "",
-    "cpoint6": "",
-    "cpoint5": "",
-    "cpoint4": "",
-    "cpoint3": "",
-    "cpoint2": "",
-    "cpoint1": "",
-    "cpoint0": "",
-    "tint_cp_color": "255 255 255",
-    "tint_cp": "-1",
-    "data_cp_value": "0.000000 0.000000 0.000000",
-    "data_cp": "-1",
-    "snapshot_mesh": "-1",
-    "snapshot_file": "",
-    "no_save": "0",
-    "start_active": "1",
-    "effect_name": "particles/burning_fx/smoke_gib_01.vpcf",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "info_particle_system",
-    "origin": "8907.313477 1448.224609 -3994.602783",
-    "angles": "0.000000 328.730499 -1.972076",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "95229"
-  },
-  {
-    "precomputedsubfrusta": "6",
-    "precomputedobbextent5": "106.721191 103.827637 51.346191",
-    "precomputedobbangles5": "0.000000 -30.999996 0.000000",
-    "precomputedobborigin5": "8909.444336 1456.001465 -3915.235107",
-    "precomputedobbextent4": "83.776855 33.176331 75.097656",
-    "precomputedobbangles4": "-0.000000 12.000000 0.000000",
-    "precomputedobborigin4": "8832.922852 1400.628784 -3938.986816",
-    "precomputedobbextent3": "204.072754 254.937927 75.132812",
-    "precomputedobbangles3": "-0.000000 12.000000 0.000000",
-    "precomputedobborigin3": "9044.383789 1740.037842 -3938.989746",
-    "precomputedobbextent2": "167.294922 74.463196 75.123291",
-    "precomputedobbangles2": "-0.000000 0.000000 0.000000",
-    "precomputedobborigin2": "9072.789062 1458.360840 -3938.987793",
-    "precomputedobbextent1": "80.074219 192.719482 75.107178",
-    "precomputedobbangles1": "-0.000000 0.000000 0.000000",
-    "precomputedobborigin1": "8824.907227 1604.501343 -3938.989746",
-    "precomputedobbextent0": "47.980713 46.841309 22.848633",
-    "precomputedobbangles0": "0.000000 -30.999996 0.000000",
-    "precomputedobborigin0": "8903.484375 1447.194580 -3991.235107",
-    "precomputedboundsmaxs": "9240.166992 1961.932129 -3863.870605",
-    "precomputedboundsmins": "8744.846680 1383.899902 -4014.124512",
-    "precomputedobbextent": "247.660156 289.016113 75.126953",
-    "precomputedobbangles": "-0.000000 0.000000 0.000000",
-    "precomputedobborigin": "8992.506836 1672.916016 -3938.997559",
-    "precomputedfieldsvalid": "1",
-    "transmit_always": "0",
-    "bakespeculartocubemaps_scale": "1.000000",
-    "light_style_target3": "",
-    "light_style_target2": "",
-    "light_style_target1": "",
-    "light_style_target0": "",
-    "light_style_output_event3": "",
-    "light_style_output_event2": "",
-    "light_style_output_event1": "",
-    "light_style_output_event0": "",
-    "light_style": "",
-    "fade_size_end": "0.025000",
-    "fade_size_start": "0.050000",
-    "showlight": "0",
-    "rendertocubemaps": "1",
-    "brightnessscale": "1.000000",
-    "shadowfade_size_end": "0.050000",
-    "shadowfade_size_start": "0.100000",
-    "pvs_modify_entity": "0",
-    "shadowpriority": "-1",
-    "shadowmapsize": "-1",
-    "castshadows": "2",
-    "minroughness": "0.000000",
-    "bakespeculartocubemaps": "0",
-    "lightcookie": "",
-    "inner_angle": "180.000000",
-    "outer_angle": "180.000000",
-    "size_params": "2.000000 24.000000 0.150000",
-    "shape": "0",
-    "bouncescale": "1.000000",
-    "bouncelight": "1",
-    "skirt": "0.100000",
-    "range": "512.000000",
-    "brightness_lumens": "52.000000",
-    "colortemperature": "6600.000000",
-    "color": "255 0 0",
-    "colormode": "0",
-    "directlight": "2",
-    "enabled": "1",
-    "brightness_legacy": "0.050781",
-    "brightness": "-4.265620",
-    "brightness_nits": "510.000000",
-    "brightness_candelas": "4.000000",
-    "brightness_units": "1",
-    "clientSideEntity": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "light_omni2",
-    "origin": "8905.238281 1449.872314 -3967.483887",
-    "angles": "88.027901 238.731430 -89.999062",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "95230"
   },
   {
     "depth_render_offset": "0.125000",
@@ -39442,7 +39074,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -39528,7 +39159,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -39740,8 +39370,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -39775,8 +39403,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -42904,7 +42530,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -43040,7 +42665,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -48803,7 +48427,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -49361,7 +48984,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde is approaching your position. Expected arrival: 5 seconds \u003C\u003C\u003C",
+        "param": "say \u003E\u003E\u003E A small zombies horde is approaching your position. Expected arrival: 10 seconds \u003C\u003C\u003C",
         "delay": 30,
         "limit": 1
       },
@@ -49370,15 +48993,7 @@
         "target": "[PR#]trg_tp_zm_bridge",
         "input": "Enable",
         "param": "",
-        "delay": 35,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]trg_tp_zm_bridge02",
-        "input": "Enable",
-        "param": "",
-        "delay": 35,
+        "delay": 40,
         "limit": 1
       },
       {
@@ -49386,28 +49001,12 @@
         "target": "[PR#]msg_SH05",
         "input": "Start",
         "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "Start",
-        "param": "",
         "delay": 35,
         "limit": 1
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_SH_IMMINENT",
+        "target": "[PR#]msg_SH05",
         "input": "DestroyImmediately",
         "param": "",
         "delay": 37,
@@ -49415,10 +49014,18 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde is approaching. Expected arrival : 5 seconds. \u003C\u003C\u003C",
-        "delay": 35,
+        "target": "[PR#]msg_SH_IMMINENT",
+        "input": "Start",
+        "param": "",
+        "delay": 40,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]msg_SH_IMMINENT",
+        "input": "DestroyImmediately",
+        "param": "",
+        "delay": 42,
         "limit": 1
       },
       {
@@ -50590,7 +50197,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -50671,7 +50277,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -50752,7 +50357,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -50833,7 +50437,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -50914,7 +50517,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -51361,8 +50963,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -51396,8 +50996,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -51431,8 +51029,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "lightingorigin": "",
     "angleOverride": "",
     "allowStretch": "0",
@@ -62806,7 +62402,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -63575,8 +63170,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -73368,8 +72961,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "lightingorigin": "",
     "angleOverride": "",
     "allowStretch": "0",
@@ -73403,8 +72994,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "lightingorigin": "",
     "angleOverride": "",
     "allowStretch": "0",
@@ -73438,8 +73027,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "lightingorigin": "",
     "angleOverride": "",
     "allowStretch": "0",
@@ -73473,8 +73060,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "lightingorigin": "",
     "angleOverride": "",
     "allowStretch": "0",
@@ -75272,94 +74857,6 @@
         "input": "StartSound",
         "param": "",
         "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde is approaching your position. Expected arrival: 15 seconds \u003C\u003C\u003C",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]trg_tp_zm_sewers_shortcut",
-        "input": "Enable",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E A small zombies horde appeared. \u003C\u003C\u003C",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH15",
-        "input": "Start",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 2,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH10",
-        "input": "Start",
-        "param": "",
-        "delay": 5,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 17,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH05",
-        "input": "Start",
-        "param": "",
-        "delay": 10,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_SH10",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 7,
         "limit": 1
       }
     ]
@@ -84112,258 +83609,6 @@
     "angles": "89.999992 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "105497"
-  },
-  {
-    "steamaudio_geometry_mode": "0",
-    "expand_render_bounds_to_include_cloth": "0",
-    "clothScale": "1.000000",
-    "StartDisabled": "0",
-    "forcenpcexclude": "0",
-    "CreateNavObstacle": "0",
-    "interactExclude": "",
-    "interactWith": "",
-    "interactAs": "",
-    "AnimateOnServer": "0",
-    "LagCompensate": "0",
-    "randomizecycle": "0",
-    "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "IdleAnim": "",
-    "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "StartingAnim": "",
-    "use_animgraph": "1",
-    "disablelowviolence": "0",
-    "glowteam": "-1",
-    "glowcolor": "255 0 0",
-    "glowrangemin": "0",
-    "glowrange": "0",
-    "glowstate": "0",
-    "lightmapstatic": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "BreakableContentsParticleOverride": "",
-    "BreakableContentsPropGroupOverride": "",
-    "BreakableContentsType": "BC_DEFAULT",
-    "burstlocation": "",
-    "burstscale": "100.000000",
-    "pressuredelay": "0.000000",
-    "spawnflags": "0",
-    "NoInterpolate": "0",
-    "PerformanceMode": "PM_NORMAL",
-    "ExplodeRadius": "0.000000",
-    "ExplodeDamage": "0.000000",
-    "damagefilter": "",
-    "targetname": "[PR#]zmtp_flare03a",
-    "vscripts": "",
-    "animgraph2_identifier": "",
-    "add_modifier": "",
-    "add_attribute": "",
-    "bodygroups": "",
-    "globalname": "",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "lightingorigin": "",
-    "rendertocubemaps": "1",
-    "disableshadows": "0",
-    "solid": "6",
-    "skin": "default",
-    "rendercolor": "255 255 255",
-    "model": "models/glowstick_red.vmdl",
-    "classname": "prop_dynamic",
-    "origin": "5952.428223 3538.730713 -5976.692383",
-    "angles": "0.000000 315.000000 -90.000000",
-    "scales": "0.014000 0.014000 0.015295",
-    "hammerUniqueId": "107678"
-  },
-  {
-    "cpoint7_parent": "0",
-    "cpoint6_parent": "0",
-    "cpoint5_parent": "0",
-    "cpoint4_parent": "0",
-    "cpoint3_parent": "0",
-    "cpoint2_parent": "0",
-    "cpoint1_parent": "0",
-    "cpoint63": "",
-    "cpoint62": "",
-    "cpoint61": "",
-    "cpoint60": "",
-    "cpoint59": "",
-    "cpoint58": "",
-    "cpoint57": "",
-    "cpoint56": "",
-    "cpoint55": "",
-    "cpoint54": "",
-    "cpoint53": "",
-    "cpoint52": "",
-    "cpoint51": "",
-    "cpoint50": "",
-    "cpoint49": "",
-    "cpoint48": "",
-    "cpoint47": "",
-    "cpoint46": "",
-    "cpoint45": "",
-    "cpoint44": "",
-    "cpoint43": "",
-    "cpoint42": "",
-    "cpoint41": "",
-    "cpoint40": "",
-    "cpoint39": "",
-    "cpoint38": "",
-    "cpoint37": "",
-    "cpoint36": "",
-    "cpoint35": "",
-    "cpoint34": "",
-    "cpoint33": "",
-    "cpoint32": "",
-    "cpoint31": "",
-    "cpoint30": "",
-    "cpoint29": "",
-    "cpoint28": "",
-    "cpoint27": "",
-    "cpoint26": "",
-    "cpoint25": "",
-    "cpoint24": "",
-    "cpoint23": "",
-    "cpoint22": "",
-    "cpoint21": "",
-    "cpoint20": "",
-    "cpoint19": "",
-    "cpoint18": "",
-    "cpoint17": "",
-    "cpoint16": "",
-    "cpoint15": "",
-    "cpoint14": "",
-    "cpoint13": "",
-    "cpoint12": "",
-    "cpoint11": "",
-    "cpoint10": "",
-    "cpoint9": "",
-    "cpoint8": "",
-    "cpoint7": "",
-    "cpoint6": "",
-    "cpoint5": "",
-    "cpoint4": "",
-    "cpoint3": "",
-    "cpoint2": "",
-    "cpoint1": "",
-    "cpoint0": "",
-    "tint_cp_color": "255 255 255",
-    "tint_cp": "-1",
-    "data_cp_value": "0.000000 0.000000 0.000000",
-    "data_cp": "-1",
-    "snapshot_mesh": "-1",
-    "snapshot_file": "",
-    "no_save": "0",
-    "start_active": "1",
-    "effect_name": "particles/burning_fx/smoke_gib_01.vpcf",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "info_particle_system",
-    "origin": "5959.742188 3545.955322 -5958.811035",
-    "angles": "0.000000 328.730499 -1.972076",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "107679"
-  },
-  {
-    "precomputedsubfrusta": "6",
-    "precomputedobbextent5": "128.128174 180.833496 128.282471",
-    "precomputedobbangles5": "45.000004 -33.000004 -3.000001",
-    "precomputedobborigin5": "5960.632324 3553.183594 -5767.973633",
-    "precomputedobbextent4": "128.062012 128.998657 180.938965",
-    "precomputedobbangles4": "1.000000 13.999999 -1.000000",
-    "precomputedobborigin4": "5864.280762 3393.422119 -5942.153320",
-    "precomputedobbextent3": "114.878906 128.632080 180.929199",
-    "precomputedobbangles3": "1.000000 14.000000 -2.000000",
-    "precomputedobborigin3": "6038.177246 3698.943848 -5954.260742",
-    "precomputedobbextent2": "83.558838 136.816772 182.853027",
-    "precomputedobbangles2": "-13.000002 4.000000 3.000000",
-    "precomputedobborigin2": "6054.136719 3439.526855 -5961.355469",
-    "precomputedobbextent1": "129.019287 128.061646 181.017822",
-    "precomputedobbangles1": "1.000000 13.999999 -1.000000",
-    "precomputedobborigin1": "5803.423340 3641.045410 -5948.328613",
-    "precomputedobbextent0": "128.188965 180.947754 128.539917",
-    "precomputedobbangles0": "45.000004 -33.000004 -3.000001",
-    "precomputedobborigin0": "5954.579102 3542.198242 -6128.827148",
-    "precomputedboundsmaxs": "6163.396484 3803.665283 -5692.297363",
-    "precomputedboundsmins": "5701.604492 3291.549072 -6204.406250",
-    "precomputedobbextent": "220.211670 256.040161 255.988281",
-    "precomputedobbangles": "-8.000000 -5.000000 -1.000000",
-    "precomputedobborigin": "5922.310059 3550.711182 -5953.333008",
-    "precomputedfieldsvalid": "1",
-    "transmit_always": "0",
-    "bakespeculartocubemaps_scale": "1.000000",
-    "light_style_target3": "",
-    "light_style_target2": "",
-    "light_style_target1": "",
-    "light_style_target0": "",
-    "light_style_output_event3": "",
-    "light_style_output_event2": "",
-    "light_style_output_event1": "",
-    "light_style_output_event0": "",
-    "light_style": "",
-    "fade_size_end": "0.025000",
-    "fade_size_start": "0.050000",
-    "showlight": "0",
-    "rendertocubemaps": "1",
-    "brightnessscale": "1.000000",
-    "shadowfade_size_end": "0.050000",
-    "shadowfade_size_start": "0.100000",
-    "pvs_modify_entity": "0",
-    "shadowpriority": "-1",
-    "shadowmapsize": "-1",
-    "castshadows": "2",
-    "minroughness": "0.000000",
-    "bakespeculartocubemaps": "0",
-    "lightcookie": "",
-    "inner_angle": "180.000000",
-    "outer_angle": "180.000000",
-    "size_params": "2.000000 24.000000 0.150000",
-    "shape": "0",
-    "bouncescale": "1.000000",
-    "bouncelight": "1",
-    "skirt": "0.100000",
-    "range": "256.000000",
-    "brightness_lumens": "711.000000",
-    "colortemperature": "6600.000000",
-    "color": "255 0 0",
-    "colormode": "0",
-    "directlight": "2",
-    "enabled": "1",
-    "brightness_legacy": "0.710938",
-    "brightness": "-0.492188",
-    "brightness_nits": "6979.000000",
-    "brightness_candelas": "57.000000",
-    "brightness_units": "1",
-    "clientSideEntity": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "light_omni2",
-    "origin": "5957.666504 3547.603027 -5948.346680",
-    "angles": "88.027893 238.731430 -89.999054",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "107680"
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -95571,7 +94816,7 @@
       {
         "output": "OnUser1",
         "target": "!self",
-        "input": "Disable",
+        "input": "Enable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -95579,9 +94824,9 @@
       {
         "output": "OnUser1",
         "target": "!self",
-        "input": "Enable",
+        "input": "Disable",
         "param": "",
-        "delay": 0.05000000074505806,
+        "delay": 0.47999998927116394,
         "limit": -1
       }
     ]
@@ -95701,9 +94946,7 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "materialoverride": "materials/cs_italy/metal/metal_basic_1.vmat",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -95774,9 +95017,7 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "materialoverride": "materials/cs_italy/metal/metal_basic_1.vmat",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -95847,9 +95088,7 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "materialoverride": "materials/cs_italy/metal/metal_basic_1.vmat",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -96062,10 +95301,7 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "lodlevel": "-1",
-    "lightmapscalebias": "-2",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -98708,7 +97944,6 @@
   {
     "AlwaysSolidIgnoreNav": "0",
     "NoInterpolate": "0",
-    "vrad_brush_cast_shadows": "0",
     "ScriptedMovement": "0",
     "solidbsp": "0",
     "interactExclude": "",
@@ -99518,8 +98753,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -99553,8 +98786,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -101452,8 +100683,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "forcenavcut": "0",
-    "updatenavwhenmoving": "0",
     "buoyancyscale": "1.000000",
     "massScale": "0.000000",
     "lightingorigin": "",
@@ -109157,7 +108386,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -109247,414 +108475,6 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "224678",
     "model": "maps/ze_trepang/entities/nuke_hurt_224678.vmdl"
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg09",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224715",
-    "model": "maps/ze_trepang/entities/target_trg09_224715.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder09",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp09:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg03",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224717",
-    "model": "maps/ze_trepang/entities/target_trg03_224717.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder03",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp03:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg22",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224719",
-    "model": "maps/ze_trepang/entities/target_trg22_224719.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder22",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp22:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Enable",
-        "param": "",
-        "delay": 1,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.0099999904632568,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg13",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224721",
-    "model": "maps/ze_trepang/entities/target_trg13_224721.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder13",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp13:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg02",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224723",
-    "model": "maps/ze_trepang/entities/target_trg02_224723.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder02",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp02:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg16",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224725",
-    "model": "maps/ze_trepang/entities/target_trg16_224725.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder16",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp16:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg15",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224727",
-    "model": "maps/ze_trepang/entities/target_trg15_224727.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder15",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp15:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Enable",
-        "param": "",
-        "delay": 1,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.0099999904632568,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]target_trg21",
-    "classname": "trigger_hurt",
-    "origin": "-14743.968750 -64.046387 11767.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "224729",
-    "model": "maps/ze_trepang/entities/target_trg21_224729.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_target_finder21",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "tp21:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
   },
   {
     "entityIndexSelection": "0",
@@ -113174,14 +111994,6 @@
         "input": "Command",
         "param": "say \u003E\u003E\u003E ZE_TREPANG, BY DLM \u003C\u003C\u003C",
         "delay": 6,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]main_srv",
-        "input": "Command",
-        "param": "say \u003E\u003E\u003E HOPE YOU HAD FUN! \u003C\u003C\u003C",
-        "delay": 7,
         "limit": 1
       }
     ]
@@ -119689,7 +118501,7 @@
   },
   {
     "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
+    "filtername": "[PR#]filter_only_t",
     "spawnflags": "1",
     "globalname": "",
     "StartDisabled": "1",
@@ -119706,25 +118518,7 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "227309",
-    "model": "maps/ze_trepang/entities/trg_stairwell_tp01_227309.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      }
-    ]
+    "model": "maps/ze_trepang/entities/trg_stairwell_tp01_227309.vmdl"
   },
   {
     "filtername": "[PR#]filter_only_t",
@@ -121748,7 +120542,6 @@
     "filterclass": "",
     "clientSideEntity": "0",
     "vscripts": "",
-    "filterteam": "3",
     "negated": "0",
     "targetname": "[PR#]filter_only_ct",
     "classname": "filter_activator_team",
@@ -121761,7 +120554,6 @@
     "filterclass": "",
     "clientSideEntity": "0",
     "vscripts": "",
-    "filterteam": "2",
     "negated": "0",
     "targetname": "[PR#]filter_only_t",
     "classname": "filter_activator_team",
@@ -121817,7 +120609,6 @@
   },
   {
     "filterclass": "",
-    "filterteam": "2",
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
@@ -124777,215 +123568,6 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]tp_zm_sewers_shortcut",
-    "classname": "point_teleport",
-    "origin": "4210.822266 2888.583008 -6049.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230445"
-  },
-  {
-    "max": "4",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]ctr_sewers_tp_target_finder01",
-    "classname": "math_counter",
-    "origin": "4123.670898 2882.648438 -5972.375977",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230448",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]tmp_zm_vent_shortcut",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]sewers_tp_target_finder_aquired",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]sewers_target_trg01",
-    "classname": "trigger_hurt",
-    "origin": "-65.760742 251.269287 -6195.554688",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230450",
-    "model": "maps/ze_trepang/entities/sewers_target_trg01_230450.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_sewers_tp_target_finder01",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "sewerstp01:1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]trg_tp_zm_sewers_shortcut",
-    "classname": "trigger_multiple",
-    "origin": "7312.000000 2362.500000 -6096.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230454",
-    "model": "maps/ze_trepang/entities/trg_tp_zm_sewers_shortcut_230454.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "max": "4",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]ctr_vent_tp_target_finder01",
-    "classname": "math_counter",
-    "origin": "4100.000000 2882.648438 -5972.375977",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230456",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]tmp_zm_sewers_shortcut",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]trg_tp_zm_vent_shortcut",
-    "classname": "trigger_multiple",
-    "origin": "7456.000000 2362.500000 -6096.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230460",
-    "model": "maps/ze_trepang/entities/trg_tp_zm_vent_shortcut_230460.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "teleport_use_current_angle": "0",
-    "teleport_parented_entities": "0",
-    "spawnflags": "0",
-    "target": "!activator",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tp_zm_vent_shortcut",
-    "classname": "point_teleport",
-    "origin": "5941.749023 3542.154297 -5956.143066",
-    "angles": "0.000000 180.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230463"
-  },
-  {
-    "teleport_use_current_angle": "0",
-    "teleport_parented_entities": "0",
-    "spawnflags": "0",
-    "target": "!activator",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
     "targetname": "[PR#]tp_zm_vent",
     "classname": "point_teleport",
     "origin": "6691.413086 3355.018799 -5964.233398",
@@ -125018,7 +123600,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "command",
-        "param": "say \u003E\u003E\u003E A large and small zombies horde is approaching your position. Expected arrival: 30 seconds \u003C\u003C\u003C",
+        "param": "say \u003E\u003E\u003E A large zombie horde is approaching your position. Expected arrival: 30 seconds \u003C\u003C\u003C",
         "delay": 0,
         "limit": 1
       },
@@ -125042,15 +123624,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "command",
-        "param": "say \u003E\u003E\u003E A large and small zombies horde appeared. \u003C\u003C\u003C",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]trg_tp_zm_vent_shortcut",
-        "input": "Enable",
-        "param": "",
+        "param": "say \u003E\u003E\u003E A large zombie horde has appeared. \u003C\u003C\u003C",
         "delay": 30,
         "limit": 1
       },
@@ -125064,34 +123638,10 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_SH10",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]msg_LH10",
         "input": "DestroyImmediately",
         "param": "",
         "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH10",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
         "limit": 1
       },
       {
@@ -125100,14 +123650,6 @@
         "input": "Start",
         "param": "",
         "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH_IMMINENT",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
         "limit": 1
       },
       {
@@ -125909,87 +124451,6 @@
     "hammerUniqueId": "230565"
   },
   {
-    "max": "4",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]ctr_maintenance_tp_target_finder01",
-    "classname": "math_counter",
-    "origin": "8598.623047 3533.924316 -3896.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230575",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]tmp_zm_maintenance_shortcut",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "teleport_use_current_angle": "0",
-    "teleport_parented_entities": "0",
-    "spawnflags": "0",
-    "target": "!activator",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tp_zm_maintenance_shortcut",
-    "classname": "point_teleport",
-    "origin": "8980.328125 1456.000000 -3994.000000",
-    "angles": "0.000000 90.000008 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230576"
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]trg_tp_zm_maintenance_shortcut",
-    "classname": "trigger_multiple",
-    "origin": "8557.500000 6530.000000 -3904.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230579",
-    "model": "maps/ze_trepang/entities/trg_tp_zm_maintenance_shortcut_230579.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "depth_render_offset": "0.125000",
     "reorient_mode": "0",
     "justify_vertical": "0",
@@ -126295,7 +124756,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -126423,7 +124883,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -126606,100 +125065,6 @@
         "target": "[PR#]tp_zm_bridge02",
         "input": "Teleport",
         "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "targetname": "[PR#]trg_tp_zm_bridge",
-    "vscripts": "",
-    "classname": "trigger_multiple",
-    "origin": "3184.000000 1796.000000 -3619.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230797",
-    "model": "maps/ze_trepang/entities/trg_tp_zm_bridge_230797.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_zm_bridge",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_shortcut_zm_g",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]trg_tp_zm_bridge02",
-    "classname": "trigger_multiple",
-    "origin": "1436.000000 1796.000000 -3619.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230798",
-    "model": "maps/ze_trepang/entities/trg_tp_zm_bridge02_230798.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "shortcut:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "RemoveContext",
-        "param": "shortcut:1",
-        "delay": 2,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]ctr_tp_zm_bridge",
-        "input": "Add",
-        "param": "1",
         "delay": 0,
         "limit": -1
       }
@@ -132998,7 +131363,7 @@
     ]
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133031,7 +131396,7 @@
     "hammerUniqueId": "110086"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133064,7 +131429,7 @@
     "hammerUniqueId": "110082"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133097,7 +131462,7 @@
     "hammerUniqueId": "109840"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133130,7 +131495,7 @@
     "hammerUniqueId": "109862"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133163,7 +131528,7 @@
     "hammerUniqueId": "109841"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133219,7 +131584,7 @@
     "hammerUniqueId": "110204"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -133383,14 +131748,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]excelsus_player_count_trg",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]music_activation_excelsus_hardcore",
         "input": "Trigger",
         "param": "",
@@ -133403,54 +131760,6 @@
         "input": "Kill",
         "param": "",
         "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (phase 1)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (phase 2)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (phase 3)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (phase 4)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (phase 5)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]HMV EXCELSUS (final phase)",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
         "limit": 1
       },
       {
@@ -133523,7 +131832,15 @@
         "input": "ForceSpawn",
         "param": "",
         "delay": 12,
-        "limit": -1
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]ze_teleport_boss_control_room",
+        "input": "Enable",
+        "param": "",
+        "delay": 12,
+        "limit": 1
       }
     ]
   },
@@ -133593,7 +131910,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -137179,7 +135495,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -137315,29 +135630,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "232206"
-  },
-  {
-    "max": "12",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]ctr_bridge_tp_target_finder01",
-    "classname": "math_counter",
-    "origin": "580.839355 446.617676 -3480.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "232332",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]tmp_bridge_tp_zm_shortcut_trg",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
   },
   {
     "precomputedboundsmaxs": "-6907.424805 1688.596069 -2448.377441",
@@ -138388,10 +136680,10 @@
     "ambient_occlusion_proxy_cone_angle_2": "0.300000",
     "ambient_occlusion_proxy_cone_angle_1": "0.300000",
     "ambient_occlusion_proxy_cone_angle_0": "0.300000",
-    "ambient_occlusion_proxy_position_3": "[PR#]0 0 0",
-    "ambient_occlusion_proxy_position_2": "[PR#]0 0 0",
-    "ambient_occlusion_proxy_position_1": "[PR#]0 0 0",
-    "ambient_occlusion_proxy_position_0": "[PR#]0 0 0",
+    "ambient_occlusion_proxy_position_3": "[PR#]env_sky_main",
+    "ambient_occlusion_proxy_position_2": "[PR#]env_sky_main",
+    "ambient_occlusion_proxy_position_1": "[PR#]env_sky_main",
+    "ambient_occlusion_proxy_position_0": "[PR#]env_sky_main",
     "ambient_occlusion_proxy_override": "0",
     "minroughness": "0.043000",
     "allow_sst_generation": "0",
@@ -138418,14 +136710,6 @@
     "brightness": "0.150000",
     "color": "90 90 90",
     "enabled": "1",
-    "local.scales": "",
-    "local.angles": "",
-    "local.origin": "",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
     "classname": "light_environment",
     "origin": "14752.902344 13480.000000 -13458.500000",
     "angles": "51.760677 124.342751 62.913731",
@@ -138509,15 +136793,7 @@
     ]
   },
   {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
+    "wait": "0.000000",
     "filtername": "",
     "spawnflags": "1",
     "globalname": "",
@@ -138530,7 +136806,7 @@
     "parentname": "",
     "vscripts": "",
     "targetname": "",
-    "classname": "trigger_hurt",
+    "classname": "trigger_multiple",
     "origin": "1874.082031 1559.968506 -3920.949951",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
@@ -138967,46 +137243,6 @@
         "param": "OnStartTouch\u003Estairwell_tp_zm01\u003ETeleport\u003E\u003E0\u003E12",
         "delay": 0,
         "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_vent_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_vent_shortcut\u003ETeleport\u003E\u003E0\u003E4",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_sewers_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_sewers_shortcut\u003ETeleport\u003E\u003E0\u003E2",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_maintenance_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_maintenance_shortcut\u003ETeleport\u003E\u003E0\u003E2",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge02",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
-        "delay": 0,
-        "limit": -1
       }
     ]
   },
@@ -139323,46 +137559,6 @@
         "param": "OnStartTouch\u003Estairwell_tp_zm01\u003ETeleport\u003E\u003E0\u003E12",
         "delay": 0,
         "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_maintenance_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_maintenance_shortcut\u003ETeleport\u003E\u003E0\u003E3",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_sewers_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_sewers_shortcut\u003ETeleport\u003E\u003E0\u003E3",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_vent_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_vent_shortcut\u003ETeleport\u003E\u003E0\u003E5",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge02",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
-        "delay": 0,
-        "limit": -1
       }
     ]
   },
@@ -139618,49 +137814,9 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge02",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]trg_stairwell_tp01",
         "input": "AddOutput",
         "param": "OnStartTouch\u003Estairwell_tp_zm01\u003ETeleport\u003E\u003E0\u003E12",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_maintenance_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_maintenance_shortcut\u003ETeleport\u003E\u003E0\u003E1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_sewers_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_sewers_shortcut\u003ETeleport\u003E\u003E0\u003E1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_vent_shortcut",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_vent_shortcut\u003ETeleport\u003E\u003E0\u003E3",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]trg_tp_zm_bridge",
-        "input": "AddOutput",
-        "param": "OnStartTouch\u003Etp_zm_bridge_randomizer\u003EPickRandomShuffle\u003E\u003E0\u003E16",
         "delay": 0,
         "limit": -1
       }
@@ -143040,7 +141196,6 @@
   {
     "AlwaysSolidIgnoreNav": "0",
     "NoInterpolate": "0",
-    "vrad_brush_cast_shadows": "0",
     "ScriptedMovement": "0",
     "solidbsp": "0",
     "interactExclude": "",
@@ -143617,29 +141772,6 @@
     "angles": "60.000000 269.659027 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "148471"
-  },
-  {
-    "max": "12",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]ctr_office_tp_target_finder01",
-    "classname": "math_counter",
-    "origin": "-16188.458008 -1343.473633 10084.624023",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "227278",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]tmp_stairwell_tp01",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -149335,7 +147467,6 @@
   {
     "AlwaysSolidIgnoreNav": "0",
     "NoInterpolate": "0",
-    "vrad_brush_cast_shadows": "0",
     "ScriptedMovement": "0",
     "solidbsp": "0",
     "interactExclude": "",
@@ -159197,7 +157328,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -168719,7 +166849,6 @@
   {
     "AlwaysSolidIgnoreNav": "0",
     "NoInterpolate": "0",
-    "vrad_brush_cast_shadows": "0",
     "ScriptedMovement": "0",
     "solidbsp": "0",
     "interactExclude": "",
@@ -169988,7 +168117,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "materialoverride": "materials/backrooms/custom_kitchen.vmat",
     "disableshadows": "0",
     "solid": "6",
     "skin": "default",
@@ -191130,7 +189258,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "materialoverride": "materials/cs_italy/metal/metal_basic_1.vmat",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -196066,7 +194193,6 @@
   {
     "AlwaysSolidIgnoreNav": "0",
     "NoInterpolate": "0",
-    "vrad_brush_cast_shadows": "0",
     "ScriptedMovement": "0",
     "solidbsp": "0",
     "interactExclude": "",
@@ -208058,7 +206184,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]tower_elevator_up",
-    "materialoverride": "materials/horizon_os.vmat",
     "lightingorigin": "",
     "solid": "0",
     "rendertocubemaps": "1",
@@ -215666,7 +213791,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -229013,7 +227137,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -234886,7 +233009,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -234958,7 +233080,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -235030,7 +233151,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -235102,7 +233222,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -235245,7 +233364,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -235530,7 +233648,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -235602,7 +233719,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -236100,7 +234216,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -236385,7 +234500,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -236883,7 +234997,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -237097,7 +235210,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -237169,7 +235281,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -237383,7 +235494,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -237597,7 +235707,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -237953,7 +236062,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -238167,7 +236275,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -238523,7 +236630,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -238737,7 +236843,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -238809,7 +236914,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -238952,7 +237056,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -239095,7 +237198,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -239167,7 +237269,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "1",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -245541,7 +243642,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245549,7 +243650,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245557,7 +243658,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245565,7 +243666,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245620,7 +243721,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245628,7 +243729,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245636,7 +243737,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245644,7 +243745,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245707,7 +243808,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245715,7 +243816,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245723,7 +243824,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245731,7 +243832,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245794,7 +243895,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245802,7 +243903,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245810,7 +243911,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "max_health 15000",
+        "param": "max_health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -245818,7 +243919,7 @@
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "health 15000",
+        "param": "health 10000",
         "delay": 0,
         "limit": -1
       },
@@ -251058,7 +249159,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "message": "[ANTON LAZAR]: HQ, send an orbital strike. Immediately.",
     "vscripts": "",
     "targetname": "[PR#]msg_horizon_one_orbital_strike",
     "classname": "info_particle_system",
@@ -251155,7 +249255,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "message": "[HHC COMMANDER]: Copy that sir. Orbital strike initiatated.",
     "vscripts": "",
     "targetname": "[PR#]msg_horizon_one_orbital_strike02",
     "classname": "info_particle_system",
@@ -251252,7 +249351,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "message": "[HHC COMMANDER]: Triangulation check in progress. 20 seconds remaining.",
     "vscripts": "",
     "targetname": "[PR#]msg_horizon_one_orbital_strike03",
     "classname": "info_particle_system",
@@ -251349,7 +249447,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "message": "[HHC COMMANDER]: Triangulation check: Failure. Orbital strike canceled.",
     "vscripts": "",
     "targetname": "[PR#]msg_horizon_one_orbital_strike_fail",
     "classname": "info_particle_system",
@@ -251446,7 +249543,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "",
-    "message": "[HHC COMMANDER]: Triangulation check: Success. Impact imminent.",
     "vscripts": "",
     "targetname": "[PR#]msg_horizon_one_orbital_strike_success",
     "classname": "info_particle_system",
@@ -269070,22 +267166,6 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]zmtp_flare03a",
-        "input": "StartGlowing",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]zmtp_flare03a",
-        "input": "StopGlowing",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]zmtp_flare03b",
         "input": "StartGlowing",
         "param": "",
@@ -269095,37 +267175,6 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]zmtp_flare03b",
-        "input": "StopGlowing",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      }
-    ]
-  },
-  {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "0",
-    "TriggerOnce": "0",
-    "StartDisabled": "1",
-    "vscripts": "",
-    "targetname": "[PR#]zmtp_assist02",
-    "classname": "logic_relay",
-    "origin": "8071.286621 4138.000000 -3720.031006",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "278712",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]zmtp_flare02",
-        "input": "StartGlowing",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]zmtp_flare02",
         "input": "StopGlowing",
         "param": "",
         "delay": 15,
@@ -269422,7 +267471,6 @@
     "precomputedfieldsvalid": "0",
     "transmit_always": "0",
     "bakespeculartocubemaps_scale": "1.000000",
-    "emissive": "0",
     "forceshadowsenabled": "0",
     "light_style_target3": "",
     "light_style_target2": "",
@@ -269497,7 +267545,6 @@
     "precomputedfieldsvalid": "0",
     "transmit_always": "0",
     "bakespeculartocubemaps_scale": "1.000000",
-    "emissive": "0",
     "forceshadowsenabled": "0",
     "light_style_target3": "",
     "light_style_target2": "",
@@ -269752,7 +267799,7 @@
         "target": "[PR#]zmtp_flare06a",
         "input": "StopGlowing",
         "param": "",
-        "delay": 5,
+        "delay": 10,
         "limit": 1
       },
       {
@@ -269768,7 +267815,7 @@
         "target": "[PR#]zmtp_flare06b",
         "input": "StopGlowing",
         "param": "",
-        "delay": 5,
+        "delay": 10,
         "limit": 1
       }
     ]
@@ -271110,14 +269157,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]zmtp_assist02",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]zmtp_assist03",
         "input": "Disable",
         "param": "",
@@ -271198,14 +269237,6 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]zmtp_assist01",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]zmtp_assist02",
         "input": "Enable",
         "param": "",
         "delay": 0,
@@ -272819,30 +270850,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade01_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade01_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade01_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]hegrenade01_ignite",
         "input": "ClearParent",
         "param": "",
@@ -273330,30 +271337,6 @@
         "input": "Disable",
         "param": "",
         "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade02_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade02_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade02_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
         "limit": -1
       },
       {
@@ -274534,30 +272517,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade03_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade03_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade03_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]hegrenade03_ignite",
         "input": "ClearParent",
         "param": "",
@@ -275049,30 +273008,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade05_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade05_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade05_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]hegrenade05_ignite",
         "input": "ClearParent",
         "param": "",
@@ -275560,30 +273495,6 @@
         "input": "Disable",
         "param": "",
         "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade04_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade04_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade04_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
         "limit": -1
       },
       {
@@ -277529,30 +275440,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade08_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade08_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade08_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]hegrenade08_ignite",
         "input": "ClearParent",
         "param": "",
@@ -278154,30 +276041,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade07_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade07_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade07_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]hegrenade07_ignite",
         "input": "ClearParent",
         "param": "",
@@ -278665,30 +276528,6 @@
         "input": "Disable",
         "param": "",
         "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade06_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade06_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenade06_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
         "limit": -1
       },
       {
@@ -280185,30 +278024,6 @@
         "input": "Disable",
         "param": "",
         "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenadex_explosion",
-        "input": "Enable",
-        "param": "",
-        "delay": 2.5,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenadex_explosion",
-        "input": "Disable",
-        "param": "",
-        "delay": 2.5999999046325684,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]hegrenadex_explosion",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 2.490000009536743,
         "limit": -1
       },
       {
@@ -285743,24 +283558,8 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]LMG01_heal_hardcore_locked",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]LMG01_heal_locked",
         "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]LMG02_heal_hardcore_locked",
-        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -285775,24 +283574,8 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]LMG03_heal_hardcore_locked",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]LMG03_heal_locked",
         "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]LMG04_heal_hardcore_locked",
-        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -285807,14 +283590,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]LMG05_heal_hardcore_locked",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]LMG05_heal_locked",
         "input": "Enable",
         "param": "",
@@ -285823,24 +283598,8 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]LMG06_heal_hardcore_locked",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]LMG06_heal_locked",
         "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]LMG07_heal_hardcore_locked",
-        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -290687,7 +288446,7 @@
   },
   {
     "ResponseContext": "item_REV01",
-    "Negated": "1",
+    "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]REV01_filter",
@@ -290695,7 +288454,17 @@
     "origin": "15883.000000 13276.036133 -13485.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "286884"
+    "hammerUniqueId": "286884",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]REV01_locked",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "message": "Press F to place a vortex landmine [0 use left]",
@@ -290948,7 +288717,7 @@
   },
   {
     "ResponseContext": "item_REV03",
-    "Negated": "1",
+    "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]REV03_filter",
@@ -290956,7 +288725,17 @@
     "origin": "15731.000000 13276.036133 -13485.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "286908"
+    "hammerUniqueId": "286908",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]REV03_locked",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "message": "Press F to place a vortex landmine [0 use left]",
@@ -291209,7 +288988,7 @@
   },
   {
     "ResponseContext": "item_REV04",
-    "Negated": "1",
+    "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]REV04_filter",
@@ -291217,7 +288996,17 @@
     "origin": "15655.000000 13276.036133 -13485.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "286920"
+    "hammerUniqueId": "286920",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]REV04_locked",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "message": "Press F to place a vortex landmine [0 use left]",
@@ -291470,7 +289259,7 @@
   },
   {
     "ResponseContext": "item_REV05",
-    "Negated": "1",
+    "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]REV05_filter",
@@ -291478,7 +289267,17 @@
     "origin": "15580.000000 13276.036133 -13485.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "286932"
+    "hammerUniqueId": "286932",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]REV05_locked",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "message": "Press F to place a vortex landmine [0 use left]",
@@ -291562,127 +289361,6 @@
         "target": "[PR#]orbital_strike_player_count",
         "input": "CountPlayersInZone",
         "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count_trg",
-    "classname": "trigger_multiple",
-    "origin": "-14552.405273 -8.000000 12017.500000",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "287564",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_trg_287564.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]horizon_one_player_count",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count",
-    "classname": "game_zone_player",
-    "origin": "-12541.441406 7032.141113 12017.500000",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288150",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_288150.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Add",
-        "param": "75",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Add",
-        "param": "75",
         "delay": 0,
         "limit": -1
       }
@@ -291803,127 +289481,6 @@
         "input": "Trigger",
         "param": "",
         "delay": 30,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count_easy",
-    "classname": "game_zone_player",
-    "origin": "-12541.441406 7032.141113 12134.813477",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288158",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_easy_288158.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count_easy_trg",
-    "classname": "trigger_multiple",
-    "origin": "-14552.405273 -8.000000 12017.500000",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288160",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_easy_trg_288160.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]horizon_one_player_count_easy",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
         "limit": -1
       }
     ]
@@ -292098,22 +289655,6 @@
         "input": "Start",
         "param": "",
         "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]horizon_one_player_count_trg",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]horizon_one_ctr_init",
-        "input": "Trigger",
-        "param": "",
-        "delay": 1,
         "limit": 1
       },
       {
@@ -293359,127 +290900,6 @@
     ]
   },
   {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count_dev",
-    "classname": "game_zone_player",
-    "origin": "-12541.441406 7032.141113 12247.466797",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288170",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_dev_288170.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_player_count_dev_trg",
-    "classname": "trigger_multiple",
-    "origin": "-14552.405273 -8.000000 12017.500000",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288172",
-    "model": "maps/ze_trepang/entities/horizon_one_player_count_dev_trg_288172.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]horizon_one_player_count_easy",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "thinkalways": "0",
     "damageforce": "0.000000 0.000000 0.000000",
     "nodmgforce": "0",
@@ -293516,558 +290936,6 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]object_83_player_count_easy",
-    "classname": "game_zone_player",
-    "origin": "-12153.042969 7032.141113 12134.813477",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288180",
-    "model": "maps/ze_trepang/entities/object_83_player_count_easy_288180.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 01)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 02)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 03)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 04)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 05)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 06)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 07)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 08)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 09)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 10)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 11)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 12)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 13)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 14)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 15)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 16)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 17)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 18)",
-        "input": "Add",
-        "param": "20",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]object_83_player_count",
-    "classname": "game_zone_player",
-    "origin": "-12153.042969 7032.141113 12017.500000",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288182",
-    "model": "maps/ze_trepang/entities/object_83_player_count_288182.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 01)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 02)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 03)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 04)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 05)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 06)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 07)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 08)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 09)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 10)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 11)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 12)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 13)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 14)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 15)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 16)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 17)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 18)",
-        "input": "Add",
-        "param": "25",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]object_83_player_count_dev",
-    "classname": "game_zone_player",
-    "origin": "-12153.042969 7032.141113 12247.466797",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288184",
-    "model": "maps/ze_trepang/entities/object_83_player_count_dev_288184.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 01)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 02)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 03)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 04)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 05)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 06)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 07)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 08)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 09)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 10)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 11)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 12)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 13)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 14)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 15)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 16)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 17)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]Object-83 (Pipe 18)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]excelsus_player_count_easy",
-    "classname": "game_zone_player",
-    "origin": "-11593.299805 7032.141113 12134.813477",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288186",
-    "model": "maps/ze_trepang/entities/excelsus_player_count_easy_288186.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 1)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 2)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 3)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 4)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 5)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (final phase)",
-        "input": "Add",
-        "param": "50",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
     "targetname": "[PR#]excelsus_player_count",
     "classname": "game_zone_player",
     "origin": "-11593.299805 7032.141113 12017.500000",
@@ -294082,189 +290950,6 @@
         "input": "Add",
         "param": "2550",
         "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]excelsus_player_count_dev",
-    "classname": "game_zone_player",
-    "origin": "-11593.299805 7032.141113 12247.466797",
-    "angles": "0.000000 315.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288190",
-    "model": "maps/ze_trepang/entities/excelsus_player_count_dev_288190.vmdl",
-    "connections": [
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 1)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 2)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 3)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 4)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (phase 5)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "PlayersOutCount",
-        "target": "[PR#]HMV EXCELSUS (final phase)",
-        "input": "Add",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]object_83_player_count_trg",
-    "classname": "trigger_multiple",
-    "origin": "-12097.443359 -271.999817 -6592.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288192",
-    "model": "maps/ze_trepang/entities/object_83_player_count_trg_288192.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]object_83_player_count",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]object_83_player_count_trg_easy",
-    "classname": "trigger_multiple",
-    "origin": "-12097.443359 -271.999817 -6592.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288194",
-    "model": "maps/ze_trepang/entities/object_83_player_count_trg_easy_288194.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]object_83_player_count_easy",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]object_83_player_count_trg_dev",
-    "classname": "trigger_multiple",
-    "origin": "-12097.443359 -271.999817 -6592.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288198",
-    "model": "maps/ze_trepang/entities/object_83_player_count_trg_dev_288198.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]object_83_player_count_dev",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
         "limit": -1
       }
     ]
@@ -294495,14 +291180,6 @@
         "input": "Enable",
         "param": "",
         "delay": 41,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]Object-83 (*)",
-        "input": "Enable",
-        "param": "",
-        "delay": 40,
         "limit": 1
       },
       {
@@ -295036,123 +291713,6 @@
     ]
   },
   {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]excelsus_player_count_trg",
-    "classname": "trigger_multiple",
-    "origin": "-9800.004883 -424.000000 -1602.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288212",
-    "model": "maps/ze_trepang/entities/excelsus_player_count_trg_288212.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]excelsus_player_count",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]excelsus_player_count_trg_easy",
-    "classname": "trigger_multiple",
-    "origin": "-9800.004883 -424.000000 -1602.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288214",
-    "model": "maps/ze_trepang/entities/excelsus_player_count_trg_easy_288214.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]excelsus_player_count_easy",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]excelsus_player_count_trg_dev",
-    "classname": "trigger_multiple",
-    "origin": "-9800.004883 -424.000000 -1602.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288216",
-    "model": "maps/ze_trepang/entities/excelsus_player_count_trg_dev_288216.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]excelsus_player_count_dev",
-        "input": "CountPlayersInZone",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "filtername": "",
     "spawnflags": "1",
     "globalname": "",
@@ -295346,7 +291906,15 @@
         "input": "ForceSpawn",
         "param": "",
         "delay": 12,
-        "limit": -1
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]ze_teleport_boss_control_room",
+        "input": "Enable",
+        "param": "",
+        "delay": 12,
+        "limit": 1
       }
     ]
   },
@@ -295528,7 +292096,15 @@
         "input": "ForceSpawn",
         "param": "",
         "delay": 12,
-        "limit": -1
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]ze_teleport_boss_control_room",
+        "input": "Enable",
+        "param": "",
+        "delay": 12,
+        "limit": 1
       }
     ]
   },
@@ -296275,8 +292851,6 @@
     "PassthroughCaller": "0",
     "FastRetrigger": "0",
     "TriggerOnce": "0",
-    "PawnSubclass": "",
-    "IsMaster": "0",
     "StartDisabled": "1",
     "targetname": "[PR#]music_activation_office_hardcore",
     "vscripts": "",
@@ -296297,8 +292871,6 @@
     ]
   },
   {
-    "IsMaster": "0",
-    "PawnSubclass": "",
     "PassthroughCaller": "0",
     "FastRetrigger": "0",
     "TriggerOnce": "0",
@@ -297604,14 +294176,6 @@
         "param": "",
         "delay": 0,
         "limit": -1
-      },
-      {
-        "output": "OutValue",
-        "target": "[PR#]hardcore_vote_display_phase2",
-        "input": "SetIntMessage",
-        "param": "",
-        "delay": 0,
-        "limit": -1
       }
     ]
   },
@@ -298641,77 +295205,6 @@
     ]
   },
   {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "0",
-    "TriggerOnce": "1",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]horizon_one_ctr_init",
-    "classname": "logic_relay",
-    "origin": "-9603.000000 1385.000000 12781.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "288401",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Disable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      }
-    ]
-  },
-  {
     "CanBePickedUp": "1",
     "spawnflags": "1",
     "lightmapstatic": "0",
@@ -299568,7 +296061,6 @@
     "Filter02": "[PR#]filter_only_t",
     "Filter01": "[PR#]ze_knife_only_dmg0",
     "filtertype": "0",
-    "damagetype": "4",
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
@@ -308036,14 +304528,6 @@
       },
       {
         "output": "OnEntitySpawned",
-        "target": "[PR#]horizon_vtol_hurt_eff05alt",
-        "input": "SetParent",
-        "param": "[PR#]horizon_vtol",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
         "target": "[PR#]horizon_vtol_hurt_eff05",
         "input": "SetParent",
         "param": "[PR#]horizon_vtol",
@@ -308165,14 +304649,6 @@
       {
         "output": "OnEntitySpawned",
         "target": "[PR#]horizon_vtol_hurt_eff07h",
-        "input": "SetParent",
-        "param": "[PR#]horizon_vtol",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]horizon_vtol_hurt_eff04alt",
         "input": "SetParent",
         "param": "[PR#]horizon_vtol",
         "delay": 0,
@@ -325711,7 +322187,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -327051,7 +323526,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -327196,7 +323670,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -327422,7 +323895,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1",
     "disableshadows": "0",
     "solid": "6",
     "skin": "default",
@@ -338315,7 +334787,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1",
     "disableshadows": "1",
     "solid": "6",
     "skin": "default",
@@ -345692,7 +342163,6 @@
     "parentname": "",
     "lightingorigin": "",
     "rendertocubemaps": "1",
-    "emissive_lighting_boost": "1",
     "disableshadows": "0",
     "solid": "6",
     "skin": "default",
@@ -348237,8 +344707,6 @@
     "enabled": "1",
     "brightness_legacy": "0.542969",
     "brightness": "-0.886719",
-    "brightness_nits": "96",
-    "brightness_candelas": "64",
     "brightness_units": "1",
     "clientSideEntity": "1",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -348398,8 +344866,6 @@
     "enabled": "1",
     "brightness_legacy": "0.542969",
     "brightness": "-0.886719",
-    "brightness_nits": "96",
-    "brightness_candelas": "64",
     "brightness_units": "1",
     "clientSideEntity": "1",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -351818,7 +348284,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -351963,7 +348428,6 @@
     "lightingorigin": "",
     "rendertocubemaps": "1",
     "disableshadows": "0",
-    "bakelighting": "0",
     "solid": "6",
     "skin": "default",
     "rendercolor": "255 255 255",
@@ -359546,258 +356010,6 @@
     "angles": "60.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "52802"
-  },
-  {
-    "cpoint7_parent": "0",
-    "cpoint6_parent": "0",
-    "cpoint5_parent": "0",
-    "cpoint4_parent": "0",
-    "cpoint3_parent": "0",
-    "cpoint2_parent": "0",
-    "cpoint1_parent": "0",
-    "cpoint63": "",
-    "cpoint62": "",
-    "cpoint61": "",
-    "cpoint60": "",
-    "cpoint59": "",
-    "cpoint58": "",
-    "cpoint57": "",
-    "cpoint56": "",
-    "cpoint55": "",
-    "cpoint54": "",
-    "cpoint53": "",
-    "cpoint52": "",
-    "cpoint51": "",
-    "cpoint50": "",
-    "cpoint49": "",
-    "cpoint48": "",
-    "cpoint47": "",
-    "cpoint46": "",
-    "cpoint45": "",
-    "cpoint44": "",
-    "cpoint43": "",
-    "cpoint42": "",
-    "cpoint41": "",
-    "cpoint40": "",
-    "cpoint39": "",
-    "cpoint38": "",
-    "cpoint37": "",
-    "cpoint36": "",
-    "cpoint35": "",
-    "cpoint34": "",
-    "cpoint33": "",
-    "cpoint32": "",
-    "cpoint31": "",
-    "cpoint30": "",
-    "cpoint29": "",
-    "cpoint28": "",
-    "cpoint27": "",
-    "cpoint26": "",
-    "cpoint25": "",
-    "cpoint24": "",
-    "cpoint23": "",
-    "cpoint22": "",
-    "cpoint21": "",
-    "cpoint20": "",
-    "cpoint19": "",
-    "cpoint18": "",
-    "cpoint17": "",
-    "cpoint16": "",
-    "cpoint15": "",
-    "cpoint14": "",
-    "cpoint13": "",
-    "cpoint12": "",
-    "cpoint11": "",
-    "cpoint10": "",
-    "cpoint9": "",
-    "cpoint8": "",
-    "cpoint7": "",
-    "cpoint6": "",
-    "cpoint5": "",
-    "cpoint4": "",
-    "cpoint3": "",
-    "cpoint2": "",
-    "cpoint1": "",
-    "cpoint0": "",
-    "tint_cp_color": "255 255 255",
-    "tint_cp": "-1",
-    "data_cp_value": "0.000000 0.000000 0.000000",
-    "data_cp": "-1",
-    "snapshot_mesh": "-1",
-    "snapshot_file": "",
-    "no_save": "0",
-    "start_active": "1",
-    "effect_name": "particles/burning_fx/smoke_gib_01.vpcf",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "info_particle_system",
-    "origin": "4281.313965 2878.224609 -6041.119141",
-    "angles": "0.000000 328.730499 -1.972076",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "34159"
-  },
-  {
-    "steamaudio_geometry_mode": "0",
-    "expand_render_bounds_to_include_cloth": "0",
-    "clothScale": "1.000000",
-    "StartDisabled": "0",
-    "forcenpcexclude": "0",
-    "CreateNavObstacle": "0",
-    "interactExclude": "",
-    "interactWith": "",
-    "interactAs": "",
-    "AnimateOnServer": "0",
-    "LagCompensate": "0",
-    "randomizecycle": "0",
-    "IdleAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "IdleAnim": "",
-    "StartingAnimationLoopMode": "ANIM_LOOP_MODE_NOT_LOOPING",
-    "StartingAnim": "",
-    "use_animgraph": "1",
-    "disablelowviolence": "0",
-    "glowteam": "-1",
-    "glowcolor": "0 0 0",
-    "glowrangemin": "0",
-    "glowrange": "0",
-    "glowstate": "0",
-    "lightmapstatic": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "BreakableContentsParticleOverride": "",
-    "BreakableContentsPropGroupOverride": "",
-    "BreakableContentsType": "BC_DEFAULT",
-    "burstlocation": "",
-    "burstscale": "100.000000",
-    "pressuredelay": "0.000000",
-    "spawnflags": "0",
-    "NoInterpolate": "0",
-    "PerformanceMode": "PM_NORMAL",
-    "ExplodeRadius": "0.000000",
-    "ExplodeDamage": "0.000000",
-    "damagefilter": "",
-    "targetname": "",
-    "vscripts": "",
-    "animgraph2_identifier": "",
-    "add_modifier": "",
-    "add_attribute": "",
-    "bodygroups": "",
-    "globalname": "",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "lightingorigin": "",
-    "rendertocubemaps": "0",
-    "disableshadows": "0",
-    "solid": "6",
-    "skin": "default",
-    "rendercolor": "255 255 255",
-    "model": "models/glowstick_red.vmdl",
-    "classname": "prop_dynamic",
-    "origin": "4274.000000 2871.000000 -6059.000000",
-    "angles": "0.000000 315.000000 -90.000000",
-    "scales": "0.014000 0.014000 0.015295",
-    "hammerUniqueId": "34178"
-  },
-  {
-    "precomputedsubfrusta": "6",
-    "precomputedobbextent5": "81.428467 73.736816 40.596436",
-    "precomputedobbangles5": "0.000000 -30.999996 0.000000",
-    "precomputedobborigin5": "4277.060059 2877.434570 -5972.500977",
-    "precomputedobbextent4": "221.652344 256.735046 152.969727",
-    "precomputedobbangles4": "1.000000 14.000000 -2.000000",
-    "precomputedobborigin4": "4126.307617 2579.498779 -5981.392578",
-    "precomputedobbextent3": "33.713867 32.756470 56.384277",
-    "precomputedobbangles3": "1.000000 12.999999 0.000000",
-    "precomputedobborigin3": "4303.817871 2918.916260 -6004.278809",
-    "precomputedobbextent2": "29.297607 259.348419 144.964111",
-    "precomputedobbangles2": "1.000000 12.999998 7.000000",
-    "precomputedobborigin2": "4367.893555 2630.894531 -5949.643066",
-    "precomputedobbextent1": "112.738281 47.814819 64.120117",
-    "precomputedobbangles1": "-0.000000 13.000000 0.000000",
-    "precomputedobborigin1": "4159.674316 2897.365723 -5995.999512",
-    "precomputedobbextent0": "47.596680 46.269287 22.589355",
-    "precomputedobbangles0": "0.000000 -30.999996 0.000000",
-    "precomputedobborigin0": "4277.351562 2877.273438 -6037.492188",
-    "precomputedboundsmaxs": "4426.863281 2943.089355 -5823.379395",
-    "precomputedboundsmins": "3911.905273 2367.843750 -6130.810059",
-    "precomputedobbextent": "243.606689 300.369171 151.133545",
-    "precomputedobbangles": "-1.000000 8.999999 6.999999",
-    "precomputedobborigin": "4140.606445 2633.311279 -5947.031250",
-    "precomputedfieldsvalid": "1",
-    "transmit_always": "0",
-    "bakespeculartocubemaps_scale": "1.000000",
-    "light_style_target3": "",
-    "light_style_target2": "",
-    "light_style_target1": "",
-    "light_style_target0": "",
-    "light_style_output_event3": "",
-    "light_style_output_event2": "",
-    "light_style_output_event1": "",
-    "light_style_output_event0": "",
-    "light_style": "",
-    "fade_size_end": "0.025000",
-    "fade_size_start": "0.050000",
-    "showlight": "0",
-    "rendertocubemaps": "0",
-    "brightnessscale": "1.000000",
-    "shadowfade_size_end": "0.050000",
-    "shadowfade_size_start": "0.100000",
-    "pvs_modify_entity": "0",
-    "shadowpriority": "-1",
-    "shadowmapsize": "-1",
-    "castshadows": "2",
-    "minroughness": "0.000000",
-    "bakespeculartocubemaps": "0",
-    "lightcookie": "",
-    "inner_angle": "180.000000",
-    "outer_angle": "180.000000",
-    "size_params": "2.000000 24.000000 0.150000",
-    "shape": "0",
-    "bouncescale": "1.000000",
-    "bouncelight": "1",
-    "skirt": "0.100000",
-    "range": "512.000000",
-    "brightness_lumens": "52.000000",
-    "colortemperature": "6600.000000",
-    "color": "255 0 0",
-    "colormode": "0",
-    "directlight": "2",
-    "enabled": "1",
-    "brightness_legacy": "0.050781",
-    "brightness": "-4.265620",
-    "brightness_nits": "510.000000",
-    "brightness_candelas": "4.000000",
-    "brightness_units": "1",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "",
-    "classname": "light_omni2",
-    "origin": "4279.238281 2879.872314 -6014.000000",
-    "angles": "88.027908 238.731415 -89.999069",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "34161"
   },
   {
     "precomputedboundsmaxs": "2157.465576 2826.094727 -5827.643066",
@@ -379635,14 +375847,6 @@
       },
       {
         "output": "OnPlayerPickup",
-        "target": "[PR#]zm_commander_death_timer",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnPlayerPickup",
         "target": "[PR#]horizon_commander_msg",
         "input": "ShowHudHint",
         "param": "!activator",
@@ -379654,6 +375858,22 @@
         "target": "!activator",
         "input": "RemoveContext",
         "param": "zmcommander",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]zm_commander_death_timer",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]zm_nocommand_death_timer",
+        "input": "Disable",
+        "param": "",
         "delay": 0,
         "limit": -1
       }
@@ -382470,26 +378690,10 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]excelsus_rtv_trg_humans",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]zr_toggle_respawn",
         "input": "Disable",
         "param": "",
         "delay": 160,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]excelsus_rtv_trg_zombies",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
         "limit": 1
       },
       {
@@ -383788,7 +379992,7 @@
     "hammerUniqueId": "307504"
   },
   {
-    "SourceEntityName": "[PR#]HMV EXCELSUS",
+    "SourceEntityName": "[PR#]HMV_EXCELSUS",
     "spawnflags": "48",
     "radius": "0",
     "cspinup": "0",
@@ -384106,7 +380310,6 @@
     "timeoutInterval": "0.000000",
     "asynchronous": "0",
     "clientSideEntity": "0",
-    "EntityTemplate": "aa_vehicle02_missiles_template",
     "spawnflags": "2",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
@@ -385473,8 +381676,6 @@
     "Case03": "push",
     "Case02": "missile_barrage",
     "Case01": "energy_reactor",
-    "RefireTime": "15",
-    "StartDisabled": "1",
     "vscripts": "",
     "targetname": "[PR#]excelsus_autotrigger_randomizer",
     "classname": "logic_case",
@@ -388038,7 +384239,7 @@
   },
   {
     "ResponseContext": "item_REV02",
-    "Negated": "1",
+    "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
     "targetname": "[PR#]REV02_filter",
@@ -388046,7 +384247,17 @@
     "origin": "15807.000000 13276.036133 -13485.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "286896"
+    "hammerUniqueId": "286896",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]REV02_locked",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "message": "Press F to place a vortex landmine [0 use left]",
@@ -397595,9 +393806,7 @@
     "timeoutInterval": "0.000000",
     "asynchronous": "0",
     "clientSideEntity": "0",
-    "filtername": "filter_only_t",
     "spawnflags": "2",
-    "StartDisabled": "1",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
     "local.origin": "0.000000 0.000000 0.000000",
@@ -397615,8 +393824,6 @@
     "entityLumpName": "316844#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -397705,8 +393912,6 @@
     "entityLumpName": "316846#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -397795,8 +394000,6 @@
     "entityLumpName": "316847#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -397885,8 +394088,6 @@
     "entityLumpName": "316848#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -397975,8 +394176,6 @@
     "entityLumpName": "316849#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -398065,8 +394264,6 @@
     "entityLumpName": "316850#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -398155,8 +394352,6 @@
     "entityLumpName": "316851#entityLumpName"
   },
   {
-    "filtername": "filter_only_t",
-    "StartDisabled": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -401616,8 +397811,6 @@
     "timeoutInterval": "0.000000",
     "asynchronous": "0",
     "clientSideEntity": "0",
-    "nodamageforces": "1",
-    "material": "7",
     "spawnflags": "2",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
@@ -402688,9 +398881,6 @@
     "timeoutInterval": "0.000000",
     "asynchronous": "0",
     "clientSideEntity": "0",
-    "nodamageforces": "1",
-    "material": "2",
-    "health": "250000",
     "spawnflags": "2",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
@@ -403759,8 +399949,8 @@
     "Template09": "",
     "Template08": "",
     "Template07": "",
-    "Template06": "[PR#]smokegrenade01_hurt",
-    "Template05": "[PR#]smokegrenade01_trgzm",
+    "Template06": "",
+    "Template05": "",
     "Template04": "[PR#]smokegrenade01_light",
     "Template03": "[PR#]smokegrenade01_snd",
     "Template02": "[PR#]smokegrenade01_eff",
@@ -403821,8 +400011,6 @@
     ]
   },
   {
-    "disablereceiveshadows": "1",
-    "rendercolor": "0 0 0 255",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -404032,8 +400220,8 @@
     "Template09": "",
     "Template08": "",
     "Template07": "",
-    "Template06": "[PR#]smokegrenade02_hurt",
-    "Template05": "[PR#]smokegrenade02_trgzm",
+    "Template06": "",
+    "Template05": "",
     "Template04": "[PR#]smokegrenade02_light",
     "Template03": "[PR#]smokegrenade02_snd",
     "Template02": "[PR#]smokegrenade02_eff",
@@ -404084,8 +400272,6 @@
     ]
   },
   {
-    "rendercolor": "0 0 0 255",
-    "disablereceiveshadows": "1",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -404295,8 +400481,8 @@
     "Template09": "",
     "Template08": "",
     "Template07": "",
-    "Template06": "[PR#]smokegrenade03_hurt",
-    "Template05": "[PR#]smokegrenade03_trgzm",
+    "Template06": "",
+    "Template05": "",
     "Template04": "[PR#]smokegrenade03_light",
     "Template03": "[PR#]smokegrenade03_snd",
     "Template02": "[PR#]smokegrenade03_eff",
@@ -404347,8 +400533,6 @@
     ]
   },
   {
-    "disablereceiveshadows": "1",
-    "rendercolor": "0 0 0 255",
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -409177,72 +405361,6 @@
     ]
   },
   {
-    "ResponseContext": "shortcut",
-    "Negated": "1",
-    "clientSideEntity": "0",
-    "targetname": "[PR#]filter_shortcut_zm",
-    "vscripts": "",
-    "classname": "filter_activator_context",
-    "origin": "16010.643555 13627.446289 -13460.070312",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "325144"
-  },
-  {
-    "Filter10": "",
-    "Filter09": "",
-    "Filter08": "",
-    "Filter07": "",
-    "Filter06": "",
-    "Filter05": "",
-    "Filter04": "",
-    "Filter03": "",
-    "Filter02": "[PR#]filter_only_t",
-    "Filter01": "[PR#]filter_shortcut_zm",
-    "filtertype": "0",
-    "ResponseContext": "shortcut",
-    "Negated": "0",
-    "clientSideEntity": "0",
-    "vscripts": "",
-    "targetname": "[PR#]filter_shortcut_zm_g",
-    "classname": "filter_multi",
-    "origin": "16010.643555 13627.446289 -13440.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "325145"
-  },
-  {
-    "max": "16",
-    "min": "0",
-    "startvalue": "0",
-    "StartDisabled": "0",
-    "targetname": "[PR#]ctr_tp_zm_bridge",
-    "vscripts": "",
-    "classname": "math_counter",
-    "origin": "2280.000000 2737.583496 -3872.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "325729",
-    "connections": [
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]trg_tp_zm_bridge02",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMax",
-        "target": "[PR#]trg_tp_zm_bridge",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "thinkalways": "0",
     "damageforce": "0.000000 0.000000 0.000000",
     "nodmgforce": "0",
@@ -409292,5 +405410,105 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "326318"
+  },
+  {
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "1.000000 1.000000 1.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "targetname": "",
+    "vscripts": "",
+    "classname": "trigger_once",
+    "origin": "-12539.644531 -223.804810 -2187.430176",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "326903",
+    "model": "maps/ze_trepang/entities/unnamed_326903.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]zm_nocommand_death_timer",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "InitialDelay": "0.000000",
+    "RefireTime": "15.000000",
+    "UpperRandomBound": "0.000000",
+    "LowerRandomBound": "0.000000",
+    "PauseAfterFiring": "0",
+    "UseRandomTime": "0",
+    "spawnflags": "0",
+    "StartDisabled": "1",
+    "vscripts": "",
+    "targetname": "[PR#]zm_nocommand_death_timer",
+    "classname": "logic_timer",
+    "origin": "-12638.142578 -174.571533 -2208.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "326904",
+    "connections": [
+      {
+        "output": "OnTimer",
+        "target": "[PR#]excelsus_autotrigger_randomizer",
+        "input": "PickRandom",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "wait": "0.000000",
+    "filtername": "",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "targetname": "[PR#]trg_tp_zm_bridge",
+    "vscripts": "",
+    "classname": "trigger_multiple",
+    "origin": "3184.000000 1796.000000 -3619.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "230797",
+    "model": "maps/ze_trepang/entities/trg_tp_zm_bridge_230797.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]tp_zm_bridge_randomizer",
+        "input": "PickRandomShuffle",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "PawnSubclass": "",
+    "IsMaster": "0",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "",
+    "classname": "info_player_start",
+    "origin": "15790.485352 10688.281250 -3598.042236",
+    "angles": "0.000000 179.999939 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "326907"
   }
 ]

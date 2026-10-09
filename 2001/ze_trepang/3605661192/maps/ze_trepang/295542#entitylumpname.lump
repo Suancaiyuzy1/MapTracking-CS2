@@ -2878,73 +2878,7 @@
     "angles": "34.999992 -179.999939 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "294631",
-    "_template_lump_ent_index": "37",
-    "connections": [
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "_template_lump_ent_index": "37"
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -3016,73 +2950,7 @@
     "angles": "34.999992 -179.999939 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "294642",
-    "_template_lump_ent_index": "38",
-    "connections": [
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "_template_lump_ent_index": "38"
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -3483,15 +3351,6 @@
     "bakefarz": "4096.000000",
     "cubemaptexture": "maps/ze_trepang/cubemaps/env_cubemap_array.vtex",
     "StartDisabled": "0",
-    "inner_angle": "180",
-    "outer_angle": "99.7",
-    "range": "1024",
-    "brightness_lumens": "1021",
-    "directlight": "2",
-    "brightness_legacy": "1.74609",
-    "brightness": "0.804688",
-    "brightness_nits": "10022",
-    "brightness_candelas": "139",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",

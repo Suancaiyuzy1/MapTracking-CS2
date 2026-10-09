@@ -142,73 +142,7 @@
     "origin": "1185.000000 332.160095 -3582.690430",
     "angles": "2.011459 117.196434 -33.172779",
     "scales": "0.274747 0.274747 0.274747",
-    "hammerUniqueId": "298968",
-    "connections": [
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "hammerUniqueId": "298968"
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -563,73 +497,7 @@
     "origin": "-141.157928 268.271057 -3587.816650",
     "angles": "0.012678 341.683411 0.000000",
     "scales": "0.392496 0.392496 0.392496",
-    "hammerUniqueId": "298810",
-    "connections": [
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "hammerUniqueId": "298810"
   },
   {
     "steamaudio_geometry_mode": "0",
@@ -700,73 +568,7 @@
     "origin": "-412.050293 -258.942932 -3587.816650",
     "angles": "0.012678 16.454544 0.000000",
     "scales": "0.392496 0.392496 0.392496",
-    "hammerUniqueId": "298889",
-    "connections": [
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 7)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 2)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 6)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 3)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 5)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 4)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (final phase)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTakeDamage",
-        "target": "[PR#]Horizon One (phase 1)",
-        "input": "Subtract",
-        "param": "1",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
+    "hammerUniqueId": "298889"
   },
   {
     "steamaudio_geometry_mode": "0",

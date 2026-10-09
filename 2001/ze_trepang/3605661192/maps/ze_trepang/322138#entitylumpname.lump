@@ -227,54 +227,6 @@
         "param": "",
         "delay": 17,
         "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_hurt",
-        "input": "Kill",
-        "param": "",
-        "delay": 15,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_hurt",
-        "input": "Enable",
-        "param": "",
-        "delay": 2,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_hurt",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 1.9900000095367432,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_trgzm",
-        "input": "ClearParent",
-        "param": "",
-        "delay": 1.9900000095367432,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_trgzm",
-        "input": "Enable",
-        "param": "",
-        "delay": 2,
-        "limit": -1
-      },
-      {
-        "output": "OnEntitySpawned",
-        "target": "[PR#]smokegrenade01_trgzm",
-        "input": "Kill",
-        "param": "",
-        "delay": 15,
-        "limit": -1
       }
     ]
   },
@@ -377,8 +329,6 @@
   {
     "steamaudio_geometry_mode": "0",
     "expand_render_bounds_to_include_cloth": "0",
-    "massScale": "10000",
-    "nodamageforces": "1",
     "clothScale": "1.000000",
     "StartDisabled": "0",
     "forcenpcexclude": "0",

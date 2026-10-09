@@ -25,7 +25,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
@@ -187,8 +186,6 @@
     "_template_lump_ent_index": "1"
   },
   {
-    "soundevent": "BaseGrenade.Explode",
-    "StartDisabled": "1",
     "SourceEntityName": "",
     "spawnflags": "48",
     "radius": "512",

@@ -121,7 +121,6 @@
     "ItemCount1": "1",
     "ItemClass1": "",
     "ammobalancing_removable": "0",
-    "allowobstacleconvexhullmerging": "1",
     "forcenavcut": "0",
     "updatenavwhenmoving": "0",
     "auto_convert_back_from_debris": "1",
