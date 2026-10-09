@@ -11,7 +11,7 @@
     flow-children: up;
     horizontal-align: left;
     vertical-align: bottom;
-    margin-left: 67%;
+    margin-left: 70%;
     margin-bottom: 2%;
 }
 .ChatLine {

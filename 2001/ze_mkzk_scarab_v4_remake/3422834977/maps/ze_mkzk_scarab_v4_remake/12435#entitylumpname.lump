@@ -394,7 +394,7 @@
     "filtername": "",
     "spawnflags": "1",
     "globalname": "",
-    "StartDisabled": "1",
+    "StartDisabled": "0",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
     "local.origin": "0.000000 0.000000 0.000000",

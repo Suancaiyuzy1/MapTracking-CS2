@@ -170,7 +170,7 @@
     "connections": [
       {
         "output": "OnPass",
-        "target": "[PR#]potato_give_t\u00260000",
+        "target": "[PR#]potato_give_ct\u00260000",
         "input": "Enable",
         "param": "",
         "delay": 0,
@@ -178,7 +178,7 @@
       },
       {
         "output": "OnPass",
-        "target": "[PR#]potato_give_t\u00260000",
+        "target": "[PR#]potato_give_ct\u00260000",
         "input": "Disable",
         "param": "",
         "delay": 0.05000000074505806,
@@ -186,7 +186,7 @@
       },
       {
         "output": "OnFail",
-        "target": "[PR#]potato_give_ct\u00260000",
+        "target": "[PR#]potato_give_t\u00260000",
         "input": "Enable",
         "param": "",
         "delay": 0,
@@ -194,7 +194,7 @@
       },
       {
         "output": "OnFail",
-        "target": "[PR#]potato_give_ct\u00260000",
+        "target": "[PR#]potato_give_t\u00260000",
         "input": "Disable",
         "param": "",
         "delay": 0.05000000074505806,

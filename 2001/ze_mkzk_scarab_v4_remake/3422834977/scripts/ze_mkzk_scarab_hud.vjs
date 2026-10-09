@@ -3188,6 +3188,15 @@ Instance.OnScriptInput("slot_reward", ({ activator }) => {
     }
 });
 
+Instance.OnScriptInput("star", ({ activator }) => {
+    if (activator instanceof CSPlayerPawn) {
+        const controller = activator.GetPlayerController();
+        if (!controller) return;
+        const name = controller.GetPlayerName();
+        pushChatMessage(`玩家 ${name} 拾取了加速星`);
+    }
+});
+
 Instance.OnScriptInput("wang_2", ({ activator }) => {
     if (activator instanceof CSPlayerPawn) {
         const controller = activator.GetPlayerController();
@@ -3233,10 +3242,10 @@ Instance.OnScriptInput("tnt_2", () => {
     setText("躲避头顶的追踪天坠", { ...hint_mid });
 });
 Instance.OnScriptInput("tnt_3", () => {
-    setText("活着通过地雷阵", { ...hint_mid });
+    setText("活着通过地雷阵", { ...hint_mid, channel: 7 });
 });
 Instance.OnScriptInput("tnt_4", () => {
-    setText("小心黄色地雷，它们的伤害略高", { ...hint_mid, size: 36 });
+    setText("小心黄色地雷，它们的伤害略高", { ...hint_mid, size: 38, channel: 7 });
 });
 Instance.OnScriptInput("tnt_5", () => {
     setText("远离玩家最多的区域", { ...hint_mid });
@@ -3244,13 +3253,17 @@ Instance.OnScriptInput("tnt_5", () => {
 Instance.OnScriptInput("tnt_6", () => {
     setText("把僵尸打进对面大门", { ...hint_mid });
 });
+Instance.OnScriptInput("tnt_6b", ({ activator }) => {
+    if (activator instanceof CSPlayerPawn) {
+        const controller = activator.GetPlayerController();
+        setTextPlayer("你已失去免抓", controller, { ...hint_mid, color: 'red' });
+    }
+});
 Instance.OnScriptInput("tnt_7", () => {
     setText("远离携带TNT的玩家", { ...hint_mid });
 });
 
-Instance.OnScriptInput("ChatPush", () => {
-    pushChatMessage("远离携带TNT的玩家");
-});
+
 
 
 const item_text = {
@@ -3977,7 +3990,7 @@ Instance.OnPlayerDisconnect(({ playerSlot }) => {
 
 const CHAT_HUD_ENTITY_NAME = 'game_text_hud';
 const CHAT_MAX_LINES = 5;
-const CHAT_LINE_LIFETIME = 5;
+const CHAT_LINE_LIFETIME = 10;
 
 let nextChatId = 0;
 const chatMessages = [];

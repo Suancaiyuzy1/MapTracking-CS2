@@ -142440,9 +142440,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "say \u4E00\u540D\u73A9\u5BB6\u62FE\u53D6\u4E86\u52A0\u901F\u661F\u661F",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "star",
         "delay": 0,
         "limit": 1
       }
@@ -142540,9 +142540,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "say \u4E00\u540D\u73A9\u5BB6\u62FE\u53D6\u4E86\u52A0\u901F\u661F\u661F",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "star",
         "delay": 0,
         "limit": 1
       }
@@ -142603,9 +142603,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "say \u4E00\u540D\u73A9\u5BB6\u62FE\u53D6\u4E86\u52A0\u901F\u661F\u661F",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "star",
         "delay": 0,
         "limit": 1
       }
@@ -142722,9 +142722,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "say \u4E00\u540D\u73A9\u5BB6\u62FE\u53D6\u4E86\u52A0\u901F\u661F\u661F",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "star",
         "delay": 0,
         "limit": 1
       }

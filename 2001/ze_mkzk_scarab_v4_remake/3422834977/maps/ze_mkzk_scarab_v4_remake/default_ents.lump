@@ -3912,7 +3912,7 @@
     "filtername": "[PR#]t",
     "spawnflags": "4097",
     "globalname": "",
-    "StartDisabled": "1",
+    "StartDisabled": "0",
     "useLocalOffset": "0",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
@@ -4198,6 +4198,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Admin_ID",
+        "input": "TestActivator",
+        "param": "",
+        "delay": 3,
+        "limit": -1
       }
     ]
   },
@@ -8161,46 +8169,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mgopenalldoors",
-        "input": "Trigger",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrtrigger1",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrtrigger2",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrtrigger0",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrwall",
-        "input": "Open",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]luoshizhen",
         "input": "Disable",
         "param": "",
@@ -8210,14 +8178,6 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]mgdrtimer",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrtriggerfinal",
         "input": "Enable",
         "param": "",
         "delay": 0.5,
@@ -8244,14 +8204,6 @@
         "target": "[PR#]modecounter",
         "input": "SetValue",
         "param": "1",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrdeathtrigger",
-        "input": "Enable",
-        "param": "",
         "delay": 0.5,
         "limit": -1
       },
@@ -8321,48 +8273,8 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]drkk",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mg1text",
-        "input": "Enable",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]load_map_mkzk",
         "input": "Trigger",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door2_2",
-        "input": "Lock",
-        "param": "",
-        "delay": 1,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door2_1",
-        "input": "Lock",
-        "param": "",
-        "delay": 1,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgdrtext*",
-        "input": "Enable",
         "param": "",
         "delay": 0.5,
         "limit": -1
@@ -8388,7 +8300,7 @@
         "target": "[PR#]mkzk_pk_temp",
         "input": "ForceSpawn",
         "param": "",
-        "delay": 0.20000000298023224,
+        "delay": 10,
         "limit": -1
       },
       {
@@ -8396,15 +8308,15 @@
         "target": "[PR#]mkzk_dr_temp",
         "input": "ForceSpawn",
         "param": "",
-        "delay": 0,
+        "delay": 10,
         "limit": -1
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mkzk_door2_temp",
+        "target": "[PR#]mkzk_door1_temp",
         "input": "ForceSpawn",
         "param": "",
-        "delay": 0,
+        "delay": 10,
         "limit": -1
       },
       {
@@ -8852,37 +8764,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7427"
-  },
-  {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "0",
-    "TriggerOnce": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]mgopenalldoors",
-    "classname": "logic_relay",
-    "origin": "-288.000000 2880.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "7443",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door3*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door4*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
   },
   {
     "InitialDelay": "0.000000",
@@ -9492,14 +9373,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mgrunopen",
-        "input": "Trigger",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]falltuer1",
         "input": "Close",
         "param": "",
@@ -9599,7 +9472,7 @@
         "target": "[PR#]door47",
         "input": "SetSpeed",
         "param": "10",
-        "delay": 0.5,
+        "delay": 3,
         "limit": 1
       },
       {
@@ -9624,6 +9497,22 @@
         "input": "RunScriptInput",
         "param": "run_1",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]tz",
+        "input": "SetSpeed",
+        "param": "64",
+        "delay": 3,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]kugeltunnelende",
+        "input": "Kill",
+        "param": "",
+        "delay": 0.5,
         "limit": -1
       }
     ]
@@ -9667,285 +9556,6 @@
         "input": "StartSound",
         "param": "",
         "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "0",
-    "TriggerOnce": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]mgrunopen",
-    "classname": "logic_relay",
-    "origin": "-160.000000 2784.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "7601",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door2*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]tz",
-        "input": "SetSpeed",
-        "param": "64",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mgrunbu",
-        "input": "Enable",
-        "param": "",
-        "delay": 3,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa1",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa2",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa3",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa4",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa5",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa6",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa7",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa8",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa9",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa91",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa92",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa93",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa94",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa95",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa96",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa97",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa98",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa99",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa991",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa992",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa993",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa994",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa995",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa996",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa997",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]kugeltunnelende",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door3*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door4*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door47",
-        "input": "Close",
-        "param": "",
-        "delay": 1,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door48",
-        "input": "Close",
-        "param": "",
-        "delay": 1,
         "limit": -1
       }
     ]
@@ -11511,7 +11121,7 @@
   },
   {
     "max": "900",
-    "min": "0",
+    "min": "-100",
     "startvalue": "76",
     "StartDisabled": "0",
     "vscripts": "",
@@ -11534,14 +11144,6 @@
         "output": "OnGetValue",
         "target": "[PR#]mghidewin",
         "input": "SetValueCompare",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
-        "target": "[PR#]mghidetimer4",
-        "input": "Disable",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -11725,6 +11327,14 @@
         "input": "Enable",
         "param": "",
         "delay": 25,
+        "limit": 1
+      },
+      {
+        "output": "OnLessThan",
+        "target": "[PR#]mghidetimer4",
+        "input": "Disable",
+        "param": "",
+        "delay": 15.5,
         "limit": 1
       }
     ]
@@ -23496,15 +23106,7 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mkzk_door1_temp",
-        "input": "ForceSpawn",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mkzk_door4_temp",
+        "target": "[PR#]mkzk_door5_temp",
         "input": "ForceSpawn",
         "param": "",
         "delay": 0,
@@ -23541,252 +23143,13 @@
         "param": "wang_outside",
         "delay": 12,
         "limit": 1
-      }
-    ]
-  },
-  {
-    "PassthroughCaller": "0",
-    "FastRetrigger": "0",
-    "TriggerOnce": "0",
-    "StartDisabled": "0",
-    "vscripts": "",
-    "targetname": "[PR#]mg5open",
-    "classname": "logic_relay",
-    "origin": "-128.000000 2720.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "9644",
-    "connections": [
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door3*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]door2*",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]tz",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa1",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa2",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa3",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa4",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa5",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa6",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa7",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa8",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa9",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa91",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa92",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa93",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa94",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa95",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa96",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa97",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa98",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa99",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa991",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa992",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa993",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa994",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa995",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa996",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]aa997",
-        "input": "Open",
-        "param": "",
-        "delay": 0,
-        "limit": -1
       },
       {
         "output": "OnTrigger",
         "target": "[PR#]final_opendoorfast",
         "input": "Test",
         "param": "",
-        "delay": 0,
+        "delay": 3,
         "limit": -1
       }
     ]
@@ -36141,7 +35504,7 @@
     ]
   },
   {
-    "message": "\u79FB\u901F 1.5\uFF0C\u91CD\u529B 0.50\uFF0C\u8840\u91CF 300",
+    "message": "\u79FB\u901F 1.5\uFF0C\u91CD\u529B 0.50\uFF0C\u8840\u91CF \u002B300",
     "vscripts": "",
     "targetname": "[PR#]i_slotmachine1",
     "classname": "env_hudhint",
@@ -36184,9 +35547,9 @@
       },
       {
         "output": "OnUser1",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "health 300",
+        "target": "[PR#]script",
+        "input": "RunScriptInput",
+        "param": "Heal300",
         "delay": 1,
         "limit": -1
       },
@@ -36313,7 +35676,7 @@
     ]
   },
   {
-    "message": "\u8840\u91CF 300",
+    "message": "\u8840\u91CF \u002B300",
     "vscripts": "",
     "targetname": "[PR#]i_slotmachine4",
     "classname": "env_hudhint",
@@ -36348,9 +35711,9 @@
       },
       {
         "output": "OnUser1",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "health 300",
+        "target": "[PR#]script",
+        "input": "RunScriptInput",
+        "param": "Heal300",
         "delay": 1,
         "limit": -1
       }
@@ -37457,7 +36820,7 @@
     "hammerUniqueId": "12354"
   },
   {
-    "message": "\u79FB\u901F 1.5\uFF0C\u83B7\u5F97\u9690\u8EAB\uFF0C\u8840\u91CF 300",
+    "message": "\u79FB\u901F 1.5\uFF0C\u83B7\u5F97\u9690\u8EAB\uFF0C\u8840\u91CF \u002B300",
     "vscripts": "",
     "targetname": "[PR#]i_slotmachine1b",
     "classname": "env_hudhint",
@@ -37508,9 +36871,9 @@
       },
       {
         "output": "OnUser1",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "health 300",
+        "target": "[PR#]script",
+        "input": "RunScriptInput",
+        "param": "Heal300",
         "delay": 1,
         "limit": -1
       },
@@ -39424,114 +38787,6 @@
     ]
   },
   {
-    "depth_render_offset": "0.125000",
-    "reorient_mode": "0",
-    "justify_vertical": "0",
-    "justify_horizontal": "1",
-    "font_name": "Arial Black",
-    "font_size": "80.000000",
-    "world_units_per_pixel": "0.300000",
-    "color": "255 255 255",
-    "fullbright": "1",
-    "enabled": "0",
-    "message": "100",
-    "lightmapstatic": "0",
-    "rendertocubemaps": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "rendercolor": "255 255 255",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mgdrtext1",
-    "classname": "point_worldtext",
-    "origin": "0.000183 -4880.000000 -944.000000",
-    "angles": "0.000000 180.000000 90.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "12403"
-  },
-  {
-    "depth_render_offset": "0.125000",
-    "reorient_mode": "0",
-    "justify_vertical": "0",
-    "justify_horizontal": "1",
-    "font_name": "Arial Black",
-    "font_size": "80.000000",
-    "world_units_per_pixel": "0.200000",
-    "color": "255 255 255",
-    "fullbright": "1",
-    "enabled": "0",
-    "message": "100",
-    "lightmapstatic": "0",
-    "rendertocubemaps": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "rendercolor": "255 255 255",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mgdrtext2",
-    "classname": "point_worldtext",
-    "origin": "66.000000 -2720.000000 -1760.000000",
-    "angles": "0.000000 270.000031 90.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "12404"
-  },
-  {
-    "depth_render_offset": "0.125000",
-    "reorient_mode": "0",
-    "justify_vertical": "0",
-    "justify_horizontal": "1",
-    "font_name": "Arial Black",
-    "font_size": "80.000000",
-    "world_units_per_pixel": "0.200000",
-    "color": "255 255 255",
-    "fullbright": "1",
-    "enabled": "0",
-    "message": "100",
-    "lightmapstatic": "0",
-    "rendertocubemaps": "0",
-    "object_culling": "0",
-    "fademaxdist": "0.000000",
-    "fademindist": "-1.000000",
-    "disablereceiveshadows": "0",
-    "rendercolor": "255 255 255",
-    "renderamt": "255",
-    "rendermode": "kRenderNormal",
-    "renderfx": "kRenderFxNone",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mgdrtext2",
-    "classname": "point_worldtext",
-    "origin": "-66.000008 -2720.000000 -1760.000000",
-    "angles": "0.000000 90.000000 90.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "12405"
-  },
-  {
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -39589,10 +38844,10 @@
     "Template10": "[PR#]steinkugeltor1",
     "Template09": "[PR#]schiebblock2",
     "Template08": "[PR#]schiebblock1",
-    "Template07": "[PR#]door43",
-    "Template06": "[PR#]door42",
-    "Template05": "[PR#]door41",
-    "Template04": "[PR#]door3",
+    "Template07": "",
+    "Template06": "",
+    "Template05": "",
+    "Template04": "[PR#]drstarttp",
     "Template03": "[PR#]nosjc",
     "Template02": "[PR#]luoshizhen",
     "Template01": "[PR#]mkzk_entity",
@@ -39891,7 +39146,7 @@
     "Template60": "[PR#]drtrespawn1",
     "Template59": "[PR#]drdiff3finish",
     "Template58": "[PR#]drdiff2finish",
-    "Template57": "[PR#]drstarttp",
+    "Template57": "",
     "Template56": "[PR#]mgdrtg",
     "Template55": "[PR#]mgdrdiff4c",
     "Template54": "[PR#]mgdrdiff3c",
@@ -40012,16 +39267,16 @@
     "Template27": "",
     "Template26": "",
     "Template25": "",
-    "Template24": "",
-    "Template23": "",
-    "Template22": "",
-    "Template21": "",
-    "Template20": "",
-    "Template19": "",
-    "Template18": "",
-    "Template17": "",
-    "Template16": "",
-    "Template15": "",
+    "Template24": "[PR#]door43",
+    "Template23": "[PR#]door42",
+    "Template22": "[PR#]door41",
+    "Template21": "[PR#]door410",
+    "Template20": "[PR#]door49",
+    "Template19": "[PR#]door48",
+    "Template18": "[PR#]door47",
+    "Template17": "[PR#]door45",
+    "Template16": "[PR#]door44",
+    "Template15": "[PR#]door3",
     "Template14": "[PR#]aaa71",
     "Template13": "[PR#]aaa61",
     "Template12": "[PR#]aaa51",
@@ -40050,9 +39305,9 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]mkzk_door1_temp",
+    "targetname": "[PR#]mkzk_door5_temp",
     "classname": "point_template",
-    "origin": "512.000000 3040.000000 0.000000",
+    "origin": "576.000000 3040.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12417",
@@ -40138,9 +39393,9 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]mkzk_door2_temp",
+    "targetname": "[PR#]mkzk_door1_temp",
     "classname": "point_template",
-    "origin": "544.000000 3040.000000 0.000000",
+    "origin": "512.000000 3040.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12419",
@@ -40210,96 +39465,8 @@
     "Template05": "",
     "Template04": "",
     "Template03": "",
-    "Template02": "",
-    "Template01": "[PR#]door31",
-    "clientOnlyEntityBehavior": "CREATE_FOR_CURRENTLY_CONNECTED_CLIENTS_ONLY",
-    "spawnGroupType": "INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP",
-    "entityFilterName": "",
-    "timeoutInterval": "0.000000",
-    "asynchronous": "0",
-    "spawnflags": "2",
-    "clientSideEntity": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mkzk_door0_temp",
-    "classname": "point_template",
-    "origin": "480.000000 3040.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "12422",
-    "worldName": "maps\\ze_mkzk_scarab_v4_remake",
-    "entityLumpName": "12422#entityLumpName"
-  },
-  {
-    "Template64": "",
-    "Template63": "",
-    "Template62": "",
-    "Template61": "",
-    "Template60": "",
-    "Template59": "",
-    "Template58": "",
-    "Template57": "",
-    "Template56": "",
-    "Template55": "",
-    "Template54": "",
-    "Template53": "",
-    "Template52": "",
-    "Template51": "",
-    "Template50": "",
-    "Template49": "",
-    "Template48": "",
-    "Template47": "",
-    "Template46": "",
-    "Template45": "",
-    "Template44": "",
-    "Template43": "",
-    "Template42": "",
-    "Template41": "",
-    "Template40": "",
-    "Template39": "",
-    "Template38": "",
-    "Template37": "",
-    "Template36": "",
-    "Template35": "",
-    "Template34": "",
-    "Template33": "",
-    "Template32": "",
-    "Template31": "",
-    "Template30": "",
-    "Template29": "",
-    "Template28": "",
-    "Template27": "",
-    "Template26": "",
-    "Template25": "",
-    "Template24": "",
-    "Template23": "",
-    "Template22": "",
-    "Template21": "",
-    "Template20": "",
-    "Template19": "",
-    "Template18": "",
-    "Template17": "",
-    "Template16": "",
-    "Template15": "",
-    "Template14": "",
-    "Template13": "",
-    "Template12": "",
-    "Template11": "",
-    "Template10": "",
-    "Template09": "",
-    "Template08": "[PR#]door410",
-    "Template07": "[PR#]door49",
-    "Template06": "[PR#]door48",
-    "Template05": "[PR#]door47",
-    "Template04": "[PR#]door45",
-    "Template03": "[PR#]door44",
-    "Template02": "",
-    "Template01": "",
+    "Template02": "[PR#]door48",
+    "Template01": "[PR#]door47",
     "clientOnlyEntityBehavior": "CREATE_FOR_CURRENTLY_CONNECTED_CLIENTS_ONLY",
     "spawnGroupType": "INSERT_INTO_POINT_TEMPLATE_SPAWN_GROUP",
     "entityFilterName": "",
@@ -40316,7 +39483,7 @@
     "vscripts": "",
     "targetname": "[PR#]mkzk_door4_temp",
     "classname": "point_template",
-    "origin": "576.000000 3040.000000 0.000000",
+    "origin": "544.000000 3040.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12423",
@@ -41929,8 +41096,8 @@
     "Template11": "",
     "Template10": "",
     "Template09": "",
-    "Template08": "",
-    "Template07": "",
+    "Template08": "[PR#]mgdrtext2",
+    "Template07": "[PR#]mgdrtext1",
     "Template06": "[PR#]seitenspiesse6",
     "Template05": "[PR#]seitenspiesse5",
     "Template04": "[PR#]seitenspiesse4",
@@ -41965,7 +41132,7 @@
     "layout": "panorama/layout/custom_game/game_text.xml",
     "targetname": "[PR#]game_text_hud",
     "classname": "custom_hud_layout",
-    "origin": "-32.000000 2768.000000 0.000000",
+    "origin": "-32.000000 2784.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12534"
@@ -42014,6 +41181,260 @@
         "target": "[PR#]mg5counter",
         "input": "Add",
         "param": "-1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "cs_script": "scripts/ze_mkzk_scarab.vjs",
+    "targetname": "[PR#]script",
+    "classname": "point_script",
+    "origin": "0.000000 2752.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12538"
+  },
+  {
+    "filterattribute": "76561199086555543",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]Admin_ID",
+    "classname": "filter_activator_attribute_int",
+    "origin": "-32.000000 2400.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12539",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]script",
+        "input": "RunScriptInput",
+        "param": "Admin",
+        "delay": 0,
+        "limit": 1
+      }
+    ]
+  },
+  {
+    "PassthroughCaller": "0",
+    "FastRetrigger": "0",
+    "TriggerOnce": "0",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]mg5open",
+    "classname": "logic_relay",
+    "origin": "-128.000000 2720.000000 0.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12542",
+    "connections": [
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa1",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa2",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa3",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa4",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa5",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa6",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa7",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa8",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa9",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa91",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa92",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa93",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa94",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa95",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa96",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa97",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa98",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa99",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa991",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa992",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa993",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa994",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa995",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa996",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]aa997",
+        "input": "Open",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]tz",
+        "input": "Open",
+        "param": "",
         "delay": 0,
         "limit": -1
       }
