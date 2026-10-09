@@ -4,7 +4,9 @@
 [
   {
     "spawnflags": "0",
+    "_minlight": "",
     "disableshadows": "0",
+    "globalname": "",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -15,6 +17,10 @@
     "renderamt": "255",
     "rendermode": "kRenderNormal",
     "renderfx": "kRenderFxNone",
+    "add_modifier": "",
+    "add_attribute": "",
+    "ResponseContext": "",
+    "vscripts": "",
     "targetname": "[PR#]warmwarm_platforms",
     "classname": "func_wall_toggle",
     "origin": "-3712.000000 -976.000000 -72.000000",
