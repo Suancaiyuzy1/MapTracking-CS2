@@ -481,54 +481,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]msg_DC10",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC10",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]nuke_excelsus_timer",
         "input": "Enable",
         "param": "",
@@ -18045,22 +17997,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]relay_door_hint30",
         "input": "Trigger",
         "param": "",
@@ -19241,22 +19177,6 @@
         "input": "Command",
         "param": "say \u003E\u003E\u003E Laser Gates disabling in 30 seconds. \u003C\u003C\u003C",
         "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
         "limit": 1
       },
       {
@@ -23984,22 +23904,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]msg_LH15",
         "input": "Start",
         "param": "",
@@ -28108,22 +28012,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 18,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]msg_SH15",
         "input": "Start",
         "param": "",
@@ -31887,22 +31775,6 @@
         "input": "DestroyImmediately",
         "param": "",
         "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
         "limit": 1
       },
       {
@@ -49135,22 +49007,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]bridge_music_activation",
         "input": "Trigger",
         "param": "",
@@ -49523,22 +49379,6 @@
         "input": "Enable",
         "param": "",
         "delay": 35,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
         "limit": 1
       },
       {
@@ -72933,22 +72773,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]relay_door_hint30",
         "input": "Trigger",
         "param": "",
@@ -75627,22 +75451,6 @@
         "input": "StartSound",
         "param": "",
         "delay": 53,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
         "limit": 1
       },
       {
@@ -79928,7 +79736,7 @@
         "target": "[PR#]breakable_vent02a",
         "input": "DisableCollision",
         "param": "",
-        "delay": 0,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -79936,7 +79744,7 @@
         "target": "[PR#]breakable_vent02",
         "input": "Break",
         "param": "",
-        "delay": 15,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -79944,7 +79752,7 @@
         "target": "[PR#]background_music04",
         "input": "StartSound",
         "param": "",
-        "delay": 15,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -79952,7 +79760,7 @@
         "target": "[PR#]trg_tp_anti_overdefense02",
         "input": "Enable",
         "param": "",
-        "delay": 30,
+        "delay": 60,
         "limit": 1
       },
       {
@@ -79960,7 +79768,7 @@
         "target": "[PR#]trg_tp_anti_overdefense01",
         "input": "Enable",
         "param": "",
-        "delay": 30,
+        "delay": 60,
         "limit": 1
       },
       {
@@ -79968,68 +79776,20 @@
         "target": "[PR#]main_srv",
         "input": "Command",
         "param": "say \u003E\u003E\u003E A large zombies horde appeared. \u003C\u003C\u003C",
-        "delay": 30,
+        "delay": 60,
         "limit": 1
       },
       {
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "Command",
-        "param": "say \u003E\u003E\u003E A large zombies horde is approaching your position. Expected arrival: 15 seconds \u003C\u003C\u003C",
-        "delay": 15,
+        "param": "say \u003E\u003E\u003E A large zombies horde is approaching your position. Expected arrival: 30 seconds \u003C\u003C\u003C",
+        "delay": 30,
         "limit": 1
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 17,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 17,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
-        "input": "Start",
-        "param": "",
-        "delay": 25,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 27,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH_IMMINENT",
+        "target": "[PR#]msg_LH10",
         "input": "Start",
         "param": "",
         "delay": 30,
@@ -80038,9 +79798,9 @@
       {
         "output": "OnStartTouch",
         "target": "[PR#]msg_LH_IMMINENT",
-        "input": "DestroyImmediately",
+        "input": "Start",
         "param": "",
-        "delay": 32,
+        "delay": 60,
         "limit": 1
       },
       {
@@ -80048,7 +79808,7 @@
         "target": "[PR#]zmtp_assist04",
         "input": "Trigger",
         "param": "",
-        "delay": 15,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -80056,12 +79816,12 @@
         "target": "[PR#]background_music*",
         "input": "StopSound",
         "param": "",
-        "delay": 14.899999618530273,
+        "delay": 29.899999618530273,
         "limit": 1
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]relay_door_hint15",
+        "target": "[PR#]relay_door_hint30",
         "input": "Trigger",
         "param": "",
         "delay": 0,
@@ -84208,22 +83968,6 @@
         "input": "DestroyImmediately",
         "param": "",
         "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 25,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 27,
         "limit": 1
       },
       {
@@ -97038,22 +96782,6 @@
         "input": "DestroyImmediately",
         "param": "",
         "delay": 27,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 30,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 32,
         "limit": 1
       },
       {
@@ -119239,22 +118967,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 42,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 40,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]relay_elevator_hint30",
         "input": "Trigger",
         "param": "",
@@ -125306,7 +125018,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "command",
-        "param": "say \u003E\u003E\u003E A large and small zombies horde is approaching your position. Expected arrival: 15 seconds \u003C\u003C\u003C",
+        "param": "say \u003E\u003E\u003E A large and small zombies horde is approaching your position. Expected arrival: 30 seconds \u003C\u003C\u003C",
         "delay": 0,
         "limit": 1
       },
@@ -125315,23 +125027,23 @@
         "target": "[PR#]trg_tp_zm_vent",
         "input": "Enable",
         "param": "",
-        "delay": 15,
-        "limit": -1
+        "delay": 30,
+        "limit": 1
       },
       {
         "output": "OnStartTouch",
         "target": "[PR#]trg_tp_humans_vent",
         "input": "Enable",
         "param": "",
-        "delay": 15,
-        "limit": -1
+        "delay": 30,
+        "limit": 1
       },
       {
         "output": "OnStartTouch",
         "target": "[PR#]main_srv",
         "input": "command",
         "param": "say \u003E\u003E\u003E A large and small zombies horde appeared. \u003C\u003C\u003C",
-        "delay": 15,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -125339,39 +125051,7 @@
         "target": "[PR#]trg_tp_zm_vent_shortcut",
         "input": "Enable",
         "param": "",
-        "delay": 15,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "Start",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH15",
-        "input": "Start",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 2,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH15",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 2,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -125379,7 +125059,7 @@
         "target": "[PR#]msg_LH10",
         "input": "Start",
         "param": "",
-        "delay": 5,
+        "delay": 20,
         "limit": 1
       },
       {
@@ -125387,7 +125067,7 @@
         "target": "[PR#]msg_SH10",
         "input": "Start",
         "param": "",
-        "delay": 5,
+        "delay": 20,
         "limit": 1
       },
       {
@@ -125395,7 +125075,7 @@
         "target": "[PR#]msg_LH10",
         "input": "DestroyImmediately",
         "param": "",
-        "delay": 7,
+        "delay": 22,
         "limit": 1
       },
       {
@@ -125403,15 +125083,7 @@
         "target": "[PR#]msg_SH10",
         "input": "DestroyImmediately",
         "param": "",
-        "delay": 7,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
-        "input": "Start",
-        "param": "",
-        "delay": 10,
+        "delay": 22,
         "limit": 1
       },
       {
@@ -125419,23 +125091,7 @@
         "target": "[PR#]msg_SH_IMMINENT",
         "input": "Start",
         "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_LH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 12,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH05",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 12,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -125443,15 +125099,7 @@
         "target": "[PR#]msg_LH_IMMINENT",
         "input": "Start",
         "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_SH05",
-        "input": "Start",
-        "param": "",
-        "delay": 10,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -125459,7 +125107,7 @@
         "target": "[PR#]msg_SH_IMMINENT",
         "input": "DestroyImmediately",
         "param": "",
-        "delay": 17,
+        "delay": 32,
         "limit": 1
       },
       {
@@ -125467,7 +125115,7 @@
         "target": "[PR#]msg_LH_IMMINENT",
         "input": "DestroyImmediately",
         "param": "",
-        "delay": 17,
+        "delay": 32,
         "limit": 1
       },
       {
@@ -125483,7 +125131,7 @@
         "target": "[PR#]spawnarea_dynamic_lights",
         "input": "Kill",
         "param": "",
-        "delay": 15,
+        "delay": 30,
         "limit": 1
       }
     ]
@@ -157043,22 +156691,6 @@
         "input": "Command",
         "param": "say \u003E\u003E\u003E Unlocking the door: 10 seconds remaining \u003C\u003C\u003C",
         "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 10,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 12,
         "limit": 1
       },
       {
@@ -196423,22 +196055,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]background_music*",
         "input": "StopSound",
         "param": "",
@@ -201038,22 +200654,6 @@
         "input": "Disable",
         "param": "",
         "delay": 25,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
         "limit": 1
       },
       {
@@ -207023,22 +206623,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 15,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 17,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]relay_door_hint15",
         "input": "Trigger",
         "param": "",
@@ -210541,14 +210125,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "Start",
-        "param": "",
-        "delay": 10,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]msg_DC10",
         "input": "Start",
         "param": "",
@@ -210577,14 +210153,6 @@
         "input": "DestroyImmediately",
         "param": "",
         "delay": 2,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DC_CLOSE",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 12,
         "limit": 1
       },
       {
@@ -241626,7 +241194,7 @@
     "disableshadows": "0",
     "bodygroups": "",
     "skin": "default",
-    "model": "maps/ze_trepang/entities/unnamed_72478.vmdl",
+    "model": "maps/ze_trepang/entities/vent_large_fan04_prop_72478.vmdl",
     "globalname": "",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -241635,7 +241203,7 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]vent_large_fan04",
-    "targetname": "",
+    "targetname": "[PR#]vent_large_fan04_prop",
     "classname": "prop_dynamic",
     "origin": "6815.651855 2482.500000 -5557.125000",
     "angles": "60.000004 90.000000 45.000004",
@@ -243444,7 +243012,7 @@
     "disableshadows": "0",
     "bodygroups": "",
     "skin": "default",
-    "model": "maps/ze_trepang/entities/unnamed_72356.vmdl",
+    "model": "maps/ze_trepang/entities/vent_large_fan03_prop_72356.vmdl",
     "globalname": "",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -243453,7 +243021,7 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]vent_large_fan03",
-    "targetname": "",
+    "targetname": "[PR#]vent_large_fan03_prop",
     "classname": "prop_dynamic",
     "origin": "7318.176758 2482.500000 -5557.125000",
     "angles": "45.000004 90.000000 45.000000",
@@ -243589,7 +243157,7 @@
     "disableshadows": "0",
     "bodygroups": "",
     "skin": "default",
-    "model": "maps/ze_trepang/entities/unnamed_72600.vmdl",
+    "model": "maps/ze_trepang/entities/vent_large_fan05_prop_72600.vmdl",
     "globalname": "",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -243598,7 +243166,7 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]vent_large_fan05",
-    "targetname": "",
+    "targetname": "[PR#]vent_large_fan05_prop",
     "classname": "prop_dynamic",
     "origin": "6299.157227 2482.500000 -5557.125000",
     "angles": "45.000004 90.000000 45.000000",
@@ -243976,7 +243544,7 @@
     "disableshadows": "0",
     "bodygroups": "",
     "skin": "default",
-    "model": "maps/ze_trepang/entities/unnamed_71152.vmdl",
+    "model": "maps/ze_trepang/entities/vent_large_fan02_prop_71152.vmdl",
     "globalname": "",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
@@ -243985,7 +243553,7 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]vent_large_fan02",
-    "targetname": "",
+    "targetname": "[PR#]vent_large_fan02_prop",
     "classname": "prop_dynamic",
     "origin": "7807.880371 2482.500000 -5557.125000",
     "angles": "60.000004 90.000000 45.000004",
@@ -248191,26 +247759,130 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "Start",
-        "param": "",
-        "delay": 20,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]msg_DO_OPEN",
-        "input": "DestroyImmediately",
-        "param": "",
-        "delay": 22,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]relay_door_hint20",
         "input": "Trigger",
         "param": "",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]main_srv",
+        "input": "Command",
+        "param": "say \u003E\u003E\u003E Disabling fans in 10 seconds. \u003C\u003C\u003C",
+        "delay": 5,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]main_srv",
+        "input": "Command",
+        "param": "say \u003E\u003E\u003E Fans disabled. \u003C\u003C\u003C",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]large_fan_hurt01",
+        "input": "Disable",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]large_fan_hurt02",
+        "input": "Disable",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]large_fan_hurt03",
+        "input": "Disable",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]large_fan_hurt04",
+        "input": "Disable",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan05",
+        "input": "Stop",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan04",
+        "input": "Stop",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan03",
+        "input": "Stop",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan02",
+        "input": "Stop",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan01",
+        "input": "Stop",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan02_prop",
+        "input": "EnableCollision",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan03_prop",
+        "input": "EnableCollision",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan04_prop",
+        "input": "EnableCollision",
+        "param": "",
+        "delay": 15,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]vent_large_fan05_prop",
+        "input": "EnableCollision",
+        "param": "",
+        "delay": 15,
         "limit": 1
       }
     ]
@@ -409070,6 +408742,30 @@
         "param": "mp_roundtime 1; mp_freezetime 0; mp_intro_team_time 0",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]trg_warmup",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]trg_phase2_intro",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]trg_phase1_intro",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -409545,5 +409241,56 @@
         "limit": -1
       }
     ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "20",
+    "damage": "0",
+    "master": "",
+    "filtername": "",
+    "spawnflags": "1",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]trg_warmup",
+    "classname": "trigger_hurt",
+    "origin": "15866.015625 10566.000000 -2940.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "326313",
+    "model": "maps/ze_trepang/entities/trg_warmup_326313.vmdl",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "!activator",
+        "input": "SetDamageFilter",
+        "param": "[PR#]filter_warmup_invincible",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "damagetype": "65536",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]filter_warmup_invincible",
+    "classname": "filter_damage_type",
+    "origin": "15200.000000 13296.000000 -13472.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "326318"
   }
 ]
