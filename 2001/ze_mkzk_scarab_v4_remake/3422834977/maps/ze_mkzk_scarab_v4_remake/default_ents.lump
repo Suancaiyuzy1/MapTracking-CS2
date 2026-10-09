@@ -3909,37 +3909,6 @@
   },
   {
     "wait": "0.010000",
-    "filtername": "[PR#]t",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "useLocalOffset": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mgdrtrigger0",
-    "classname": "trigger_multiple",
-    "origin": "0.000000 4232.000000 288.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "7535",
-    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger0_7535.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]mgdrtp1",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.010000",
     "filtername": "[PR#]hpfix",
     "spawnflags": "4097",
     "globalname": "",
@@ -3973,42 +3942,6 @@
         "input": "GetValue",
         "param": "",
         "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "0",
-    "landmark": "",
-    "target": "[PR#]tpfinal",
-    "wait": "0.01",
-    "filtername": "",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "1",
-    "useLocalOffset": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]mgdrtrigger4",
-    "classname": "trigger_teleport",
-    "origin": "0.000000 4232.000000 288.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "7544",
-    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtrigger4_7544.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]mgdrhp",
-        "input": "Test",
-        "param": "",
-        "delay": 0.5,
         "limit": -1
       }
     ]
@@ -10567,6 +10500,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]mgopen",
+        "input": "Trigger",
+        "param": "",
+        "delay": 1,
+        "limit": -1
       }
     ]
   },
@@ -10685,6 +10626,14 @@
         "input": "ForceSpawn",
         "param": "",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]mgopen",
+        "input": "Trigger",
+        "param": "",
+        "delay": 1,
         "limit": -1
       }
     ]
@@ -10812,6 +10761,14 @@
         "input": "ForceSpawn",
         "param": "",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]mgopen",
+        "input": "Trigger",
+        "param": "",
+        "delay": 1,
         "limit": -1
       }
     ]
@@ -22866,7 +22823,7 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mg5open",
+        "target": "[PR#]mgopen",
         "input": "Trigger",
         "param": "",
         "delay": 0.5,
@@ -39146,8 +39103,8 @@
     "Template60": "[PR#]drtrespawn1",
     "Template59": "[PR#]drdiff3finish",
     "Template58": "[PR#]drdiff2finish",
-    "Template57": "",
-    "Template56": "[PR#]mgdrtg",
+    "Template57": "[PR#]mgdrtrigger0",
+    "Template56": "[PR#]mgdrtrigger4",
     "Template55": "[PR#]mgdrdiff4c",
     "Template54": "[PR#]mgdrdiff3c",
     "Template53": "[PR#]mgdrdiffvote",
@@ -41095,7 +41052,7 @@
     "Template12": "",
     "Template11": "",
     "Template10": "",
-    "Template09": "",
+    "Template09": "[PR#]mgdrtg",
     "Template08": "[PR#]mgdrtext2",
     "Template07": "[PR#]mgdrtext1",
     "Template06": "[PR#]seitenspiesse6",
@@ -41223,7 +41180,7 @@
     "TriggerOnce": "0",
     "StartDisabled": "0",
     "vscripts": "",
-    "targetname": "[PR#]mg5open",
+    "targetname": "[PR#]mgopen",
     "classname": "logic_relay",
     "origin": "-128.000000 2720.000000 0.000000",
     "angles": "0.000000 0.000000 0.000000",

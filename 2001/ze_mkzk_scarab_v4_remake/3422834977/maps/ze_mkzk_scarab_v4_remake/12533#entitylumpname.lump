@@ -418,5 +418,61 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12405",
     "_template_lump_ent_index": "8"
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mgdrtg",
+    "classname": "trigger_multiple",
+    "origin": "-448.000000 -944.000000 -288.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "12328",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrtg_12328.vmdl",
+    "_template_lump_ent_index": "9",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "KeyValue",
+        "param": "max_health 300",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "AddContext",
+        "param": "heal:1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgheal",
+        "input": "Enable",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgheal",
+        "input": "Disable",
+        "param": "",
+        "delay": 0.20000000298023224,
+        "limit": 1
+      }
+    ]
   }
 ]
