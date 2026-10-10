@@ -28,8 +28,6 @@
  *   danmu_hit_fx(_template)     | info_particle_system  | 命中爆点
  *   danmu_muzzle_fx(_template)  | info_particle_system  | 发射火花
  *   danmu_hit_count             | math_counter（已有）  | 脚本 EntFire "Add" 1
- *   danmu_player_hurt           | hurt 触发器           | 命中瞬间脚本脉冲 Enable->Disable
- *   danmu_other_hurt            | hurt 触发器           | 同上（另一个体积/过滤，覆盖其它目标）
  *   stg_end                     | 可选                  | hits >= hitLimit 时触发它的 endInput
  *
  *   资源路径约定：cs_script 里填 addon 内相对路径换 `.vjs` 后缀（对齐官方
@@ -124,13 +122,6 @@ const CFG = {
     endTarget: "stg_end",                 // 留空 "" 表示不触发
     endInput: "Enable",
 
-    // ---- 弹幕击中碰撞 → 伤害 ----
-    // 命中判定触发的瞬间，把这些 hurt 触发器「开启 -> 稍后关闭」，伤害只结算这一次。
-    // 谁受伤由这些实体自己的体积/过滤决定，脚本只负责脉冲，不关心谁在里面。
-    // 想拆成「打中驾驶员 / 打中其它」两路，就把名字分到两个数组、在各自调用点调 pulseHurt。
-    hurtOnHit: ["danmu_player_hurt", "danmu_other_hurt"],
-    hurtPulseTime: 0.1,                   // 开启后多久关闭（秒；>=0.1 合规）
-
     // ---- 游戏平面 ----
     // 背景 mesh 前面的那块 2D 平面。深度（法线轴）和平面原点在开波时标定一次，
     // 之后所有 u/v 数值都是「相对**玩区中心**」的偏移（靠 planeCenter 平移半个玩区）。
@@ -141,24 +132,11 @@ const CFG = {
     // 平面朝向（背景是哪种墙）：见上面注释里的三个预设，本题图是 wall_yz
     plane: "wall_yz",
     planeCenter: { u: 1101, v: 1502 },    // = 玩区尺寸的一半。取自 stg_background 背景 mesh：
-                                          //   横 (y) 2202 → u 半宽 1101；竖 (z) 3004 → v 半高 1502
-                                          // 锚点在左下角，沿 +U/+V 平移这么多就到玩区中心，
-                                          // 于是 u ∈ ±1101（横）、v ∈ ±1502（竖）
-    // 玩家碰撞：是否展示**机体判定**。默认开。
-    //   优先用地图标记实体：CFG.hitboxEntity —— 一个「非实体 + 半透明」的 func_brush，
-    //   做成 Y21×Z21×X10 的扁盒（原点必须在盒中心）。脚本每帧把它移到判定位置，
-    //   **正式服也能看到**；找不到该实体时回退到 DebugBox/DebugSphere（仅 dev/tools 可见）。
+    //   横 (y) 2202 → u 半宽 1101；竖 (z) 3004 → v 半高 1502
+    // 锚点在左下角，沿 +U/+V 平移这么多就到玩区中心，
+    // 于是 u ∈ ±1101（横）、v ∈ ±1502（竖）
+    // 是否由脚本画出机体判定（框 + 中心点）。只在 dev/tools 环境可见。
     showHitbox: true,
-    // 机体判定盒的地图实体名（func_brush，尺寸/材质见上）。留空 = 不用实体，走 debug 画法。
-    hitboxEntity: "danmu_hitbox",
-    // 判定中心点用的实体名（可选，小 func_brush 或 env_sprite）。留空 = 不画中心点。
-    hitDotEntity: "",
-    // 判定盒"高亮"：给标记实体加发光描边（BaseModelEntity.Glow，不挑材质，正式服可用）。
-    // 贴图透明度不生效时（如不透明玻璃），靠它保证看得见。
-    hitboxGlow: true,
-    hitboxGlowColor: { r: 80, g: 255, b: 120 },
-    // 弹幕碰撞：是否画出每颗弹幕的判定球（红点）。默认关——发布时只留玩家判定。
-    showDanmuHitbox: false,
     hitDotRadius: 3,   // 判定中心点那个小球的半径（画着看的小点，不是判定尺寸）
     // 标定微调：把**整块弹幕场**在平面内平移，用来对齐背景画面。机体、boss、弹幕
     // 会一起平移，相对关系（也就是判定）不变。
@@ -176,7 +154,7 @@ const CFG = {
     danmuRadius: 6,                       // 弹幕判定半径
     boundsU: [-1800, 1800],               // 平面内出界即回收（比玩区宽，弹幕先飞出去再消失）
     boundsV: [-1700, 2600],               // 上方放宽是给第 2 阶段「太鼓先减速上升到最高点
-                                          // 再俯冲」留余量（原版也是冲出画面上缘的）
+    // 再俯冲」留余量（原版也是冲出画面上缘的）
     killOnWorldHit: false,                // 弹幕撞到场景是否消失（背景墙在平面后时保持 false）
 
     // ---- 弹幕 ----
@@ -184,7 +162,7 @@ const CFG = {
     danmuLife: 14,                        // 单颗最长存活（秒）
     maxDanmu: 420,                        // 同屏上限，保护性能
     danmuSkipClass: [],                   // 模板里「不当作弹幕来移动」的类名（现在是粒子，
-                                          // 要的就是它本身，所以留空；想加纯装饰粒子再往里填）
+    // 要的就是它本身，所以留空；想加纯装饰粒子再往里填）
 
     // ---- boss（移动/火力/节奏都按阶段给，见下面的 PHASES） ----
     bossOrigin: { u: 0, v: 1170 },        // boss 的平面内中心（玩区顶部 v=+1502 附近）
@@ -193,16 +171,14 @@ const CFG = {
     // ---- 粒子 ----
     fxLife: 3.0,                          // 生成的粒子实体多久后 Kill
     muzzleFx: true,
-    muzzleFxMinInterval: 0.1,             // 发射粒子节流（秒；>=0.1 合规）
+    muzzleFxMinInterval: 0.05,            // 发射粒子节流（秒）
 
     // ---- 关卡 ----
     autoStart: true,                      // 脚本加载即用第 1 阶段开波
     hitLimit: 0,                          // >0：命中达到该次数就结束（触发 endTarget）
 
     // ---- 调试 ----
-    // true：画屏幕文字（阶段/命中/弹幕数）+ 找不到实体时的提示。
-    // 玩家/弹幕碰撞框另有 showHitbox / showDanmuHitbox 控制，不在此开关内。
-    debug: false,
+    debug: false,                         // true：画 hitbox 框/弹幕点 + 屏幕文字
 };
 
 /* ============================== Boss 三阶段 ============================== */
@@ -324,17 +300,6 @@ function toWorld(u, v, w) {
     return out;
 }
 
-/** 复用一个参数对象做「每帧位移」：避免每帧 × 每颗弹幕都 new 出临时对象，
- *  JS 的 GC 会在帧内制造 10ms 级尖峰（实测弹幕段峰值就是它）。引擎同步读取向量值，复用安全。 */
-const _moveArg = { position: { x: 0, y: 0, z: 0 } };
-function moveTo(ent, u, v, w) {
-    const p = _moveArg.position;
-    p[AXIS_U] = PLANE_U0 + u;
-    p[AXIS_V] = PLANE_V0 + v;
-    p[AXIS_W] = (w === undefined) ? PLANE_W : w;
-    ent.Move(_moveArg);
-}
-
 const deg2rad = (d) => d * Math.PI / 180;
 
 /** 世界坐标 → 平面坐标（toWorld 的逆） */
@@ -357,13 +322,6 @@ let ship;
 let shipU = 0, shipV = 0;
 /** @type {import("cs_script/point_script").Entity | undefined} */
 let boss;
-/** 机体判定的**地图标记实体**（CFG.hitboxEntity / CFG.hitDotEntity，正式服可见） */
-/** @type {import("cs_script/point_script").Entity | undefined} */
-let hitboxMarker;
-/** @type {import("cs_script/point_script").Entity | undefined} */
-let hitDotMarker;
-let hitboxHidden = false;             // 是否已把标记藏起来（避免每帧重复挪）
-let hitboxGlowing = false;            // 标记是否已开着高亮（Glow 是状态，不用每帧调）
 /** 弹幕类型 -> 已解析的 point_template（CFG.danmuKinds 的键） */
 /** @type {Record<string, import("cs_script/point_script").PointTemplate | undefined>} */
 let tplDanmu = {};
@@ -418,11 +376,6 @@ function resolveAll(verbose) {
     tplHitFx = (tplHitFx && tplHitFx.IsValid()) ? tplHitFx : findTemplate(CFG.hitFxTpl);
     tplMuzzleFx = (tplMuzzleFx && tplMuzzleFx.IsValid()) ? tplMuzzleFx : findTemplate(CFG.muzzleFxTpl);
     ship = (ship && ship.IsValid()) ? ship : Instance.FindEntityByName(CFG.shipName);
-    // 判定标记（可选）：找不到就回退到 Debug 画法
-    hitboxMarker = (hitboxMarker && hitboxMarker.IsValid()) ? hitboxMarker
-        : (CFG.hitboxEntity ? Instance.FindEntityByName(CFG.hitboxEntity) : undefined);
-    hitDotMarker = (hitDotMarker && hitDotMarker.IsValid()) ? hitDotMarker
-        : (CFG.hitDotEntity ? Instance.FindEntityByName(CFG.hitDotEntity) : undefined);
     if (ship && ship.IsValid()) {
         // 机体位置完全由脚本给，别让物理/动画跟脚本抢
         try { ship.SetMoveType(CSMoveType.NONE); } catch (e2) { /* 某些类不支持 */ }
@@ -523,7 +476,6 @@ function spawnFromTemplate(tpl, pos, ang) {
         return [];
     }
     if (!ents || ents.length === 0) return [];
-    profSpawns += ents.length;                         // PROF 计数
     for (const e of ents) {
         if (!e || !e.IsValid()) continue;
         // 模板里的实体默认可能带物理；统一改成不动，由脚本 Teleport 定位
@@ -567,70 +519,6 @@ function spawnBullets(pos, kind) {
     return out;
 }
 
-/* ============================== 弹幕对象池 ==============================
- * 生成一个弹幕实体（ForceSpawn）实测约 1.5~3ms；本图每秒要造 ~96 个 → 单帧 10~25ms 尖峰。
- * 改为「回收复用」：弹幕到期/命中时**不再 Kill**，而是瞬移到远处驻留点并放回池子；
- * 下次同类开火优先取池中实体，只把它 Teleport 到发射点即可（稳态下几乎不再 ForceSpawn）。
- *   · 启用/回收那一刻用 Teleport（重置插值＝瞬移，避免实体从驻留点"拉丝"滑过来）
- *   · 每帧移动仍用 Move（不重置插值＝平滑）
- * 池按「这次开火实际用的模板」分开，避免不同类型模型混用。
- * 注意：池会让实体一直存在（只是停在远处），所以重载时要主动清（见 OnScriptReload）。 */
-// 驻留点：要「不可见」但也必须在网络原点量化的合法 cell 内（0~32 → 各轴约 ±16384），
-// 否则引擎会每帧刷 "outside of cell bounds"。这里取远离玩区（玩区 z≈10660~13664）的正下方。
-const PARK_WORLD = { x: 0, y: 0, z: -14000 };   // 可按地图调整；务必保持在 ±16000 内
-const danmuPool = {};                            // effKind -> [ent, ...]（空闲可复用）
-const danmuKindN = {};                           // effKind -> 该模板一次生成几个实体
-let poolWarnedMulti = false;
-
-/** 这次开火实际会用的模板键（与 spawnBullets 的优先级一致） */
-function effectiveKind(kind) {
-    if (kind && tplDanmu[kind]) return kind;
-    const pk = phaseKind();
-    if (tplDanmu[pk]) return pk;
-    return "normal";
-}
-
-/** 生成一组实体：优先从池里复用（按该模板的实体数），池不足才真生成 */
-function acquireEnts(effKind, pos, ang) {
-    const list = danmuPool[effKind] || (danmuPool[effKind] = []);
-    const want = danmuKindN[effKind];
-
-    if (want !== undefined) {
-        const out = [];
-        while (out.length < want && list.length) {
-            const e = list.pop();
-            if (!e || !e.IsValid()) continue;
-            try { e.Teleport({ position: pos, angles: ang }); out.push(e); } catch (err) { /* 丢弃 */ }
-        }
-        if (out.length === want) return out;
-        for (const e of out) releaseEnt(effKind, e);   // 凑不齐一组：先还回去，整体新生成
-    }
-
-    const ents = spawnBullets(pos, effKind);
-    if (danmuKindN[effKind] === undefined) {
-        danmuKindN[effKind] = ents.length;
-        if (ents.length > 1 && !poolWarnedMulti) {
-            poolWarnedMulti = true;
-            Instance.Msg("[STG] ⚠ 模板 " + effKind + " 一次生成 " + ents.length
-                + " 个实体；对象池将按组复用\n");
-        }
-    }
-    return ents;
-}
-
-/** 回收一枚弹幕：入池；needPark 为真时才先 Teleport 到驻留点。
- *  "已飞出可见范围"的弹幕（needPark=false）就地留在界外即可——本来就看不清，
- *  省掉一大批 Teleport 正是消除「回收尖峰」的关键。 */
-function releaseEnt(effKind, ent, needPark) {
-    if (!ent || !ent.IsValid()) return;
-    if (needPark !== false) {
-        try { ent.Teleport({ position: PARK_WORLD }); } catch (e) { return; }
-    }
-    (danmuPool[effKind] || (danmuPool[effKind] = [])).push(ent);
-    profKills++;                               // PROF：本帧回收数
-    if (profKills > profKillMax) profKillMax = profKills;
-}
-
 /* ============================== 弹幕 ============================== */
 /** boss 的可见模型 / 它的原始深度 / 它在平面里的「家」坐标（calibrate 时采一次） */
 /** @type {import("cs_script/point_script").Entity | undefined} */
@@ -662,41 +550,22 @@ function bossPos() {
 }
 
 /** 从**指定平面坐标**打一发（角度 0=+u / 90=+v）；boss 齐射与「四边弹幕」共用。
- *  opts 可选：{ kind: 弹幕类型名（决定用哪套粒子）, motion: 每帧回调（变速/拐弯） }
- *  **不受每帧生成预算限制**，立即生成；返回生成出的实体数组（供需要句柄的调用点用）。 */
-function fireFromNow(u, v, angDeg, speed, opts) {
+ *  opts 可选：{ kind: 弹幕类型名（决定用哪套粒子）, motion: 每帧回调（变速/拐弯） } */
+function fireFrom(u, v, angDeg, speed, opts) {
     const o = opts || {};
     const ph = curPhase();
-    if (danmu.length >= Math.min(CFG.maxDanmu, ph.maxDanmu)) return [];
-    const effKind = effectiveKind(o.kind);
-    const ents = acquireEnts(effKind, toWorld(u, v), { pitch: 0, yaw: 0, roll: 0 });
-    if (ents.length === 0) return [];
+    if (danmu.length >= Math.min(CFG.maxDanmu, ph.maxDanmu)) return;
+    const ents = spawnBullets(toWorld(u, v), o.kind);
+    if (ents.length === 0) return;
     const d = dirUV(angDeg);
     const now = Instance.GetGameTime();
     const spd = speed * ph.speedMul;
     for (const e of ents) {
         danmu.push({
-            ent: e, kind: effKind, u, v, vu: d.u * spd, vv: d.v * spd, born: now,
+            ent: e, u, v, vu: d.u * spd, vv: d.v * spd, born: now,
             launchDeg: angDeg, descendDeg: o.descendDeg, motion: o.motion,
         });
     }
-    return ents;
-}
-
-/* 每帧生成预算：一次"齐射"（如 5 颗边缘大光弹各炸 14 小弹 = 70 个实体）会在一帧里
- * ForceSpawn 70 次 ≈ 57ms（实测 ~0.8ms/个），能把服务器卡住好几帧。
- * 这里限制每帧最多真生成 SPAWN_PER_FRAME 个，超出的按 FIFO 排队到后续帧；
- * 总数/角度/速度都不变，只是"出现"分几帧完成（视觉上像子弹连续喷出）。
- * 调大 = 更接近瞬时、但单帧更卡；调小 = 更平滑、但铺开更久。 */
-const SPAWN_PER_FRAME = 8;
-let spawnLeft = 0;
-const spawnBacklog = [];
-
-/** 生成一发（受每帧预算限制；超预算就排队、本次返回 null，不立即生成） */
-function fireFrom(u, v, angDeg, speed, opts) {
-    if (spawnLeft <= 0) { spawnBacklog.push([u, v, angDeg, speed, opts]); return null; }
-    spawnLeft--;
-    return fireFromNow(u, v, angDeg, speed, opts);
 }
 
 function fire(angDeg, speed, kind) {
@@ -749,7 +618,7 @@ function startSpiral(every, dur, speed, spinDeg, kind) {
     const now = Instance.GetGameTime();
     emitters.push({
         until: now + dur,
-        every: Math.max(0.1, every || 0.1),    // 下限保护：发射间隔不得 < 0.1（合规）
+        every: Math.max(0.02, every || 0.1),   // 下限保护：think 里的发射循环不能零步长
         next: now,
         fn: () => { fire(spawnPhase, speed, kind || "spiral"); spawnPhase += spinDeg; },
     });
@@ -870,14 +739,14 @@ const TAIKO = {
     //    ins_700/701 配好弹、ins_703(slot, 自机 id) 挂上去、之后每帧 ins_704 同步位置，
     //    所以太鼓是**一边飞一边从自己身上往外喷弹**（这就是「ロケット」的尾焰）。
     //    角度 = %A + π，%A 最终是 +90°（正下方）→ 尾焰朝**正上方**。
-    trailEvery: 0.1,          // 喷尾迹的间隔（原版连续喷=每帧；抬到 0.1s 合规）
+    trailEvery: 4 / 60,       // 喷尾迹的间隔（原版连续喷，这里隔帧省性能）
     trailDur: 1.3,            // 俯冲开始后喷多久
     trailSpeed: 1500,         // 尾焰速度（原版 ins_605 speed=32 → 很长的拖尾）
     trailSpread: 6,           // 尾焰左右抖动（度）
 
     // —— 2 连太鼓落到底后（原版 TaikoA07_at2 出界分支）——
-    flameCount: 10,           // 发射炎发数（原版 $C=60 每帧一颗；间隔必须 >=0.1，故压到 10 发 × 0.1s = 1s，保持原时长/节奏）
-    flameGap: 0.1,            // 每发发射炎的间隔（原版每帧一颗=1/60；抬到 0.1s 合规）
+    flameCount: 60,           // 发射炎 60 发（原版 $C=60，每帧一颗）
+    flameGap: 1 / 60,
     flameSpeed: 620,          // 朝**自机**（原版 ins_604(1, [-9998], …)）
     flameRandDeg: 5,          // 每发再随机偏 0~5°（原版 [-9987]*0.08726646）
     flameDelay: 1.0,          // 炎喷完才炸
@@ -1074,7 +943,7 @@ const SHIELD = {
     spinDeg: 22,          // 5way 激光的顺时针转速（度/秒）——放慢一点更好躲
     beams: 5,             // 全方位 5way
     beamBaseDeg: -90,     // 初始方向（原版 %A = -π/2）
-    beamEvery: 0.1,       // 每条光束的射弹间隔（原 0.035 太密；>=0.1 合规，会明显变稀）
+    beamEvery: 0.035,     // 每条光束的射弹间隔（越密越像激光）
     beamSpeed: 1600,      // 光束弹速度（够快就能连成一条线，但别飞太猛）
     beamKind: "spiral",
     edgeStart: 0.6,       // 开局多久后开始生成边缘大光弹
@@ -1157,8 +1026,9 @@ function spawnEdgeBulbs() {
         const dist = rayToEdge(b.u, b.v, deg);
         const pu = b.u + d.u * dist, pv = b.v + d.v * dist;
 
-        // 大光弹本体直接生成（数量少，用 now 版拿实体句柄；不走预算）
-        const bulb = fireFromNow(pu, pv, deg, 0, { kind: SHIELD.edgeKind, motion: holdStill });
+        const before = danmu.length;
+        fireFrom(pu, pv, deg, 0, { kind: SHIELD.edgeKind, motion: holdStill });
+        const bulb = danmu.slice(before).map((x) => x.ent);
 
         once(SHIELD.edgeHold, () => {
             for (let k = 0; k < SHIELD.burstCount; k++) {
@@ -1181,40 +1051,12 @@ function killDanmuEnt(ent) {
 
 function killDanmuAt(i) {
     const d = danmu[i];
-    if (d.ent) {
-        // 自然飞出可见范围的：就地留在界外，不必 Teleport 驻留（避免同帧大批量 Teleport 的回收尖峰）
-        const farOut = d.u < CFG.boundsU[0] - 300 || d.u > CFG.boundsU[1] + 300
-                    || d.v < CFG.boundsV[0] - 300 || d.v > CFG.boundsV[1] + 300;
-        releaseEnt(d.kind, d.ent, !farOut);
-    }
+    if (d.ent && d.ent.IsValid()) Instance.EntFireAtTarget({ target: d.ent, input: "Kill" });
     danmu.splice(i, 1);
-}
-
-/** 显式清场（stg_stop / stg_start / 换阶段）：把场上弹幕**真正 Kill 掉**，保证客户端立刻清空。
- *  说明：运行中的自然回收才走对象池（"挪到远处"复用）；显式清场若也只"驻留"，
- *  在这些非自然回收的场景下客户端不一定会立刻更新位置，看起来就像"没清空"。 */
-function clearAllDanmu() {
-    for (let i = danmu.length - 1; i >= 0; i--) {
-        const d = danmu[i];
-        if (d.ent && d.ent.IsValid()) {
-            try { Instance.EntFireAtTarget({ target: d.ent, input: "Kill" }); } catch (e) { /* 忽略 */ }
-        }
-        danmu.splice(i, 1);
-    }
-}
-
-/** 命中瞬间脉冲 hurt 触发器：开启 -> 稍后关闭（伤害只结算这一次） */
-function pulseHurt() {
-    for (const name of CFG.hurtOnHit) {
-        if (!name) continue;
-        Instance.EntFireAtName({ name: name, input: "Enable" });
-        Instance.EntFireAtName({ name: name, input: "Disable", delay: CFG.hurtPulseTime });
-    }
 }
 
 function onHit(pos) {
     hitCount++;
-    pulseHurt();
     if (CFG.hitCounter) {
         Instance.EntFireAtName({ name: CFG.hitCounter, input: "Add", value: 1 });
     }
@@ -1264,7 +1106,6 @@ function updateDanmu(dt) {
             });
             if (tr.didHit && tr.hitEntity && tr.hitEntity.IsWorld()) {
                 fxAt(tplHitFx, tr.end);
-                pulseHurt();
                 killDanmuAt(i);
                 continue;
             }
@@ -1279,8 +1120,8 @@ function updateDanmu(dt) {
         }
 
         d.u = nu; d.v = nv;
-        moveTo(d.ent, nu, nv);   // 复用对象、Move 不重置插值（平滑，且无 GC 尖峰）
-        if (CFG.showDanmuHitbox) {
+        d.ent.Teleport({ position: toWorld(nu, nv) });
+        if (CFG.debug) {
             Instance.DebugSphere({ center: toWorld(nu, nv), radius: CFG.danmuRadius, duration: 0, color: { r: 255, g: 80, b: 80 } });
         }
     }
@@ -1289,7 +1130,7 @@ function updateDanmu(dt) {
 function updateBoss() {
     const b = bossTarget();
     if (boss && boss.IsValid()) {
-        try { moveTo(boss, b.u, b.v); } catch (e) { /* 不支持就算了 */ }
+        try { boss.Teleport({ position: toWorld(b.u, b.v) }); } catch (e) { /* 不支持就算了 */ }
     }
     // 可见模型：parent 到 boss 的**绝对不能**再由脚本推（会双重变换 → 模型被甩飞），
     // 而且 Teleport 会抛异常，一旦抛出去 think 里后面的 updateDanmu / 时间轴就全被跳过
@@ -1297,7 +1138,7 @@ function updateBoss() {
     // 另外第一次 Teleport 失败也自动关掉驱动。
     if (!CFG.bossModelParented && bossModelDrive && bossModel && bossModel.IsValid()) {
         try {
-            moveTo(bossModel, b.u, b.v, bossModelW);
+            bossModel.Teleport({ position: toWorld(b.u, b.v, bossModelW) });
         } catch (e) {
             bossModelDrive = false;
             Instance.Msg("[STG] boss 模型不能由脚本推（大概已设 parent）；"
@@ -1308,7 +1149,7 @@ function updateBoss() {
 
 /* ====== 机体操控：脚本每 tick 直接读驾驶员按键并移动模型 =======================
  * game_ui（move_game_Uid）只负责「冻住驾驶员」，并把接管/释放事件送进脚本：
- *   PlayerOn  -> RunScriptInput pilot_on    （activator = 驾驶员 pawn）
+ * PlayerOn    -> RunScriptInput pilot_on    （activator = 驾驶员 pawn）
  *   PlayerOff -> RunScriptInput pilot_off
  * 脚本用 CSPlayerPawn.IsInputPressed 每 tick 读按键，自己积分出机体在平面内的位置，
  * 再 Teleport 机体模型 —— 不用 func_movelinear，也不需要任何地图 IO 传按键：
@@ -1355,56 +1196,18 @@ function updateShip(dt) {
     // 模型原点相对判定点的偏移（原点在脚底时，把模型往下挪，肚子才对上判定点）
     if (ship && ship.IsValid()) {
         const o = CFG.shipModelOffset;
-        moveTo(ship, shipU + o.u, shipV + o.v);
+        ship.Teleport({ position: toWorld(shipU + o.u, shipV + o.v) });
     }
-}
-
-/** 把判定标记移到远处（停波 / 关显示时用，避免留个绿框在场上） */
-function hideHitboxMarkers() {
-    if (hitboxMarker && hitboxMarker.IsValid()) {
-        if (hitboxGlowing) {
-            try { hitboxMarker.Unglow(); } catch (e0) { /* 有些类不支持 */ }
-        }
-        try { hitboxMarker.Teleport({ position: PARK_WORLD }); } catch (e) { /* 忽略 */ }
-    }
-    if (hitDotMarker && hitDotMarker.IsValid()) {
-        try { hitDotMarker.Teleport({ position: PARK_WORLD }); } catch (e2) { /* 忽略 */ }
-    }
-    hitboxGlowing = false;
-    hitboxHidden = true;
 }
 
 /**
- * 展示机体判定：
+ * 用脚本画出机体判定（不依赖地图里的 brush）：
  *   绿框 = 机体判定盒（平面内 hitboxWidth×hitboxHeight，法线方向 hitboxDepth）
- *   黄点 = 判定中心（只用来肉眼对齐，不代表判定尺寸）
- * 优先用**地图标记实体**（CFG.hitboxEntity / hitDotEntity）：每帧 Teleport 到判定位置；
- * 标记 brush 的原点就是盒中心，所以直接挪原点即可 —— **正式服也能看到**。
- * 没有标记实体时回退到 DebugBox/DebugSphere（仅 dev/tools 生效）。
- * CFG.showHitbox=false 时把标记藏到远处（只做一次）。
+ *   黄点 = 判定中心（小球，半径 CFG.hitDotRadius，只用来肉眼对齐，不代表判定尺寸）
+ * 只在 dev/tools 环境可见（DebugBox/DebugSphere 的限制）。
  */
 function drawHitbox() {
-    if (!CFG.showHitbox) {
-        if (!hitboxHidden) hideHitboxMarkers();
-        return;
-    }
-    hitboxHidden = false;
-
     const p = toWorld(shipU, shipV);
-    if (hitboxMarker && hitboxMarker.IsValid()) {
-        try { hitboxMarker.Teleport({ position: p }); } catch (e) { /* 不同类可能不支持 */ }
-        // 高亮描边：只在刚打开时调一次（Glow 是持续状态；贴图不透明时靠它保证看得见）
-        if (CFG.hitboxGlow && !hitboxGlowing) {
-            hitboxGlowing = true;
-            try { hitboxMarker.Glow(CFG.hitboxGlowColor); } catch (e3) { /* 有些类不支持 */ }
-        }
-        if (hitDotMarker && hitDotMarker.IsValid()) {
-            try { hitDotMarker.Teleport({ position: p }); } catch (e2) { /* 同上 */ }
-        }
-        return;
-    }
-
-    // 回退：dev/tools 的调试画法
     const hu = CFG.hitboxWidth / 2, hv = CFG.hitboxHeight / 2, hw = CFG.hitboxDepth / 2;
     const mins = { x: p.x, y: p.y, z: p.z };
     const maxs = { x: p.x, y: p.y, z: p.z };
@@ -1434,20 +1237,20 @@ function resolvePilot(ent) {
 // game_ui 的 PlayerOn/PlayerOff（activator = 驾驶员 pawn）
 Instance.OnScriptInput("pilot_on", (data) => {
     pilot = resolvePilot(data ? data.activator : undefined);
-    // 只在解析失败时报错；成功是常规流程，不刷日志
-    if (!pilot) Instance.Msg("[STG] ⚠ pilot_on 没解析出驾驶员（检查 move_game_Uid 的 OnCase01 连线）\n");
+    if (pilot) {
+        Instance.Msg("[STG] 驾驶员接管：" + pilot.GetClassName() +
+            (typeof pilot.IsInputPressed === "function" ? "（可读按键）" : "（⚠ 不能读按键）") + "\n");
+    } else {
+        Instance.Msg("[STG] ⚠ pilot_on 没解析出驾驶员（检查 move_game_Uid 的 OnCase01 连线）\n");
+    }
 });
 Instance.OnScriptInput("pilot_off", () => {
     pilot = null;
     keyHeld.left = keyHeld.right = keyHeld.fwd = keyHeld.back = false;
+    Instance.Msg("[STG] 驾驶员释放\n");
 });
 
 /* ============================== 主循环 ============================== */
-/* 主循环节拍（秒）。0 = 每 tick 都跑（原版、最顺滑）；调大越省 CPU、但位移越"跳"。
- * 之前为过 cs_script 审查规则设成 0.1，但 0.1 + Teleport(重置客户端插值) 看着掉帧；
- * 且 stg 属 nannoimi（不是送审的 ze_surf_easy），这里按顺滑优先改回 0（每 tick）。
- * 顺滑主要靠 updateDanmu 改用 Move()（不重置插值、客户端平滑插值），不靠调高节拍。 */
-const THINK_INTERVAL = 0;
 let lastTime = 0;
 
 /** 同一个 key 只往控制台报一次（热路径里抛异常时免得每 tick 刷屏） */
@@ -1481,55 +1284,17 @@ function pinBoss() {
     bossPinned = true;
 }
 
-/* ============================== 临时性能剖析 ==============================
- * 定位 think 每帧耗时热点（引擎日志 "thinking for N ms!"）用。
- * 每帧记录各段耗时，约每 1 秒汇总打印一次；定位完可整段删除。 */
-const PROF = { on: true, acc: {}, max: {}, n: 0, t0: 0, danmuSum: 0, peek: 0, spawnSum: 0, spawnPeak: 0, killSum: 0, backlogPeak: 0 };
-let profSpawns = 0;   // 本帧 ForceSpawn 出来的实体数
-let profKills = 0;    // 本帧回收的弹幕数
-let profKillMax = 0;  // 单帧回收数峰值
-function nowMs() {
-    try {
-        if (typeof performance !== "undefined" && performance && performance.now) return performance.now();
-        if (typeof Date !== "undefined" && Date.now) return Date.now();
-    } catch (e) { /* 忽略，走下面的兜底 */ }
-    return Instance.GetGameTime() * 1000;   // 兜底（同一帧内不递增，仅保不崩）
-}
-function profAdd(k, ms) {
-    PROF.acc[k] = (PROF.acc[k] || 0) + ms;
-    if (!PROF.max[k] || ms > PROF.max[k]) PROF.max[k] = ms;
-}
-function profFlush() {
-    const n = PROF.n || 1;
-    const parts = Object.keys(PROF.acc)
-        .map((k) => k + "=" + (PROF.acc[k] / n).toFixed(2) + "/" + (PROF.max[k] || 0).toFixed(1))
-        .join("  ");
-    Instance.Msg("[STG][PROF] 每帧 均值/峰值(ms) n=" + n
-        + " 弹幕均值=" + (PROF.danmuSum / n).toFixed(0)
-        + " 生成/帧=" + (PROF.spawnSum / n).toFixed(1) + "(峰" + PROF.spawnPeak + ")"
-        + " 回收/帧=" + (PROF.killSum / n).toFixed(1) + "(峰" + profKillMax + ")"
-        + " 积压峰=" + PROF.backlogPeak
-        + " 单帧峰值=" + PROF.peek.toFixed(1) + " | " + parts + "\n");
-    PROF.acc = {}; PROF.max = {}; PROF.n = 0; PROF.danmuSum = 0; PROF.peek = 0;
-    PROF.spawnSum = 0; PROF.spawnPeak = 0; PROF.killSum = 0; PROF.backlogPeak = 0;
-}
-
 function think() {
     const now = Instance.GetGameTime();
-    Instance.SetNextThink(now + THINK_INTERVAL);       // 节拍见 THINK_INTERVAL（0=每tick）
+    Instance.SetNextThink(now);                        // 每 tick 再进来
     const dt = Math.min(Math.max(now - lastTime, 0), 0.1);
     lastTime = now;
-    profSpawns = 0; profKills = 0; profKillMax = 0;   // PROF：本帧生成/回收计数清零
-    spawnLeft = SPAWN_PER_FRAME;        // 每帧生成预算，重置
-
-    const __t0 = PROF.on ? nowMs() : 0;
 
     // 每一步都独立兜底：某一步抛异常（比如实体设了 parent 之后 Teleport 不被允许）
     // 只跳过它自己，不能把后面的 updateDanmu / 时间轴一起带走 —— 时间轴是唯一开波的地方，
     // 它被跳过就等于「一颗弹幕都没有」。
     try { pinBoss(); } catch (e) { logOnce("pin", e); }                     // 别让 func_physbox 掉下去
     try { pollPilot(); updateShip(dt); } catch (e) { logOnce("ship", e); }   // 读按键 + 积分机体位置
-    const __t2 = PROF.on ? nowMs() : 0;
 
     if (!running) return;
 
@@ -1537,12 +1302,9 @@ function think() {
         if (CFG.debug) Instance.DebugScreenText({ text: "STG: 找不到 hitbox/boss/模板，等待…", x: 100, y: 300, color: { r: 255, g: 200, b: 0 } });
         return;
     }
-    const __t3 = PROF.on ? nowMs() : 0;
 
     try { updateBoss(); } catch (e) { logOnce("boss", e); }
-    const __t4 = PROF.on ? nowMs() : 0;
     try { updateDanmu(dt); } catch (e) { logOnce("danmu", e); }
-    const __t5 = PROF.on ? nowMs() : 0;
 
     // 定时发射器（螺旋等）
     for (let i = emitters.length - 1; i >= 0; i--) {
@@ -1553,7 +1315,6 @@ function think() {
         }
         if (now > e.until) emitters.splice(i, 1);
     }
-    const __t5a = PROF.on ? nowMs() : 0;
 
     // 本轮时间轴（按当前阶段）
     const ph = curPhase();
@@ -1564,42 +1325,12 @@ function think() {
     }
     if (tl >= ph.loopLength) { loopStart = now; timelineIdx = 0; }
 
-    // 排出积压的生成（同一每帧预算内）：把一次大齐射摊到多帧，消除单帧 50ms+ 尖峰
-    let drainGuard = 0;
-    while (spawnLeft > 0 && spawnBacklog.length > 0 && drainGuard++ < 256) {
-        const q = spawnBacklog.shift();
-        fireFrom(q[0], q[1], q[2], q[3], q[4]);
-    }
-    const __t5b = PROF.on ? nowMs() : 0;
-
-    drawHitbox();   // 自身按 CFG.showHitbox 决定"画 or 藏"
+    if (CFG.showHitbox) drawHitbox();
     if (CFG.debug) {
         Instance.DebugScreenText({
             text: `STG  P${phaseIdx + 1}${ph.name}  hits=${hitCount}  danmu=${danmu.length}`,
             x: 100, y: 280, duration: 0, color: { r: 120, g: 220, b: 255 },
         });
-    }
-    const __t6 = PROF.on ? nowMs() : 0;
-
-    // 临时性能剖析：约每 1 秒汇总一次（定位后整段连同上面 PROF/nowMs 一起删）
-    if (PROF.on) {
-        profAdd("定身+机体", __t2 - __t0);
-        profAdd("解析", __t3 - __t2);
-        profAdd("boss", __t4 - __t3);
-        profAdd("弹幕", __t5 - __t4);
-        profAdd("发射器", __t5a - __t5);
-        profAdd("时间轴+补生成", __t5b - __t5a);
-        profAdd("画框", __t6 - __t5b);
-        profAdd("合计", __t6 - __t0);
-        PROF.danmuSum += danmu.length;
-        PROF.spawnSum += profSpawns;
-        if (profSpawns > PROF.spawnPeak) PROF.spawnPeak = profSpawns;
-        PROF.killSum += profKills;
-        if (spawnBacklog.length > PROF.backlogPeak) PROF.backlogPeak = spawnBacklog.length;
-        if (__t6 - __t0 > PROF.peek) PROF.peek = __t6 - __t0;
-        PROF.n++;
-        if (PROF.t0 === 0) PROF.t0 = now;
-        if (now - PROF.t0 >= 1) { PROF.t0 = now; profFlush(); }
     }
 }
 
@@ -1623,7 +1354,7 @@ function startGame() {
     }
     calibrate();
     // 清掉上一局残留的弹幕，避免重复 start 时越积越多
-    clearAllDanmu();
+    for (let i = danmu.length - 1; i >= 0; i--) killDanmuAt(i);
     emitters.length = 0;
     // boss 改成「不动」：位置完全由脚本 Teleport 决定，避免物理引擎跟脚本抢。
     // 想保留 boss 物理/碰撞就删掉这两行。
@@ -1633,7 +1364,9 @@ function startGame() {
     loopStart = Instance.GetGameTime(); timelineIdx = 0; spawnPhase = 0;
     running = true;
     const ph = curPhase();
-    Instance.Msg("[STG] ▶ 阶段" + (phaseIdx + 1) + "「" + ph.name + "」开始\n");
+    Instance.Msg("[STG] ▶ 开始 第" + (phaseIdx + 1) + "阶段「" + ph.name + "」"
+        + "（平面 " + AXIS_U + AXIS_V + "，深度 " + AXIS_W + "="
+        + PLANE_W.toFixed(1) + "，原点 u=" + PLANE_U0.toFixed(1) + " v=" + PLANE_V0.toFixed(1) + "）\n");
 }
 
 /**
@@ -1649,23 +1382,23 @@ function setPhase(idx, silent) {
     // 没在跑的时候切阶段：只记下来，等 startGame 时生效
     if (!running) {
         phaseIdx = idx;
-        if (!silent) Instance.Msg("[STG] 已选 阶段" + (idx + 1) + "「" + PHASES[idx].name + "」\n");
+        if (!silent) Instance.Msg("[STG] 已选 第" + (idx + 1) + "阶段「" + PHASES[idx].name + "」，等待开波\n");
         return;
     }
     phaseIdx = idx;
     // 清弹 + 清定时发射器，然后按新阶段重开一轮
-    clearAllDanmu();
+    for (let i = danmu.length - 1; i >= 0; i--) killDanmuAt(i);
     emitters.length = 0;
     loopStart = Instance.GetGameTime(); timelineIdx = 0; spawnPhase = 0;
-    Instance.Msg("[STG] ⚔ 阶段" + (idx + 1) + "「" + PHASES[idx].name + "」\n");
+    Instance.Msg("[STG] ⚔ 进入 第" + (idx + 1) + "阶段「" + PHASES[idx].name + "」"
+        + "  速度×" + PHASES[idx].speedMul + "  同屏上限 " + Math.min(CFG.maxDanmu, PHASES[idx].maxDanmu) + "\n");
 }
 
 function stopGame(clean) {
     running = false;
     emitters.length = 0;
     if (clean) {
-        clearAllDanmu();
-        hideHitboxMarkers();     // 别把判定绿框留在场上
+        for (let i = danmu.length - 1; i >= 0; i--) killDanmuAt(i);
     }
     Instance.Msg("[STG] ⏹ 停止\n");
 }
@@ -1674,7 +1407,7 @@ function stopGame(clean) {
 Instance.OnScriptInput("stg_start", () => startGame());
 Instance.OnScriptInput("stg_stop", () => stopGame(true));
 Instance.OnScriptInput("stg_fire", () => fireAimed(720, 0, 1));
-Instance.OnScriptInput("stg_recal", () => { calibrate(true); Instance.Msg("[STG] 已重新标定\n"); });
+Instance.OnScriptInput("stg_recal", () => { calibrate(true); Instance.Msg("[STG] 已重新标定平面原点（锚点 = " + (hasAnchorWorld() ? "CFG.anchorWorld" : CFG.hitboxName) + "，机体已送回起点）\n"); });
 Instance.OnScriptInput("stg_debug", () => { CFG.debug = !CFG.debug; Instance.Msg("[STG] debug=" + CFG.debug + "\n"); });
 
 /* ---- 平面微调（控制台，边看边调）----
@@ -1730,17 +1463,7 @@ Instance.OnActivate(() => {
 Instance.OnScriptReload({
     // 阶段号要跟着过河：before 在旧脚本实例里跑，after 在新实例里跑，
     // 不走 memory 的话热重载一次就跳回第 1 阶段了。
-    before: () => {
-        // 重载前清掉本实例造出的实体（含"停在远处"的池实体）：否则工具模式反复重载会在
-        // 世界里累积一堆僵尸实体（对象池的副作用）。正式服没有重载，不受影响。
-        try {
-            for (const list of Object.values(danmuPool)) {
-                for (const e of list) if (e && e.IsValid()) Instance.EntFireAtTarget({ target: e, input: "Kill" });
-            }
-            for (const d of danmu) if (d.ent && d.ent.IsValid()) Instance.EntFireAtTarget({ target: d.ent, input: "Kill" });
-        } catch (e) { /* 忽略 */ }
-        return { wasRunning: running, hits: hitCount, phase: phaseIdx };
-    },
+    before: () => ({ wasRunning: running, hits: hitCount, phase: phaseIdx }),
     after: (mem) => {
         lastTime = Instance.GetGameTime();
         if (mem && typeof mem.phase === "number" && mem.phase >= 0 && mem.phase < PHASES.length) {
@@ -1758,4 +1481,4 @@ Instance.OnRoundStart(() => {
 });
 Instance.OnBeginRoundRestart(() => stopGame(true));
 
-Instance.Msg("[STG] stg.js 已加载（输入：stg1/stg2/stg3 切阶段，stg_start/stg_stop 开关）\n");
+Instance.Msg("[STG] stg.js 已加载（Boss 三阶段：RunScriptInput stg1 / stg2 / stg3；stg_next 顺序推进）\n");
