@@ -5204,8 +5204,8 @@ var SlicooPersistentSkills = (() => {
   var __getOwnPropNames = Object.getOwnPropertyNames;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
   var __export = (target, all) => {
-    for (var name in all)
-      __defProp(target, name, { get: all[name], enumerable: true });
+    for (var name2 in all)
+      __defProp(target, name2, { get: all[name2], enumerable: true });
   };
   var __copyProps = (to, from, except, desc) => {
     if (from && typeof from === "object" || typeof from === "function") {
@@ -5217,17 +5217,17 @@ var SlicooPersistentSkills = (() => {
   };
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // skill_fix_20261011/src/persistent_skills.js
+  // elves_skill2_fix_20261012/src/persistent_skills.js
   var persistent_skills_exports = {};
   __export(persistent_skills_exports, {
     createPersistentSkills: () => createPersistentSkills,
     insideSkillVolume: () => insideSkillVolume
   });
 
-  // skill_fix_20261011/src/skill_volumes.js
+  // elves_skill2_fix_20261012/src/skill_volumes.js
   var skillVolumes = { "shield_area": { "minimum": [-280, -280, -140.00001525879998], "maximum": [280, 280, 140], "planes": [[0.05551175675800421, 0.08307919932183522, 0.9949956238605692, 139.29938776400107], [0.16415976212176223, 0.24568245501120842, 0.9553489958124163, 144.43949326891158], [0.057645292321144403, 0.289802263226217, 0.9553489773387378, 144.43949599379465], [0.019493175793671488, 0.09799858533058926, 0.9949956247997677, 139.29938762068872], [-0.3565273882775972, 0.5335807625569878, 0.7669288045425462, 169.08926290869624], [-0.0933570675385624, 0.4693381969021503, 0.8780695387435091, 154.50500776770244], [-0.1251956593927117, 0.6294014424795532, 0.7669288565922407, 169.08926239810253], [-0.2658587748676181, 0.397885746063556, 0.8780694989038945, 154.5050088136241], [-0.17278643967631965, 0.8686566334885606, 0.4643064713745676, 209.45770735528896], [-0.1869898866895728, 0.9400617135841529, 0.28516443840185773, 233.8137950105575], [-0.4920546568600213, 0.7364112649715258, 0.4643066481167417, 209.45766888033975], [-0.5325020265467206, 0.7969457601824279, 0.28516494709358653, 233.81371330997507], [-0.5325020676248897, 0.7969458216602645, 0.28516469857516274, 233.81375444206284], [0.08307918696186857, 0.055511766463732966, 0.9949956243510979, 139.29938804299803], [0.245682489275305, 0.16415976700200402, 0.9553489861623017, 144.43949633338156], [0.5325022803600339, 0.7969458856675169, 0.2851641224435172, 233.81383819055253], [0.5529960247356263, 0.8276172575155032, 0.09615129582648442, 259.88630098851115], [0.8276172452231906, 0.5529960165221683, 0.09615144886995157, 259.886275502488], [0.7969459377950672, 0.5325021215544432, 0.2851642733091892, 233.81381372139748], [0.5335806467394655, 0.3565271420756998, 0.7669289995745551, 169.0892534014498], [0.3978857379904265, 0.26585871152069196, 0.8780695217420835, 154.505012184146], [0.4693381892496648, 0.09335724066651994, 0.8780695244267275, 154.50501383457743], [0.629401272877765, 0.12519575241189523, 0.7669289805959014, 169.0892590381106], [0.09799860167209079, 0.019493129048857166, 0.9949956241060559, 139.29938812251837], [0.2898021862994716, 0.05764528238219168, 0.9553490012739448, 144.43949413420424], [0.2456823843559623, -0.164159858045866, 0.9553489974996207, 144.43949540502862], [0.1641598952253764, -0.24568249288354133, 0.9553489632014692, 144.43949548293403], [0.3978857377382816, -0.2658588039112795, 0.8780694938826467, 154.50501973344936], [0.26585871874579314, -0.3978855799985147, 0.8780695911464483, 154.5049990198661], [-0.1519755070598576, -0.7640314328670037, 0.6270242537933381, 187.6316060507248], [0.15197542079066564, -0.7640314571515922, 0.6270242451120327, 187.63161388834186], [0.12519559490824708, -0.6294013084266095, 0.7669289771331125, 169.08924857813417], [0.12519569062551061, -0.6294012774682207, 0.7669289869148077, 169.089250734759], [-0.1251956646659994, -0.6294013422350804, 0.766928937999811, 169.08924918186295], [-0.12519577653684594, -0.6294013060520904, 0.7669289494322528, 169.08925170244535], [0.2898022003332994, -0.05764520980216024, 0.9553490013962664, 144.4394956524662], [0.09799860170625316, -0.019493111172395997, 0.9949956244529117, 139.29938817107816], [-0.17278684768212324, -0.868656684197614, 0.46430622466953997, 209.45773253171942], [-0.4920544677286654, -0.7364117977447561, 0.4643060035478718, 209.4577491325598], [-0.4327892073835274, -0.6477145242681378, 0.6270242395828394, 187.63158431165525], [-0.4327890203393421, -0.647714244336861, 0.6270246578539329, 187.63154319060382], [0.17278663841287284, 0.8686566399823359, 0.4643063852679364, 209.4577224096869], [0.15197534924936382, 0.7640313382908541, 0.6270244072841346, 187.63158331263415], [-0.1519752035398345, 0.7640313793072606, 0.6270243926219062, 187.63158130736556], [0.08307917626618677, -0.055511777200373466, 0.9949956246451478, 139.29938808416495], [0.4327891354121675, -0.6477145389495689, 0.6270242740935441, 187.63161131155556], [0.3565272461899684, -0.5335805829682368, 0.7669289955422691, 169.08925341239865], [-0.8686567158910691, -0.17278670750490896, 0.46430621754070395, 209.4576892641777], [-0.764031445219562, 0.1519754631753888, 0.6270242493782309, 187.63156737223576], [-0.8686567158910691, 0.17278670750490896, 0.46430621754070384, 209.45768926417767], [-0.7640314452195618, -0.15197546317538876, 0.6270242493782309, 187.6315673722357], [0.05551177110599376, -0.08307918502857839, 0.9949956242535256, 139.2993878190151], [0.4920545202875296, 0.7364115421292043, 0.4643063532663496, 209.45773053453317], [0.4327889574472204, 0.6477145343603518, 0.6270244016703823, 187.63159315213701], [0.6477146289611095, 0.4327890206574212, 0.6270242603186599, 187.63161360771267], [0.7364116698401791, 0.4920544266933496, 0.46430624989835945, 209.4577401706358], [-0.9762409304574864, 0.19418669227374685, 0.09615182912083634, 259.8862251167001], [-0.9762410076471784, 0.19418650107252935, 0.09615143155060533, 259.8862802569697], [-0.8276172093044301, 0.5529960860426981, 0.09615135820467617, 259.8863116673283], [-0.8276171776399303, 0.5529960648851577, 0.09615175243772989, 259.88624601646376], [-0.7969457239839136, 0.5325019312681184, 0.2851652261750718, 233.81367605779474], [-0.9400614632326774, 0.18699013776612158, 0.2851650990620072, 233.81366985539336], [-0.9400614200376577, 0.18698999806163374, 0.2851653330643341, 233.8136380152999], [0.05764538376921272, -0.28980226169341505, 0.9553489722857724, 144.43949479003703], [0.01949316210639113, -0.09799858805315965, 0.9949956247997681, 139.29938762068866], [-0.6477145752132579, 0.4327891165193925, 0.6270242496735454, 187.63157421307574], [-0.5335808621690389, 0.35652732568141804, 0.7669287643382541, 169.08926324892244], [-0.4327892432614312, 0.647714374110448, 0.6270243699314314, 187.63156712226734], [-0.736411822311113, -0.4920544341700083, 0.4643060001486721, 209.45773268495782], [-0.7969454644651772, -0.5325021937570608, 0.2851654612892323, 233.81363229605654], [-0.7969455526694924, -0.5325022526933284, 0.2851651047320617, 233.8136913096025], [-0.9400614449758571, -0.18698986115213026, 0.2851653406292759, 233.81364421797025], [-0.019493183441540624, -0.09799858801238755, 0.9949956243858024, 139.29938726529105], [-0.057645416368970935, -0.2898022638212332, 0.955348969673248, 144.4394938283653], [0, 0, -1, 140.00001525879998], [-0.976241041488767, -0.19418643087067977, 0.09615122973022287, 259.88630678090067], [-0.7364115577045334, 0.4920545555867415, 0.4643062911543596, 209.45769111615033], [-0.8276170599815397, -0.5529963086328545, 0.09615136330780184, 259.8863002594963], [0.46933819522689446, -0.09335710543913749, 0.8780695356093315, 154.50501580226717], [-0.24568236424239467, -0.16415986335608107, 0.9553490017596609, 144.43948476519532], [-0.08307921035199207, -0.05551179997533151, 0.9949956205284463, 139.29938624013795], [-0.05551179349774301, -0.083079200657371, 0.99499562169931, 139.29938661438172], [-0.1641597699550076, -0.24568254724942024, 0.955348970745955, 144.43949036138386], [-0.05764535949020255, 0.2898021205322082, 0.9553490165715779, 144.43949172141384], [0.09335719018883094, 0.4693381668781476, 0.8780695417513962, 154.50500622538064], [0.18698968795525944, -0.9400618101413869, 0.2851642504103446, 233.81383329695785], [-0.18699020349558737, -0.9400616558775224, 0.28516442089694355, 233.81378493751626], [0.186990045479442, -0.9400615135197375, 0.2851649938028445, 233.81373214557115], [0.19418626306549888, -0.9762410698931648, 0.09615128023331582, 259.88631442569476], [-0.194186355120265, -0.9762410461112649, 0.09615133578213807, 259.886308879077], [-0.186990158254858, -0.9400614284373989, 0.28516520033142284, 233.81370049850838], [-0.2898021866578254, -0.057645261002517476, 0.955349002455278, 144.43948546874316], [-0.0979986287049898, -0.0194931701925566, 0.9949956206374907, 139.29938614157797], [0.6477145662022713, -0.4327891325915287, 0.6270242478884493, 187.6316197714216], [0.7364116479998472, -0.49205445652843915, 0.46430625292004357, 209.4577415337692], [0.7364117326731505, -0.492054513105323, 0.4643060586660613, 209.45777375206794], [0.49205450991323135, -0.7364116600408189, 0.46430617724727186, 209.45775598712126], [0.49205456129520936, -0.7364114928713126, 0.464306387933252, 209.4577278866532], [0.18699000379404457, 0.940061752611104, 0.2851642329585573, 233.81382326779763], [-0.28980216139028603, 0.057645255976489444, 0.9553490104233759, 144.43948370699582], [-0.09799862870498982, 0.019493170192556603, 0.9949956206374907, 139.29938614157797], [-0.5335808444838851, -0.35652744359445276, 0.7669287218274385, 169.08926648275175], [-0.39788559842450055, -0.26585890961337283, 0.878069525006742, 154.504998792267], [-0.35652727522144717, -0.5335811093089374, 0.7669286158514456, 169.08928194537458], [-0.2658585886066434, -0.397885640768854, 0.8780696030122226, 154.50499096605307], [0.17278673727585178, -0.8686567316629287, 0.46430617695465154, 209.45774901423377], [-0.24568244061750644, 0.16415969870586983, 0.9553490104108673, 144.43948660123093], [-0.08307923365723138, 0.05551174401427708, 0.9949956217046486, 139.2993864048061], [-0.6477145450926445, -0.4327891702412844, 0.6270242437077609, 187.6315724278678], [-0.6477144755280391, -0.43278878760996686, 0.6270245796701533, 187.631528602872], [-0.629401542817398, -0.12519575945186892, 0.7669287579132424, 169.08926115450504], [-0.6294015326336191, 0.1251958866645141, 0.7669287455042596, 169.08925841862413], [0.09335716764545332, -0.46933820392129405, 0.8780695243482446, 154.5050089480693], [-0.46933819205278904, -0.09335717724934658, 0.8780695296710012, 154.50500043428403], [-0.019493176865966414, 0.0979985907213674, 0.9949956242478145, 139.29938724597278], [-0.055511756105758245, 0.08307921622941174, 0.9949956224852254, 139.29938672441017], [-0.1641597544255499, 0.24568241689876127, 0.9553490069360654, 144.43948861344919], [-0.46933818783015696, 0.09335727278108977, 0.8780695217710165, 154.50499904420377], [-0.3978857602613703, 0.2658587593566347, 0.8780694971667005, 154.50500850794754], [0.764031518867736, -0.15197523130012502, 0.6270242158385383, 187.63162664160436], [0.8686567303860856, -0.17278654913585356, 0.4643062493577687, 209.4577449873283], [0.8686567973303332, -0.17278656245189097, 0.46430611915832776, 209.45776658176226], [0.5325023387995138, -0.7969457497821127, 0.2851643930740198, 233.81381513438905], [0.19418650843479243, 0.9762410061968018, 0.09615143140775559, 259.8862798708633], [-0.19418639916691294, 0.976241027722725, 0.09615143352787585, 259.8862856013049], [-0.5529960470452622, 0.8276172354654827, 0.09615135731120047, 259.8862966798001], [0.5335805818221836, -0.35652721829109646, 0.766929009309149, 169.08925554769218], [0.6294012842090753, -0.12519561086441938, 0.7669289944031663, 169.08926208227803], [0.35652720014821293, 0.5335807336511396, 0.7669289121103648, 169.0892632239489], [0.2658587097885685, 0.39788569173559385, 0.8780695432263015, 154.50500908360368], [0.5529962493426506, -0.8276171080346016, 0.0961512906902638, 259.88631658179565], [0.8276170987414264, -0.5529961966877744, 0.09615167351471517, 259.8862507212781], [0.7969458809671738, -0.5325021316636782, 0.28516441324803105, 233.81380057887367], [0.7640314699196843, 0.1519753754319748, 0.627024240547905, 187.6316183832771], [0.8686567142872743, 0.17278665319305012, 0.46430624075278304, 209.45774110544886], [0.8686567504161115, 0.17278666037952636, 0.4643061704860402, 209.45775275965084], [-0.5529961081658243, -0.8276171842323354, 0.09615144677430792, 259.8862950950158], [-0.5325020263235968, -0.7969456224306648, 0.2851653324825155, 233.81365759470697], [0.12519575139334613, 0.629401381308016, 0.7669288917759044, 169.0892599683986], [0.9762410113016002, -0.19418639590054623, 0.09615160685077155, 259.88626629434435], [0.9762410095266797, 0.19418653729186822, 0.09615133931944594, 259.8862886473273], [-0.35652736858494694, -0.5335806692770118, 0.766928878595525, 169.08924864829723], [-0.7364115326457437, 0.4920542912027581, 0.4643066110829115, 209.45764844531652], [-0.09335742875664362, -0.4693381694917886, 0.8780695149895854, 154.50500272363627], [0.9400617435419147, -0.18698988790318483, 0.2851643388484781, 233.81381173689593], [0.9400617366325291, 0.1869900026051762, 0.28516428641249875, 233.81381167198373], [0.7364116988471574, 0.49205444607518806, 0.4643061833517657, 209.45775120782685]] }, "elves_attack3_area": { "minimum": [-1000.0001220703, -1e3, -739], "maximum": [1000.0001220703, 1e3, 781], "planes": [[0.9951847321090564, 0.09801708512818173, 0, 995.1848416265802], [0.9951847201440742, -0.09801720661068015, 0, 995.1848535915614], [0, 0, 1, 781], [0, 0, -1, 739], [0.0980172066106814, 0.995184720144074, 0, 995.184720144074], [-0.09801686788153448, 0.9951847535059476, 0, 995.1847535059476], [0.29028452734892274, 0.9569403812055443, 0, 995.1847075055155], [0.4713968783880676, 0.8819211886818377, 0, 995.1847154406036], [-0.995184726126571, -0.09801714586939349, 0, 995.184847609069], [-0.9951847291178175, 0.09801711549875335, 0, 995.1848506003159], [0.773010573203808, 0.6343931381368502, 0, 995.184712132044], [0.6343931714987492, 0.7730105458244142, 0, 995.1847079017869], [0.8819211886818367, 0.4713968783880694, 0, 995.1847154406037], [0.9569401557571959, 0.2902852705519068, 0, 995.1847836299027], [0.8819213270547882, -0.47139661951049394, 0, 995.184686668843], [0.9569401032851224, -0.29028544352870955, 0, 995.184765912161], [0.7730106985076727, -0.6343929854535596, 0, 995.184731492114], [-0.9569402684813734, 0.29028489895066356, 0, 995.1848394099171], [-0.8819213002525048, 0.4713966696540519, 0, 995.1848500110876], [0.4713968783880694, -0.8819211886818367, 0, 995.1848230969875], [0.6343933575441334, -0.773010393140921, 0, 995.1847786729832], [0.2902850975753023, -0.9569402082291751, 0, 995.1848827263802], [-0.09801600354753823, -0.9951848386347981, 0, 995.1848505996411], [0.09801591243672915, -0.9951848476083202, 0, 995.1848356434883], [-0.2902851840636516, -0.9569401819931758, 0, 995.1848915851364], [-0.6343929187294861, -0.7730107532666565, 0, 995.1847230315177], [-0.47139758816125055, -0.8819208092996537, 0, 995.1847442119785], [-0.7730099466825098, -0.6343939015547858, 0, 995.1848476528373], [-0.881921206550245, -0.4713968449586405, 0, 995.1848843559105], [-0.9569403812055443, -0.29028452734892274, 0, 995.1848597546344], [-0.2902846138376007, 0.9569403549695013, 0, 995.1847747713103], [-0.6343932048606752, 0.7730105184449959, 0, 995.1847811120932], [-0.7730105458244118, 0.6343931714987521, 0, 995.1848191844804], [-0.47139686167314276, 0.8819211976161544, 0, 995.1847711264587]] }, "blizzard_area": { "minimum": [-700, -700, -496.4356079101999], "maximum": [700, 700, 589.5645141601999], "planes": [[0.9951847259956842, 0.09801714719830885, 0, 696.6292962319964], [0.9951847089028215, -0.09801732074488842, 0, 696.6293081969789], [0, 0, 1, 589.5645141601999], [0, 0, -1, 496.4356079101999], [0.09801723397152057, 0.9951847174492644, 0, 696.6293022144852], [-0.09801683684678864, 0.9951847565625942, 0, 696.629329593816], [0.2902848064977237, 0.9569402965266846, 0, 696.6292883622997], [0.4713967996474019, 0.8819212307696119, 0, 696.6292796486525], [-0.9951847174492642, -0.09801723397152219, 0, 696.6293022144848], [-0.9951847217224736, 0.09801719058493205, 0, 696.6293052057315], [0.7730104837009999, 0.6343932471963634, 0, 696.6292837360355], [0.6343932471963646, 0.773010483700999, 0, 696.6292837360356], [0.881921329607469, 0.4713966147347621, 0, 696.6292652627484], [0.9569402590467228, 0.29028493005251166, 0, 696.6292795034848], [0.8819212307696109, -0.4713967996474039, 0, 696.6293334768912], [0.9569404200813547, -0.2902843991924474, 0, 696.6293175657939], [0.7730106235930674, -0.6343930767373313, 0, 696.6293460467137], [-0.9569401729720768, 0.29028521380217, 0, 696.6292768763215], [-0.8819214889943289, 0.47139631654270053, 0, 696.6292921768469], [0.4713960391737887, -0.881921637250875, 0, 696.6292993696267], [0.6343930290774188, -0.7730106627065224, 0, 696.6293587375236], [0.2902859666338945, -0.9569399446022857, 0, 696.6293219946068], [-0.09801648310725541, -0.9951847914027248, 0, 696.6293659468088], [0.09801626617581198, -0.9951848127684385, 0, 696.6293569730319], [-0.2902859048561474, -0.9569399633424489, 0, 696.629308706435], [-0.6343922793992817, -0.7730112779504474, 0, 696.6293696365165], [-0.47139645370058403, -0.881921415681983, 0, 696.6292527345265], [-0.7730113561782551, -0.6343921840781573, 0, 696.6293611757546], [-0.8819209470189404, -0.4713973305070952, 0, 696.6292708357747], [-0.9569402854118565, -0.29028484313838127, 0, 696.6292857351845], [-0.29028468294236326, 0.9569403340068031, 0, 696.629337910509], [-0.634393076736897, 0.7730106235934237, 0, 696.6292988658944], [-0.7730106627065227, 0.6343930290774185, 0, 696.6293200172815], [-0.4713971455945732, 0.8819210458568776, 0, 696.6293065627044]] } };
 
-  // skill_fix_20261011/src/entity_names.js
+  // elves_skill2_fix_20261012/src/entity_names.js
   function getTemplateSuffix(actualName, baseName) {
     const actual = String(actualName ?? ""), base = String(baseName ?? "");
     if (actual === base) return "";
@@ -5243,12 +5243,8 @@ var SlicooPersistentSkills = (() => {
     return base ? [base, base + "&*", base + "_*"] : [];
   }
 
-  // skill_fix_20261011/src/persistent_skills.js
-  var definitions = {
-    "mdxzl_lopb/blizzard.lua": { name: "blizzard_area", classname: "trigger_hurt", begin: 2, end: 16, kind: "blizzard" },
-    "mdxzl_lopb/shield.lua": { name: "shield_area", classname: "trigger_multiple", begin: 0.1, end: 20, kind: "shield" },
-    "mdxzl_lopb/elves.lua": { name: "elves_attack3_area", classname: "trigger_hurt", begin: 16, end: 16.2999992371, kind: "elves" }
-  };
+  // elves_skill2_fix_20261012/src/elves_second.js
+  var name = "elves_attack2_particle";
   var interval = 0.05;
   var epsilon = 1e-6;
   var valid = (entity) => {
@@ -5258,7 +5254,185 @@ var SlicooPersistentSkills = (() => {
       return false;
     }
   };
-  var aliveZombie = (entity) => valid(entity) && entity.GetTeamNumber() === 2 && entity.GetHealth() > 0;
+  var zombie = (pawn) => valid(pawn) && pawn.GetTeamNumber() === 2 && pawn.GetHealth() > 0;
+  function createElvesSecond(Instance) {
+    const casts = /* @__PURE__ */ new Map(), effects = /* @__PURE__ */ new Map();
+    const counts = { casts: 0, pushes: 0, pulls: 0, centerHits: 0, edgeHits: 0, restores: 0 };
+    let nextPoll = 0;
+    const now = () => Instance.GetGameTime();
+    function scan() {
+      for (const query of templateNameQueries(name)) for (const entity of Instance.FindEntitiesByName(query)) {
+        if (!valid(entity) || entity.GetClassName() !== "info_particle_system" || !matchesTemplateName(entity.GetEntityName(), name) || casts.has(entity)) continue;
+        casts.set(entity, { entity, born: now(), players: /* @__PURE__ */ new Map() });
+        counts.casts++;
+      }
+    }
+    function input(target, inputName, value) {
+      if (valid(target)) Instance.EntFireAtTarget({ target, input: inputName, value: String(value) });
+    }
+    function move(pawn, velocity) {
+      if (!Object.values(velocity).every(Number.isFinite)) throw new Error("Non-finite elves second skill velocity");
+      if (typeof pawn.Move === "function") pawn.Move({ velocity });
+      else pawn.Teleport({ velocity });
+    }
+    function location(record, pawn) {
+      const center = record.entity.GetAbsOrigin(), position = pawn.GetAbsOrigin();
+      let height = 72;
+      if (typeof pawn.GetEyePosition === "function") height = Math.max(36, Math.min(72, pawn.GetEyePosition().z - position.z + 8));
+      const vertical = position.z - center.z;
+      if (vertical + height < -3 || vertical > 221) return null;
+      const horizontal = { x: position.x - center.x, y: position.y - center.y };
+      const distance = Math.hypot(horizontal.x, horizontal.y);
+      if (distance > 360) return null;
+      let direction;
+      if (distance > 1e-3) direction = { x: horizontal.x / distance, y: horizontal.y / distance };
+      else {
+        const velocity = pawn.GetAbsVelocity(), length = Math.hypot(velocity.x, velocity.y);
+        const yaw = (record.entity.GetAbsAngles().yaw || 0) * Math.PI / 180;
+        direction = length > 1e-3 ? { x: -velocity.x / length, y: -velocity.y / length } : { x: Math.cos(yaw), y: Math.sin(yaw) };
+      }
+      return { distance, direction };
+    }
+    function stateFor(record, pawn) {
+      let state = record.players.get(pawn);
+      if (!state) {
+        state = { push: -Infinity, pull: -Infinity, center: -Infinity, edge: -Infinity };
+        record.players.set(pawn, state);
+      }
+      return state;
+    }
+    function effectFor(pawn) {
+      let effect = effects.get(pawn);
+      if (!effect) {
+        effect = { centerUntil: 0, edgeUntil: 0, rootUntil: 0, nextRoot: Infinity, value: null, written: -Infinity };
+        effects.set(pawn, effect);
+      }
+      return effect;
+    }
+    function damage(pawn, amount) {
+      const health = pawn.GetHealth() - amount;
+      if (health > 0) pawn.SetHealth(health);
+      else input(pawn, "SetHealth", -69);
+    }
+    function affect(record, pawn, time) {
+      const age = time - record.born, point = location(record, pawn);
+      if (!point || age < 0 || age >= 13) return;
+      const state = stateFor(record, pawn), { distance, direction } = point;
+      if (age < 6 && distance <= 300 && time + epsilon >= state.push) {
+        const velocity = pawn.GetAbsVelocity();
+        move(pawn, { x: velocity.x + direction.x * 300, y: velocity.y + direction.y * 300, z: velocity.z + 30 });
+        state.push = time + 0.15;
+        counts.pushes++;
+      }
+      if (age + epsilon >= 4 && age < 8 && distance >= 300 && time + epsilon >= state.edge) {
+        const effect = effectFor(pawn);
+        effect.edgeUntil = Math.max(effect.edgeUntil, time + 1.25);
+        effect.rootUntil = Math.max(effect.rootUntil, time + 1);
+        if (!Number.isFinite(effect.nextRoot)) effect.nextRoot = time;
+        damage(pawn, 300);
+        state.edge = time + 0.5;
+        counts.edgeHits++;
+      }
+      if (zombie(pawn) && age + epsilon >= 6 && age < 12 && distance <= 300 && time + epsilon >= state.center) {
+        const effect = effectFor(pawn);
+        effect.centerUntil = Math.max(effect.centerUntil, time + 1.5);
+        damage(pawn, 200);
+        state.center = time + 0.5;
+        counts.centerHits++;
+      }
+      if (zombie(pawn) && age + epsilon >= 10 && distance >= 60 && time + epsilon >= state.pull) {
+        move(pawn, { x: -direction.x * 500, y: -direction.y * 500, z: 100 });
+        state.pull = time + 0.1;
+        counts.pulls++;
+      }
+    }
+    function release(pawn) {
+      const effect = effects.get(pawn);
+      if (effect && effect.value !== null && valid(pawn) && pawn.GetHealth() > 0) {
+        input(pawn, "KeyValue", "speed 1.1");
+        counts.restores++;
+      }
+      effects.delete(pawn);
+    }
+    function updateEffect(pawn, effect, time) {
+      if (!zombie(pawn)) {
+        release(pawn);
+        return;
+      }
+      if (time <= effect.rootUntil + epsilon && time + epsilon >= effect.nextRoot) {
+        move(pawn, { x: 0, y: 0, z: 0 });
+        effect.nextRoot = time + 0.5;
+      } else if (time > effect.rootUntil + epsilon) effect.nextRoot = Infinity;
+      const value = time < effect.centerUntil ? 0.6 : time < effect.edgeUntil ? 0.8 : null;
+      if (value === null) {
+        release(pawn);
+        return;
+      }
+      if (value !== effect.value || time + epsilon >= effect.written + 0.1) {
+        input(pawn, "KeyValue", "speed " + value);
+        effect.value = value;
+        effect.written = time;
+      }
+    }
+    function poll() {
+      const time = now();
+      if (time + epsilon < nextPoll) return;
+      nextPoll = time + interval;
+      for (const [entity] of casts) if (!valid(entity)) casts.delete(entity);
+      const active = [...casts.values()].filter((record) => time < record.born + 13);
+      if (!active.length && !effects.size) return;
+      const players = Instance.GetAllPlayerControllers().filter((controller) => controller.IsConnected()).map((controller) => controller.GetPlayerPawn()).filter(zombie);
+      for (const record of active) {
+        for (const pawn of players) if (zombie(pawn)) affect(record, pawn, time);
+        for (const pawn of record.players.keys()) if (!zombie(pawn)) record.players.delete(pawn);
+      }
+      for (const [pawn, effect] of effects) updateEffect(pawn, effect, time);
+    }
+    function resetPlayer(pawn) {
+      if (effects.has(pawn)) release(pawn);
+      for (const record of casts.values()) record.players.delete(pawn);
+    }
+    function reset() {
+      for (const pawn of effects.keys()) release(pawn);
+      casts.clear();
+      nextPoll = 0;
+    }
+    function capture() {
+      return { casts: [...casts.values()].filter((record) => valid(record.entity)).map((record) => ({
+        entity: record.entity,
+        born: record.born,
+        players: [...record.players].map(([pawn, state]) => [pawn, { ...state }])
+      })), effects: [...effects].map(([pawn, effect]) => [pawn, { ...effect }]) };
+    }
+    function restore(memory) {
+      if (!memory) return;
+      for (const record of memory.casts || []) if (valid(record.entity)) {
+        casts.set(record.entity, { ...record, players: new Map(record.players.map(([pawn, state]) => [pawn, { ...state }])) });
+      }
+      for (const [pawn, effect] of memory.effects || []) if (zombie(pawn) && Math.max(effect.centerUntil, effect.edgeUntil) > now()) {
+        effects.set(pawn, { ...effect, written: -Infinity });
+      }
+      nextPoll = 0;
+    }
+    return { scan, poll, reset, resetPlayer, capture, restore, status: () => ({ activeCasts: [...casts.values()].filter((record) => valid(record.entity) && now() < record.born + 13).length, affectedPlayers: effects.size, ...counts }) };
+  }
+
+  // elves_skill2_fix_20261012/src/persistent_skills.js
+  var definitions = {
+    "mdxzl_lopb/blizzard.lua": { name: "blizzard_area", classname: "trigger_hurt", begin: 2, end: 16, kind: "blizzard" },
+    "mdxzl_lopb/shield.lua": { name: "shield_area", classname: "trigger_multiple", begin: 0.1, end: 20, kind: "shield" },
+    "mdxzl_lopb/elves.lua": { name: "elves_attack3_area", classname: "trigger_hurt", begin: 16, end: 16.2999992371, kind: "elves" }
+  };
+  var interval2 = 0.05;
+  var epsilon2 = 1e-6;
+  var valid2 = (entity) => {
+    try {
+      return Boolean(entity && entity.IsValid());
+    } catch {
+      return false;
+    }
+  };
+  var aliveZombie = (entity) => valid2(entity) && entity.GetTeamNumber() === 2 && entity.GetHealth() > 0;
   function basis(angles) {
     const radians = Math.PI / 180;
     const pitch = (angles.pitch || 0) * radians, yaw = (angles.yaw || 0) * radians, roll = (angles.roll || 0) * radians;
@@ -5293,6 +5467,7 @@ var SlicooPersistentSkills = (() => {
   }
   function createPersistentSkills(Instance, source, options) {
     const definition = definitions[source], windSource = source === "mdxzl_lopb/ice_wind.lua";
+    const elvesSecond = definition?.kind === "elves" ? createElvesSecond(Instance) : null;
     const areas = /* @__PURE__ */ new Map(), speeds = /* @__PURE__ */ new Map(), winds = /* @__PURE__ */ new Map(), installed = /* @__PURE__ */ new WeakSet();
     const counts = { polls: 0, discovered: 0, slows: 0, releases: 0, pushes: 0, elfHits: 0, duplicateElfHits: 0, windCasts: 0, errors: 0 };
     let nextPoll = 0;
@@ -5302,8 +5477,8 @@ var SlicooPersistentSkills = (() => {
       counts.errors++;
       options.report("PERSISTENT_SKILL_ERROR", source + ": " + String(error?.stack || error));
     }
-    function input(target, name, value = "") {
-      if (valid(target)) Instance.EntFireAtTarget({ target, input: name, value });
+    function input(target, name2, value = "") {
+      if (valid2(target)) Instance.EntFireAtTarget({ target, input: name2, value });
     }
     function velocity(target, value) {
       if (![value.x, value.y, value.z].every(Number.isFinite)) throw new Error("Non-finite skill velocity");
@@ -5327,16 +5502,17 @@ var SlicooPersistentSkills = (() => {
       return { x: horizontal.x / length, y: horizontal.y / length };
     }
     function active(record, time) {
-      return valid(record.entity) && time + epsilon >= record.born + definition.begin && time < record.born + definition.end;
+      return valid2(record.entity) && time + epsilon2 >= record.born + definition.begin && time < record.born + definition.end;
     }
     function scan() {
+      elvesSecond?.scan();
       if (!definition) return;
       for (const query of templateNameQueries(definition.name)) for (const entity of Instance.FindEntitiesByName(query)) {
-        if (!valid(entity) || entity.GetClassName() !== definition.classname || !matchesTemplateName(entity.GetEntityName(), definition.name) || areas.has(entity)) continue;
+        if (!valid2(entity) || entity.GetClassName() !== definition.classname || !matchesTemplateName(entity.GetEntityName(), definition.name) || areas.has(entity)) continue;
         areas.set(entity, { entity, born: now(), exposure: /* @__PURE__ */ new Map(), hit: /* @__PURE__ */ new Set(), pushed: /* @__PURE__ */ new Map() });
         counts.discovered++;
       }
-      for (const [entity] of areas) if (!valid(entity)) areas.delete(entity);
+      for (const [entity] of areas) if (!valid2(entity)) areas.delete(entity);
     }
     function players() {
       return Instance.GetAllPlayerControllers().filter((controller) => controller.IsConnected()).map((controller) => controller.GetPlayerPawn()).filter(aliveZombie);
@@ -5360,14 +5536,14 @@ var SlicooPersistentSkills = (() => {
     }
     function slow(pawn, value, time) {
       const prior = speeds.get(pawn);
-      if (!prior || prior.value !== value || time + epsilon >= prior.written + 0.1) {
+      if (!prior || prior.value !== value || time + epsilon2 >= prior.written + 0.1) {
         input(pawn, "KeyValue", "speed " + value);
         speeds.set(pawn, { value, written: time });
         counts.slows++;
       }
     }
     function release(pawn) {
-      if (valid(pawn)) {
+      if (valid2(pawn)) {
         input(pawn, "KeyValue", "speed 1");
         counts.releases++;
       }
@@ -5384,35 +5560,35 @@ var SlicooPersistentSkills = (() => {
     }
     function shield(record, pawn, time) {
       if (!aliveZombie(pawn) || !active(record, time) || !insideSkillVolume(record.entity, pawn, skillVolumes[definition.name])) return;
-      if (time + epsilon < (record.pushed.get(pawn) ?? -Infinity) + interval) return;
+      if (time + epsilon2 < (record.pushed.get(pawn) ?? -Infinity) + interval2) return;
       const outward = direction(record.entity, pawn);
       velocity(pawn, { x: outward.x * 600, y: outward.y * 600, z: 200 });
       record.pushed.set(pawn, time);
       counts.pushes++;
     }
     function castWind(entity) {
-      if (!valid(entity)) return;
+      if (!valid2(entity)) return;
       const time = now(), prior = winds.get(entity);
-      const pendingStops = prior ? [.../* @__PURE__ */ new Set([...prior.pendingStops.filter((deadline) => deadline >= time - interval), Math.ceil(prior.until / interval) * interval])] : [];
+      const pendingStops = prior ? [.../* @__PURE__ */ new Set([...prior.pendingStops.filter((deadline) => deadline >= time - interval2), Math.ceil(prior.until / interval2) * interval2])] : [];
       winds.set(entity, { entity, until: time + 7, next: time, pendingStops });
       input(entity, "Start");
       counts.windCasts++;
     }
     function pushWind(record, zombies, time) {
-      if (!valid(record.entity)) {
+      if (!valid2(record.entity)) {
         winds.delete(record.entity);
         return;
       }
-      if (time + epsilon >= record.until) {
+      if (time + epsilon2 >= record.until) {
         input(record.entity, "Stop");
         winds.delete(record.entity);
         return;
       }
-      if (record.pendingStops.some((deadline) => time >= deadline + interval)) {
+      if (record.pendingStops.some((deadline) => time >= deadline + interval2)) {
         input(record.entity, "Start");
-        record.pendingStops = record.pendingStops.filter((deadline) => time < deadline + interval);
+        record.pendingStops = record.pendingStops.filter((deadline) => time < deadline + interval2);
       }
-      if (time + epsilon < record.next) return;
+      if (time + epsilon2 < record.next) return;
       record.next = time + 0.1;
       const center = record.entity.GetAbsOrigin();
       for (const pawn of zombies) {
@@ -5446,6 +5622,11 @@ var SlicooPersistentSkills = (() => {
           return lua.multi();
         });
       } else if (definition?.kind === "elves") {
+        scope.jineng2 = lua.fn(() => {
+          elvesSecond.scan();
+          elvesSecond.poll();
+          return lua.multi();
+        });
         const original = scope.getdazhao;
         scope.getdazhao = lua.fn((event) => {
           const pawn = runtime().native(event?.activator), caller = runtime().native(event?.caller);
@@ -5477,10 +5658,11 @@ var SlicooPersistentSkills = (() => {
     function poll() {
       if (!definition && !windSource) return;
       const time = now();
-      if (time + epsilon < nextPoll) return;
-      nextPoll = time + interval;
+      if (time + epsilon2 < nextPoll) return;
+      nextPoll = time + interval2;
       try {
-        for (const [entity] of areas) if (!valid(entity)) areas.delete(entity);
+        elvesSecond?.poll();
+        for (const [entity] of areas) if (!valid2(entity)) areas.delete(entity);
         if (!speeds.size && !winds.size && ![...areas.values()].some((record) => active(record, time))) return;
         counts.polls++;
         const zombies = players(), slowed = /* @__PURE__ */ new Set();
@@ -5506,6 +5688,7 @@ var SlicooPersistentSkills = (() => {
       }
     }
     function reset() {
+      elvesSecond?.reset();
       for (const pawn of speeds.keys()) release(pawn);
       for (const record of winds.values()) input(record.entity, "Stop");
       areas.clear();
@@ -5513,6 +5696,7 @@ var SlicooPersistentSkills = (() => {
       nextPoll = 0;
     }
     function resetPlayer(pawn) {
+      elvesSecond?.resetPlayer(pawn);
       if (speeds.has(pawn)) release(pawn);
       for (const record of areas.values()) {
         record.exposure.delete(pawn);
@@ -5521,18 +5705,19 @@ var SlicooPersistentSkills = (() => {
       }
     }
     function capture() {
-      return { areas: [...areas.values()].filter((record) => valid(record.entity)).map((record) => ({
+      return { elvesSecond: elvesSecond?.capture(), areas: [...areas.values()].filter((record) => valid2(record.entity)).map((record) => ({
         entity: record.entity,
         born: record.born,
         exposure: [...record.exposure],
         hit: [...record.hit],
         pushed: [...record.pushed]
-      })), winds: [...winds.values()].filter((record) => valid(record.entity)) };
+      })), winds: [...winds.values()].filter((record) => valid2(record.entity)) };
     }
     function restore(memory) {
       if (!memory) return;
-      for (const record of memory.areas || []) if (valid(record.entity)) areas.set(record.entity, { ...record, exposure: new Map(record.exposure), hit: new Set(record.hit), pushed: new Map(record.pushed) });
-      for (const record of memory.winds || []) if (valid(record.entity) && record.until > now()) {
+      elvesSecond?.restore(memory.elvesSecond);
+      for (const record of memory.areas || []) if (valid2(record.entity)) areas.set(record.entity, { ...record, exposure: new Map(record.exposure), hit: new Set(record.hit), pushed: new Map(record.pushed) });
+      for (const record of memory.winds || []) if (valid2(record.entity) && record.until > now()) {
         winds.set(record.entity, { ...record, next: now(), pendingStops: [...record.pendingStops] });
         input(record.entity, "Start");
       }
@@ -5546,13 +5731,13 @@ var SlicooPersistentSkills = (() => {
       resetPlayer,
       capture,
       restore,
-      status: () => ({ enabled: Boolean(definition || windSource), interval, areas: areas.size, activeWinds: winds.size, slowedPlayers: speeds.size, ...counts })
+      status: () => ({ enabled: Boolean(definition || windSource), interval: interval2, areas: areas.size, activeWinds: winds.size, slowedPlayers: speeds.size, ...counts, elvesSecond: elvesSecond?.status() })
     };
   }
   return __toCommonJS(persistent_skills_exports);
 })();
 
-var BUILD_REVISION = "skill-runtime-v4.6-persistent-skills-20261011";
+var BUILD_REVISION = "skill-runtime-v4.7-elves-second-20261012";
 function installSplit(Instance2, Types, deployment2, module, sourceId) {
   const currentName = Instance2.GetMapName().replace(/^.*[\\/]/, "").replace(/\.(?:vmap|vpk)$/, "");
   const full = deployment2.maps[currentName === "ze_forhidden_slicoo_cn" ? "ze_forhidden_slicoo_cs2_o_js_split" : currentName];
