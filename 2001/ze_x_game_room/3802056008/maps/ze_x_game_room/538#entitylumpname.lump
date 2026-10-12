@@ -264,7 +264,7 @@
     "triggeronstarttouch": "0",
     "speed": "1200",
     "pushdir": "0.000000 0.000000 0.000000",
-    "filtername": "[PR#]human",
+    "filtername": "[PR#]lv2_fall_filter",
     "spawnflags": "4097",
     "globalname": "",
     "StartDisabled": "0",

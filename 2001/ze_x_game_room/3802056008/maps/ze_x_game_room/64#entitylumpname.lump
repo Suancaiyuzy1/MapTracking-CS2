@@ -73,6 +73,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnBreak",
+        "target": "[PR#]wall_tips_sound_maker",
+        "input": "ForceSpawnAtEntityOrigin",
+        "param": "!caller",
+        "delay": 0,
+        "limit": -1
       }
     ]
   }
