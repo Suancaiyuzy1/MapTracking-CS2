@@ -229,8 +229,8 @@
       {
         "output": "OnPlayerPickup",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 0 255 255",
+        "input": "Color",
+        "param": "0 255 255",
         "delay": 0,
         "limit": -1
       },

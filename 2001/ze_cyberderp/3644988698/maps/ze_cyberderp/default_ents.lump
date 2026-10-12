@@ -3184,64 +3184,64 @@
       {
         "output": "OnCase01",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 255 0 0",
+        "input": "Color",
+        "param": "255 0 0",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase02",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 0 255 0",
+        "input": "Color",
+        "param": "0 255 0",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase03",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 0 0 255",
+        "input": "Color",
+        "param": "0 0 255",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase04",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 0 0 0",
+        "input": "Color",
+        "param": "0 0 0",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase05",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 255 255 255",
+        "input": "Color",
+        "param": "255 255 255",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase07",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 255 0 255",
+        "input": "Color",
+        "param": "255 0 255",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase06",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 255 255 0",
+        "input": "Color",
+        "param": "255 255 0",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase08",
         "target": "!activator",
-        "input": "AddOutput",
-        "param": "rendercolor 0 255 255",
+        "input": "Color",
+        "param": "0 255 255",
         "delay": 0,
         "limit": -1
       }
@@ -7614,15 +7614,15 @@
       {
         "output": "OnPlayerPickup",
         "target": "!activator",
-        "input": "AddOutput",
+        "input": "KeyValue",
         "param": "health 7200",
-        "delay": 0,
+        "delay": 0.10000000149011612,
         "limit": -1
       },
       {
         "output": "OnPlayerPickup",
         "target": "!activator",
-        "input": "AddOutput",
+        "input": "KeyValue",
         "param": "max_health 7200",
         "delay": 0,
         "limit": -1
@@ -10570,9 +10570,9 @@
       {
         "output": "OnPlayerPickup",
         "target": "!activator",
-        "input": "AddOutput",
+        "input": "KeyValue",
         "param": "health 777",
-        "delay": 0,
+        "delay": 0.10000000149011612,
         "limit": -1
       },
       {
@@ -10580,6 +10580,14 @@
         "target": "[PR#]pt_jesus",
         "input": "Teleport",
         "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "!activator",
+        "input": "KeyValue",
+        "param": "max_health 777",
         "delay": 0,
         "limit": -1
       }
@@ -22147,25 +22155,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11174"
-  },
-  {
-    "brightnessscale": "1.000000",
-    "tint_color": "255 255 255",
-    "skyname": "materials/skybox/mpa61.vmat",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]default_sky",
-    "classname": "env_sky",
-    "origin": "-2106.552979 -3694.695312 575.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "2155"
   },
   {
     "worldGroupID": "skyboxWorldGroup0",
