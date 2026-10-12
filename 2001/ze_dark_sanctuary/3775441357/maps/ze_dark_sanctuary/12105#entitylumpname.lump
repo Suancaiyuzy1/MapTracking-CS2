@@ -112,7 +112,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]windmb_weapons",
+    "parentname": "[PR#]wind_trg",
     "targetname": "[PR#]windmb_par1",
     "vscripts": "",
     "effect_name": "particles/zzz/stright_wind.vpcf",
@@ -183,6 +183,22 @@
         "input": "Command",
         "param": "say \u003E\u003E\u003E\u4EBA\u7C7B\u83B7\u5F97\u4E86\u9B54\u6CD5\u4E66\u003C\u003C\u003C",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]wind_mm2",
+        "input": "SetMeasureTarget",
+        "param": "[PR#]windmb_filter",
+        "delay": 0.05000000074505806,
+        "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]wind_trg",
+        "input": "Enable",
+        "param": "",
+        "delay": 0.009999999776482582,
         "limit": 1
       }
     ]

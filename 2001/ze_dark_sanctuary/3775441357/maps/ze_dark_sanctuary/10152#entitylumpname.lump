@@ -870,7 +870,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]xcw_weapons",
+    "parentname": "[PR#]xcw_trg",
     "targetname": "[PR#]xcw_par2",
     "vscripts": "",
     "effect_name": "particles/newspar/alei_atk8.vpcf",
@@ -934,6 +934,22 @@
         "param": "say \u003E\u003E\u003E\u6CD5\u5E08\u52A0\u5165\u4E86\u6218\u6597\u003C\u003C\u003C",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]xcw_trg",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "[PR#]xcw_mm2",
+        "input": "SetMeasureTarget",
+        "param": "[PR#]xcw_filter",
+        "delay": 0.05000000074505806,
+        "limit": -1
       }
     ]
   },
