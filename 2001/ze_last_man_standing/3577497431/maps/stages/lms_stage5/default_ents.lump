@@ -20873,7 +20873,7 @@
         "target": "[PR#]stage_5_teleport_to_core",
         "input": "Enable",
         "param": "",
-        "delay": 0,
+        "delay": 3,
         "limit": -1
       },
       {
@@ -21096,6 +21096,14 @@
         "output": "OnUser1",
         "target": "[PR#]layer_stage5_end_blue",
         "input": "showworldlayerandspawnentities",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnFullyOpen",
+        "target": "[PR#]stage_5_last_man_trigger_core_end",
+        "input": "Enable",
         "param": "",
         "delay": 0,
         "limit": -1

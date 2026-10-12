@@ -89,7 +89,7 @@
   },
   {
     "clientSideEntity": "0",
-    "filtername": "[PR#]zombie_jumper",
+    "filtername": "[PR#]Zombie_Item_jumper",
     "Negated": "0",
     "vscripts": "",
     "targetname": "[PR#]Zombie_Item_Jumper_Filter",

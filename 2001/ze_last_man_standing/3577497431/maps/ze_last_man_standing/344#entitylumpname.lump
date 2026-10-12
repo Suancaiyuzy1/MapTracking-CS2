@@ -413,7 +413,6 @@
     ]
   },
   {
-    "fadescale": "1",
     "CanBePickedUp": "1",
     "spawnflags": "1",
     "lightmapstatic": "0",

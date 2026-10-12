@@ -17014,9 +17014,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]strip",
-        "input": "RunScriptInput",
-        "param": "stripzombie",
+        "target": "[PR#]Global_Weapon_Strip",
+        "input": "TriggerForActivatedPlayer",
+        "param": "",
         "delay": 0,
         "limit": 1
       }
@@ -25664,9 +25664,9 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "[PR#]strip",
-        "input": "RunScriptInput",
-        "param": "stripzombie",
+        "target": "[PR#]Global_Weapon_Strip",
+        "input": "TriggerForActivatedPlayer",
+        "param": "",
         "delay": 0,
         "limit": 1
       }

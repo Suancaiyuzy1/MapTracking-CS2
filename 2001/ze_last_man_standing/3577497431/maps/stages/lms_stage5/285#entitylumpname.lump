@@ -1185,14 +1185,6 @@
         "param": "",
         "delay": 0,
         "limit": -1
-      },
-      {
-        "output": "OnFullyOpen",
-        "target": "[PR#]stage_5_last_man_trigger_core_end",
-        "input": "Enable",
-        "param": "",
-        "delay": 20,
-        "limit": -1
       }
     ]
   },
