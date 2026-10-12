@@ -249,7 +249,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]xcw_weapons",
+    "parentname": "[PR#]xcw_trg2",
     "targetname": "[PR#]xcw_hurt",
     "vscripts": "",
     "classname": "trigger_hurt",
@@ -274,6 +274,198 @@
         "input": "KeyValue",
         "param": "speed 1",
         "delay": 1,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "1000",
+    "damage": "400",
+    "master": "",
+    "filtername": "[PR#]witch_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]xcw_trg2",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_hurt",
+    "classname": "trigger_hurt",
+    "origin": "410.590088 -0.929932 11.719971",
+    "angles": "-0.000000 179.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13982",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_hurt_13982.vmdl",
+    "_template_lump_ent_index": "6",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_push",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_par",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "1000",
+    "damage": "400",
+    "master": "",
+    "filtername": "[PR#]llk_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]xcw_trg2",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_hurt",
+    "classname": "trigger_hurt",
+    "origin": "410.590088 -0.929932 27.719971",
+    "angles": "-0.000000 179.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13998",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_hurt_13998.vmdl",
+    "_template_lump_ent_index": "7",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_hurt1",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par2",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Start",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_freeze",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par1",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Stop",
+        "param": "",
+        "delay": 3,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
         "limit": -1
       }
     ]
@@ -318,7 +510,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "10076",
     "model": "maps/ze_dark_sanctuary/entities/xcw_button_10076.vmdl",
-    "_template_lump_ent_index": "6",
+    "_template_lump_ent_index": "8",
     "connections": [
       {
         "output": "OnPressed",
@@ -342,7 +534,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]xcw_weapons",
+    "parentname": "[PR#]xcw_trg2",
     "targetname": "[PR#]xcw_laser_mk",
     "vscripts": "",
     "classname": "env_entity_maker",
@@ -350,7 +542,7 @@
     "angles": "-0.000000 0.000000 179.999985",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "10146",
-    "_template_lump_ent_index": "7"
+    "_template_lump_ent_index": "9"
   },
   {
     "thinkalways": "0",
@@ -371,7 +563,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]xcw_weapons",
+    "parentname": "[PR#]xcw_trg2",
     "targetname": "[PR#]xcw_hurt",
     "vscripts": "",
     "classname": "trigger_hurt",
@@ -380,7 +572,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "10116",
     "model": "maps/ze_dark_sanctuary/entities/xcw_hurt_10116.vmdl",
-    "_template_lump_ent_index": "8",
+    "_template_lump_ent_index": "10",
     "connections": [
       {
         "output": "OnHurtPlayer",
@@ -396,6 +588,198 @@
         "input": "KeyValue",
         "param": "speed 1",
         "delay": 1,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "1000",
+    "damage": "400",
+    "master": "",
+    "filtername": "[PR#]witch_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]xcw_trg2",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_hurt",
+    "classname": "trigger_hurt",
+    "origin": "410.590088 -0.929932 11.719971",
+    "angles": "-0.000000 179.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13982",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_hurt_13982.vmdl",
+    "_template_lump_ent_index": "11",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_push",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_par",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "1000",
+    "damage": "400",
+    "master": "",
+    "filtername": "[PR#]llk_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]xcw_trg2",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_hurt",
+    "classname": "trigger_hurt",
+    "origin": "410.590088 -0.929932 27.719971",
+    "angles": "-0.000000 179.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13998",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_hurt_13998.vmdl",
+    "_template_lump_ent_index": "12",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_hurt1",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par2",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Start",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_freeze",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par1",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Stop",
+        "param": "",
+        "delay": 3,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
         "limit": -1
       }
     ]
@@ -495,7 +879,7 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "10115",
-    "_template_lump_ent_index": "9"
+    "_template_lump_ent_index": "13"
   },
   {
     "CanBePickedUp": "1",
@@ -517,7 +901,7 @@
     "angles": "-0.000000 -0.000082 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "10079",
-    "_template_lump_ent_index": "10",
+    "_template_lump_ent_index": "14",
     "connections": [
       {
         "output": "OnPlayerPickup",
@@ -554,6 +938,66 @@
     ]
   },
   {
+    "MeasureType": "1",
+    "TargetScale": "100.000000",
+    "TargetReference": "[PR#]xcw_trg",
+    "Target": "[PR#]xcw_trg2",
+    "MeasureReference": "[PR#]xcw_trg",
+    "MeasureTarget": "[PR#]xcw_weapons",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_mm2",
+    "classname": "logic_measure_movement",
+    "origin": "-43.409668 -28.929932 21.719971",
+    "angles": "-0.000000 -89.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13988",
+    "_template_lump_ent_index": "15"
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "0",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]xcw_weapons",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_trg",
+    "classname": "trigger_multiple",
+    "origin": "46.792480 -2.999268 87.719971",
+    "angles": "-0.000000 -89.999985 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13989",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_trg_13989.vmdl",
+    "_template_lump_ent_index": "16"
+  },
+  {
+    "wait": "0.000000",
+    "filtername": "",
+    "spawnflags": "0",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]xcw_trg2",
+    "classname": "trigger_multiple",
+    "origin": "46.792480 -2.998291 87.719971",
+    "angles": "-0.000000 0.000027 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "13991",
+    "model": "maps/ze_dark_sanctuary/entities/xcw_trg2_13991.vmdl",
+    "_template_lump_ent_index": "17"
+  },
+  {
     "SourceEntityName": "",
     "spawnflags": "48",
     "radius": "1250",
@@ -585,7 +1029,7 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11785",
-    "_template_lump_ent_index": "11"
+    "_template_lump_ent_index": "18"
   },
   {
     "SourceEntityName": "",
@@ -619,7 +1063,7 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11789",
-    "_template_lump_ent_index": "12"
+    "_template_lump_ent_index": "19"
   },
   {
     "SourceEntityName": "",
@@ -653,6 +1097,6 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11790",
-    "_template_lump_ent_index": "13"
+    "_template_lump_ent_index": "20"
   }
 ]

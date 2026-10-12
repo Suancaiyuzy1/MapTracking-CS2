@@ -67,6 +67,198 @@
     ]
   },
   {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "2000",
+    "damage": "1350",
+    "master": "",
+    "filtername": "[PR#]witch_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]hummer_hurt2",
+    "classname": "trigger_hurt",
+    "origin": "404.000000 0.000000 19.719971",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "14014",
+    "model": "maps/ze_dark_sanctuary/entities/hummer_hurt2_14014.vmdl",
+    "_template_lump_ent_index": "1",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_push",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]witch_par",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd1",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]wsdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 7,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "2000",
+    "damage": "1350",
+    "master": "",
+    "filtername": "[PR#]llk_int",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]hummer_hurt2",
+    "classname": "trigger_hurt",
+    "origin": "404.000000 0.000000 37.719971",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "14016",
+    "model": "maps/ze_dark_sanctuary/entities/hummer_hurt2_14016.vmdl",
+    "_template_lump_ent_index": "2",
+    "connections": [
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_hurt1",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par2",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Start",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_freeze",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]llk_par1",
+        "input": "Stop",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llk_par4",
+        "input": "Stop",
+        "param": "",
+        "delay": 3,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd2",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]llkdd3",
+        "input": "StopSound",
+        "param": "",
+        "delay": 5,
+        "limit": -1
+      }
+    ]
+  },
+  {
     "cpoint7_parent": "0",
     "cpoint6_parent": "0",
     "cpoint5_parent": "0",
@@ -161,7 +353,7 @@
     "angles": "0.000000 89.999992 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11290",
-    "_template_lump_ent_index": "1"
+    "_template_lump_ent_index": "3"
   },
   {
     "cpoint7_parent": "0",
@@ -258,7 +450,7 @@
     "angles": "0.000000 89.999992 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11561",
-    "_template_lump_ent_index": "2"
+    "_template_lump_ent_index": "4"
   },
   {
     "cpoint7_parent": "0",
@@ -355,7 +547,7 @@
     "angles": "0.000000 89.999992 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11562",
-    "_template_lump_ent_index": "3"
+    "_template_lump_ent_index": "5"
   },
   {
     "cpoint7_parent": "0",
@@ -452,6 +644,6 @@
     "angles": "0.000000 89.999992 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11563",
-    "_template_lump_ent_index": "4"
+    "_template_lump_ent_index": "6"
   }
 ]
