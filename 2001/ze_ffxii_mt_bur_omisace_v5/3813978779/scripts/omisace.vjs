@@ -217,13 +217,13 @@ Instance.OnScriptInput("LoadStage", () => {
     }
     if(STAGE == 2)
     {
-        TARGET_TIME = 5.00;
+        TARGET_TIME = 4.00;
         THRUSTER_FORWARD = 350;
         THRUSTER_SIDE = 10;
     }
     if(STAGE == 4)
     {
-        TARGET_TIME = 5.00;
+        TARGET_TIME = 4.00;
         THRUSTER_FORWARD = 350;
         THRUSTER_SIDE = 10;
     }
@@ -876,7 +876,7 @@ Instance.OnScriptInput("ItemText_Sand", ({ activator }) => {
 Instance.OnScriptInput("ItemText_Shield", ({ activator }) => {
     if (activator instanceof CSPlayerPawn) {
         const controller = activator.GetPlayerController();
-        setTextPlayer("Name: Ensanguined Shield\nDuration: 2 Secs\nCooldown: 65 Secs", controller, omisace_item_gametext)
+        setTextPlayer("Name: Ensanguined Shield\nDuration: 6 Secs\nCooldown: 75 Secs (2 Uses)", controller, omisace_item_gametext)
     }
 });
 Instance.OnScriptInput("ItemText_Speed_Potion", ({ activator }) => {

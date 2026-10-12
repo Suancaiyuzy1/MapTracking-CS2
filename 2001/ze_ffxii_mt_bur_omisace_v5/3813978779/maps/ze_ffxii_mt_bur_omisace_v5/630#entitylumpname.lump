@@ -279,15 +279,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 0.6",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "speed 1.1",
+        "param": "speed 0.5",
         "delay": 0,
         "limit": -1
       }
