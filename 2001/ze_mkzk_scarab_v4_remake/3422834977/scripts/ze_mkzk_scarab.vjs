@@ -17,6 +17,17 @@ Instance.OnScriptInput("Admin", (inputData) => {
     if (playerController && playerController.IsValid()) admins.add(playerController);
 });
 
+async function restartRoundWithDelay() {
+    Instance.ServerCommand("say 即将重启回合");
+    await Instance.Delay(1);
+    Instance.ServerCommand("say 即将重启回合");
+    await Instance.Delay(1);
+    Instance.ServerCommand("say 即将重启回合");
+    await Instance.Delay(1);
+    Instance.ServerCommand("endround");
+}
+
+
 const MODE_ALIASES = {
     '1': 1, '死亡赛跑': 1, '死跑': 1,
     '2': 2, '躲猫猫': 2,
@@ -46,8 +57,14 @@ Instance.OnPlayerChat((event) => {
     if (event.player && event.player.IsValid() && admins.has(event.player)) {
         switch (event.text) {
             case "restartround":
+            case "restart_round":
             case "重启回合":
-                Instance.ServerCommand("mp_restartgame 3");
+            case "结束回合":
+                void restartRoundWithDelay();
+                break;
+            case "取消指定":
+            case "停止指定":
+                forcedNextMode = 0;
                 break;
         }
         const match = event.text.match(/^(?:禁用模式|关闭模式|禁用|disablemode|disable_mode)\s*[:：]?\s*(.+)$/i);
@@ -73,30 +90,28 @@ Instance.OnPlayerChat((event) => {
             return;
         }
 
-        const nextModeMatch = event.text.match(/^(?:下回合模式|选择模式|选择|指定|指定模式|nextmode|next_mode)\s*[:：]?\s*(.+)$/i);
-        if (nextModeMatch) {
-            const key = nextModeMatch[1].trim();
+        const forceModeMatch = event.text.match(/^(?:指定|指定模式|forcemode|force_mode)\s*[:：]?\s*(.+)$/i);
+        if (forceModeMatch) {
+            const key = forceModeMatch[1].trim();
             const mode = MODE_ALIASES[key];
             if (mode === undefined) {
                 Instance.ServerCommand(`say 未知模式: ${key}`);
                 return;
             }
-
             forcedNextMode = mode;
-            Instance.ServerCommand(`say 已指定下回合模式为（${MODE_NAMES[mode]}）`);
+            Instance.ServerCommand(`say 已指定模式为（${MODE_NAMES[mode]}）`);
             return;
         }
-
     }
 });
 
 const DEFAULT_MODE_RATES  = {
-    1: 12,
+    1: 15,
     2: 23,
     3: 30,
     4: 0,
     5: 8,
-    6: 20,
+    6: 12,
     7: 0,
     8: 0,
     9: 0,
@@ -123,11 +138,9 @@ function enableAllModes() {
     }
 }
 
-
 Instance.OnScriptInput("PickMode", () => {
     if (forcedNextMode !== 0) {
         const winner = forcedNextMode;
-        forcedNextMode = 0;
         modeProgress[winner] = 0;
         EntFire(`mgmode${winner}`, 'Trigger');
         return;
@@ -136,7 +149,6 @@ Instance.OnScriptInput("PickMode", () => {
     let safety = 100;
     while (winner === 0 && safety-- > 0) {
         let bestProgress = -Infinity;
-
         for (const m of Object.keys(modeProgress)) {
             const mode = Number(m);
             if (disabledModes.has(mode)) continue;
@@ -148,18 +160,17 @@ Instance.OnScriptInput("PickMode", () => {
             }
         }
     }
-
     if (winner === 0) {
-        Instance.ServerCommand("模式选择异常：没有可用模式");
-        Instance.ServerCommand("模式选择异常：没有可用模式");
-        Instance.ServerCommand("模式选择异常：没有可用模式");
+        Instance.ServerCommand("say 模式选择异常：没有可用模式");
         enableAllModes();
-        Instance.ServerCommand("mp_restartgame 3");
+        void restartRoundWithDelay();
         return;
     }
-
     modeProgress[winner] = 0;
     EntFire(`mgmode${winner}`, 'Trigger');
+    if (winner == 3) {
+        EntFire('mgrunrandom', 'PickRandomShuffle');
+    }
 });
 
 
@@ -177,6 +188,67 @@ Instance.OnPlayerKill((event) => {
     if (!controller) return;
     controller.AddMoneySpendableNow(2000);
 });
+
+/** 所有活跃的跟随对 { follower, root } */
+const activePairs = new Set();
+
+/** think 循环是否已启动 */
+let thinkStarted = false;
+
+function followerNameToRootName(followerName) {
+
+    const namefixMatch = followerName.match(/(_\d+)$/);
+    if (!namefixMatch) return null;
+    const namefix = namefixMatch[1];                          // 例如 "_1"
+    const base = followerName.slice(0, -namefix.length);      // 例如 "potato_tnt"
+    const lastUnderscore = base.lastIndexOf('_');
+    if (lastUnderscore < 0) return null;
+    const prefix = base.slice(0, lastUnderscore);             // 例如 "potato"
+    return `${prefix}_root${namefix}`;
+}
+
+function followThink() {
+    if (activePairs.size === 0) {
+        thinkStarted = false;
+        return;
+    }
+    Instance.SetNextThink(Instance.GetGameTime());
+    for (const pair of activePairs) {
+        if (!pair.follower.IsValid() || !pair.root.IsValid()) {
+            activePairs.delete(pair);
+            continue;
+        }
+        pair.follower.Teleport({
+            position: pair.root.GetAbsOrigin(),
+            angles: pair.root.GetAbsAngles(),
+        });
+    }
+}
+
+Instance.OnScriptInput('StartFollow', (inputData) => {
+    const follower = inputData.caller;
+    if (!follower || !follower.IsValid()) return;
+    const followerName = follower.GetEntityName();
+    const rootName = followerNameToRootName(followerName);
+    if (!rootName) {
+        return;
+    }
+    const root = Instance.FindEntityByName(rootName);
+    if (!root || !root.IsValid()) {
+        return;
+    }
+    activePairs.add({ follower, root });
+    if (thinkStarted) return;
+    thinkStarted = true;
+    Instance.SetThink(followThink);
+    Instance.SetNextThink(Instance.GetGameTime());
+});
+
+Instance.OnScriptInput('StopFollow', () => {
+    activePairs.clear();
+    thinkStarted = false;
+});
+
 
 
 export { };

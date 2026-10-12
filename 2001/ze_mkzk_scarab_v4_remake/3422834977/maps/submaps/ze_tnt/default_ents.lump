@@ -146251,7 +146251,7 @@
     "Template15": "",
     "Template14": "[PR#]potato_tnt",
     "Template13": "[PR#]potato_text",
-    "Template12": "[PR#]potato_tp",
+    "Template12": "",
     "Template11": "[PR#]potato_sound",
     "Template10": "[PR#]potato_give_t",
     "Template09": "[PR#]potato_give_ct",
@@ -150508,14 +150508,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]mg6a5timer2",
-        "input": "Enable",
-        "param": "",
-        "delay": 12,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]script_hud",
         "input": "RunScriptInput",
         "param": "tnt_7",
@@ -151089,14 +151081,6 @@
         "param": "-1",
         "delay": 27,
         "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]mg6a5timer2",
-        "input": "Disable",
-        "param": "",
-        "delay": 22,
-        "limit": -1
       }
     ]
   },
@@ -151180,32 +151164,5 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "19320",
     "model": "maps/submaps/ze_tnt/entities/mg6a5killtg_19320.vmdl"
-  },
-  {
-    "InitialDelay": "0.000000",
-    "RefireTime": "0.050000",
-    "UpperRandomBound": "0.000000",
-    "LowerRandomBound": "0.000000",
-    "PauseAfterFiring": "0",
-    "UseRandomTime": "0",
-    "spawnflags": "0",
-    "StartDisabled": "1",
-    "vscripts": "",
-    "targetname": "[PR#]mg6a5timer2",
-    "classname": "logic_timer",
-    "origin": "-160.000000 2528.000000 0.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "19325",
-    "connections": [
-      {
-        "output": "OnTimer",
-        "target": "[PR#]potato_tp*",
-        "input": "TeleportToCurrentPos",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
   }
 ]

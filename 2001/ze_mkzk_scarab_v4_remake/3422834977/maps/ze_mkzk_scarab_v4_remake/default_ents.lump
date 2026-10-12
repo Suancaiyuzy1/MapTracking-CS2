@@ -26408,7 +26408,7 @@
     "color": "255 101 255",
     "fullbright": "1",
     "enabled": "1",
-    "message": "[ TNT\u8DD1\u9177 ]",
+    "message": "[ \u5C0F\u6E38\u620F\u5408\u96C6 ]",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -39942,6 +39942,14 @@
         "input": "Trigger",
         "param": "",
         "delay": 0.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]mgruntrigger",
+        "input": "Kill",
+        "param": "",
+        "delay": 1,
         "limit": -1
       }
     ]
