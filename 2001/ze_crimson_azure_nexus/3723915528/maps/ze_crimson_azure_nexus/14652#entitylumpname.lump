@@ -69,7 +69,7 @@
     "damagemodel": "0",
     "damagetype": "0",
     "damagecap": "50",
-    "damage": "500",
+    "damage": "400",
     "master": "",
     "filtername": "",
     "spawnflags": "4097",

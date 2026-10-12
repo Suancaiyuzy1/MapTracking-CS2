@@ -418,7 +418,7 @@
         "target": "!activator",
         "input": "keyvalue",
         "param": "speed 1",
-        "delay": 2,
+        "delay": 3,
         "limit": -1
       }
     ]
