@@ -1112,7 +1112,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 25",
+        "param": "say 25s",
         "delay": 0,
         "limit": 1
       },
@@ -1128,7 +1128,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 40,
         "limit": 1
       },
@@ -1136,7 +1136,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 20",
+        "param": "say 20s",
         "delay": 30,
         "limit": 1
       },
@@ -1160,7 +1160,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 25",
+        "param": "say 25s",
         "delay": 55,
         "limit": 1
       },
@@ -1168,7 +1168,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 70,
         "limit": 1
       },
@@ -1200,7 +1200,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 15,
         "limit": 1
       },
@@ -2564,7 +2564,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 25,
         "limit": 1
       },
@@ -2668,7 +2668,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 25",
+        "param": "say 25s",
         "delay": 40,
         "limit": 1
       },
@@ -2692,7 +2692,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 25",
+        "param": "say 25s",
         "delay": 75,
         "limit": 1
       },
@@ -2716,7 +2716,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 20",
+        "param": "say 20s",
         "delay": 120,
         "limit": 1
       },
@@ -5712,7 +5712,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 20",
+        "param": "say 20s",
         "delay": 0,
         "limit": 1
       },
@@ -5823,7 +5823,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 25",
+        "param": "say 25s",
         "delay": 15,
         "limit": 1
       },
@@ -5839,7 +5839,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 5,
         "limit": 1
       },
@@ -5855,7 +5855,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 5",
+        "param": "say 5s",
         "delay": 0,
         "limit": 1
       }
@@ -10862,14 +10862,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]hikouten",
-        "input": "StartSound",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
         "param": "say NOW PLAYING:\u98DB\u884C\u8247 - King Gnu",
@@ -10952,184 +10944,8 @@
         "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say \u5927\u96E8\u964D\u3089\u305B\u3000\u5927\u5730\u9707\u308F\u305B\uFF08\u5927\u96E8\u503E\u76C6 \u5927\u5730\u9707\u98A4\uFF09",
-        "delay": 172.1300048828125,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u63FA\u3089\u305B\u3000\u547D\u63FA\u3089\u305B\uFF08\u8BA9\u751F\u547D\u6447\u66F3 \u8BA9\u751F\u547D\u6447\u66F3\uFF09",
-        "delay": 179.72000122070312,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u904E\u53BB\u3092\u795D\u3048\u3000\u660E\u65E5\u3092\u62C5\u3048\uFF08\u795D\u798F\u8FC7\u53BB \u627F\u62C5\u660E\u65E5\uFF09",
-        "delay": 176,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
         "param": "say \u50F5\u5C3810s\u540E\u4F20\u9001",
         "delay": 140,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u5927\u96E8\u964D\u3089\u305B\u3000\u5927\u5730\u9707\u308F\u305B\uFF08\u5927\u96E8\u503E\u76C6 \u5927\u5730\u9707\u98A4\uFF09",
-        "delay": 183.97000122070312,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u904E\u53BB\u3092\u795D\u3048\u3000\u660E\u65E5\u3092\u62C5\u3048\uFF08\u795D\u798F\u8FC7\u53BB \u627F\u62C5\u660E\u65E5\uFF09",
-        "delay": 188.82000732421875,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u63FA\u3089\u305B\u3000\u547D\u63FA\u3089\u305B\uFF08\u8BA9\u751F\u547D\u6447\u66F3 \u8BA9\u751F\u547D\u6447\u66F3\uFF09",
-        "delay": 191.82000732421875,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u3053\u306E\u6642\u4EE3\u306B\u98DB\u3073\u4E57\u3063\u3066\uFF08\u98DE\u8EAB\u4E58\u4E0A\u8FD9\u4E2A\u65F6\u4EE3\uFF09",
-        "delay": 196.6999969482422,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u4ECA\u591C\u3053\u306E\u8857\u3092\u98DB\u3073\u7ACB\u3063\u3066\uFF08\u4ECA\u591C\u8981\u98DE\u8D8A\u8FD9\u6761\u8857\u9053\uFF09",
-        "delay": 199.44000244140625,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u5927\u7A7A\u3092\u98DB\u3073\u56DE\u3063\u3066\uFF08\u5728\u5929\u7A7A\u4E2D\u5F80\u590D\u76D8\u65CB\uFF09",
-        "delay": 202.25,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u63FA\u3089\u305B\u3000\u547D\u63FA\u3089\u305B\uFF08\u8BA9\u751F\u547D\u6447\u66F3 \u8BA9\u751F\u547D\u6447\u66F3\uFF09",
-        "delay": 205.35000610351562,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u3053\u306E\u98A8\u306B\u98DB\u3073\u4E57\u3063\u3066\uFF08\u98DE\u8EAB\u4E58\u4E0A\u8FD9\u573A\u98CE\u66B4\uFF09",
-        "delay": 209.0399932861328,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u4ECA\u591C\u53F0\u98A8\u306E\u76EE\u3068\u306A\u3063\u3066\uFF08\u4ECA\u591C\u8981\u6210\u4E3A\u53F0\u98CE\u4E4B\u773C\uFF09",
-        "delay": 211.38999938964844,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u5927\u7A7A\u3092\u98DB\u3073\u56DE\u3063\u3066\uFF08\u5728\u5929\u7A7A\u4E2D\u5F80\u590D\u76D8\u65CB\uFF09",
-        "delay": 214.24000549316406,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u63FA\u3089\u305B\u3000\u547D\u63FA\u3089\u305B\uFF08\u8BA9\u751F\u547D\u6447\u66F3 \u8BA9\u751F\u547D\u6447\u66F3\uFF09",
-        "delay": 217.25999450683594,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u8CB4\u65B9\u306E\u671F\u5F85\u306B\u98DB\u3073\u4E57\u3063\u3066\uFF08\u98DE\u8EAB\u8FCE\u5411\u4F60\u7684\u671F\u5F85\uFF09",
-        "delay": 220.35000610351562,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u4ECA\u591C\u3053\u306E\u7FBD\u6839\u3067\u98DB\u3073\u305F\u304F\u3066\uFF08\u4ECA\u591C\u60F3\u7528\u8FD9\u53CC\u7FC5\u8180\u5C55\u7FC5\u9AD8\u98DE\uFF09",
-        "delay": 223.35000610351562,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u3053\u306E\u5927\u7A7A\u3092\u98DB\u3073\u305F\u304F\u3066\uFF08\u5728\u8FD9\u5929\u7A7A\u4E2D\u5F80\u590D\u76D8\u65CB\uFF09",
-        "delay": 226.33999633789062,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u751F\u307E\u308C\u3000\u547D\u751F\u307E\u308C\uFF08\u751F\u547D\u4ECE\u8FD9\u91CC\u8BDE\u751F\uFF01\u751F\u547D\u4ECE\u8FD9\u91CC\u8BDE\u751F\uFF01\uFF09",
-        "delay": 229.3800048828125,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u3053\u306E\u98A8\u306B\u98DB\u3073\u4E57\u3063\u3066\uFF08\u98DE\u8EAB\u4E58\u4E0A\u8FD9\u573A\u98CE\u66B4\uFF09",
-        "delay": 232.9600067138672,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u4ECA\u591C\u540D\u3082\u7121\u304D\u98A8\u3068\u306A\u3063\u3066\uFF08\u4ECA\u591C\u5316\u4E3A\u65E0\u540D\u4E4B\u98CE\uFF09",
-        "delay": 235.50999450683594,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u6E05\u6FC1\u3092\u4F75\u305B\u5451\u3093\u3067\uFF08\u6E05\u6D4A\u5584\u6076\u662F\u975E\u4E00\u5E76\u541E\u4E0B\uFF09",
-        "delay": 238.33999633789062,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "say \u547D\u63FA\u3089\u305B\u3000\u547D\u63FA\u3089\u305B\uFF08\u8BA9\u751F\u547D\u6447\u66F3 \u8BA9\u751F\u547D\u6447\u66F3\uFF09",
-        "delay": 241.27999877929688,
         "limit": 1
       },
       {
@@ -11179,6 +10995,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]lyrics_script",
+        "input": "RunScriptInput",
+        "param": "Play",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -11442,7 +11266,7 @@
         "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 30",
+        "param": "say 30s",
         "delay": 10,
         "limit": 1
       },
@@ -11450,7 +11274,7 @@
         "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 30,
         "limit": 1
       },
@@ -11586,7 +11410,7 @@
         "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 60",
+        "param": "say 60s",
         "delay": 70,
         "limit": 1
       },
@@ -11634,7 +11458,7 @@
         "output": "OnPressed",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 10",
+        "param": "say 10s",
         "delay": 120,
         "limit": 1
       },
@@ -15211,25 +15035,6 @@
     ]
   },
   {
-    "cs_script": "scripts/stg.vjs",
-    "targetname": "[PR#]stg_script",
-    "classname": "point_script",
-    "origin": "-3874.000000 -13555.000000 10643.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "2193",
-    "connections": [
-      {
-        "output": "",
-        "target": "!self",
-        "input": "RunScriptInput",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
     "Template64": "",
     "Template63": "",
     "Template62": "",
@@ -17721,9 +17526,9 @@
     "precomputedobbextent3": "103.151367 87.600586 33.371094",
     "precomputedobbangles3": "0.000000 0.000000 -45.000004",
     "precomputedobborigin3": "-11334.992188 6436.333984 10448.006836",
-    "precomputedobbextent2": "31.667725 84.219727 76.678467",
-    "precomputedobbangles2": "-43.999992 3.000002 36.999992",
-    "precomputedobborigin2": "-11245.199219 6349.712891 10437.962891",
+    "precomputedobbextent2": "35.878418 84.100098 76.389893",
+    "precomputedobbangles2": "-45.000000 0.000000 39.999992",
+    "precomputedobborigin2": "-11240.336914 6349.337402 10442.740234",
     "precomputedobbextent1": "37.083984 103.414062 128.061768",
     "precomputedobbangles1": "45.000004 0.000000 0.000000",
     "precomputedobborigin1": "-11451.290039 6350.874512 10422.022461",
@@ -21621,5 +21426,43 @@
         "limit": -1
       }
     ]
+  },
+  {
+    "observable": "0",
+    "layout": "panorama/layout/custom_game/lyrics/lyrics.xml",
+    "targetname": "[PR#]lyrics_hud",
+    "classname": "custom_hud_layout",
+    "origin": "-3874.000000 -13555.000000 10643.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "2645"
+  },
+  {
+    "cs_script": "scripts/stg.vjs",
+    "targetname": "[PR#]stg_script",
+    "classname": "point_script",
+    "origin": "-3874.000000 -13555.000000 10643.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "2193",
+    "connections": [
+      {
+        "output": "",
+        "target": "!self",
+        "input": "RunScriptInput",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "cs_script": "scripts/lyrics.vjs",
+    "targetname": "[PR#]lyrics_script",
+    "classname": "point_script",
+    "origin": "-3874.000000 -13555.000000 10743.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "2646"
   }
 ]
