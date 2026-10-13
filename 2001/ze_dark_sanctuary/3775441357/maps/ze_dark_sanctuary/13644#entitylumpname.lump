@@ -20,7 +20,7 @@
   },
   {
     "triggeronstarttouch": "0",
-    "speed": "600",
+    "speed": "700",
     "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "[PR#]T",
     "spawnflags": "4097",
@@ -126,7 +126,7 @@
   },
   {
     "triggeronstarttouch": "0",
-    "speed": "600",
+    "speed": "700",
     "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "[PR#]T",
     "spawnflags": "4097",

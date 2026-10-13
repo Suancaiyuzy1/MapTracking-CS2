@@ -50,14 +50,6 @@
         "param": "",
         "delay": 0.009999999776482582,
         "limit": -1
-      },
-      {
-        "output": "OnFullyOpen",
-        "target": "[PR#]hj_math",
-        "input": "SetValue",
-        "param": "0",
-        "delay": 0.009999999776482582,
-        "limit": -1
       }
     ]
   },
@@ -69,7 +61,7 @@
     "damagemodel": "0",
     "damagetype": "0",
     "damagecap": "2000",
-    "damage": "1500",
+    "damage": "500",
     "master": "",
     "filtername": "[PR#]T",
     "spawnflags": "4097",
@@ -92,27 +84,11 @@
     "_template_lump_ent_index": "1",
     "connections": [
       {
-        "output": "OnHurtPlayer",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "speed 0",
-        "delay": 0,
-        "limit": -1
-      },
-      {
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "Ignitelifetime",
-        "param": "3",
+        "param": "4",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnHurtPlayer",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "speed 1",
-        "delay": 1,
         "limit": -1
       }
     ]

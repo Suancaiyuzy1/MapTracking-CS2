@@ -166,7 +166,7 @@
         "target": "!activator",
         "input": "keyvalue",
         "param": "targetname windmb_filter",
-        "delay": 0.10000000149011612,
+        "delay": 0.20000000298023224,
         "limit": -1
       },
       {
@@ -190,7 +190,7 @@
         "target": "[PR#]wind_mm2",
         "input": "SetMeasureTarget",
         "param": "[PR#]windmb_filter",
-        "delay": 0.05000000074505806,
+        "delay": 0.10000000149011612,
         "limit": -1
       },
       {

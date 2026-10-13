@@ -101,7 +101,7 @@
   },
   {
     "triggeronstarttouch": "0",
-    "speed": "800",
+    "speed": "888",
     "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "[PR#]T",
     "spawnflags": "4097",
@@ -121,11 +121,21 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13713",
     "model": "maps/ze_dark_sanctuary/entities/fw_push_13713.vmdl",
-    "_template_lump_ent_index": "1"
+    "_template_lump_ent_index": "1",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "KeyValue",
+        "param": "basevelocity 0 0 100",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "triggeronstarttouch": "0",
-    "speed": "800",
+    "speed": "888",
     "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "[PR#]T",
     "spawnflags": "4097",
@@ -145,7 +155,17 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13714",
     "model": "maps/ze_dark_sanctuary/entities/fw_push_13714.vmdl",
-    "_template_lump_ent_index": "2"
+    "_template_lump_ent_index": "2",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "KeyValue",
+        "param": "basevelocity 0 0 -10",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   },
   {
     "thinkalways": "0",
