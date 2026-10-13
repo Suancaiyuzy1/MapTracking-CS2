@@ -964,7 +964,7 @@
     "targetname": "[PR#]xcw_mm2",
     "classname": "logic_measure_movement",
     "origin": "-43.409668 -28.929932 21.719971",
-    "angles": "-0.000000 -89.999985 0.000000",
+    "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13988",
     "_template_lump_ent_index": "15"
@@ -985,7 +985,7 @@
     "targetname": "[PR#]xcw_trg",
     "classname": "trigger_multiple",
     "origin": "46.792480 -2.999268 87.719971",
-    "angles": "-0.000000 -89.999985 0.000000",
+    "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13989",
     "model": "maps/ze_dark_sanctuary/entities/xcw_trg_13989.vmdl",

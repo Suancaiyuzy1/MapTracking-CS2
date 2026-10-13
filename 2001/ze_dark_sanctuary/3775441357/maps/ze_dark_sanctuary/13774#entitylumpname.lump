@@ -113,40 +113,6 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]fw_weapons",
-    "targetname": "[PR#]fw_push",
-    "vscripts": "",
-    "classname": "trigger_push",
-    "origin": "37.800781 0.969971 6.720459",
-    "angles": "-89.999977 179.999985 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "13713",
-    "model": "maps/ze_dark_sanctuary/entities/fw_push_13713.vmdl",
-    "_template_lump_ent_index": "1",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "KeyValue",
-        "param": "basevelocity 0 0 100",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "triggeronstarttouch": "0",
-    "speed": "888",
-    "pushdir": "0.000000 0.000000 0.000000",
-    "filtername": "[PR#]T",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "1.000000 1.000000 1.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "[PR#]fw_weapons",
     "vscripts": "",
     "targetname": "[PR#]fw_push",
     "classname": "trigger_push",
@@ -155,7 +121,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13714",
     "model": "maps/ze_dark_sanctuary/entities/fw_push_13714.vmdl",
-    "_template_lump_ent_index": "2",
+    "_template_lump_ent_index": "1",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -195,13 +161,13 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13717",
     "model": "maps/ze_dark_sanctuary/entities/fw_hurt_13717.vmdl",
-    "_template_lump_ent_index": "3",
+    "_template_lump_ent_index": "2",
     "connections": [
       {
         "output": "OnHurtPlayer",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 0.33",
+        "param": "speed 0.1",
         "delay": 0,
         "limit": -1
       },
@@ -214,10 +180,18 @@
         "limit": -1
       },
       {
+        "output": "OnHurtPlayer",
+        "target": "!activator",
+        "input": "KeyValue",
+        "param": "basevelocity 0 0 100",
+        "delay": 0,
+        "limit": -1
+      },
+      {
         "output": "OnEndTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "basevelocity 0 0 -100",
+        "param": "speed 0",
         "delay": 0,
         "limit": -1
       }
@@ -293,7 +267,7 @@
     "angles": "24.999996 90.000015 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13534",
-    "_template_lump_ent_index": "4"
+    "_template_lump_ent_index": "3"
   },
   {
     "cpoint7_parent": "0",
@@ -390,7 +364,7 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13768",
-    "_template_lump_ent_index": "5"
+    "_template_lump_ent_index": "4"
   },
   {
     "clothScale": "1.000000",
@@ -462,7 +436,7 @@
     "angles": "0.000000 145.999969 0.000000",
     "scales": "34.540894 38.885143 37.566399",
     "hammerUniqueId": "13535",
-    "_template_lump_ent_index": "6"
+    "_template_lump_ent_index": "5"
   },
   {
     "CanBePickedUp": "1",
@@ -484,7 +458,7 @@
     "angles": "-0.000000 -0.000082 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13538",
-    "_template_lump_ent_index": "7",
+    "_template_lump_ent_index": "6",
     "connections": [
       {
         "output": "OnPlayerPickup",
@@ -552,7 +526,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13536",
     "model": "maps/ze_dark_sanctuary/entities/fw_button_13536.vmdl",
-    "_template_lump_ent_index": "8",
+    "_template_lump_ent_index": "7",
     "connections": [
       {
         "output": "OnPressed",
@@ -578,6 +552,6 @@
     "angles": "-0.000000 179.999985 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13539",
-    "_template_lump_ent_index": "9"
+    "_template_lump_ent_index": "8"
   }
 ]
