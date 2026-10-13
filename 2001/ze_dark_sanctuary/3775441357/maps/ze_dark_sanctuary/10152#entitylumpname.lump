@@ -193,7 +193,7 @@
     "locked_sound": "",
     "use_sound": "",
     "displaytext": "",
-    "damagefilter": "[PR#]xcw_filter",
+    "damagefilter": "",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -485,7 +485,7 @@
     "locked_sound": "",
     "use_sound": "",
     "displaytext": "",
-    "damagefilter": "[PR#]xcw_filter",
+    "damagefilter": "",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -907,7 +907,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "keyvalue",
-        "param": "targetname xcw_filter",
+        "param": "targetname xcw_user",
         "delay": 0.019999999552965164,
         "limit": -1
       },
@@ -947,8 +947,16 @@
         "output": "OnPlayerPickup",
         "target": "[PR#]xcw_mm2",
         "input": "SetMeasureTarget",
-        "param": "[PR#]xcw_filter",
+        "param": "xcw_user",
         "delay": 0.05000000074505806,
+        "limit": -1
+      },
+      {
+        "output": "OnPlayerPickup",
+        "target": "!activator",
+        "input": "Addcontext",
+        "param": "xcwa:1",
+        "delay": 0.019999999552965164,
         "limit": -1
       }
     ]
