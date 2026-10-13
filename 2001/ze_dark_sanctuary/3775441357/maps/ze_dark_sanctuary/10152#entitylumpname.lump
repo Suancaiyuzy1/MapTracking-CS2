@@ -870,7 +870,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]xcw_trg",
+    "parentname": "[PR#]xcw_trg2",
     "targetname": "[PR#]xcw_par2",
     "vscripts": "",
     "effect_name": "particles/newspar/alei_atk8.vpcf",
