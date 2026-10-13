@@ -165,7 +165,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "keyvalue",
-        "param": "targetname windmb_user",
+        "param": "targetname windmb_filter",
         "delay": 0.019999999552965164,
         "limit": -1
       },
@@ -189,7 +189,7 @@
         "output": "OnPlayerPickup",
         "target": "[PR#]wind_mm2",
         "input": "SetMeasureTarget",
-        "param": "windmb_user",
+        "param": "[PR#]windmb_filter",
         "delay": 0.05000000074505806,
         "limit": -1
       },

@@ -545,5 +545,27 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "13665",
     "_template_lump_ent_index": "8"
+  },
+  {
+    "PostSpawnInheritAngles": "0",
+    "PostSpawnDirectionVariance": "0.150000",
+    "PostSpawnDirection": "0.000000 0.000000 0.000000",
+    "PostSpawnSpeed": "0.000000",
+    "EntityTemplate": "[PR#]hj_tem2",
+    "spawnflags": "0",
+    "local.scales": "1.000000 1.000000 1.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]hj_weapons",
+    "vscripts": "",
+    "targetname": "[PR#]hj_mk2",
+    "classname": "env_entity_maker",
+    "origin": "74.689941 -7.030029 -1.280029",
+    "angles": "-0.000000 0.000000 179.999985",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "14035",
+    "_template_lump_ent_index": "9"
   }
 ]
