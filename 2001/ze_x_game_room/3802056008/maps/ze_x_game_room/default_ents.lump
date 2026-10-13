@@ -2575,7 +2575,7 @@
         "output": "OnTrigger",
         "target": "[PR#]qizi_path18",
         "input": "ToggleAlternatePath",
-        "param": "[PR#]qizi_path21",
+        "param": "",
         "delay": 0.5,
         "limit": -1
       },
@@ -2583,7 +2583,7 @@
         "output": "OnTrigger",
         "target": "[PR#]qizi_tracktrain",
         "input": "MoveToPathNode",
-        "param": "[PR#]qizi_path18",
+        "param": "",
         "delay": 0,
         "limit": -1
       }
@@ -7960,7 +7960,7 @@
     "vscripts": "",
     "targetname": "[PR#]lv4_dest2",
     "classname": "info_teleport_destination",
-    "origin": "2367.000000 -91.500000 1842.500000",
+    "origin": "2360.875000 -95.250000 1814.125000",
     "angles": "0.000000 90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "407"
@@ -9617,8 +9617,8 @@
     "vscripts": "",
     "targetname": "[PR#]lv2_asfk_tp2_dest",
     "classname": "info_teleport_destination",
-    "origin": "2621.000000 -2070.000000 1317.500000",
-    "angles": "0.000000 0.000000 0.000000",
+    "origin": "2609.750000 -2068.125000 1317.500000",
+    "angles": "0.000000 345.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "472"
   },
@@ -10783,6 +10783,14 @@
         "target": "[PR#]lv2_dest3",
         "input": "FollowEntity",
         "param": "[PR#]lv1_boss_dest",
+        "delay": 1,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "!self",
+        "input": "Disable",
+        "param": "",
         "delay": 1,
         "limit": 1
       }
@@ -12726,7 +12734,7 @@
         "target": "[PR#]lv2_nuke",
         "input": "SetDamage",
         "param": "99999",
-        "delay": 12,
+        "delay": 15,
         "limit": 1
       },
       {
@@ -12734,7 +12742,7 @@
         "target": "[PR#]white_fade",
         "input": "Fade",
         "param": "",
-        "delay": 10,
+        "delay": 13,
         "limit": 1
       },
       {
@@ -12814,7 +12822,7 @@
         "target": "[PR#]lv1_boss_zombie_back_tp",
         "input": "Enable",
         "param": "",
-        "delay": 13,
+        "delay": 15,
         "limit": 1
       },
       {
@@ -14000,7 +14008,7 @@
         "output": "OnPass",
         "target": "[PR#]qizi_path18",
         "input": "ToggleAlternatePath",
-        "param": "[PR#]qizi_path21",
+        "param": "",
         "delay": 0,
         "limit": 1
       }
@@ -14088,7 +14096,7 @@
         "input": "Trigger",
         "param": "",
         "delay": 0.10000000149011612,
-        "limit": -1
+        "limit": 1
       }
     ]
   },
@@ -16194,9 +16202,9 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]start_tp",
-        "input": "KeyValue",
-        "param": "target lv3_dest0",
+        "target": "[PR#]lv1_dest",
+        "input": "FollowEntity",
+        "param": "[PR#]lv3_dest0",
         "delay": 0,
         "limit": -1
       },
@@ -19023,7 +19031,7 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "[PR#]cam_trigger",
+        "target": "[PR#]cam_on_trigger",
         "input": "Disable",
         "param": "",
         "delay": 0,
@@ -21805,6 +21813,14 @@
         "param": "",
         "delay": 0.10000000149011612,
         "limit": -1
+      },
+      {
+        "output": "OnBlockedOpening",
+        "target": "!activator",
+        "input": "sethealth",
+        "param": "0",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -23451,6 +23467,14 @@
         "param": "",
         "delay": 1,
         "limit": -1
+      },
+      {
+        "output": "OnBlockedOpening",
+        "target": "!activator",
+        "input": "sethealth",
+        "param": "0",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -23769,7 +23793,7 @@
   },
   {
     "solidbsp": "0",
-    "distance": "-60",
+    "distance": "-75",
     "loopmovesound": "0",
     "_minlight": "",
     "spawnflags": "72",
@@ -23838,6 +23862,14 @@
         "input": "DisableMotion",
         "param": "",
         "delay": 1,
+        "limit": -1
+      },
+      {
+        "output": "OnBlockedOpening",
+        "target": "!activator",
+        "input": "sethealth",
+        "param": "0",
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -29005,7 +29037,7 @@
   },
   {
     "wait": "1.000000",
-    "filtername": "",
+    "filtername": "[PR#]cam_user_context",
     "spawnflags": "4097",
     "globalname": "",
     "StartDisabled": "1",
@@ -29016,13 +29048,13 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]cam_trigger",
+    "targetname": "[PR#]cam_on_trigger",
     "classname": "trigger_multiple",
     "origin": "-43.000000 -1430.000000 -4733.897461",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1168",
-    "model": "maps/ze_x_game_room/entities/cam_trigger_1168.vmdl",
+    "model": "maps/ze_x_game_room/entities/cam_on_trigger_1168.vmdl",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -29047,6 +29079,14 @@
         "param": "StartCam1",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnEndTouch",
+        "target": "!activator",
+        "input": "removecontext",
+        "param": "iscamuser",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -29341,5 +29381,55 @@
         "limit": -1
       }
     ]
+  },
+  {
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]cam_trigger",
+    "classname": "trigger_once",
+    "origin": "-43.000000 -1430.000000 -4887.625000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1184",
+    "model": "maps/ze_x_game_room/entities/cam_trigger_1184.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "!activator",
+        "input": "addcontext",
+        "param": "iscamuser:1",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]cam_on_trigger",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "ResponseContext": "iscamuser",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "targetname": "[PR#]cam_user_context",
+    "vscripts": "",
+    "classname": "filter_activator_context",
+    "origin": "1282.625000 -617.250000 -3143.897461",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1186"
   }
 ]
