@@ -51405,9 +51405,9 @@
       },
       {
         "output": "OnPlayerPickup",
-        "target": "[PR#]xcw_mm2",
+        "target": "[PR#]typ_mm2",
         "input": "SetMeasureTarget",
-        "param": "[PR#]typ_filter",
+        "param": "typ_user",
         "delay": 0.05000000074505806,
         "limit": -1
       },
@@ -51415,8 +51415,8 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "keyvalue",
-        "param": "targetname typ_filter",
-        "delay": 0.10000000149011612,
+        "param": "targetname typ_user",
+        "delay": 0.019999999552965164,
         "limit": -1
       },
       {

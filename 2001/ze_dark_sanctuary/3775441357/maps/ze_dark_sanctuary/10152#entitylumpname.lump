@@ -907,7 +907,7 @@
         "output": "OnPlayerPickup",
         "target": "!activator",
         "input": "keyvalue",
-        "param": "targetname xcw_filter",
+        "param": "targetname xcw_user",
         "delay": 0.019999999552965164,
         "limit": -1
       },
@@ -947,8 +947,8 @@
         "output": "OnPlayerPickup",
         "target": "[PR#]xcw_mm2",
         "input": "SetMeasureTarget",
-        "param": "[PR#]xcw_filter",
-        "delay": 0.10000000149011612,
+        "param": "xcw_user",
+        "delay": 0.05000000074505806,
         "limit": -1
       }
     ]
