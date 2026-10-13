@@ -66,10 +66,10 @@
       },
       {
         "output": "OnPlayerPickup",
-        "target": "[PR#]darkknight_trg",
+        "target": "[PR#]redknight_trg",
         "input": "Kill",
         "param": "",
-        "delay": 0.009999999776482582,
+        "delay": 0,
         "limit": -1
       },
       {

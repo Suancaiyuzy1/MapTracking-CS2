@@ -75300,7 +75300,7 @@
     "vscripts": "",
     "targetname": "[PR#]redknight_mk",
     "classname": "env_entity_maker",
-    "origin": "-5890.047852 11572.420898 6486.000000",
+    "origin": "-5890.047852 11572.420898 6482.000000",
     "angles": "0.000000 90.000053 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "14058"
