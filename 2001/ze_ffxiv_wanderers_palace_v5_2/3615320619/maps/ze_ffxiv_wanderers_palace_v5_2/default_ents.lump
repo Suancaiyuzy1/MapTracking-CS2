@@ -96059,7 +96059,7 @@
         "target": "[PR#]music_js",
         "input": "RunScriptInput",
         "param": "refrain_end",
-        "delay": 205,
+        "delay": 97,
         "limit": -1
       }
     ]
@@ -96093,7 +96093,7 @@
         "target": "[PR#]music_js",
         "input": "RunScriptInput",
         "param": "StarRingChild_end",
-        "delay": 92,
+        "delay": 205,
         "limit": -1
       }
     ]

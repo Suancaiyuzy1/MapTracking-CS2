@@ -18,7 +18,16 @@ function findHud() {
     }
 }
 
-Instance.OnActivate(() => { findHud(); });
+Instance.OnActivate(() => {
+    findHud();
+
+try {
+        Instance.Msg("[MUSIC_LYRICS] 脚本已加载：dedicated=" + Instance.IsDedicatedServer()
+            + "，hud实体=" + (hud ? "已找到" : "NULL"));
+    } catch (e) {
+        Instance.Msg("[MUSIC_LYRICS] 脚本已加载（IsDedicatedServer 不可用：" + e + "）");
+    }
+});
 
 let kwPlaying = false;
 let kwStart = 0;
@@ -137,13 +146,13 @@ let kwRootHideTok = 0;
 
 function kwRootShow() {
     const tok = ++kwRootHideTok;           
-    if (kwRootShown) return;
     kwRootShown = true;
-    cls("Kw_root", "Visible", false);
+
+cls("Kw_root", "Visible", false);
     cls("Kw_root", "FadeOut", true);       
     Instance.Delay(0.02).then(() => {
-        if (tok !== kwRootHideTok) return;
-        cls("Kw_root", "FadeOut", false);  
+        if (tok !== kwRootHideTok) return;  
+        cls("Kw_root", "FadeOut", false);   
         cls("Kw_root", "Visible", true);
     });
 }
@@ -260,11 +269,14 @@ const hideT = KW_UNITS[i][2];
         }
     }
 
-kwEvents.push({ t: KW_END_T - KW_FADE, fn: () => { kwStop(); } });
+kwEvents.push({ t: KW_END_T - KW_FADE, fn: () => { kwStop("时间轴播完 KW_END_T"); } });
     kwEvents.sort((a, b) => a.t - b.t);
 }
 
-function kwStop() {
+function kwStop(reason) {
+    if (kwPlaying) {
+        Instance.Msg("[MUSIC_LYRICS] StarRingChild 停止（" + (reason || "未说明原因") + "）");
+    }
     kwPlaying = false;
     kwIdx = kwEvents.length;
     kwRootHide();                          
@@ -363,7 +375,7 @@ const hideT = RF_UNITS[i][2];
         }
     }
 
-rfEvents.push({ t: RF_END_T - KW_FADE, fn: () => { rfStop(); } });
+rfEvents.push({ t: RF_END_T - KW_FADE, fn: () => { rfStop("时间轴播完 RF_END_T"); } });
     rfEvents.sort((a, b) => a.t - b.t);
 }
 
@@ -377,9 +389,9 @@ Instance.OnScriptInput("StarRingChild_start", () => {
     if (!hud || !hud.IsValid()) findHud();
     if (!hud) return;
 
-rfStop();
+rfStop("切到第一首 StarRingChild");
     rfResetBoxes();
-    kwStop();
+    kwStop("重新开始第一首");
     kwResetBoxes();          
     kwBuild();
     kwIdx = 0;
@@ -392,7 +404,7 @@ rfStop();
 });
 
 Instance.OnScriptInput("StarRingChild_end", () => {
-    kwStop();
+    kwStop("收到 StarRingChild_end 输入");
     Instance.Msg("[MUSIC_LYRICS] StarRingChild end");
 });
 
@@ -400,9 +412,9 @@ Instance.OnScriptInput("refrain_start", () => {
     if (!hud || !hud.IsValid()) findHud();
     if (!hud) return;
 
-kwStop();
+kwStop("切到第二首 Ref_rain");
     kwResetBoxes();
-    rfStop();
+    rfStop("重新开始第二首");
     rfResetBoxes();
     rfBuild();
     rfIdx = 0;
@@ -420,13 +432,14 @@ if (RF_UNITS.length > 0) {
 });
 
 Instance.OnScriptInput("refrain_end", () => {
-    rfStop();
+    rfStop("收到 refrain_end 输入");
     Instance.Msg("[MUSIC_LYRICS] refrain end");
 });
 
 Instance.OnRoundStart(() => {
-    kwStop();
-    rfStop();
+
+kwStop("回合开始重置（OnRoundStart）");
+    rfStop("回合开始重置（OnRoundStart）");
 });
 
 Instance.OnScriptInput("kwdebug2", () => {

@@ -74,11 +74,13 @@
     font-weight: bold;
     color: #00ff00;
     horizontal-align: center;
-    vertical-align: 200px;
+    vertical-align: top;
+    margin-top: 200px;
 }
 .kw_dbg {
     horizontal-align: center;
-    vertical-align: 400px;
+    vertical-align: top;
+    margin-top: 400px;
     flow-children: right;
 }
 .kw_dbg.Hidden {
