@@ -3348,7 +3348,7 @@
     "vscripts": "",
     "targetname": "[PR#]d6",
     "classname": "info_teleport_destination",
-    "origin": "-3555.063965 14901.000000 10296.937500",
+    "origin": "-3555.063965 14881.000000 10296.937500",
     "angles": "0.000000 270.000031 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "533"
@@ -3397,7 +3397,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "trigger_teleport",
-    "origin": "-6001.000000 14862.000000 10274.000000",
+    "origin": "-6001.000000 14839.000000 10274.000000",
     "angles": "0.000000 90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "825",
@@ -3434,7 +3434,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "point_worldtext",
-    "origin": "-5984.948242 14845.626953 10299.156250",
+    "origin": "-5984.948242 14822.626953 10299.156250",
     "angles": "0.000000 180.000015 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "827"
@@ -3524,7 +3524,7 @@
     "vscripts": "",
     "targetname": "[PR#]d5",
     "classname": "info_teleport_destination",
-    "origin": "-6004.437500 14947.000000 10255.031250",
+    "origin": "-6004.437500 14928.000000 10257.031250",
     "angles": "0.000000 270.000031 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "845"
@@ -4702,7 +4702,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "trigger_teleport",
-    "origin": "-3551.750000 14813.000977 10315.865234",
+    "origin": "-3551.750000 14792.000977 10315.865234",
     "angles": "0.000000 90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "903",
@@ -4739,7 +4739,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "point_worldtext",
-    "origin": "-3535.698242 14796.627930 10341.021484",
+    "origin": "-3535.698242 14775.627930 10341.021484",
     "angles": "0.000000 180.000015 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "905"
@@ -10666,7 +10666,17 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1914",
-    "model": "maps/ze_surf_nannoimi/entities/unnamed_1914.vmdl"
+    "model": "maps/ze_surf_nannoimi/entities/unnamed_1914.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]cmd",
+        "input": "Command",
+        "param": "sv_airaccelerate 90",
+        "delay": 0,
+        "limit": 1
+      }
+    ]
   },
   {
     "check_if_dest_clear_for_player": "0",
@@ -11618,6 +11628,14 @@
         "param": "",
         "delay": 281,
         "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]cmd",
+        "input": "Command",
+        "param": "sv_airaccelerate 90",
+        "delay": 280,
+        "limit": 1
       }
     ]
   },
@@ -20461,6 +20479,14 @@
         "param": "",
         "delay": 151,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]cmd",
+        "input": "Command",
+        "param": "sv_airaccelerate 90",
+        "delay": 150,
+        "limit": 1
       }
     ]
   },
