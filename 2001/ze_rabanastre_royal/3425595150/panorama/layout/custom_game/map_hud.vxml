@@ -16,19 +16,19 @@
             </Panel>
         </Panel>
         <Panel id="Stage_root_1" class="stage_master" hittest="false">
-            <Image id="stage_img_1" class="stage_img" src="s2r://panorama/images/icons/map_info_stage1.vtex" hittest="false" />
+            <Image id="stage_img_1" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage1.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_2" class="stage_master" hittest="false">
-            <Image id="stage_img_2" class="stage_img" src="s2r://panorama/images/icons/map_info_stage2.vtex" hittest="false" />
+            <Image id="stage_img_2" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage2.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_3" class="stage_master" hittest="false">
-            <Image id="stage_img_3" class="stage_img" src="s2r://panorama/images/icons/map_info_stage3.vtex" hittest="false" />
+            <Image id="stage_img_3" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage3.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_4" class="stage_master" hittest="false">
-            <Image id="stage_img_4" class="stage_img" src="s2r://panorama/images/icons/map_info_stage4.vtex" hittest="false" />
+            <Image id="stage_img_4" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage4.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_zm" class="stage_master" hittest="false">
-            <Image id="stage_img_zm" class="stage_img" src="s2r://panorama/images/icons/map_info_stagezm.vtex" hittest="false" />
+            <Image id="stage_img_zm" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stagezm.png" hittest="false" />
         </Panel>
         <Panel id="Lyrics_root" class="lyrics_master" hittest="false">
             <Panel id="lyrics_wrap" class="lyrics_wrap" hittest="false">
@@ -430,81 +430,81 @@
         </Panel>
         <Panel id="Kw_root" class="kw_master" hittest="false">
             <Panel id="Kw_box_1" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_1" class="kw_dim" src="s2r://panorama/images/icons/songs_1_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_1" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_1_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_1" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_1_blue.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_1_blue.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_2" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_2" class="kw_dim" src="s2r://panorama/images/icons/songs_2_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_2" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_2_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_2" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_2_blue.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_2_blue.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_3" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_3" class="kw_dim" src="s2r://panorama/images/icons/songs_3_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_3" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_3_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_3" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_3_blue.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_3_blue.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_4" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_4" class="kw_dim" src="s2r://panorama/images/icons/songs_4_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_4" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_4_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_4" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_4_blue.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_4_blue.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_5" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_5" class="kw_dim" src="s2r://panorama/images/icons/songs_5_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_5" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_5_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_5" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_5_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_5_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_6" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_6" class="kw_dim" src="s2r://panorama/images/icons/songs_6_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_6" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_6_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_6" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_6_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_6_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_7" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_7" class="kw_dim" src="s2r://panorama/images/icons/songs_7_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_7" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_7_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_7" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_7_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_7_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_8" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_8" class="kw_dim" src="s2r://panorama/images/icons/songs_8_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_8" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_8_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_8" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_8_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_8_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_9" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_9" class="kw_dim" src="s2r://panorama/images/icons/songs_9_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_9" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_9_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_9" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_9_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_9_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_10" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_10" class="kw_dim" src="s2r://panorama/images/icons/songs_10_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_10" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_10_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_10" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_10_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_10_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_11" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_11" class="kw_dim" src="s2r://panorama/images/icons/songs_11_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_11" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_11_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_11" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_11_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_11_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_12" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_12" class="kw_dim" src="s2r://panorama/images/icons/songs_12_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_12" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_12_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_12" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_12_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_12_pink.png" hittest="false" />
                 </Panel>
             </Panel>
             <Panel id="Kw_box_13" class="kw_box Hidden" hittest="false">
-                <Image id="Kw_dim_13" class="kw_dim" src="s2r://panorama/images/icons/songs_13_dim.vtex" hittest="false" />
+                <Image id="Kw_dim_13" class="kw_dim" src="s2r://panorama/layout/custom_game/icons/songs_13_dim.png" hittest="false" />
                 <Panel id="Kw_sweep_13" class="kw_sweep" hittest="false">
-                    <Image class="kw_blue" src="s2r://panorama/images/icons/songs_13_pink.vtex" hittest="false" />
+                    <Image class="kw_blue" src="s2r://panorama/layout/custom_game/icons/songs_13_pink.png" hittest="false" />
                 </Panel>
             </Panel>
         </Panel>
