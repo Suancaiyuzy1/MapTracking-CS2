@@ -33,9 +33,9 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]frozen_elite",
+    "parentname": "[PR#]frozen_elite\u00260000",
     "vscripts": "",
-    "targetname": "[PR#]frozen_button",
+    "targetname": "[PR#]frozen_button\u00260000",
     "classname": "func_button",
     "origin": "-9.599609 38.652344 2.876953",
     "angles": "-0.000000 90.000000 0.000000",
@@ -46,7 +46,7 @@
     "connections": [
       {
         "output": "OnPressed",
-        "target": "[PR#]frozen_filter",
+        "target": "[PR#]frozen_filter\u00260000",
         "input": "TestActivator",
         "param": "",
         "delay": 0,
@@ -68,7 +68,7 @@
     "rendermode": "0",
     "renderfx": "0",
     "vscripts": "",
-    "targetname": "[PR#]frozen_elite",
+    "targetname": "[PR#]frozen_elite\u00260000",
     "classname": "weapon_elite",
     "origin": "0.000000 -2.762695 0.876953",
     "angles": "-0.000000 90.000000 0.000000",
@@ -78,7 +78,7 @@
     "connections": [
       {
         "output": "OnPlayerPickup",
-        "target": "[PR#]frozen_button",
+        "target": "[PR#]frozen_button\u00260000",
         "input": "Unlock",
         "param": "",
         "delay": 0,
@@ -114,8 +114,8 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]frozen_elite",
-    "targetname": "[PR#]frozen_mak_effect",
+    "parentname": "[PR#]frozen_elite\u00260000",
+    "targetname": "[PR#]frozen_mak_effect\u00260000",
     "vscripts": "",
     "classname": "env_entity_maker",
     "origin": "0.000000 -18.000000 0.000000",
@@ -129,7 +129,7 @@
     "Negated": "0",
     "clientSideEntity": "0",
     "vscripts": "",
-    "targetname": "[PR#]frozen_filter",
+    "targetname": "[PR#]frozen_filter\u00260000",
     "classname": "filter_activator_context",
     "origin": "46.000000 -14.000000 -4.000000",
     "angles": "-0.000000 90.000000 0.000000",
@@ -139,7 +139,7 @@
     "connections": [
       {
         "output": "OnPass",
-        "target": "[PR#]frozen_button",
+        "target": "[PR#]frozen_button\u00260000",
         "input": "Lock",
         "param": "",
         "delay": 0,
@@ -147,15 +147,15 @@
       },
       {
         "output": "OnPass",
-        "target": "[PR#]frozen_button",
+        "target": "[PR#]frozen_button\u00260000",
         "input": "Unlock",
         "param": "",
-        "delay": 90,
+        "delay": 40,
         "limit": -1
       },
       {
         "output": "OnPass",
-        "target": "[PR#]frozen_mak_effect",
+        "target": "[PR#]frozen_mak_effect\u00260000",
         "input": "ForceSpawn",
         "param": "",
         "delay": 0,

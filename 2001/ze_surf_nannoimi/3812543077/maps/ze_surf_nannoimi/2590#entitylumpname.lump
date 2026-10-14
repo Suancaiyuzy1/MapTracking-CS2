@@ -91,7 +91,7 @@
     "parentAttachmentName": "",
     "parentname": "[PR#]frozen_elite",
     "vscripts": "",
-    "targetname": "[PR#]frozen_particle",
+    "targetname": "[PR#]frozen_particle\u00260000",
     "classname": "info_particle_system",
     "origin": "0.000000 -1.245117 -30.000000",
     "angles": "-0.000000 90.000000 0.000000",
@@ -187,7 +187,7 @@
     "useLocalOffset": "0",
     "parentAttachmentName": "",
     "parentname": "[PR#]frozen_elite",
-    "targetname": "[PR#]frozen_ring_particle",
+    "targetname": "[PR#]frozen_ring_particle\u00260000",
     "vscripts": "",
     "classname": "info_particle_system",
     "origin": "0.000000 -1.245117 -30.000000",
@@ -202,7 +202,7 @@
     "TriggerOnce": "0",
     "StartDisabled": "0",
     "vscripts": "",
-    "targetname": "[PR#]frozen_relay",
+    "targetname": "[PR#]frozen_relay\u00260000",
     "classname": "logic_relay",
     "origin": "19.529297 7.329102 -25.123047",
     "angles": "-0.000000 90.000000 0.000000",
@@ -212,7 +212,7 @@
     "connections": [
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_particle",
+        "target": "[PR#]frozen_particle\u00260000",
         "input": "Start",
         "param": "",
         "delay": 0,
@@ -220,7 +220,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_ring_particle",
+        "target": "[PR#]frozen_ring_particle\u00260000",
         "input": "Start",
         "param": "",
         "delay": 0,
@@ -228,7 +228,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_particle",
+        "target": "[PR#]frozen_particle\u00260000",
         "input": "DestroyImmediately",
         "param": "",
         "delay": 7,
@@ -236,7 +236,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_ring_particle",
+        "target": "[PR#]frozen_ring_particle\u00260000",
         "input": "DestroyImmediately",
         "param": "",
         "delay": 7,
@@ -244,7 +244,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger_res",
+        "target": "[PR#]frozen_trigger_res\u00260000",
         "input": "Enable",
         "param": "",
         "delay": 7,
@@ -252,7 +252,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger",
+        "target": "[PR#]frozen_trigger\u00260000",
         "input": "Enable",
         "param": "",
         "delay": 0,
@@ -260,7 +260,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger",
+        "target": "[PR#]frozen_trigger\u00260000",
         "input": "Disable",
         "param": "",
         "delay": 6.5,
@@ -268,7 +268,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger_res",
+        "target": "[PR#]frozen_trigger_res\u00260000",
         "input": "Disable",
         "param": "",
         "delay": 7.199999809265137,
@@ -276,7 +276,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_particle",
+        "target": "[PR#]frozen_particle\u00260000",
         "input": "Kill",
         "param": "",
         "delay": 7.5,
@@ -284,7 +284,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_ring_particle",
+        "target": "[PR#]frozen_ring_particle\u00260000",
         "input": "Kill",
         "param": "",
         "delay": 7.5,
@@ -292,7 +292,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger_res",
+        "target": "[PR#]frozen_trigger_res\u00260000",
         "input": "Kill",
         "param": "",
         "delay": 7.5,
@@ -300,7 +300,7 @@
       },
       {
         "output": "OnSpawn",
-        "target": "[PR#]frozen_trigger",
+        "target": "[PR#]frozen_trigger\u00260000",
         "input": "Kill",
         "param": "",
         "delay": 7.5,
@@ -329,7 +329,7 @@
     "parentAttachmentName": "",
     "parentname": "[PR#]heal_elite",
     "vscripts": "",
-    "targetname": "[PR#]frozen_trigger",
+    "targetname": "[PR#]frozen_trigger\u00260000",
     "classname": "trigger_multiple",
     "origin": "16.000000 -3.245117 2.000000",
     "angles": "-0.000000 90.000000 0.000000",
@@ -369,7 +369,7 @@
     "parentAttachmentName": "",
     "parentname": "[PR#]heal_elite",
     "vscripts": "",
-    "targetname": "[PR#]frozen_trigger_res",
+    "targetname": "[PR#]frozen_trigger_res\u00260000",
     "classname": "trigger_multiple",
     "origin": "16.000000 -3.245117 2.000000",
     "angles": "-0.000000 90.000000 0.000000",
