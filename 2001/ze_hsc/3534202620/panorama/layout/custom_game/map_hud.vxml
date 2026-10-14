@@ -7,13 +7,13 @@
     </styles>
     <Panel class="Root" hittest="false">
         <Panel id="Stage_root_1" class="stage_master" hittest="false">
-            <Image id="stage_img_1" class="stage_img" src="s2r://panorama/images/icons/map_info_stage1.vtex" hittest="false" />
+            <Image id="stage_img_1" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage1.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_2" class="stage_master" hittest="false">
-            <Image id="stage_img_2" class="stage_img" src="s2r://panorama/images/icons/map_info_stage2.vtex" hittest="false" />
+            <Image id="stage_img_2" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage2.png" hittest="false" />
         </Panel>
         <Panel id="Stage_root_3" class="stage_master" hittest="false">
-            <Image id="stage_img_3" class="stage_img" src="s2r://panorama/images/icons/map_info_stage3.vtex" hittest="false" />
+            <Image id="stage_img_3" class="stage_img" src="s2r://panorama/layout/custom_game/icons/Map_info_stage3.png" hittest="false" />
         </Panel>
         <Panel id="Fire_root" class="fire_master" hittest="false">
             <Panel id="Fire_t5" class="fire_step" hittest="false">
