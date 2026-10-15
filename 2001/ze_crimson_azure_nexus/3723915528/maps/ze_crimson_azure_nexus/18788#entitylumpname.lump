@@ -60,8 +60,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "0",
-    "damagecap": "240",
-    "damage": "240",
+    "damagecap": "220",
+    "damage": "220",
     "master": "",
     "filtername": "[PR#]human",
     "spawnflags": "4097",
@@ -104,7 +104,7 @@
         "target": "!activator",
         "input": "Keyvalue",
         "param": "speed 1",
-        "delay": 2,
+        "delay": 1.7999999523162842,
         "limit": -1
       }
     ]

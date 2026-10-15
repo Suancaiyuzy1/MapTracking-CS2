@@ -3868,6 +3868,14 @@
         "param": "say \u003C\u003C The Final \u003E\u003E",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]Map_spawn_tp",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -46376,7 +46384,7 @@
         "target": "!activator",
         "input": "Keyvalue",
         "param": "speed 1",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -46400,7 +46408,7 @@
         "target": "[PR#]h_ds_hurt2",
         "input": "Disable",
         "param": "",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -46416,7 +46424,7 @@
         "target": "[PR#]h_ds_model1",
         "input": "SetAnimationLooping",
         "param": "move2",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -46432,7 +46440,7 @@
         "target": "[PR#]h_ds_e_par",
         "input": "Stop",
         "param": "",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -46448,7 +46456,7 @@
         "target": "[PR#]h_ds_e_par1",
         "input": "Stop",
         "param": "",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -46472,7 +46480,7 @@
         "target": "[PR#]fog1",
         "input": "SetFogEndDistance",
         "param": "6500",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       }
     ]
@@ -48763,7 +48771,7 @@
         "target": "[PR#]z_lz_hurt",
         "input": "Disable",
         "param": "",
-        "delay": 2,
+        "delay": 2.299999952316284,
         "limit": -1
       },
       {
@@ -48786,7 +48794,7 @@
         "output": "OnTrigger",
         "target": "!self",
         "input": "Keyvalue",
-        "param": "speed 2",
+        "param": "speed 2.3",
         "delay": 0,
         "limit": -1
       },
@@ -49545,7 +49553,7 @@
     "glowcolor": "135 206 250",
     "glowrangemin": "50",
     "glowrange": "75",
-    "glowstate": "3",
+    "glowstate": "0",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -61086,8 +61094,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "0",
-    "damagecap": "8000",
-    "damage": "8000",
+    "damagecap": "6000",
+    "damage": "6000",
     "master": "",
     "filtername": "[PR#]zombies",
     "spawnflags": "4097",
@@ -65732,6 +65740,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]admin_int11",
+        "input": "TestActivator",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -66143,7 +66159,7 @@
     "glowcolor": "135 206 250",
     "glowrangemin": "0",
     "glowrange": "75",
-    "glowstate": "3",
+    "glowstate": "0",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -69655,7 +69671,7 @@
         "target": "!activator",
         "input": "keyvalue",
         "param": "speed 1",
-        "delay": 2,
+        "delay": 2.5,
         "limit": -1
       }
     ]
@@ -70931,7 +70947,7 @@
     "vscripts": "",
     "targetname": "[PR#]First_tpdes_bai",
     "classname": "info_player_start",
-    "origin": "-10219.905273 6512.802734 1161.000000",
+    "origin": "-10219.905273 6356.000000 1161.000000",
     "angles": "0.000000 90.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "20715"
@@ -71417,5 +71433,27 @@
     "angles": "0.000000 180.000046 0.000000",
     "scales": "0.370000 0.370000 0.370000",
     "hammerUniqueId": "20728"
+  },
+  {
+    "filterattribute": "76561199504902465",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]admin_int11",
+    "classname": "filter_activator_attribute_int",
+    "origin": "-10043.764648 -2789.000000 -747.097168",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "20729",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "!activator",
+        "input": "Keyvalue",
+        "param": "origin -9660.89 -4349.15 -754.097",
+        "delay": 1.5,
+        "limit": -1
+      }
+    ]
   }
 ]
