@@ -9552,7 +9552,7 @@
     "vscripts": "",
     "targetname": "[PR#]lv2_rainbow_tp2_dest",
     "classname": "info_teleport_destination",
-    "origin": "2885.000000 -2183.000000 2031.000000",
+    "origin": "2904.000000 -2183.000000 2031.000000",
     "angles": "0.000000 179.999893 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "467"
@@ -9617,7 +9617,7 @@
     "vscripts": "",
     "targetname": "[PR#]lv2_asfk_tp2_dest",
     "classname": "info_teleport_destination",
-    "origin": "2609.750000 -2068.125000 1317.500000",
+    "origin": "2624.000000 -2064.000000 1317.500000",
     "angles": "0.000000 345.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "472"
@@ -21453,7 +21453,7 @@
         "target": "[PR#]lv1_wall1_mdl",
         "input": "Open",
         "param": "",
-        "delay": 29.5,
+        "delay": 29,
         "limit": 1
       }
     ]
@@ -25699,7 +25699,7 @@
     "Filter05": "",
     "Filter04": "",
     "Filter03": "",
-    "Filter02": "",
+    "Filter02": "[PR#]vip_lihuabai_filter",
     "Filter01": "[PR#]vip_yitiaoxianyu_filter",
     "filtertype": "1",
     "Negated": "0",
@@ -26209,7 +26209,7 @@
     "color": "255 255 255",
     "fullbright": "1",
     "enabled": "1",
-    "message": "https://afdian.com/a/xiongchj\n\u4E3A\u6211\u53D1\u7535\n\u83B7\u5F97\u8D5E\u52A9\u8005\u76AE\u80A4\u7B49\u66F4\u591A\u6743\u76CA",
+    "message": "https://afdian.com/a/xiongchj\n-\u4E3A\u6211\u53D1\u7535--\u83B7\u5F97\u4EE5\u4E0B\u5730\u56FE\u66F4\u591A\u6743\u76CA-\nze_aot_trost\nze_overlord\nze_x_game_room",
     "lightmapstatic": "1",
     "rendertocubemaps": "0",
     "object_culling": "0",
@@ -26229,7 +26229,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "point_worldtext",
-    "origin": "-589.097290 -1102.178955 -4071.038086",
+    "origin": "-589.097290 -1102.178955 -4092.000000",
     "angles": "0.000000 89.999969 89.999977",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1095"
@@ -26265,7 +26265,7 @@
     "vscripts": "",
     "targetname": "",
     "classname": "point_worldtext",
-    "origin": "-589.097290 -1206.281006 -4010.814941",
+    "origin": "-589.097290 -1206.281006 -4000.000000",
     "angles": "0.000000 89.999969 89.999977",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1096"
@@ -29431,5 +29431,17 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1186"
+  },
+  {
+    "filterattribute": "76561199572045634",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]vip_lihuabai_filter",
+    "classname": "filter_activator_attribute_int",
+    "origin": "-840.646484 -220.000000 -2800.651611",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "1187"
   }
 ]
