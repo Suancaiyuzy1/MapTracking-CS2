@@ -25,6 +25,9 @@ const DEBUG_HOOKS = {
    
 
 const CONFIG = Object.freeze({
+  // Set false to silence all [ze_collective] console logs.
+  loggingEnabled: false,
+  zombieItemAntiInflateCallout: true,
   gridSize: 96,
   mapSize: 20,
   elevationStep: 30,
@@ -296,6 +299,10 @@ let invincibilityHudNextSyncAt = 0;
 
 const SQUID_BLIND_HUD_TARGET = "collective_squid_blind_hud";
 const SQUID_BLIND_HUD_PANEL = "collective_squid_blind_overlay";
+const JUMPSCARE_HUD_TARGET = "collective_jumpscare_hud";
+const JUMPSCARE_HUD_PANEL = "collective_jumpscare_overlay";
+const jumpscareHudPlayers = new Map();
+let jumpscareHudWarningPrinted = false;
 let squidBlindHud;
 const squidBlindHudPlayers = new Map();
 let squidBlindHudWarningPrinted = false;
@@ -2488,6 +2495,7 @@ const RACE_CONFIG = Object.freeze({
   checkoutInterval: 0.2,
   stageBoxCells: 20,
   startAt: 17,
+  kartSpawnPerThink: 2,
   // Kart physics hull is about 60 long x 43 wide; riders are 32 wide.
   startHalfWidth: 280,
   startLaneSpacing: 56,
@@ -3081,7 +3089,7 @@ const kamikazePilots = new WeakMap();
                                                                            
 const GENERIC_EVENT_DEFINITIONS = Object.freeze({
   PIZZADOOM: Object.freeze({ cost: 0, supported: true }),
-  PLEDGE: Object.freeze({ cost: 0, supported: true, duration: Infinity }),
+  PLEDGE: Object.freeze({ calloutFail: true, cost: 0, supported: true, duration: Infinity }),
   KAMIKAZE: Object.freeze({ cost: 5, supported: true, duration: 15 }),
   BEAMGRID: Object.freeze({ cost: 50, supported: true, duration: 32 }),
   THICK_FOG: Object.freeze({ cost: 0, supported: true, duration: 40 }),
@@ -3178,8 +3186,8 @@ const GENERIC_PIZZADOOM_CONFIG = Object.freeze({
   soundStack: 5,
   contactFxTemplate: "template_event_pizzadoom_contact",
   contactBloodParticle: "particles/blood_impact/blood_impact_headshot.vpcf",
-  contactFlashParticle: "particles/weapons/cs_weapon_fx/weapon_taser_flash.vpcf",
-  contactFxLifetime: 0.05,
+  contactFlashParticle: "particles/luffaren/pizza_tesla/tesla.vpcf",
+  contactFxLifetime: 0.25,
   contactFxWindow: 0.15,
   contactHalfSize: Object.freeze({ x: 20000, y: 20000, z: 8 }),
 });
@@ -3442,6 +3450,7 @@ const FEATURE_TEMPLATE_NAMES = Object.freeze({
   spawnSafety: "template_spawn_safety",
   ladder: "template_ladder",
   trigger: "template_boostpad",
+  jumpscare: "template_stage_jumpscare",
   lowgrav: "template_lowgrav",
   lowgravFloor: "template_lowgrav_floor",
   airslide: "template_airslide",
@@ -3649,6 +3658,7 @@ const TRAP_TEMPLATE_KEYS = new Set(
 );
 
 function featureTemplateIsRequired(key) {
+  if (key === "jumpscare") return false;
                                                                            
                                                                     
   if (["bossPieceTouch", "bossEyeTouch", "bossEyeDamage", "bossGrenadeDamage", "finaleCheckoutDamage", "finaleMover", "finaleZombieMover", "finaleCheckoutText", "finaleThunder", "finaleRain", "finaleRainGround"].includes(key)) return false;
@@ -3698,19 +3708,22 @@ const TRAP_DEFINITIONS = Object.freeze({
     jumpAfterFirst: true, jumpNudgeDelay: 0.8, jumpNudgeForce: 20,
     healthBase: 300, healthPerHuman: 100,
   }),
-  buttonmimic: Object.freeze({ pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 1, useRadius: 105 }),
-  banana: Object.freeze({ pool: "step", model: "models/luffaren/ck_banana.vmdl", cost: 2, radius: 8, zRange: 4, spinDegrees: 2000, spinTime: 4.0 }),
+  buttonmimic: Object.freeze({ printChat: true, pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 1, useRadius: 105 }),
+  banana: Object.freeze({ printChat: true, pool: "step", model: "models/luffaren/ck_banana.vmdl", cost: 2, radius: 8, zRange: 4, spinDegrees: 2000, spinTime: 4.0 }),
   flinger: Object.freeze({
+    printChat: true,
     pool: "vicinity", model: "models/luffaren/heal_orb.vmdl", cost: 2,
     triggerRadius: 150, triggerMinZ: -100, triggerMaxZ: 200,
     radius: 600, force: 1400, zMin: 300, zMax: 700,
   }),
   blackhole: Object.freeze({
+    printChat: true,
     pool: "vicinity", model: "models/luffaren/heal_orb.vmdl", cost: 7,
     radius: 500, killDistance: 50, pullMultiplier: 0.9, battery: 1000,
     killDrain: 700, distanceDrainMultiplier: 1,
   }),
   spikes: Object.freeze({
+    printChat: true,
     pool: "step", model: "models/luffaren/spikes.vmdl", cost: 2, radius: 36,
     runSpeed: 150, fallSpeed: 50, runDamage: 23, fallDamage: 132, zRange: 18,
   }),
@@ -3719,12 +3732,14 @@ const TRAP_DEFINITIONS = Object.freeze({
     tickInterval: 0.8, damage: 2, zRange: 4,
   }),
   guster: Object.freeze({
+    printChat: true,
     pool: "vicinity", model: "models/luffaren/gust.vmdl", cost: 2,
     triggerRadius: 300, triggerMinZ: -100, triggerMaxZ: 200,
     waveSpeed: 300, waveRadius: 32, waveLifetime: 20,
     pushSpeed: 400, pushUp: 251,
   }),
   slotmachine: Object.freeze({
+    printNames: true,
     pool: "spawn", model: "models/luffaren/slotmachine.vmdl", cost: 3,
     useRadius: 110, winChance: 10, usesMin: 1, usesMax: 20,
     winHealth: 150, loseHealth: 18, spinTime: 0.8, reuseDelay: 1.8,
@@ -3732,6 +3747,7 @@ const TRAP_DEFINITIONS = Object.freeze({
     minislotSpawnChance: 40, minislotMaximum: 5,
   }),
   bomb: Object.freeze({
+    printChat: true,
     pool: "vicinity", model: "models/luffaren/bomb_chuck.vmdl", cost: 2,
     triggerRadius: 150, triggerMinZ: -100, triggerMaxZ: 200,
     fuseTime: 8, explosionDamage: 400, explosionRadius: 400,
@@ -3741,16 +3757,22 @@ const TRAP_DEFINITIONS = Object.freeze({
     hitsMin: 1, hitsMax: 30, explosionDamage: 200, explosionRadius: 200,
     igniteTime: 5, igniteRadius: 200,
   }),
-  mimic: Object.freeze({ pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 10, radius: 18, zRange: 4 }),
+  mimic: Object.freeze({ printChat: true, pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 10, radius: 18, zRange: 4 }),
   landmine: Object.freeze({
+    printChat: true,
     pool: "step", model: "models/luffaren/landmine.vmdl", cost: 2, radius: 8, zRange: 4,
     // Source trigger_multiple mins -3 -3 -1 / maxs 3 3 2 touching the player hull
     // (±16 wide, 72 tall): the pawn origin may be 19 units off and up to 73 below.
     triggerHalfSize: 19, triggerMinZ: -73, triggerMaxZ: 2,
     explosionDamage: 5000, explosionRadius: 100,
   }),
-  pizza: Object.freeze({ pool: "step", model: "models/luffaren/pizza.vmdl", cost: 2, radius: 12, zRange: 6 }),
+  pizza: Object.freeze({
+    printChat: true, pool: "step", model: "models/luffaren/pizza.vmdl", cost: 2, radius: 12, zRange: 6,
+    // Source trigger mins -4 -4 -1 / maxs 4 4 2, expanded by the player hull.
+    triggerHalfSize: 20, triggerMinZ: -73, triggerMaxZ: 2,
+  }),
   beartrap: Object.freeze({
+    printChat: true,
     pool: "step", model: "models/luffaren/beartrap.vmdl", cost: 2,
     radius: 12, zRange: 4, damage: 69, freezeTime: 10,
   }),
@@ -3937,6 +3959,7 @@ const ITEM_DEFINITIONS = Object.freeze({
     attachment: Object.freeze({ pitch: -10, yaw: 180, scale: 0.8 }),
   }),
   greasy_fingers: Object.freeze({
+    printName: true,
     team: 2, carrierKind: "knife", hammerId: 14, model: "models/luffaren/heal_orb.vmdl",
     cooldown: 0, uses: 1, useMode: "oneShot", behavior: "greasy_fingers",
     range: CONFIG.greasyFingersRange,
@@ -3995,6 +4018,7 @@ const ITEM_DEFINITIONS = Object.freeze({
     idleAnimation: "idle",
   }),
   stone: Object.freeze({
+    printDeaths: true,
     team: 2, carrierKind: "knife", hammerId: 8, model: "models/luffaren/stone.vmdl",
     cooldown: 3, uses: 10, useMode: "finiteCharges", behavior: "stone",
     thrustForce: 20000, thrustTime: 0.1, physicsMass: 67.5863,
@@ -4061,6 +4085,7 @@ const ITEM_DEFINITIONS = Object.freeze({
     cooldown: 150, uses: Infinity, useMode: "cooldownUnlimited", behavior: "storm_blade",
     bossRadius: 500, bossDamage: 10000, bossStunChance: 90, bossStunTimeAdd: 7,
     pickupUseRadius: 96,
+    mapVisualUpCorrection: 16,
     attachment: Object.freeze({ left: 8, yaw: 110, scale: 1 }),
     idleAnimation: "idle",
   }),
@@ -4162,10 +4187,18 @@ const ITEM_TUTORIALS = Object.freeze({
     "Give yourself an upward boost.\nCombine it with jumping for extra height." },
 });
 
+function itemDisplayName(item) {
+  if (item.name === "planetcrystal") {
+    const elements = { earth: "EarthCrystal", fire: "FireCrystal", wind: "WindCrystal", water: "WaterCrystal" };
+    if (elements[item.variant]) return elements[item.variant];
+  }
+  return ITEM_TUTORIALS[item.name]?.name ?? item.name;
+}
+
 function itemTutorialContent(item) {
   const d = item.definition;
   const tutorial = ITEM_TUTORIALS[item.name];
-  let title = tutorial?.name ?? item.name;
+  let title = itemDisplayName(item);
   let description = tutorial?.describe(d) ?? "Use this item to activate its ability.";
   if (item.name === "planetcrystal") {
     const elements = {
@@ -5798,6 +5831,21 @@ const LEVELS = Object.freeze(ALL_LEVELS.filter((level) => {
 
 
 
+// Cosmetic parodies only. Match CS2Fixes wording without invoking its commands
+// or changing the real vote, nominations, next map, or any server ConVar.
+const TROLL_MESSAGE_CONFIG = Object.freeze({
+  enabled: true, minimumDelay: 0.1, maximumDelay: 1000, voteChance: 0.20,
+  hudDuration: 8,
+  maps: Object.freeze([
+    "ze_blackmesa_lambda_v1", "ze_infiltration_final_p3", "ze_predator_ultimate_p7",
+    "ze_toaster_p3", "ze_halo_poa_p4", "ze_interception_p2", "ze_frostdrake_tower_v1",
+    "ze_castlevania_p1_7", "ze_santassination_v3", "ze_diddle_v3", "ze_pizzatime_v9",
+    "ze_best_korea_v1", "ze_magmadrake_b4", "ze_eternal_grove_v3", "ze_crazykart_v4", "ze_collective_v1_9",
+  ]),
+});
+const TROLL_MESSAGE_PANEL = "collective_troll_message";
+const trollMessageHud = { hud: undefined, text: undefined, visible: false, retryAt: 0, warned: false };
+
 // Round arena: every container that only lives for one round. An engine round
 // restart swaps the whole set for fresh objects (releaseRoundToEngine), so a
 // forgotten clear() can't carry handles or closures into later rounds.
@@ -5805,6 +5853,10 @@ const LEVELS = Object.freeze(ALL_LEVELS.filter((level) => {
 // theme resources, warnings, slot HUD maps) must stay out of this list.
 function createRoundScope() {
   return {
+    trollMessages: createTrollMessageState(),
+    roundReportLevels: new Map(),
+    roundReportRecent: [],
+    roundReportVictims: new WeakSet(),
     falldownCheckpointQueue: [],
     falldownCheckpoints: new Map(),
     falldownCheckpointSuppressions: new Map(),
@@ -5814,6 +5866,7 @@ function createRoundScope() {
     lowgravFailsafeQueue: [],
     airslideFailsafeQueue: [],
     motherZombies: new Set(),
+    zombieItemInflateCalledOut: new WeakSet(),
     terrainPreloadRetiring: new Set(),
     themePreloadCleanup: [],
     levels: new Map(),
@@ -5855,6 +5908,8 @@ const state = {
   roundBootstrapSerial: 0,
   roundBootstrapPending: false,
   roundBootstrapWaitLogged: false,
+  roundReportPrinted: false,
+  reportSessionId: createReportSessionId(),
   nextEndCheckAt: 0,
   endLockedUntil: 0,
   falldownCheckpointEnabled: true,
@@ -10162,6 +10217,7 @@ function raceLevelRecord(runtime, level, slot, mirrored, entry, incoming, rows, 
     left,
   };
   state.levels.set(index, record);
+  trackRoundReportLevel(record);
   runtime.raceLevels ??= [];
   runtime.raceLevels.push(record);
   runtime.raceHistory ??= [];
@@ -10580,10 +10636,10 @@ function raceConfigureKinematicKartBody(controller) {
   return true;
 }
 
-function setRacePawnControlLocked(pawn, locked) {
+function setRacePawnControlLocked(pawn, locked, restoreMoveType = 1) {
   if (!validEntity(pawn)) return false;
   // CS2 CSMoveType: NONE=0, WALK=1, FLYGRAVITY=2 (not the Source 1 numbering).
-  const moveType = locked ? 0 : 1;
+  const moveType = locked ? 0 : restoreMoveType;
   let applied = false;
   try {
     if (typeof pawn.SetMoveType === "function") {
@@ -10979,6 +11035,10 @@ function kartMount(controller, pawn, now = Instance.GetGameTime()) {
                                                                        
                                                                      
   controller.previousBodyOwner = controller.body?.GetOwner?.();
+  // RACE preparation may already have frozen the pawn (NONE); release that
+  // case to WALK, while ordinary riders keep their pre-mount movement mode.
+  const moveType = pawn.GetMoveType?.();
+  controller.riderMoveType = Number.isInteger(moveType) && moveType > 0 ? moveType : 1;
   controller.body?.SetOwner?.(pawn);
   const bodyPosition = kartBodyOrigin(controller) ?? controller.position;
   const seatPosition = add(bodyPosition, vec(0, 0, kartRiderLocalZ(controller)));
@@ -10996,6 +11056,7 @@ function kartDismount(controller, now = Instance.GetGameTime(), moveRider = true
     if (controller) {
       if (validEntity(controller.body)) controller.body.SetOwner?.(controller.previousBodyOwner);
       controller.previousBodyOwner = undefined;
+      controller.riderMoveType = undefined;
       controller.rider = undefined;
       controller.pawn = undefined;
       controller.team = undefined;
@@ -11003,11 +11064,16 @@ function kartDismount(controller, now = Instance.GetGameTime(), moveRider = true
     }
     return false;
   }
-  fireTarget(rider, "ClearParent", "");
+  // Manual seat sync never parents the rider. Do not queue a ClearParent
+  // after control has been restored, or touch the walking pawn's hierarchy.
+  if (controller.parented) {
+    if (typeof rider.SetParent === "function") rider.SetParent(undefined);
+    else fireTarget(rider, "ClearParent", "");
+  }
   controller.body?.SetOwner?.(controller.previousBodyOwner);
   controller.previousBodyOwner = undefined;
-  try { rider.SetParent?.(undefined); } catch {                                 }
-  setRacePawnControlLocked(rider, false);
+  setRacePawnControlLocked(rider, false, controller.riderMoveType ?? 1);
+  controller.riderMoveType = undefined;
   if (moveRider) {
     const bodyPosition = kartBodyOrigin(controller) ?? rider.GetAbsOrigin?.();
     if (bodyPosition) rider.Teleport?.({ position: add(bodyPosition, vec(0, 0, KART_CONFIG.dismountZOffset)), velocity: vec() });
@@ -11172,7 +11238,6 @@ function spawnKartController(runtime, position, angles, options = {}) {
   applyKartVisualPose(controller);
   queueKartCollisionFilter(controller);
   if (options.rider) kartMount(controller, options.rider, Instance.GetGameTime());
-  if (mode === "ending") raceLog(runtime, `kart motion=physics terrain=physics collisiongroup=${controller.collisionGroup} rider=seat_sync`);
   return controller;
 }
 
@@ -11191,15 +11256,43 @@ function raceKillPawn(pawn) {
   pawn.TakeDamage?.({ damage: 999999, damageFlags: (CSDamageFlags.FORCE_DEATH ?? 0) | (CSDamageFlags.IGNORE_ARMOR ?? 0) });
 }
 
+// Reuse the authored worldtext; deleting it would break the next round.
+function hideRaceDirectionHint(runtime) {
+  const hint = runtime?.raceDirectionHint;
+  if (runtime) runtime.raceDirectionHint = undefined;
+  if (!validEntity(hint)) return;
+  fireTarget(hint, "Disable");
+  hint.Teleport({ position: vec(0, 0, -16384), angles: { pitch: 0, yaw: 0, roll: 0 }, velocity: vec() });
+}
+
+function showRaceDirectionHint(runtime) {
+  const hint = state.raceAnchors?.directionHint;
+  if (!validEntity(hint)) {
+    raceLog(runtime, "GO THIS WAY worldtext missing; check ending_race_direction_hint in the map build");
+    return;
+  }
+  runtime.raceDirectionHint = hint;
+  const position = add(runtime.raceStart, add(mul(runtime.direction, 2000),
+    add(mul(leftOf(runtime.direction), 500), vec(0, 0, 175))));
+  // Source 2 worldtext uses the same upright basis as the spawn-stage label.
+  const angles = { pitch: 0, yaw: normalizeYaw(yawOf(runtime.direction) - 90), roll: 90 };
+  hint.Teleport({ position, angles, velocity: vec() });
+  fireTarget(hint, "SetMessage", "GO THIS WAY");
+  fireTarget(hint, "SetTextColor", "255 255 255");
+  fireTarget(hint, "Enable");
+  endingTaskAt(runtime, Instance.GetGameTime() + 20, () => {
+    if (runtime.raceDirectionHint === hint) hideRaceDirectionHint(runtime);
+  }, `race_${runtime.sequence}_direction_hint_hide`);
+}
+
 function beginRace(runtime) {
-  if (!runtime || runtime.lifecycle !== "active" || runtime.raceStarted) return;
-  runtime.raceStarted = true;
-  runtime.raceStartedAt = Instance.GetGameTime();
-  runtime.raceCheckoutReadyAt = runtime.raceStartedAt + RACE_CONFIG.checkoutGrace;
+  if (!runtime || runtime.lifecycle !== "active" || runtime.raceStarted || runtime.raceKartPreparation) return;
+  runtime.raceKartPreparation = { queue: [], cursor: 0, spawned: 0, maxJobMs: 0, startedAt: Instance.GetGameTime() };
   runtime.raceFrozen = true;
   runtime.orientationCorrections = [];
   runtime.raceStart ??= add(runtime.anchor, vec(0, 0, 12));
   runtime.humanRaceStart ??= add(runtime.raceStart, mul(runtime.direction, 1320));
+  showRaceDirectionHint(runtime);
   const teams = new Map([[2, []], [3, []]]);
   for (const pawn of allLivingPawns()) teams.get(pawn.GetTeamNumber?.())?.push(pawn);
   for (const [team, pawns] of teams) {
@@ -11208,10 +11301,54 @@ function beginRace(runtime) {
     const rowDirection = team === 3 ? -1 : 1;
     for (const [index, slot] of raceStartSlots(pawns.length).entries()) {
       const offset = add(mul(runtime.left, slot.lateral), mul(runtime.direction, rowDirection * slot.row * RACE_CONFIG.startRowSpacing));
-      spawnRaceKart(runtime, pawns[index], add(base, offset));
+      runtime.raceKartPreparation.queue.push({ pawn: pawns[index], team, position: add(base, offset) });
     }
   }
-  announce("RACE ending: GO");
+}
+
+// A kart is atomic (body, visual and mounted rider), but a whole grid is not.
+// Charge initialization as well as ForceSpawn against the shared Think budget.
+function processRaceKartPreparation(runtime) {
+  return withGenerationBudget(() => {
+    const preparation = runtime?.raceKartPreparation;
+    if (!preparation || runtime.lifecycle !== "active" || runtime.raceStarted) return;
+    let jobs = 0;
+    while (preparation.cursor < preparation.queue.length
+      && jobs < RACE_CONFIG.kartSpawnPerThink && generationWorkAvailable()) {
+      const request = preparation.queue[preparation.cursor];
+      if (!validEntity(request.pawn) || !request.pawn.IsAlive?.()
+        || request.pawn.GetTeamNumber?.() !== request.team) {
+        preparation.cursor++;
+        continue;
+      }
+      try {
+        runGenerationWork(() => {
+          const start = generationClock();
+          spawnRaceKart(runtime, request.pawn, request.position);
+          preparation.maxJobMs = Math.max(preparation.maxJobMs, generationClock() - start);
+          preparation.spawned++;
+        });
+      } catch (error) {
+        runtime.raceKartPreparation = undefined;
+        failRuntime(`RACE kart preparation failed: ${error}`);
+        return;
+      }
+      preparation.cursor++;
+      jobs++;
+    }
+    if (preparation.cursor < preparation.queue.length) return;
+    runtime.raceKartPreparation = undefined;
+    runtime.raceStarted = true;
+    runtime.raceStartedAt = Instance.GetGameTime();
+    runtime.raceCheckoutReadyAt = runtime.raceStartedAt + RACE_CONFIG.checkoutGrace;
+    runtime.lastRaceTickAt = runtime.raceStartedAt;
+    // Preserve all countdown/audio/win offsets if preparation outlasts its slot.
+    runtime.raceTimelineDelay = Math.max(0,
+      runtime.raceStartedAt - (runtime.runStartedAt + RACE_CONFIG.startAt));
+    scheduleRaceDrivingTimeline(runtime);
+    raceLog(runtime, `karts ready=${preparation.spawned} preparation=${(runtime.raceStartedAt - preparation.startedAt).toFixed(2)}s maxJob=${preparation.maxJobMs.toFixed(2)}ms`);
+    announce("RACE ending: GO");
+  });
 }
 
 // Source spawned karts at RandomFloat(-280,280) as non-colliding debris
@@ -11475,7 +11612,8 @@ function updateKartController(runtime, controller, elapsed, now = Instance.GetGa
     }
     pawn.Teleport?.({
       position: bodyPosition ? add(bodyPosition, vec(0, 0, kartRiderLocalZ(controller))) : undefined,
-      velocity,
+      // The body owns vehicle momentum; the locked pawn only follows its seat.
+      velocity: vec(),
     });
     controller.riderSyncedAt = now;
     controller.riderSyncedPosition = bodyPosition ? add(bodyPosition, vec(0, 0, kartRiderLocalZ(controller))) : undefined;
@@ -12031,11 +12169,13 @@ function clearRaceOldTransient(runtime) {
 
 function cleanupRaceRuntime(runtime) {
   if (!runtime || runtime.kind !== "RACE" || runtime.raceCleanupDone) return;
+  hideRaceDirectionHint(runtime);
   for (const controller of runtime.karts?.values?.() ?? []) {
     cleanupKartController(runtime, controller, false);
   }
   releaseRacePreparationPlayers(runtime);
   runtime.karts?.clear?.();
+  runtime.raceKartPreparation = undefined;
   for (const piece of runtime.rubblePieces ?? []) cleanupRaceRubblePiece(runtime, piece);
   runtime.rubblePieces = [];
   for (const record of runtime.raceLevels ?? []) {
@@ -12132,6 +12272,11 @@ function scheduleRaceTimeline(runtime) {
     runtime.tpCapturedAt = Instance.GetGameTime();
   });
   at(RACE_CONFIG.startAt, "start", () => beginRace(runtime));
+}
+
+function scheduleRaceDrivingTimeline(runtime) {
+  const at = (time, key, callback) => endingTaskAt(runtime,
+    runtime.runStartedAt + time + runtime.raceTimelineDelay, callback, `race_${runtime.sequence}_${key}`);
   for (let index = 0; index < RACE_CONFIG.orientationCount; index++) {
     at(RACE_CONFIG.orientationStart + index * RACE_CONFIG.orientationInterval, `orientation_${index}`, () => applyRaceOrientation(runtime));
   }
@@ -12152,7 +12297,7 @@ function scheduleRaceTimeline(runtime) {
   at(RACE_CONFIG.musicAt, "music", () => {
     playRaceMusic(runtime);
     runtime.raceBgmStartedAt = Instance.GetGameTime();
-    runtime.nextRaceMusicAt = runtime.runStartedAt + RACE_CONFIG.musicAt + RACE_CONFIG.musicRepeat;
+    runtime.nextRaceMusicAt = runtime.runStartedAt + runtime.raceTimelineDelay + RACE_CONFIG.musicAt + RACE_CONFIG.musicRepeat;
   });
   at(RACE_CONFIG.killZombiesAt, "kill_zombies", () => finishRaceRound(runtime));
   at(RACE_CONFIG.massFallbackAt, "mass_fallback", () => {
@@ -12267,6 +12412,7 @@ function processRaceEnding(runtime = state.endingRuntime) {
                                                                           
                                                              
     lockRacePreparationPlayers(runtime, runtime.playersStashedAt !== undefined);
+    processRaceKartPreparation(runtime);
     return;
   }
   if (runtime.nextRaceMusicAt !== undefined && now + 1e-6 >= runtime.nextRaceMusicAt) {
@@ -12310,11 +12456,14 @@ function* spawnFinaleItemListSteps(runtime, names, team, basePosition, rolePrefi
   let spawned = 0;
   for (let index = 0; index < names.length; index++) {
     const name = names[index];
-    const position = add(basePosition, vec(
+    const offset = options.sideSpread !== undefined
+      ? add(mul(runtime.left, (Math.random() * 2 - 1) * options.sideSpread), vec(0, 0, Number(options.zOffset ?? 40)))
+      : vec(
       Math.floor(Math.random() * 341) - 170,
       Math.floor(Math.random() * 341) - 170,
       Number(options.zOffset ?? 40),
-    ));
+    );
+    const position = add(basePosition, offset);
     try {
       spawnItemFeature(runtime, {
         kind: "feature",
@@ -12388,7 +12537,9 @@ function* spawnFinaleZombieItemSteps(runtime) {
   const base = finaleZombieItemAnchor(runtime);
   if (!base) return 0;
   const names = runtime.infinite ? FINALE_ITEM_CONFIG.zombieInfinite : FINALE_ITEM_CONFIG.zombie;
-  const count = yield* spawnFinaleItemListSteps(runtime, names, 2, base, "finale_zombie", { zOffset: 0 });
+  // Source spreads along the long side only; forward jitter can leave this narrow platform.
+  const sideSpread = (FINALE_BOSS_CONFIG.zPlatformLength - 0.5) * CONFIG.gridSize / 2;
+  const count = yield* spawnFinaleItemListSteps(runtime, names, 2, base, "finale_zombie", { zOffset: 0, sideSpread });
   runtime.finaleZombieItemsSpawned = true;
   runtime.finaleZombieItemsSpawnedAt = Instance.GetGameTime();
   runtime.finaleZombieItemCount = count;
@@ -15508,6 +15659,7 @@ function queueFinaleEscapeLevel(runtime) {
   selected.escapeNoItems = escape.flags.itemsDisabled;
   selected.escapeNoTraps = escape.flags.trapsDisabled;
   state.levels.set(selected.index, selected);
+  trackRoundReportLevel(selected);
   escape.current = selected;
   if (!escape.firstLevel) {
     escape.firstLevel = selected;
@@ -15615,6 +15767,8 @@ function processFinaleEscapeSpawn(runtime) {
   closeBlockSpawnSafety(level);
   if (level.lifecycle !== "active") {
     setLevelLifecycle(level, "active");
+    try { startHardCodedStageEvent(level); }
+    catch (error) { failRuntime(`escape stage event failed: ${error}`); return; }
     spawnEndIndicator(level);
     updateTerrainPreviewHud(level, "finale-escape-spawn-complete");
   }
@@ -16796,8 +16950,8 @@ function processFinaleBossBullets(runtime, now) {
 const FINALE_ATTACK_PARTICLES = Object.freeze({
   finaleBossAttack: "weapon_sensorgren_spark_02",
   finaleBossFlingCharge: "weapon_sensorgren_spark_02",
-  finaleBossSight: "weapon_taser_flash",
-  finaleBossFling: "weapon_taser_flash",
+  finaleBossSight: "pizza_tesla",
+  finaleBossFling: "pizza_tesla",
 });
 const FINALE_ATTACK_PARTICLE_LIMIT = 30;
 
@@ -16821,6 +16975,7 @@ function spawnFinaleBossAttackVisual(runtime, position, direction, color, speed,
     || !Number.isFinite(lifetime) || lifetime <= 0) return undefined;
   const effect = FINALE_ATTACK_PARTICLES[feature];
   if (!effect) return undefined;
+  if (effect === "pizza_tesla") lifetime = Math.max(lifetime, 0.25);
   const now = Instance.GetGameTime();
   runtime.bossAttackParticlePool ??= new Set();
   runtime.bossAttackVisuals ??= new Set();
@@ -17569,6 +17724,7 @@ function distance2D(a, b) {
 }
 
 function message(text) {
+  if (!CONFIG.loggingEnabled) return;
   Instance.Msg(`[ze_collective] ${text}`);
 }
 
@@ -17612,10 +17768,266 @@ function raceRequestContext(runtime, record, request, kind) {
   }
 }
 
+// Source PlayerNameMessage prints the nickname, never the entity name or slot.
+// Capture it now so delayed messages cannot refer to a reused player slot.
+function playerNameMessage(player, prefix = "", affix = "", delay = 0) {
+  let name;
+  try {
+    if (!validEntity(player)) return false;
+    const controller = typeof player.GetPlayerName === "function" ? player
+      : player.GetOriginalPlayerController?.() ?? player.GetPlayerController?.();
+    if (!validEntity(controller)) return false;
+    name = controller.GetPlayerName?.();
+  } catch {
+    return false;
+  }
+  if (typeof name !== "string" || !name.trim()) return false;
+  const text = `${prefix}${name}${affix}`;
+  if (delay > 0) schedule(delay, () => announce(text));
+  else announce(text);
+  return true;
+}
+
 function announce(text) {
   message(text);
   const safe = String(text).replace(/[\r\n;"]/g, " ");
   Instance.ServerCommand(`say ${safe}`);
+}
+
+function createTrollMessageState() {
+  return { enabled: TROLL_MESSAGE_CONFIG.enabled, nextAt: undefined,
+    nominations: new Map(), counts: new Map(), text: undefined, expiresAt: 0 };
+}
+
+function trollMessageText(value, limit = 256) {
+  // Keep names literal in both console commands and the non-HTML HUD label.
+  return Array.from(String(value ?? "").replace(/[\x00-\x1f\x7f;"\\]/g, " ").trim()).slice(0, limit).join("");
+}
+
+function syncTrollMessageHud(now = Instance.GetGameTime()) {
+  const prank = state.trollMessages;
+  const text = now < prank.expiresAt ? prank.text : undefined;
+  if (!text && !trollMessageHud.visible) return;
+  if (now < trollMessageHud.retryAt) return;
+  try {
+    const hud = findPledgeHud();
+    if (!validEntity(hud) || typeof hud.SetHasClass !== "function"
+      || typeof hud.SetDialogVariableString !== "function") throw Error("collective_pledge_hud is unavailable");
+    if (text) {
+      if (trollMessageHud.hud !== hud || trollMessageHud.text !== text || !trollMessageHud.visible) {
+        hud.SetDialogVariableString("troll_message_text", "troll_message", text);
+        hud.SetHasClass(TROLL_MESSAGE_PANEL, "Active", true);
+        Object.assign(trollMessageHud, { hud, text, visible: true });
+      }
+    } else {
+      hud.SetHasClass(TROLL_MESSAGE_PANEL, "Active", false);
+      hud.SetDialogVariableString("troll_message_text", "troll_message", "");
+      Object.assign(trollMessageHud, { hud: undefined, text: undefined, visible: false });
+    }
+  } catch (error) {
+    trollMessageHud.retryAt = now + 1;
+    if (!trollMessageHud.warned) {
+      trollMessageHud.warned = true;
+      message(`[TROLL HUD] ${error}; chat messages remain available`);
+    }
+  }
+}
+
+function clearTrollMessages() {
+  state.trollMessages = createTrollMessageState();
+  trollMessageHud.retryAt = 0;
+  syncTrollMessageHud();
+}
+
+function showTrollMessage(text) {
+  const safe = trollMessageText(text);
+  if (!safe) return false;
+  const prank = state.trollMessages;
+  prank.text = safe;
+  prank.expiresAt = Instance.GetGameTime() + TROLL_MESSAGE_CONFIG.hudDuration;
+  announce(safe);
+  trollMessageHud.retryAt = 0;
+  syncTrollMessageHud();
+  return true;
+}
+
+function trollMapNomination() {
+  const candidates = Instance.GetAllPlayerControllers().filter(controller => {
+    try {
+      return validEntity(controller) && controller.IsConnected?.() !== false && !controller.IsBot?.()
+        && trollMessageText(controller.GetPlayerName?.());
+    } catch { return false; }
+  });
+  if (!candidates.length || !TROLL_MESSAGE_CONFIG.maps.length) return false;
+  const controller = candidates[Math.floor(Math.random() * candidates.length)];
+  const name = trollMessageText(controller.GetPlayerName(), 64);
+  const prank = state.trollMessages;
+  const previous = prank.nominations.get(name);
+  const pool = TROLL_MESSAGE_CONFIG.maps.filter(map => map !== previous);
+  if (!pool.length) return false;
+  const map = pool[Math.floor(Math.random() * pool.length)];
+  if (previous) prank.counts.set(previous, Math.max(0, (prank.counts.get(previous) ?? 0) - 1));
+  const count = (prank.counts.get(map) ?? 0) + 1;
+  prank.nominations.set(name, map);
+  prank.counts.set(map, count);
+  // CS2Fixes uses the same line for first and changed nominations.
+  return showTrollMessage(`[CS2Fixes] ${map} was nominated by ${name}. It now has ${count} nomination${count === 1 ? "" : "s"}.`);
+}
+
+function trollMapVote() {
+  const pool = TROLL_MESSAGE_CONFIG.maps;
+  if (!pool.length) return false;
+  return showTrollMessage(`The vote has ended. ${pool[Math.floor(Math.random() * pool.length)]} will be the next map!`);
+}
+
+function processTrollMessages(now) {
+  const prank = state.trollMessages;
+  if (!prank.enabled || !state.running || state.fatal) return;
+  if (prank.nextAt === undefined) {
+    prank.nextAt = now + TROLL_MESSAGE_CONFIG.minimumDelay
+      + Math.random() * (TROLL_MESSAGE_CONFIG.maximumDelay - TROLL_MESSAGE_CONFIG.minimumDelay);
+    return;
+  }
+  if (now < prank.nextAt) return;
+  // Schedule from now: no catch-up flood after a long pause or stalled Think.
+  prank.nextAt = undefined;
+  if (Math.random() < TROLL_MESSAGE_CONFIG.voteChance) trollMapVote();
+  else trollMapNomination();
+  processTrollMessages(now);
+}
+
+function debugTrollMessageCommand(args) {
+  const command = String(args ?? "status").trim().toLowerCase() || "status";
+  if (command === "nom" || command === "nominate") {
+    if (!trollMapNomination()) message("[TROLL] no connected named human player available");
+  } else if (command === "vote") trollMapVote();
+  else if (command === "on" || command === "off") {
+    state.trollMessages.enabled = command === "on";
+    state.trollMessages.nextAt = undefined;
+    if (command === "off") { state.trollMessages.text = undefined; syncTrollMessageHud(); }
+    message(`[TROLL] automatic messages ${command.toUpperCase()}`);
+  } else if (command === "status") {
+    message(`[TROLL] automatic=${state.trollMessages.enabled} next=${state.trollMessages.nextAt ?? "not scheduled"}`);
+  } else message("usage: ze_debug_troll [nom|vote|on|off|status]");
+}
+
+function createReportSessionId() {
+  // Source wraps eight characters from UniqueString() in '#'. CS2 has no
+  // Squirrel UniqueString; retain its printable format with a local token.
+  return `#${Array.from({ length: 8 }, () => Math.floor(Math.random() * 36).toString(36)).join("")}#`;
+}
+
+// Retain values only: retiring terrain must neither erase statistics nor keep
+// its entities, output closures or planning queues alive until round end.
+function trackRoundReportLevel(runtime) {
+  if (!runtime || state.roundReportLevels.has(runtime.index)) return;
+  const record = {
+    index: runtime.index, id: String(runtime.id ?? "unknown"),
+    name: String(runtime.name ?? "unknown"), author: String(runtime.author ?? "unknown"),
+    center: clone(runtime.center ?? runtime.end ?? vec()),
+    stageLevel: runtime.stageLevel ?? 0,
+    special: runtime.raceLevel ? "race" : runtime.finaleEscape ? "escape" : undefined,
+    deaths: 0,
+  };
+  state.roundReportLevels.set(runtime.index, record);
+  state.roundReportRecent.push(record);
+  if (state.roundReportRecent.length > CONFIG.maxAreaHistory + 2) state.roundReportRecent.shift();
+}
+
+function recordRoundReportDeath(pawn, position = pawn?.GetAbsOrigin?.()) {
+  if (!state.running || state.roundReportPrinted || state.campaign.endingResolved
+    || !validEntity(pawn) || !position || state.roundReportVictims.has(pawn)) return;
+  // Source attributes human deaths/infections to the nearest recent map in
+  // XY, including retained history. Speculative preloads are never admitted.
+  const recent = state.roundReportRecent;
+  let nearest, distance = Infinity;
+  for (let i = recent.length - 1; i >= 0; i--) {
+    const candidate = recent[i];
+    const nextDistance = distance2D(position, candidate.center);
+    if (nextDistance < distance) { nearest = candidate; distance = nextDistance; }
+  }
+  if (!nearest) return;
+  nearest.deaths++;
+  state.roundReportVictims.add(pawn);
+}
+
+function captureRoundReport(ending) {
+  if (state.roundReportPrinted) return undefined;
+  const levels = [...state.roundReportLevels.values()];
+  const stage = ending?.stageSnapshot ?? state.currentLevel?.stageSnapshot
+    ?? state.pendingLevel?.stageSnapshot ?? campaignStageSnapshot();
+  const bosses = [...(ending?.bosses ?? [])];
+  return {
+    stage, levels, endingKind: ending?.kind,
+    debug: ending?.debugForced === true || !!state.debugStageId,
+    adminReset: state.campaign.adminSelection === "reset",
+    // Source reports mapspawnindex, incremented when a map is committed, even
+    // before construction finishes. Stage progress is a separate counter.
+    reached: levels.reduce((count, level) => level.special || !Number.isInteger(level.index)
+      ? count : Math.max(count, level.index), 0),
+    bossHealth: bosses.reduce((sum, boss) => sum + (boss.dead ? 0 : Math.max(0, boss.health || 0)), 0),
+    bossMaxHealth: bosses.reduce((sum, boss) => sum + Math.max(0, boss.maxHealth || 0), 0),
+    grenadeHits: ending?.bossGrenadeHitCount ?? 0,
+    escapeStarted: ending?.escapeStartedAt !== undefined,
+    escapeLevel: ending?.escape?.levelCount ?? levels.filter(level => level.special === "escape").length,
+    escapeTarget: ending?.escape?.levelTarget,
+    finalPyramid: ending?.finalPyramidStartedAt !== undefined,
+  };
+}
+
+function roundReportSummary(report, humansWon) {
+  const stage = report.stage;
+  const finale = report.endingKind === "FINALE" || stage.stageIndex === FINALE_STAGE_INDEX;
+  const finaleName = stage.infiniteMode ? `infinite-finale(checkout:${stage.checkoutValue ?? report.reached})` : "finale";
+  if (report.adminReset) return "resetting map!";
+  if (report.debug) return `debug ${report.endingKind ?? "level"} run ended`;
+  if (humansWon) {
+    if (finale) return stage.infiniteMode
+      ? `YOU WON THE MAP IN INFINITE MODE (${stage.checkoutValue ?? report.reached} levels) - REPEATING INFINITY MODE`
+      : "YOU WON THE MAP - ENABLING INFINITY MODE";
+    const next = state.campaign.stageIndex >= FINALE_STAGE_INDEX ? "the finale"
+      : `stage ${state.campaign.stageIndex + 1} (${campaignStageSnapshot().theme})`;
+    return `you completed stage ${stage.stageNumber} (${stage.theme}) - moving on to ${next}`;
+  }
+  if (finale) {
+    if (report.finalPyramid) return `you lost during the ${finaleName} final pyramid defense`;
+    if (report.escapeStarted) return `you lost during the ${finaleName} ending-rush (level ${report.escapeLevel}/${report.escapeTarget ?? "?"})`;
+    if (report.bossMaxHealth > 0) {
+      const percent = Math.floor(report.bossHealth / report.bossMaxHealth * 100);
+      return `you lost during the ${finaleName} bossfight (${percent}% out of ${report.bossMaxHealth}hp left | ${report.grenadeHits} grenades hit)`;
+    }
+    return `you lost during the early ${finaleName}`;
+  }
+  const progress = `${report.reached}/${stage.infiniteMode ? "infinity" : stage.stageGoal}`;
+  if (report.endingKind) return `you lost during the ${report.endingKind} ending (level ${progress})`;
+  return `you reached level ${progress}`;
+}
+
+function printRoundReport(report, ending) {
+  if (!report || state.roundReportPrinted) return;
+  state.roundReportPrinted = true;
+  // Settlement advances the campaign and clears its level counter. Report
+  // the pre-settlement stage and the ending's explicit outcome instead.
+  const humansWon = !report.debug && !state.adminSlayActive && ending?.outcome?.humansWon === true;
+  announce(`${humansWon ? "[STAGE]" : "[ROUND END]"}${report.debug ? " [DEBUG]" : ""} ${roundReportSummary(report, humansWon)} (SID:${state.reportSessionId})`);
+  message("[MAP DEATH SUMMARY]");
+  const levels = report.levels.slice().reverse();
+  if (!levels.length) message("     no generated levels");
+  for (const level of levels) {
+    message(`     index: ${level.index}   |   deaths: ${level.deaths}   |   id: ${level.id}`
+      + `   |   name: ${level.name}   |   author: ${level.author}`);
+  }
+  // Source suppresses compact chat export in single-player. Chunk long runs
+  // into bounded ASCII commands so no map IDs disappear through truncation.
+  if ((Instance.GetAllPlayerControllers()?.length ?? 0) <= 1) return;
+  let chunk = "ID_DEATHS|";
+  for (const level of levels) {
+    const id = level.id.replace(/^#/, "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64) || "unknown";
+    const token = `${id}_${level.deaths}|`;
+    if (chunk.length + token.length > 180) { announce(chunk); chunk = "ID_DEATHS|"; }
+    chunk += token;
+  }
+  if (levels.length) announce(chunk);
 }
 
 function findTerrainPreviewHud() {
@@ -18120,13 +18532,14 @@ function terrainPreviewTileClass(tile) {
 
 function terrainPreviewRows(runtime) {
   if (!runtime) return [];
-  // Prefer the authored image over the mirrored/normalized generation grid.
+  // Source tiles use the opposite row/column order from the authored image.
+  // GetRotatedMap(map, "east", false) in manager.nut is a transpose; keep
+  // the preview independent of world direction and runtime mirroring.
   if (Array.isArray(runtime.previewTiles)) {
-    const rows = [];
-    for (let y = 0; y < CONFIG.mapSize; y++) {
-      rows.push(runtime.previewTiles.slice(y * CONFIG.mapSize, (y + 1) * CONFIG.mapSize));
-    }
-    return rows;
+    const size = CONFIG.mapSize;
+    if (runtime.previewTiles.length !== size * size) return [];
+    return Array.from({ length: size }, (_, y) =>
+      Array.from({ length: size }, (_, x) => runtime.previewTiles[x * size + y]));
   }
   if (Array.isArray(runtime.previewRows)) return runtime.previewRows;
   return [];
@@ -19417,6 +19830,12 @@ function processThemePreloadBudgeted(now, pending, allowSpawns) {
 
 function resetRoundState({ preserveCampaignOutcome = false } = {}) {
   state.running = false;
+  if (!entityReleaseByEngine) {
+    state.roundReportPrinted = false;
+    state.roundReportLevels.clear();
+    state.roundReportRecent.length = 0;
+    state.roundReportVictims = new WeakSet();
+  }
   // All warmup props are also in roundEntities and are handled by the normal
   // explicit reset/engine release. Drop iterators retaining the old pending.
   state.themePreloadCleanup.length = 0;
@@ -19444,7 +19863,9 @@ function resetRoundState({ preserveCampaignOutcome = false } = {}) {
   roundCleanupStep("clearSpawnSafetyTriggers", () => clearSpawnSafetyTriggers());
   roundCleanupStep("clearInvincibilityHud", () => clearInvincibilityHud());
   roundCleanupStep("clearSquidBlindHud", () => clearSquidBlindHud());
+  roundCleanupStep("clearJumpscareHud", () => clearJumpscareHud());
   roundCleanupStep("clearItemTutorials", () => clearItemTutorials());
+  roundCleanupStep("clearTrollMessages", () => clearTrollMessages());
   roundCleanupStep("clearZombieItemLocks", () => clearZombieItemLocks());
   roundCleanupStep("preview HUD", () => hideTerrainPreviewHud("round-reset"));
   roundCleanupStep("stage label", () => hideSpawnStageLabel());
@@ -21470,6 +21891,7 @@ function processPostSpawnQueuesBudgeted(rounds, budget) {
         entries.some(entry => entry.levelIndex === runtime.index && entry.kind === "terrain")))) return;
     queue.splice(requestIndex, 1);
     if (!runtime || runtime.lifecycle === "destroyed") return;
+    if (request.stageEvent && !hardCodedStageEventLive(runtime)) return;
     spent++;
     try {
       runGenerationWork(() => {
@@ -22204,6 +22626,7 @@ function generateNextLevel() {
     state.levelIndex = index;
     state.pendingLevel = runtime;
     state.levels.set(index, runtime);
+    trackRoundReportLevel(runtime);
     state.lastLevelId = runtime.id;
     message(`${runtime.planningIterator ? "planning" : "queued"} level ${index}: '${runtime.name}' by ${runtime.author}`
       + (runtime.planningIterator ? " (20x20 pixels)" : ` (${runtime.remaining} requests)`));
@@ -23339,7 +23762,8 @@ function spawnTriggerFeature(runtime, request) {
       fireTarget(trigger, "Enable", undefined, 0.05);
       entry.ready = true;
     });
-    spawnVisual(runtime, { ...request, feature: "teleportVisual" }, request.themeModel ?? TELEPORT_MODEL);
+    trigger.__teleportEntry.visual = spawnVisual(runtime,
+      { ...request, feature: "teleportVisual" }, request.themeModel ?? TELEPORT_MODEL);
   }
   if (request.feature === "boost") {
     const pad = { trigger, request, cooldowns: new Map(), pendingLaunches: new Map() };
@@ -23362,6 +23786,13 @@ function spawnTriggerFeature(runtime, request) {
         entry.invalidActivators++;
         if (runtime.debugTeleport) message(`[TELEPORT DEBUG] ${entry.mode} activator is not a living player`);
         return;
+      }
+      // Zombies remove the entry crystal, while its teleport/bounce stays active.
+      if (pawn.GetTeamNumber?.() === 2 && entry.visual) {
+        if (validEntity(entry.visual)) entry.visual.Kill();
+        runtime.entities.delete(entry.visual);
+        state.silentHillWorld.visuals.delete(entry.visual);
+        entry.visual = undefined;
       }
                                                                          
                                                                           
@@ -23571,6 +24002,9 @@ function spawnButtonFeature(runtime, request) {
     } else {
       throw new Error(`${request.feature}: interaction prototype cannot display its themed model`);
     }
+  }
+  if (request.feature === "genericHold" && request.renderColor) {
+    applyTerrainAppearance(button, 0, request.renderColor);
   }
   runtime.buttons.add(button);
   button.SetEntityName?.(`block_${runtime.index}_${request.feature}_${record.id}_use`);
@@ -25208,7 +25642,7 @@ function trapSpawnTransform(name, request) {
   let position = clone(request.position);
   let angles = { pitch: 0, yaw: Math.random() * 360, roll: 0 };
                                                                    
-  if (name === "thigh_spider") position = add(position, randomTrapOffset(30, 1));
+  if (name === "thigh_spider" && !request.stageEvent) position = add(position, randomTrapOffset(30, 1));
   else if (name === "landmine") position = add(position, randomTrapOffset(32));
   else if (name === "beartrap" || name === "bomb" || name === "flinger") {
     position = add(position, randomTrapOffset(20));
@@ -25527,12 +25961,14 @@ function activateStepTrap(runtime, controller, pawn, now) {
   const { name, definition } = controller;
   if (name === "landmine") {
     if (!trapCanAffect(controller, pawn, now, 9999)) return;
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " stepped on a landmine");
     playSourceAudioCue(6032, controller.position);
     explodeTrap(controller, trapExplosionTargets(), definition.explosionRadius, definition.explosionDamage, 1100);
   } else if (name === "banana") {
     if (!trapCanAffect(controller, pawn, now, 9999)) return;
     const velocity = pawn.GetAbsVelocity?.() ?? vec();
     const position = pawn.GetAbsOrigin?.() ?? controller.position;
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " slipped on a banana peel");
     controller.spinVictim = pawn;
     controller.spinStartedAt = now;
     controller.spinUntil = now + definition.spinTime;
@@ -25548,18 +25984,27 @@ function activateStepTrap(runtime, controller, pawn, now) {
     if (Math.hypot(velocity.x, velocity.y, velocity.z) <= definition.runSpeed) return;
     if (!trapCanAffect(controller, pawn, now, 0.25)) return;
     const falling = velocity.z < -definition.fallSpeed;
+    if (falling && definition.printChat !== false) playerNameMessage(pawn, "", " got impaled by spikes");
     damagePawn(pawn, falling ? definition.fallDamage : definition.runDamage);
     if (!falling) pawn.Teleport?.({ velocity: vec(0, 0, velocity.z) });
     playSourceAudioStack(falling ? [5356, 5357] : [5363], pawn.GetAbsOrigin?.() ?? controller.position);
   } else if (name === "pizza") {
     if (!trapCanAffect(controller, pawn, now, 0.20)) return;
-    damagePawn(pawn, 999999);
+    if (definition.printChat !== false) playerNameMessage(pawn, "***THE PIZZA IS AGGRESSIVE*** (towards ", ")", 1.55);
+    const victimPosition = clone(pawn.GetAbsOrigin?.() ?? controller.position);
+    pawn.TakeDamage?.({ damage: 999999, inflictor: controller.visual,
+      damageFlags: (CSDamageFlags.FORCE_DEATH ?? 0) | (CSDamageFlags.IGNORE_ARMOR ?? 0) });
+    const soundPosition = add(controller.position, vec(0, 0, 8));
+    const pitch = 95 + Math.floor(Math.random() * 11);
     for (let i = 0; i < 3; i++) {
-      playSourceAudioCue(6086, controller.position);
-      playSourceAudioCue(6087, controller.position);
+      playSourceAudioCue(6086, soundPosition, { pitch });
+      playSourceAudioCue(6087, soundPosition, { pitch });
     }
+    spawnItemParticle(runtime, undefined, "blood_impact_headshot", victimPosition, sourceItemImpactAngles(), 0.05);
+    spawnItemParticle(runtime, undefined, "pizza_tesla", add(victimPosition, vec(0, 0, 32)), undefined, 0.25);
   } else if (name === "beartrap") {
     if (!trapCanAffect(controller, pawn, now, 9999)) return;
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " got caught in a beartrap");
     damagePawn(pawn, definition.damage);
     if (pawn.IsAlive?.()) addPlayerStatus(runtime, pawn, `${controller.source}:beartrap`, definition.freezeTime, {
       frozenPosition: pawn.GetAbsOrigin?.() ?? controller.position,
@@ -25583,6 +26028,7 @@ function activateStepTrap(runtime, controller, pawn, now) {
 function activateVicinityTrap(runtime, controller, pawn, now) {
   if (controller.name === "bomb") {
     if (controller.triggeredAt !== undefined) return;
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " triggered a bomb");
     controller.triggeredAt = now + controller.definition.fuseTime;
     controller.nextBeepAt = now;
     controller.beepRate = 1;
@@ -25593,6 +26039,7 @@ function activateVicinityTrap(runtime, controller, pawn, now) {
   controller.triggeredAt = now;
   const pawnPosition = pawn.GetAbsOrigin?.() ?? controller.position;
   if (controller.name === "flinger") {
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " triggered a flinger");
     for (const target of trapTargets()) {
       const targetPosition = target.GetAbsOrigin?.();
       if (!targetPosition || Math.hypot(
@@ -25610,6 +26057,7 @@ function activateVicinityTrap(runtime, controller, pawn, now) {
     playSourceAudioStack([5195, 5196], controller.position);
     spendTrap(controller);
   } else if (controller.name === "guster") {
+    if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " triggered a guster");
     const direction = directionBetween(controller.position, add(pawnPosition, vec(0, 0, 40)));
     controller.wave = {
       position: clone(controller.position), direction,
@@ -25656,6 +26104,7 @@ function useSlotMachine(runtime, controller, pawn, now) {
   if (controller.inUse || now < (controller.reuseAt ?? 0)) return false;
   controller.usesRemaining--;
   if (controller.usesRemaining < 0) {
+    if (controller.definition.printNames !== false) playerNameMessage(pawn, "", " gambled and exploded!");
     destroySlotMachine(runtime, controller);
     return true;
   }
@@ -25675,6 +26124,7 @@ function finishSlotOutcome(controller) {
   controller.inUse = false;
   controller.player = undefined;
   const won = Math.random() * 100 <= controller.definition.winChance;
+  if (controller.definition.printNames !== false) playerNameMessage(pawn, "", won ? " gambled and won!" : " gambled and lost...");
   fireTarget(controller.visual, "SetAnimation", won ? "win" : "lose");
   fireTarget(controller.visual, "SetDefaultAnimation", won ? "win" : "lose", 0.02);
   if (won) {
@@ -25692,6 +26142,7 @@ function finishSlotOutcome(controller) {
 
 function activateFatalMimic(controller, pawn, button = false) {
   if (controller.spent || pawn.GetTeamNumber?.() !== 3 || !pawn.IsAlive?.()) return false;
+  if (controller.definition.printChat !== false) playerNameMessage(pawn, button ? "Beware button-mimics! (" : "Beware item-mimics! (", " fell for it)");
   state.silentHillWorld.visuals.delete(controller.visual);
   controller.visual?.SetModel?.("models/luffaren/beartrap.vmdl");
   controller.visual?.SetModelScale?.(1.8);
@@ -26019,6 +26470,7 @@ function processBlackhole(controller, targets, now) {
     if (distance > controller.definition.radius) continue;
     pulling = true;
     if (distance <= controller.definition.killDistance) {
+      if (controller.definition.printChat !== false) playerNameMessage(pawn, "", " got sucked into a black hole");
       controller.battery -= controller.definition.killDrain;
       damagePawn(pawn, 999999);
       playSourceAudioCue(5265, controller.position);
@@ -26074,7 +26526,10 @@ function damageTrapController(controller, event) {
   if (controller.spent) return;
   if (controller.name === "explosive_barrel") {
     controller.hitsRemaining--;
-    if (controller.hitsRemaining <= 0) detonateBarrel(controller);
+    if (controller.hitsRemaining <= 0) {
+      playerNameMessage(event?.attacker ?? event?.activator, "", " blew up an explosive barrel");
+      detonateBarrel(controller);
+    }
     else {
       // OnTakeDamage can run before the engine commits health loss.
       afterThink(() => {
@@ -26248,6 +26703,7 @@ function processTraps(now) {
 
 function spawnTrapFeature(runtime, request) {
   const stage = stageSnapshotForRuntime(runtime);
+  const forced = request.debugTrap === true || request.stageEvent === true;
   if (request.tile === 85) {
     const visual = spawnModelBlock(
       runtime,
@@ -26267,17 +26723,17 @@ function spawnTrapFeature(runtime, request) {
     }
     return;
   }
-  if (!request.debugTrap && (!FEATURE_FLAGS.traps || CONFIG.disableTraps)) return;
+  if (!forced && (!FEATURE_FLAGS.traps || CONFIG.disableTraps)) return;
   const tile = request.tile === 89 ? 86 + Math.floor(Math.random() * 3) : request.tile;
   const chanceKey = { 86: "trapstepChance", 87: "trapvicinityChance", 88: "trapspawnChance" }[tile];
-  if (!request.debugTrap && Math.random() * 100 > (stage[chanceKey] ?? stage.trapChance)) return;
+  if (!forced && Math.random() * 100 > (stage[chanceKey] ?? stage.trapChance)) return;
   const profile = themeProfile(request.themeName ?? runtime.themeSnapshot);
   const name = request.trapName
     ?? selectTrapForTile(tile, Infinity, profile);
   if (!name) return;
   const definition = TRAP_DEFINITIONS[name];
   if (!definition) throw new Error(`unknown debug trap '${name}'`);
-  if (!request.debugTrap && sourceFeatureEstimatedCost(definition.cost) > CONFIG.sourceTrapCostLimit) return;
+  if (!forced && sourceFeatureEstimatedCost(definition.cost) > CONFIG.sourceTrapCostLimit) return;
   const { position, angles } = trapSpawnTransform(name, request);
   if (name === "kart") {
     const controller = spawnKartController(runtime, position, angles, {
@@ -26517,6 +26973,10 @@ function knifeStripAllowed(item, pawn, now) {
   const protectionEndsAt = state.firstInfectionAt + CONFIG.zombieItemAntiInflateTime;
   if (now < protectionEndsAt) {
     showZombieItemLock(item, pawn, now, protectionEndsAt, "protection");
+    if (CONFIG.zombieItemAntiInflateCallout && !state.zombieItemInflateCalledOut.has(pawn)) {
+      state.zombieItemInflateCalledOut.add(pawn);
+      playerNameMessage(pawn, "[ITEM] ", ` was not allowed to pick up Z-item '${itemDisplayName(item)}' due to suspected inflating`);
+    }
     return false;
   }
   item.data ??= {};
@@ -27063,10 +27523,10 @@ function applyInitialItemVisualState(item) {
       break;
     case "planetcrystal": {
       const colors = {
-        earth: { r: 200, g: 150, b: 0, a: 100 },
-        fire: { r: 255, g: 0, b: 0, a: 100 },
-        wind: { r: 255, g: 255, b: 255, a: 100 },
-        water: { r: 0, g: 255, b: 255, a: 100 },
+        earth: { r: 200, g: 150, b: 0, a: 80 },
+        fire: { r: 255, g: 0, b: 0, a: 80 },
+        wind: { r: 255, g: 255, b: 255, a: 80 },
+        water: { r: 0, g: 255, b: 255, a: 80 },
       };
       const color = colors[item.variant] ?? colors.wind;
       item.visual.SetColor?.(color);
@@ -27321,7 +27781,11 @@ function useGreasyFingers(runtime, item, holder, now) {
                                                                              
                                                                               
   const targets = nearbyPawns(origin, item.definition.range, 3);
-  for (const pawn of targets) dropActiveWeapon(pawn);
+  for (const pawn of targets) {
+    if (item.definition.printName !== false) playerNameMessage(pawn, "Golly, ", " got greased!");
+    else announce("Golly, someone got greased!");
+    dropActiveWeapon(pawn);
+  }
   runtime.itemDeployables.add({
     id: state.nextItemEffectId++,
     kind: "greasy_fingers",
@@ -27876,11 +28340,13 @@ function cancelItemTasks(runtime, item) {
 }
 
 const ITEM_NATIVE_PARTICLE_EFFECTS = new Set([
+  "pizza_tesla",
+  "storm_end_core",
   "aztec_copter_takeoff_grass", "blood_impact_headshot", "chicken_gone", "copter_takeoff_1_dust_low",
-  "env_sparks_omni", "explosion_child_core04c_1k", "explosion_child_distort01b",
+  "env_sparks_omni", "explosion_child_distort01b",
   "explosion_child_distort01c", "explosion_child_distort01d_1k", "explosion_coop_mission_shrapnel02e_1k",
   "explosion_hegrenade_brief", "extinsguish_fire_blastout_01", "impact_dirt", "storm_lightning_01",
-  "storm_lightning_01_modglow", "water_impact_bubbles_1", "weapon_sensorgren_detonate", "weapon_sensorgren_spark_02", "weapon_taser_flash",
+  "storm_lightning_01_modglow", "water_impact_bubbles_1", "weapon_sensorgren_detonate", "weapon_sensorgren_spark_02",
 ]);
 
 function reserveItemParticleBurst(name, maximum, duration, countRejected = false) {
@@ -28509,6 +28975,11 @@ function sourceAudioSample(value) {
 function retireSourceAudio(record) {
   if (!record || !sourceAudio.live.delete(record)) return;
   if (validEntity(record.sound)) {
+    // Storm Blade's one-shot event can restart when sent sound-control inputs.
+    if (record.killOnly) {
+      record.sound.Kill();
+      return;
+    }
     fireTarget(record.sound, "Volume", "0");
     fireTarget(record.sound, "StopSound");
     fireTarget(record.sound, "Kill", "", 0.02);
@@ -28565,7 +29036,8 @@ function spawnSourceAudio(token, position, options = {}) {
   const clipTime = asset.seconds / Math.max(0.01, pitch / 100);
   const record = { token, sound, owner: options.owner, parent: options.parent,
     position: clone(position), followUntil: now + life,
-    expiresAt: now + Math.max(life, clipTime + 0.1), pitch, volume, radius };
+    expiresAt: now + Math.max(life, clipTime + 0.1), pitch, volume, radius,
+    killOnly: options.killOnly === true };
   sound.SetEntityName?.(`audio_live_${++sourceAudio.serial}_${token}`);
   sound.Teleport?.({position:clone(position)});
   if (validEntity(record.parent)) {
@@ -29083,7 +29555,7 @@ function resolveBaguetteSwing(runtime, item, holder) {
     if (reserveItemParticleBurst("baguette", 6, 0.05)) {
       const position = add(pawn.GetAbsOrigin?.() ?? item.position, vec(0, 0, 40));
       playSourceAudioCue(7419, position);
-      spawnItemParticle(runtime, item, "weapon_taser_flash", position, sourceItemImpactAngles(), 0.03);
+      spawnItemParticle(runtime, item, "pizza_tesla", position, sourceItemImpactAngles(), 0.25);
     }
     const velocity = pawn.GetAbsVelocity?.() ?? vec();
     const direction = directionWithPitchOffset(holder);
@@ -29213,6 +29685,8 @@ function usePeanutButter(runtime, item, holder, now) {
     position,
     touched: new Set(),
     source: itemEffectSource(runtime, item, "peanut"),
+    lastAt: now,
+    fallVelocity: 0,
     expiresAt: now + 15,
   });
   item.visual?.SetColor?.({ r: 255, g: 0, b: 0, a: 150 });
@@ -29268,6 +29742,10 @@ function useBillNye(runtime, item, holder, now) {
                                                                           
                                                                        
   visual.Teleport?.({ position, angles: visualAngles, velocity: vec() });
+  // The imported TV's upright pose is baseidle; apply it on placement,
+  // before the one-second power-on delay. This model has no play sequence.
+  fireTarget(visual, "SetAnimation", "baseidle");
+  fireTarget(visual, "SetDefaultAnimation", "baseidle");
   const applyBillNyeBodyGroup = () => {
     if (validEntity(visual)) fireTarget(visual, "SetBodyGroup", "main,1");
   };
@@ -29636,6 +30114,7 @@ function useHumanRift(runtime, item, holder, now) {
       expiresAt: now + 100,
       removeAt: now + 200,
     };
+    playerNameMessage(holder, "", " used Rift (entry)");
     item.data.riftPair = pair;
     runtime.itemDeployables.add(pair);
     playSourceAudioCue(10805, add(entry, vec(0, 0, 61)));
@@ -29657,6 +30136,7 @@ function useHumanRift(runtime, item, holder, now) {
     glow: { r: 255, g: 255, b: 255, a: 255 },
   });
   pair.complete = true;
+  playerNameMessage(holder, "", " used Rift (exit)");
   item.data.riftPair = undefined;
   playSourceAudioCue(10805, add(pair.exit, vec(0, 0, 61)));
   spawnItemParticle(runtime, item, "water_impact_bubbles_1", add(pair.exit, vec(0, 0, 61)), undefined, 0.05);
@@ -30034,6 +30514,8 @@ function destroyHumanItemsForHammer(center, item) {
         ? item.definition.heldItemRadius
         : item.definition.placedItemRadius;
       if (position && Math.hypot(position.x - center.x, position.y - center.y, position.z - center.z) <= radius) {
+        if (humanItem.state === "held")
+          playerNameMessage(humanItem.holder, `DestructoHammer destructed ${itemDisplayName(humanItem)} (held by `, ")");
         consumeItem(runtime, humanItem);
       }
     }
@@ -30104,11 +30586,10 @@ function useStormBlade(runtime, item, holder, now) {
   hurtFinaleBossAt(add(position, vec(0, 0, 100)), item.definition.bossRadius, item.definition.bossDamage, item.definition.bossStunChance, item.definition.bossStunTimeAdd, holder, "storm_blade");
                                                                              
   const sounds = new Set(), borrowedSounds = new Set();
-  for (let i = 0; i < 3; i++) {
-    const record = spawnSourceAudio("i_am_the_storm_cut", position,
-      { radius:100000, lifetime:8, pitch:100, volume:10 });
-    if (record) { record.expiresAt = now + 8; sounds.add(record.sound); }
-  }
+  // One voice per cast; retain the emitter until the complete clip has finished.
+  const soundRecord = spawnSourceAudio("i_am_the_storm_cut", position,
+    { radius:100000, pitch:100, volume:10, killOnly:true });
+  if (soundRecord) sounds.add(soundRecord.sound);
   const frozen = new Set();
   const pieces = new Set();
   const pieceStates = new Map();
@@ -30178,8 +30659,8 @@ function useStormBlade(runtime, item, holder, now) {
                                                                           
                                                                        
                                      
-    soundStopAt: now + 8.0,
-    removeAt: now + 12.2,
+    soundStopAt: soundRecord?.expiresAt ?? now,
+    removeAt: Math.max(now + 12.2, soundRecord?.expiresAt ?? now),
   });
   const hiltPosition = sourceItemModelPosition(item, holder);
   spawnItemParticle(runtime, item, "env_sparks_omni", hiltPosition, undefined, 0.05);
@@ -30497,7 +30978,7 @@ function usePlanetCrystal(runtime, item, holder, now) {
   const elementCues = { earth: [10164,10165,10166], fire: [10223,10224],
     wind: [10300,10301], water: [10368,10369,10370] };
   playSourceAudioStack(elementCues[variant] ?? [], effectPosition);
-  spawnItemParticle(runtime, item, "weapon_taser_flash", sourceItemModelPosition(item, holder), undefined, 0.10);
+  spawnItemParticle(runtime, item, "pizza_tesla", sourceItemModelPosition(item, holder), undefined, 0.25);
 
   if (variant !== "earth") {
     const effectType = variant === "fire" ? 0 : variant === "wind" ? 1 : 2;
@@ -30516,6 +30997,7 @@ function usePlanetCrystal(runtime, item, holder, now) {
   }
 
   if (variant === "earth") {
+    playerNameMessage(holder, "", " used EarthCrystal");
     spawnEarthCrystalPieces(runtime, controller, effectAngles);
   } else if (variant === "fire") {
     spawnElementCrystalTrigger(runtime, controller, holder, effectAngles);
@@ -30620,7 +31102,7 @@ function deployHealOrb(runtime, holder, item, now) {
     nextHealAt: now + growDuration,
     grenadeRecipients: new Set(),
   });
-  message(`${holder.GetPlayerController?.()?.GetPlayerName?.() ?? "human"} used heal orb`);
+  playerNameMessage(holder, "", " used heal orb");
   return true;
 }
 
@@ -30936,8 +31418,10 @@ function cleanupDeployable(runtime, deployable) {
                                                                       
                                                                              
                                                                         
-        if (deployable.kind !== "storm_blade") fireTarget(visual, "StopSound", "");
-        fireTarget(visual, "Volume", "0");
+        if (deployable.kind !== "storm_blade") {
+          fireTarget(visual, "StopSound", "");
+          fireTarget(visual, "Volume", "0");
+        }
       }
       if (deployable.borrowedSounds?.has(visual)) continue;
       if (validEntity(visual)) visual.Kill();
@@ -31301,11 +31785,14 @@ function hitStoneTarget(runtime, deployable, pawn, stonePosition) {
   if (deployable.touched.has(pawn)) return;
   deployable.touched.add(pawn);
   playSourceAudioCue(9656, pawn.GetAbsOrigin?.() ?? deployable.position);
-  spawnItemParticle(runtime, deployable.item, "weapon_taser_flash", stonePosition, sourceItemImpactAngles(), 0.03);
+  spawnItemParticle(runtime, deployable.item, "pizza_tesla", stonePosition, sourceItemImpactAngles(), 0.25);
   const damage = deployable.item.definition.damage;
   const health = pawn.GetHealth?.() ?? 0;
   if (health > damage) pawn.SetHealth?.(health - damage);
-  else damagePawn(pawn, 999999, deployable.user, deployable.visual);
+  else {
+    if (deployable.item.definition.printDeaths !== false) playerNameMessage(pawn, "", " got stoned to death!");
+    damagePawn(pawn, 999999, deployable.user, deployable.visual);
+  }
   if (!deployable.item.definition.stopTargetVelocity) return;
   const velocity = pawn.GetAbsVelocity?.() ?? vec();
   pawn.Teleport?.({ velocity: vec(0, 0, Math.min(0, velocity.z)) });
@@ -31444,6 +31931,7 @@ function processBallisticZombieProjectile(runtime, deployable, now, humans, zomb
   if (deployable.kind === "bomb_chuck") {
     for (const pawn of humans) {
       if (!humanUsesBomb(pawn, deployable, usePressed)) continue;
+      playerNameMessage(pawn, "", " died trying to defuse a bomb");
       damagePawn(pawn, 999999, deployable.user, deployable.visual);
     }
     if (now >= deployable.detonateAt) {
@@ -31589,7 +32077,7 @@ function processLinearZombieProjectile(runtime, deployable, now, humans) {
       damagePawn(pawn, 999999, deployable.user, deployable.visual);
       spawnPizzaImpactSounds(runtime, deployable, now);
       spawnItemParticle(runtime, deployable.item, "blood_impact_headshot", impactPosition, sourceItemImpactAngles(), 0.05);
-      spawnItemParticle(runtime, deployable.item, "weapon_taser_flash", impactPosition, sourceItemImpactAngles(), 0.05);
+      spawnItemParticle(runtime, deployable.item, "pizza_tesla", impactPosition, sourceItemImpactAngles(), 0.25);
       continue;
     }
     if ((deployable.touchCooldowns.get(pawn) ?? 0) > now) continue;
@@ -31637,8 +32125,8 @@ function processPuller(runtime, deployable, now, humans) {
     });
     nullifyFalldownCheckpoint(pawn, deployable.user);
     playSourceAudioCue(9315, add(pawn.GetAbsOrigin?.() ?? deployable.position, vec(0, 0, 40)));
-    spawnItemParticle(runtime, deployable.item, "weapon_taser_flash",
-      add(pawn.GetAbsOrigin?.() ?? deployable.position, vec(0, 0, 40)), undefined, 0.03);
+    spawnItemParticle(runtime, deployable.item, "pizza_tesla",
+      add(pawn.GetAbsOrigin?.() ?? deployable.position, vec(0, 0, 40)), undefined, 0.25);
     damagePawn(pawn, deployable.item.definition.damage, deployable.user, deployable.visual);
   }
 }
@@ -31647,6 +32135,24 @@ function processPeanutButter(runtime, deployable, now, zombies) {
   if (now >= deployable.expiresAt || !validEntity(deployable.visual)) {
     cleanupDeployable(runtime, deployable);
     return;
+  }
+  // Source used prop_physics_override. The port's effect visual needs its own
+  // gravity and swept ground collision; keep testing support as platforms move.
+  const elapsed = Math.max(0, Math.min(0.1, now - (deployable.lastAt ?? now)));
+  deployable.lastAt = now;
+  if (elapsed > 0) {
+    const velocity = deployable.fallVelocity ?? 0;
+    const destination = add(deployable.position,
+      vec(0, 0, velocity * elapsed - 0.5 * CONFIG.worldGravity * elapsed * elapsed));
+    const trace = Instance.TraceLine({
+      start: add(deployable.position, vec(0, 0, 1)),
+      end: destination,
+      ignoreEntity: deployable.visual,
+      ignorePlayers: true,
+    });
+    deployable.position = trace?.didHit ? clone(trace.end) : destination;
+    deployable.fallVelocity = trace?.didHit ? 0 : velocity - CONFIG.worldGravity * elapsed;
+    deployable.visual.Teleport?.({ position: deployable.position, velocity: vec() });
   }
   for (const pawn of zombies) {
     if (!validZombieTarget(pawn)) continue;
@@ -31744,11 +32250,6 @@ function processBillNye(runtime, deployable, now, zombies) {
     return;
   }
   if (now < deployable.startsAt) return;
-  if (!deployable.animationStarted) {
-    deployable.animationStarted = true;
-    fireTarget(deployable.visual, "SetAnimation", "play");
-    fireTarget(deployable.visual, "SetDefaultAnimation", "play", 0.02);
-  }
   if (now < deployable.scansAt) return;
   for (const pawn of zombies) {
     if (!validZombieTarget(pawn)) continue;
@@ -32031,6 +32532,15 @@ function processZombieRift(runtime, pair, now, zombies) {
   }
 }
 
+function otherActiveImpostorExists(excluded) {
+  for (const runtime of activeRuntimes()) {
+    for (const deployable of runtime.itemDeployables ?? []) {
+      if (deployable !== excluded && deployable.kind === "impostor") return true;
+    }
+  }
+  return false;
+}
+
 function otherHiddenImpostorExists(excluded) {
   for (const runtime of activeRuntimes()) {
     for (const deployable of runtime.itemDeployables ?? []) {
@@ -32060,6 +32570,10 @@ function cleanupImpostor(runtime, deployable) {
 function processImpostor(runtime, deployable, now) {
   const user = deployable.user;
   if (!validEntity(user) || !user.IsAlive?.() || user.GetTeamNumber?.() !== 2) {
+    const article = otherActiveImpostorExists(deployable) ? "an" : "the";
+    playerNameMessage(user, "", deployable.hidden
+      ? ` was ${article} impostor - good job finding and killing him before he managed to act!`
+      : ` (${article} impostor) is now dead - good job!`);
     cleanupImpostor(runtime, deployable);
     return;
   }
@@ -32074,6 +32588,7 @@ function processImpostor(runtime, deployable, now) {
   }
   if (!deployable.hidden || now < deployable.revealAt) return;
   deployable.hidden = false;
+  playerNameMessage(user, "", " revealed himself as an impostor, kill him before he kills you!");
   if (deployable.originalModel) user.SetModel?.(deployable.originalModel);
   playSourceAudioCue(9865, add(user.GetAbsOrigin?.() ?? vec(), vec(0, 0, 48)));
   if (!otherHiddenImpostorExists(deployable)) Instance.ServerCommand("sv_disable_radar 0");
@@ -32112,7 +32627,6 @@ function stopStormBladeSounds(runtime, deployable) {
                                                                              
                                                                              
                                                                        
-    fireTarget(sound, "Volume", "0");
     if (deployable.borrowedSounds?.has(sound)) continue;
     sound.Kill?.();
     runtime.entities?.delete(sound);
@@ -32122,10 +32636,11 @@ function stopStormBladeSounds(runtime, deployable) {
 
 function spawnStormBladeEndParticles(runtime, item, position) {
   if (Math.floor(Math.random() * 8) !== 0) return;
+  // Preserve Source's burst; only the core's overbright factor is reduced.
   spawnItemParticle(runtime, item, "explosion_coop_mission_shrapnel02e_1k",
     add(position, vec(0, 0, -Math.floor(Math.random() * 201))), undefined, 0.05);
   if (Math.random() >= 0.5) return;
-  spawnItemParticle(runtime, item, "explosion_child_core04c_1k", position, undefined, 0.05);
+  spawnItemParticle(runtime, item, "storm_end_core", position, undefined, 0.05);
   if (Math.random() >= 0.5) return;
   spawnItemParticle(runtime, item, "explosion_child_distort01d_1k", position, undefined, 0.05);
   spawnItemParticle(runtime, item, "storm_lightning_01", position, undefined, 0.05);
@@ -32177,7 +32692,8 @@ function processStormBlade(runtime, deployable, now) {
     const alpha = pieceState.ending
       ? Math.round(255 * Math.max(0, Math.min(1, (pieceState.killAt - now) / 0.75)))
       : 255;
-    piece.SetColor?.({ r: 255, g: 255, b: 255, a: alpha });
+    const shade = pieceState.ending ? 0 : 255;
+    piece.SetColor?.({ r: shade, g: shade, b: shade, a: alpha });
     piece.Teleport?.({
       position: pieceState.position,
       angles: pieceState.angles,
@@ -32213,6 +32729,7 @@ function processStormBlade(runtime, deployable, now) {
       spawnStormBladeEndParticles(runtime, deployable.item, pieceState.position);
       pieceState.ending = true;
       piece.Unglow?.();
+      piece.SetColor?.({ r: 0, g: 0, b: 0, a: 255 });
       piece.SetModelScale?.(4 + Math.random() * 4);
     }
     scheduleItemTask(runtime, deployable.item, 0.18, () => {
@@ -32278,8 +32795,8 @@ function spawnCaptainPlanetHitParticles(runtime, deployable, victimPosition, att
     scheduleItemParticle(runtime, item, delay, (activeRuntime) => {
       const current = victimPosition();
       if (!current) return;
-      spawnItemParticle(activeRuntime, item, "weapon_taser_flash",
-        add(current, vec(randomInt(-30, 30), randomInt(-30, 30), randomInt(30, 50))), undefined, 0.10);
+      spawnItemParticle(activeRuntime, item, "pizza_tesla",
+        add(current, vec(randomInt(-30, 30), randomInt(-30, 30), randomInt(30, 50))), undefined, 0.25);
     });
   }
   const captainAngles = anglesFromDirection(attackDirection);
@@ -33227,6 +33744,8 @@ function spawnGenericPizzaContactFx(event, position, now) {
     particle.Teleport({ position: clone(position), angles: randomAngles(), velocity: vec() });
     fireTarget(particle, "Start");
   }
+  // Keep the original brief blood burst while allowing the Tesla arcs to finish.
+  fireTarget(members.blood, "Kill", undefined, 0.05);
   const pitch = 40 + Math.floor(Math.random() * 61), soundPosition = add(position, vec(0, 0, 8));
   for (const sound of entities.filter(entity => !particles.has(entity))) {
     sound.Teleport({ position: soundPosition });
@@ -34245,7 +34764,11 @@ function processGenericEvents(now) {
         if (!validEntity(pawn) || !pawn.IsAlive?.() || pawn.GetTeamNumber?.() !== 3) event.pledged.delete(pawn);
       }
       for (const pawn of genericEventPlayers()) {
-        if (event.pledged.has(pawn)) damageRaceRubblePawn(pawn, 2);
+        if (event.pledged.has(pawn)) {
+          if (GENERIC_EVENT_DEFINITIONS.PLEDGE.calloutFail && Number(pawn.GetHealth?.()) <= 2)
+            playerNameMessage(pawn, "", " did not state the pledge");
+          damageRaceRubblePawn(pawn, 2);
+        }
       }
       syncPledgePrompt(event);
       if (!event.pledged.size) endGenericEvent(event);
@@ -34257,6 +34780,7 @@ function processGenericEvents(now) {
         if (state.genericEvents.bloodlustHits.get(pawn)) {
           if (health < 150) pawn.SetHealth?.(Math.min(150, health + 3));
         } else {
+          if (health <= 2) playerNameMessage(pawn, "", " did not quench the bloodthirst");
           damageRaceRubblePawn(pawn, 2);
         }
         state.genericEvents.bloodlustHits.delete(pawn);
@@ -34322,6 +34846,114 @@ function setGenericEventManualMode(enabled) {
 
 
 
+// These webscript events are absent from the older script/manager.nut snapshot.
+// Source: CS:GO scripts/vscripts/luffaren/manager.nut, HardCodedStageEvents.
+function hardCodedStageEventLive(runtime) {
+  return state.running && !state.fatal && state.levels.get(runtime.index) === runtime
+    && runtime.lifecycle !== "destroyed" && runtime.lifecycle !== "fading";
+}
+
+function stageEventTask(runtime, delay, callback) {
+  return schedule(delay, () => {
+    if (hardCodedStageEventLive(runtime)) callback();
+  }, runtime.index);
+}
+
+function jumpscareHudWarning(error) {
+  if (jumpscareHudWarningPrinted) return;
+  jumpscareHudWarningPrinted = true;
+  message(`Maze jumpscare HUD unavailable: ${error}; load the updated compiled map and layout`);
+}
+
+function clearJumpscareHud(owner, pawn) {
+  for (const [slot, record] of jumpscareHudPlayers) {
+    if ((owner !== undefined && record.owner !== owner) || (pawn && record.pawn !== pawn)) continue;
+    try {
+      if (validEntity(record.hud)) record.hud.SetHasClassForPlayer(slot, JUMPSCARE_HUD_PANEL, "Active", false);
+    } catch (error) {
+      jumpscareHudWarning(error);
+      continue; // Retain failed clears so the next Think/reset can retry.
+    }
+    jumpscareHudPlayers.delete(slot);
+  }
+}
+
+function syncJumpscareHud(now) {
+  for (const record of jumpscareHudPlayers.values()) {
+    if (!state.running || state.fatal || record.until <= now || !validEntity(record.pawn)
+      || !record.pawn.IsAlive?.() || record.pawn.GetTeamNumber?.() !== 3
+      || playerSlotForHud(record.pawn) !== record.slot
+      || !validEntity(record.hud) || !state.levels.has(record.owner)
+      || !hardCodedStageEventLive(state.levels.get(record.owner)))
+      clearJumpscareHud(record.owner, record.pawn);
+  }
+}
+
+function touchMazeJumpscare(runtime, data) {
+  if (!hardCodedStageEventLive(runtime) || !validEntity(runtime.mazeJumpscare?.trigger)) return false;
+  const pawn = resolvePawn(data?.activator);
+  if (!validEntity(pawn) || !pawn.IsAlive?.() || pawn.GetTeamNumber?.() !== 3
+    || runtime.mazeJumpscare.touchers.has(pawn)) return false;
+  const slot = playerSlotForHud(pawn);
+  if (slot === undefined) return false;
+  const hud = Instance.FindEntityByName(JUMPSCARE_HUD_TARGET);
+  if (!validEntity(hud) || typeof hud.SetHasClassForPlayer !== "function") {
+    jumpscareHudWarning(JUMPSCARE_HUD_TARGET);
+    return false;
+  }
+  const previous = jumpscareHudPlayers.get(slot);
+  if (previous) {
+    clearJumpscareHud(previous.owner, previous.pawn);
+    if (jumpscareHudPlayers.has(slot)) return false;
+  }
+  try { hud.SetHasClassForPlayer(slot, JUMPSCARE_HUD_PANEL, "Active", true); }
+  catch (error) { jumpscareHudWarning(error); return false; }
+  jumpscareHudPlayers.set(slot, { pawn, slot, hud, owner: runtime.index,
+    until: Instance.GetGameTime() + 0.7 });
+  runtime.mazeJumpscare.touchers.add(pawn);
+  spawnSourceAudio("shellbert_despair", pawn.GetAbsOrigin(),
+    { owner: runtime.index, recipient: pawn, radius: -1, lifetime: 0.2 });
+  announce("HOLY SHIT");
+  return true;
+}
+
+function startHardCodedStageEvent(runtime) {
+  if (runtime.hardCodedStageEventStarted || runtime.raceLevel) return;
+  if (runtime.id === "#1660527778") {
+    featureTemplate("trap_thigh_spider");
+    featureTemplate("trapSpiderDamage");
+    const position = add(sub(runtime.end, mul(runtime.outgoing, 530)), mul(runtime.incoming, 40));
+    for (let i = 0; i < 10; i++) state.trapSpawnQueue.push({
+      levelIndex: runtime.index, kind: "feature", feature: "trap", tile: 88,
+      trapName: "thigh_spider", stageEvent: true, position: clone(position),
+      themeName: runtime.stageSnapshot?.theme,
+    });
+    const lines = [[5, "Oh my god these thighs"], [6, "I wish to dive deep into them"],
+      [6, "Let me explore them"], [7, "Deeper"], [8, "Deeper..."],
+      [9, "Lord forgive me for what i'm about to do to Shellbert"]];
+    for (const [delay, line] of lines) stageEventTask(runtime, delay, () => announce(line));
+    let delay = 4.5;
+    for (let i = 0; i < 50; i++) {
+      stageEventTask(runtime, delay, () => spawnSourceAudio("popgasm", vec(), {
+        owner: runtime.index, radius: 0, lifetime: 0.2, pitch: 60 + Math.floor(Math.random() * 51),
+      }));
+      delay += 0.01 + Math.random() * 0.99;
+    }
+  } else if (runtime.id === "#1658255300") {
+    const position = sub(runtime.end, mul(runtime.outgoing, 500));
+    const trigger = spawnTriggerVolume(runtime, { templateKey: "jumpscare",
+      feature: "mazeJumpscare", position, angles: { pitch: 0, yaw: 0, roll: 0 } },
+      vec(-100, -100, -100), vec(100, 100, 200));
+    trigger.SetEntityName?.(`block_${runtime.index}_jumpscare`);
+    runtime.mazeJumpscare = { trigger, touchers: new Set() };
+    connectOwnedOutput(runtime, trigger, "OnStartTouch", data => touchMazeJumpscare(runtime, data));
+    fireTarget(trigger, "Enable", "", 0.05);
+    for (const [delay, line] of [[5, "What a nice looking maze"], [6, "Let's go through it"],
+      [7, "What could go wrong?"]]) stageEventTask(runtime, delay, () => announce(line));
+  } else return;
+  runtime.hardCodedStageEventStarted = true;
+}
+
 function finishPendingLevel() {
   const runtime = state.pendingLevel;
   if (!runtime) return;
@@ -34337,6 +34969,8 @@ function finishPendingLevel() {
   ensureThemeModelSky(campaignStageSnapshot().infiniteMode ? campaignStageSnapshot().theme
     : runtime.stageSnapshot?.theme ?? campaignStageSnapshot().theme, runtime.end.z);
   setLevelLifecycle(runtime, "active");
+  try { startHardCodedStageEvent(runtime); }
+  catch (error) { failRuntime(`stage event failed for level ${runtime.index}: ${error}`); return; }
   updateTerrainPreviewHud(runtime, "spawn-complete");
   if (runtime.debugLiquidFall) {
     message(`[LIQUID FALL DEBUG] ready: ${runtime.debugLiquidFallSamples.size}/32 samples; use ze_debug_liquid_fall status`);
@@ -34490,6 +35124,7 @@ function beginLevelFade(runtime) {
   if ([...state.genericEvents.active.values()].some(event => !event.ended && event.collapseSource === runtime)) return;
   if (!runtime || runtime.lifecycle === "destroyed" || runtime.lifecycle === "fading") return;
   setLevelLifecycle(runtime, "fading");
+  clearJumpscareHud(runtime.index);
   runtime.fadeStartedAt = Instance.GetGameTime();
   runtime.fadeStep = state.finaleEscapeActive ? 50 : CONFIG.despawnFadeStep;
   runtime.fadeInterval = state.finaleEscapeActive ? 0.05 : CONFIG.despawnFadeInterval;
@@ -34657,6 +35292,7 @@ function settleEngineRelease() {
 function destroyLevel(index, preservePickedItems = false, deferKill = false) {
   const runtime = state.levels.get(index);
   if (!runtime) return;
+  clearJumpscareHud(index);
   clearGenerationWork(index);
   clearBoostPads(runtime);
   clearSpawnSafetyTriggers(index);
@@ -34971,7 +35607,22 @@ function spawnTeleRoundStart(inputData) {
     velocity: vec(),
   });
   applyCheapPlayerModel(pawn, CHEAP_PLAYERMODEL_CONFIG.humanModel);
+  restoreKnifeAfterReturn(pawn);
+}
+
+function restoreKnifeAfterReturn(pawn) {
   restoreMissingKnife(pawn);
+  if (!validEntity(pawn) || !pawn.IsAlive?.()) return;
+  const team = pawn.GetTeamNumber?.();
+  if (team !== 2 && team !== 3) return;
+  // OnStartTouch can precede native teleport/inventory updates. Recheck even
+  // when a knife is still present now, and retry a failed GiveNamedItem call.
+  // Round-scoped tasks discard these checks when the round ends.
+  for (const delay of [0.1, 0.5]) {
+    schedule(delay, () => {
+      if (validEntity(pawn) && pawn.GetTeamNumber?.() === team) restoreMissingKnife(pawn);
+    });
+  }
 }
 
 // Restore a plain knife only on a return teleport; the knife slot also covers
@@ -35004,7 +35655,7 @@ function spawnTele(inputData) {
   if (infectionHasStarted() && pawn.GetTeamNumber?.() === 2) {
     applyCheapPlayerModel(pawn, CHEAP_PLAYERMODEL_CONFIG.zombieModel);
   }
-  restoreMissingKnife(pawn);
+  restoreKnifeAfterReturn(pawn);
 }
 
 // 原版 ::CHEAP_PLAYERMODELS。CS2 版默认关闭，由服务器用 StripperCS2 添加名为
@@ -35118,7 +35769,7 @@ function fallDownTouchTrigger(inputData) {
     });
     if (typeof pawn.SetHealth === "function") pawn.SetHealth(rescuedHealth);
     else pawn.TakeDamage?.({ damage: CONFIG.falldownCheckpointDamage, damageFlags: CSDamageFlags.IGNORE_ARMOR ?? 0 });
-    restoreMissingKnife(pawn);
+    restoreKnifeAfterReturn(pawn);
     const checkpointName = checkpointEntity.GetEntityName?.() ?? "block_*";
     message(`[FALL] rescued CT: -${CONFIG.falldownCheckpointDamage} HP -> ${Math.round(rescuedHealth)}, checkpoint=${checkpointName}`);
     return;
@@ -35314,7 +35965,7 @@ function rememberZombieInfectionHit(event, attacker) {
     state.zombieInfectionReturns.delete(pawn);
     return;
   }
-  const record = { returned: false };
+  const record = { returned: false, position: clone(pawn.GetAbsOrigin?.() ?? vec()) };
   state.zombieInfectionReturns.set(pawn, record);
   // CS2Fixes cancels the health damage and infects a living CT via SwitchTeam;
   // its synthetic player_death does not require native OnPlayerKill to fire.
@@ -35332,8 +35983,10 @@ function handleZombieInfectionTeamChanged(event) {
   if (!pawn) return;
   const record = state.zombieInfectionReturns.get(pawn);
   if (event.oldTeam === 3 && pawn.GetTeamNumber?.() === 2) {
+    recordRoundReportDeath(pawn, record?.position ?? pawn.GetAbsOrigin?.());
     if (record) confirmZombieInfectionReturn(pawn, record);
   } else {
+    if (pawn.GetTeamNumber?.() === 3) state.roundReportVictims.delete(pawn);
     state.zombieInfectionReturns.delete(pawn);
   }
 }
@@ -35348,6 +36001,7 @@ function releaseItemsOnDeath(pawn) {
 
 function handlePlayerKill(event) {
   const pawn = resolvePawn(event?.player ?? event?.victim ?? event?.controller);
+  if (pawn?.GetTeamNumber?.() === 3) recordRoundReportDeath(pawn);
   if (pawn) hideInvincibilityForPlayer(pawn);
   if (pawn) hidePledgePromptForPlayer(pawn);
   if (pawn) hideSquidBlindForPlayer(pawn);
@@ -35635,9 +36289,19 @@ function reportGeneratedTeleports() {
 function resetPlayerEffects(event) {
   const pawn = resolvePawn(event?.player ?? event?.controller ?? event?.pawn ?? event);
   if (!pawn) return;
+  if (state.roundReportVictims.has(pawn)) {
+    const victims = state.roundReportVictims;
+    // Reset also fires during infection. Wait until the team switch settles
+    // before allowing another death for a new living human life.
+    afterThink(() => {
+      if (victims === state.roundReportVictims && validEntity(pawn)
+        && pawn.IsAlive?.() && pawn.GetTeamNumber?.() === 3) victims.delete(pawn);
+    });
+  }
   clearAirslide(pawn);
   hideInvincibilityForPlayer(pawn);
   hidePledgePromptForPlayer(pawn);
+  clearJumpscareHud(undefined, pawn);
   hideItemTutorialForPlayer(pawn);
   hideZombieItemLockForPlayer(pawn);
   dropHeldItem(pawn);
@@ -35714,6 +36378,7 @@ function thinkBody() {
     guardStep("processThemePreload", () => processThemePreload(now));
     guardStep("processThemeMusic", () => processThemeMusic(now));
     guardStep("processGenericEvents", () => processGenericEvents(now));
+    guardStep("processTrollMessages", () => processTrollMessages(now));
     guardStep("processSilentHillVisualChange", () => processSilentHillVisualChange());
     guardStep("processEndingRuntime", () => processEndingRuntime());
     guardStep("updateInfectionState", () => updateInfectionState(now));
@@ -35739,7 +36404,9 @@ function thinkBody() {
     if (!state.fatal) guardStep("processTerrainSpawnFades", () => processTerrainSpawnFades(now));
   }
   guardStep("syncInvincibilityHud", () => syncInvincibilityHud(now));
+  guardStep("syncJumpscareHud", () => syncJumpscareHud(now));
   guardStep("syncItemTutorials", () => syncItemTutorials(now));
+  guardStep("syncTrollMessageHud", () => syncTrollMessageHud(now));
   guardStep("syncZombieItemLocks", () => syncZombieItemLocks(now));
 }
 
@@ -35913,6 +36580,7 @@ Instance.OnScriptReload({
     clearSpawnSafetyTriggers();
     clearSourceAudio();
     const memory = {
+      reportSessionId: state.reportSessionId,
       debugShowcaseMode: state.debugShowcaseMode,
       debugSilentHillTheme: state.debugSilentHillTheme,
       debugGravityMode: state.debugGravityMode,
@@ -35949,6 +36617,9 @@ Instance.OnScriptReload({
     return memory;
   },
   after: (memory) => {
+    if (/^#[a-zA-Z0-9_]{8}#$/.test(memory?.reportSessionId ?? "")) {
+      state.reportSessionId = String(memory.reportSessionId);
+    }
     state.debugShowcaseMode = DEBUG_HOOKS.enabled && memory?.debugShowcaseMode === true;
     state.debugSilentHillTheme = DEBUG_HOOKS.enabled && memory?.debugSilentHillTheme === true;
     state.debugGravityMode = DEBUG_HOOKS.enabled && memory?.debugGravityMode === true;
@@ -36020,6 +36691,7 @@ Instance.OnRoundEnd((event = {}) => {
   state.running = false;
   cancelScheduledTasks();
   const ending = state.endingRuntime;
+  const report = guardStep("capture round report", () => captureRoundReport(ending));
   const raceAudio = ending?.kind === "RACE" ? {
     sequence: ending.sequence,
     raceFinish: clone(ending.raceFinish ?? ending.anchor ?? vec()),
@@ -36037,6 +36709,7 @@ Instance.OnRoundEnd((event = {}) => {
     if (!state.campaign.endingResolved)
       retainCampaignStage(ending?.debugForced ? "debug_race_round_end" : "round_end");
   });
+  roundCleanupStep("round report", () => printRoundReport(report, ending));
   // The world stays up through the round-end delay; the round restart removes it.
   releaseRoundToEngine({ preserveCampaignOutcome: true });
   if (raceAudio) scheduleRaceRoundAudio(raceAudio, winningTeam);
@@ -37765,6 +38438,7 @@ function debugItemPositions() {
 
 const DEBUG_COMMAND_HANDLERS = Object.freeze({
   debugEndCommand,
+  debugTrollMessageCommand,
   debugNextEndingCommand,
   debugEndingCommand,
   debugEventCommand,

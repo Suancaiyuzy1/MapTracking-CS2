@@ -121,3 +121,27 @@
 .ZombieItemLockTitle {
     font-weight: bold;
 }
+.TrollMessage {
+    width: 900px;
+    height: fit-children;
+    horizontal-align: center;
+    vertical-align: top;
+    position: 0px 22% 0px;
+    visibility: collapse;
+    opacity: 0;
+}
+.TrollMessage.Active {
+    visibility: visible;
+    opacity: 1;
+}
+.TrollMessageText {
+    width: 100%;
+    height: fit-children;
+    color: #ffc800;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: 1px 1px 3px #000000;
+    white-space: normal;
+}
