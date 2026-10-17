@@ -2467,7 +2467,7 @@ const KART_CONFIG = Object.freeze({
   normalSpawnZOffset: 20,
   riderLocalZ: -40,
   endingRiderLocalZ: -8,
-  humanRiderHeightOffset: 32,
+  humanRiderHeightOffset: 16,
   riderStartPitch: 40,
   dismountZOffset: 60,
   mountRange: 10,
@@ -2537,6 +2537,8 @@ const RACE_CONFIG = Object.freeze({
   rubbleHeightMin: 4000,
   rubbleHeightMax: 800,
   rubbleLifetime: 4,
+  rubbleFailureBackoff: 1,
+  rubbleFailureBackoffMax: 8,
   rubbleTypes: Object.freeze([25, 5, 91, 95, 3]),
                                                                              
                                                                              
@@ -2755,7 +2757,6 @@ const FINALE_BOSS_CONFIG = Object.freeze({
   damageMultiplierInfiniteAdd: 0.5,
   damageMultiplierStageEach: 0.0001,
   damageMultiplierStageCap: 2,
-  healthOverride: 100, // Temporary test HP; set to null to restore normal scaling.
   healthBase: 3000,
   healthPerHuman: 17000,
   healthPerHumanInfinite: 20000,
@@ -2918,6 +2919,22 @@ const FINALE_THUNDER_CONFIG = Object.freeze({
   // Temporarily off: finale_thunder.vpcf triggers "not precached correctly" blocking loads.
   visualEnabled: false,
   visualNote: "Original four-frame lightning; de_train rain assets with local-view emission and bounded ground splashes",
+  // Source TickThunderFX flashes a lightning env_sprite at the same sky points every tick; the
+  // CS2 stand-in is lightning_strike_sky (~3x the ground strike, bolt ~9000u), centred on the point.
+  strikeEnabled: true,
+  strikeTemplateKey: "lightningStrikeSky",
+  strikeBaseDrop: 4500,
+  // Strikes live LIGHTNING_STRIKE_CONFIG.lifetime (0.9s) vs a ~0.25s mean tick; cap the overlap.
+  strikeMaxLive: 4,
+});
+
+// Lightning strike ("雷劈"): particles/luffaren/lightning_strike/lightning_strike.vpcf via
+// template_lightning_strike. The particle has two re-strikes up to 0.24s; 0.9s covers their fade.
+const LIGHTNING_STRIKE_CONFIG = Object.freeze({
+  lifetime: 0.9,
+  groundTraceDistance: 4096,
+  sounds: ["thunder_dist_1", "thunder_dist_2", "thunder_dist_3"],
+  soundRadius: 10000,
 });
 
 const FINALE_RAIN_CONFIG = Object.freeze({
@@ -3528,6 +3545,8 @@ const FEATURE_TEMPLATE_NAMES = Object.freeze({
   finaleThunder: "template_finale_thunder",
   finaleRain: "template_finale_rain",
   finaleRainGround: "template_finale_rain_ground",
+  lightningStrike: "template_lightning_strike",
+  lightningStrikeSky: "template_lightning_strike_sky",
   volume: "template_block",
   block: "template_block",
   breakable: "template_breakable",
@@ -3726,7 +3745,7 @@ function featureTemplateIsRequired(key) {
   if (key === "jumpscare") return false;
                                                                            
                                                                     
-  if (["bossPieceTouch", "bossEyeTouch", "bossEyeDamage", "bossGrenadeDamage", "finaleCheckoutDamage", "finaleMover", "finaleZombieMover", "finaleCheckoutText", "finaleThunder", "finaleRain", "finaleRainGround"].includes(key)) return false;
+  if (["bossPieceTouch", "bossEyeTouch", "bossEyeDamage", "bossGrenadeDamage", "finaleCheckoutDamage", "finaleMover", "finaleZombieMover", "finaleCheckoutText", "finaleThunder", "finaleRain", "finaleRainGround", "lightningStrike", "lightningStrikeSky"].includes(key)) return false;
                                                                          
                                                                            
                                                            
@@ -6980,10 +6999,28 @@ function startFinaleBossMusic(runtime, at = Instance.GetGameTime()) {
     if (runtime.bossPhase !== "escape") processFinaleMusic(runtime, Instance.GetGameTime());
   }, `finale_music_intro_${runtime.sequence}`);
   endingTaskAt(runtime, runtime.finaleMusicLoopAt, () => {
-    if (!runtime || runtime.bossPhase === "escape") return;
-    startFinaleMusicLoop(runtime, runtime.finaleMusicLoopAt);
+    processFinaleMusic(runtime, Instance.GetGameTime());
   }, `finale_music_loop_${runtime.sequence}`);
   return true;
+}
+
+// Source FinaleMusicLoop: the infinite static stinger also flashes white and sets
+// postprocess local contrast (vignette 1.75/0.5, blur 0.25, strength 100) until round end.
+// CS2 has no postprocess_controller inputs, so a disabled map-sized volume carries the vpost.
+function setFinaleInfiniteScreenFx(runtime, enabled) {
+  const volume = Instance.FindEntityByName?.("finale_infinite_postprocess");
+  if (!enabled) {
+    if (runtime?.finaleInfiniteScreenFx && validEntity(volume)) fireTarget(volume, "Disable", "");
+    if (runtime) runtime.finaleInfiniteScreenFx = false;
+    return;
+  }
+  const fade = Instance.FindEntityByName?.("finale_infinite_fade");
+  runtime.finaleInfiniteScreenFx = true;
+  if (validEntity(fade)) fireTarget(fade, "Fade", "", 0.02);
+  if (validEntity(volume)) fireTarget(volume, "Enable", "", 0.07);
+  if (!validEntity(fade) || !validEntity(volume)) {
+    runtime.finaleInfiniteScreenFxNote = "finale_infinite_fade/finale_infinite_postprocess map entities are unavailable";
+  }
 }
 
 function startFinaleMusicLoop(runtime, at = Instance.GetGameTime()) {
@@ -6992,6 +7029,7 @@ function startFinaleMusicLoop(runtime, at = Instance.GetGameTime()) {
   if (infinite && !runtime.finaleInfiniteMusicStaticPlayed) {
     stopEndingMusic(runtime);
     const played = playEndingMusic(runtime, "confronting_myself_infinite_static", true);
+    setFinaleInfiniteScreenFx(runtime, true);
     runtime.finaleInfiniteMusicStaticPlayed = true;
     runtime.finaleMusicPhase = played ? "infinite_static" : "infinite_static_missing";
     runtime.finaleMusicNextAt = at + FINALE_MUSIC_CONFIG.infiniteStaticDelay;
@@ -7027,9 +7065,9 @@ function processFinaleMusic(runtime, now = Instance.GetGameTime()) {
     runtime.finaleMusicRetryAt = played ? undefined : now + 1;
     finaleMusicHistory(runtime, "boss_start", "confronting_myself_start", runtime.finaleMusicStartAt);
   }
+  // A boss killed before the loop point must still hand off to the loop.
   if (["boss_intro", "boss_start", "boss_start_missing"].includes(runtime.finaleMusicPhase)
-    && now + 1e-6 >= (runtime.finaleMusicLoopAt ?? Infinity)
-    && runtime.bossPhase !== "escape") {
+    && now + 1e-6 >= (runtime.finaleMusicLoopAt ?? Infinity)) {
     startFinaleMusicLoop(runtime, runtime.finaleMusicLoopAt);
   }
   if (["infinite_static", "infinite_static_missing"].includes(runtime.finaleMusicPhase)
@@ -7256,7 +7294,11 @@ function markEndingOutcomePending(runtime, humansWon) {
   // Both runtimes leave activeRuntimes() below; retire temporary projectiles
   // and Puller beams instead of leaving them frozen until the round resets.
   retireLinearZombieProjectiles(runtime);
-  if (source && source.lifecycle !== "destroyed") retireLinearZombieProjectiles(source);
+  retireHealOrbs(runtime);
+  if (source && source.lifecycle !== "destroyed") {
+    retireLinearZombieProjectiles(source);
+    retireHealOrbs(source);
+  }
   if (source && !["outcome_pending", "destroyed"].includes(source.lifecycle)) {
     source.lifecycleBeforeOutcome = source.lifecycle;
     source.lifecycle = "outcome_pending";
@@ -8221,6 +8263,7 @@ function finishEndingRuntime(runtime, lifecycle = "resolved") {
     if (runtime.bossPhase === "escape") state.finaleEscapeActive = false;
     state.finalePostImpostorUntil = 0;
     stopFinaleThunder(runtime);
+    setFinaleInfiniteScreenFx(runtime, false);
     stopCollectiveTitle("finale_cleanup");
   }
                                                                           
@@ -11469,15 +11512,27 @@ function processRaceKartPreparation(runtime) {
           preparation.spawned++;
         });
       } catch (error) {
-        runtime.raceKartPreparation = undefined;
-        failRuntime(`RACE kart preparation failed: ${error}`);
-        return;
+        // One car failing (often a transient world-limit spike) must not end
+        // the round for everyone. Drop that car; its stashed, control-locked
+        // rider cannot race, so remove them instead of leaving them in the sky.
+        preparation.failed = (preparation.failed ?? 0) + 1;
+        const partial = runtime.karts.get(request.pawn);
+        if (partial) cleanupKartController(runtime, partial, false);
+        runtime.raceDiagnostics ??= [];
+        runtime.raceDiagnostics.push(`kart preparation skipped team=${request.team}: ${error}`);
+        message(`[RACE] kart skipped team=${request.team} (${preparation.failed} failed): ${error}`);
+        raceKillPawn(request.pawn);
       }
       preparation.cursor++;
       jobs++;
     }
     if (preparation.cursor < preparation.queue.length) return;
     runtime.raceKartPreparation = undefined;
+    // Every car failing means the kart template itself is broken.
+    if (preparation.spawned === 0 && preparation.failed > 0) {
+      failRuntime(`RACE kart preparation failed: all ${preparation.failed} karts failed to spawn`);
+      return;
+    }
     runtime.raceStarted = true;
     runtime.raceStartedAt = Instance.GetGameTime();
     runtime.raceCheckoutReadyAt = runtime.raceStartedAt + RACE_CONFIG.checkoutGrace;
@@ -11486,7 +11541,7 @@ function processRaceKartPreparation(runtime) {
     runtime.raceTimelineDelay = Math.max(0,
       runtime.raceStartedAt - (runtime.runStartedAt + RACE_CONFIG.startAt));
     scheduleRaceDrivingTimeline(runtime);
-    raceLog(runtime, `karts ready=${preparation.spawned} preparation=${(runtime.raceStartedAt - preparation.startedAt).toFixed(2)}s maxJob=${preparation.maxJobMs.toFixed(2)}ms`);
+    raceLog(runtime, `karts ready=${preparation.spawned} failed=${preparation.failed ?? 0} preparation=${(runtime.raceStartedAt - preparation.startedAt).toFixed(2)}s maxJob=${preparation.maxJobMs.toFixed(2)}ms`);
     announce("RACE ending: GO");
   });
 }
@@ -12018,9 +12073,17 @@ function spawnRaceRubblePiece(runtime, target, now) {
     cleanupRaceRubblePiece(runtime, piece);
     runtime.raceDiagnostics ??= [];
     runtime.raceDiagnostics.push(`rubble generation failed: ${error}`);
-    failRuntime(`RACE/FINALE falling rubble generation failed: ${error}`);
+    // Rubble is decoration plus chip damage; a failed piece must not end the
+    // round. Back off the shared stream so repeated failures stay cheap.
+    runtime.rubbleFailures = (runtime.rubbleFailures ?? 0) + 1;
+    runtime.rubbleConsecutiveFailures = (runtime.rubbleConsecutiveFailures ?? 0) + 1;
+    const backoff = Math.min(RACE_CONFIG.rubbleFailureBackoffMax,
+      RACE_CONFIG.rubbleFailureBackoff * runtime.rubbleConsecutiveFailures);
+    state.nextRubbleSpawnAt = now + backoff;
+    message(`[RUBBLE] piece skipped (${runtime.rubbleFailures} failed, retry in ${backoff}s): ${error}`);
     return;
   }
+  runtime.rubbleConsecutiveFailures = 0;
   runtime.rubblePieces ??= [];
   runtime.rubblePieces.push(piece);
   state.activeRubblePieces.add(piece.visual);
@@ -12550,6 +12613,13 @@ function startRaceEnding(stageSnapshot, sourceRuntime) {
   }
   if (RACE_LEVELS.length !== 50) throw new Error(`RACE requires exactly 50 playable authored levels after removing the simplified course, got ${RACE_LEVELS.length}`);
   const runtime = createEndingRuntime("RACE", stageSnapshot, sourceRuntime);
+  // Author-approved deviation: Source lets BLOODLUST tick on into RACE, where the
+  // ~23s kart preparation gives humans nothing to shoot and drains them at 4 HP/s.
+  for (const event of [...state.genericEvents.active.values()]) {
+    if (event.name !== "BLOODLUST") continue;
+    endGenericEvent(event);
+    announce("EVENT: the bloodthirst has ended for the race");
+  }
   runtime.raceProfile = undefined;
   runtime.remaining = 0;
   finishRaceSpawn(runtime);
@@ -13863,6 +13933,10 @@ function startFinaleThunder(runtime, now = Instance.GetGameTime()) {
     primaryPlayed: 0,
     secondaryPlayed: 0,
     visualSupported: FINALE_THUNDER_CONFIG.visualEnabled && state.featureTemplates.has("finaleThunder"),
+    strikeSupported: FINALE_THUNDER_CONFIG.strikeEnabled
+      && state.featureTemplates.has(FINALE_THUNDER_CONFIG.strikeTemplateKey),
+    strikesLive: 0,
+    strikeCount: 0,
     precipitationSupported: state.featureTemplates.has("finaleRain"),
     precipitationRequested: 2,
     note: FINALE_THUNDER_CONFIG.visualNote,
@@ -13896,6 +13970,21 @@ function processFinaleThunder(runtime, now = Instance.GetGameTime()) {
       if (validEntity(flash)) flash.Kill();
       runtime.entities.delete(flash);
     });
+  }
+  if (thunder.strikeSupported && thunder.strikesLive < FINALE_THUNDER_CONFIG.strikeMaxLive) {
+    // Sky point has no ground under it, so place the bolt base directly; thunder audio stays below.
+    const strike = strikeLightning(add(position, vec(0, 0, -FINALE_THUNDER_CONFIG.strikeBaseDrop)),
+      { snap: false, sound: false, template: FINALE_THUNDER_CONFIG.strikeTemplateKey });
+    if (strike) {
+      thunder.strikesLive++;
+      thunder.strikeCount++;
+      runtime.entities.add(strike);
+      endingTask(runtime, LIGHTNING_STRIKE_CONFIG.lifetime, () => {
+        thunder.strikesLive = Math.max(0, thunder.strikesLive - 1);
+        if (validEntity(strike)) strike.Kill();
+        runtime.entities.delete(strike);
+      });
+    }
   }
   let primaryPlayed = false;
   let secondaryPlayed = false;
@@ -13934,6 +14023,58 @@ function stopFinaleThunder(runtime) {
   runtime.finaleRainParticle = undefined;
   runtime.finaleRainNextAt = undefined;
   return wasEnabled;
+}
+
+// Ground point under `position`, or undefined when nothing solid is within the trace distance.
+function lightningStrikeGround(position) {
+  if (typeof Instance.TraceLine !== "function") return undefined;
+  const trace = Instance.TraceLine({
+    start: add(position, vec(0, 0, 16)),
+    end: add(position, vec(0, 0, -LIGHTNING_STRIKE_CONFIG.groundTraceDistance)),
+    ignorePlayers: true,
+  });
+  const end = trace?.position ?? trace?.end;
+  return (trace?.didHit ?? trace?.hit) && end && Number.isFinite(end.z) ? clone(end) : undefined;
+}
+
+// One-shot lightning strike at `position` (snapped to the ground below unless options.snap
+// is false). Cosmetic only: no damage. options.template picks the feature template key
+// (default "lightningStrike"; "lightningStrikeSky" is the 3x finale variant). Returns the
+// particle entity, or undefined when the map lacks the template. The engine removes the
+// particle after the config lifetime.
+function strikeLightning(position, options = {}) {
+  if (!position) return undefined;
+  const key = options.template ?? "lightningStrike";
+  const template = state.featureTemplates.get(key);
+  if (!validEntity(template)) {
+    state.lightningStrikeTemplateWarned ??= new Set();
+    if (!state.lightningStrikeTemplateWarned.has(key)) {
+      state.lightningStrikeTemplateWarned.add(key);
+      message(`WARNING: ${FEATURE_TEMPLATE_NAMES[key]} missing from map; lightning strike skipped`);
+    }
+    return undefined;
+  }
+  const ground = options.snap === false ? clone(position) : lightningStrikeGround(position) ?? clone(position);
+  // Random yaw swings the bolt's sky end around the impact so repeated strikes differ.
+  const angles = { pitch: 0, yaw: Math.random() * 360, roll: 0 };
+  const spawned = spawnRoundEntities(template, ground, angles) ?? [];
+  if (spawned.length !== 1 || !validEntity(spawned[0]) || spawned[0].GetClassName?.() !== "info_particle_system") {
+    destroyEntities(spawned);
+    message(`WARNING: ${FEATURE_TEMPLATE_NAMES[key]} must spawn exactly one info_particle_system`);
+    return undefined;
+  }
+  const particle = spawned[0];
+  particle.Teleport({ position: ground, angles, velocity: vec() });
+  fireTarget(particle, "Start");
+  fireTarget(particle, "Kill", undefined, LIGHTNING_STRIKE_CONFIG.lifetime);
+  if (options.sound !== false) {
+    const sounds = LIGHTNING_STRIKE_CONFIG.sounds;
+    playCatalogSound(sounds[Math.floor(Math.random() * sounds.length)], ground, {
+      radius: LIGHTNING_STRIKE_CONFIG.soundRadius, lifetime: 0.5,
+      pitch: 90 + Math.floor(Math.random() * 21),
+    });
+  }
+  return particle;
 }
 
 // Source builds and tears down the finale through ::Process queues that run a
@@ -14420,6 +14561,14 @@ function prepareInfiniteFinaleEntrance(runtime) {
       const visual = state.silentHillWorld.visuals.get(entity);
       if (visual) visual.runtime = source;
     }
+    // The handoff left teledest at the retiring stage's start; until bridge
+    // cleanup takes over the TP queue, send zombies to the Finale bridge head.
+    const structure = runtime.finaleStructure;
+    if (structure && !structure.bridgeCleanupStarted) {
+      const entrance = finaleStructurePosition(runtime, 1, 0, 0);
+      entrance.z += 8;
+      moveTeleportDestination(entrance, runtime.direction);
+    }
     beginLevelFade(source);
     source.sourceCleanupScheduled = true;
     const duration = Math.ceil((255 - 3) / source.fadeStep) * source.fadeInterval + 0.05;
@@ -14434,6 +14583,9 @@ function processFinaleEnding(runtime = state.endingRuntime) {
   if (["spawning", "active"].includes(runtime.lifecycle)) processFinaleSky(runtime);
   processInfiniteFinaleEvents(runtime, Instance.GetGameTime());
   processFinaleThunder(runtime, Instance.GetGameTime());
+  // The boss loop outlives the boss: escape and the final pyramid (bossMode
+  // "pyramid", bossPhase cleared) must keep restarting it.
+  if (["spawning", "active"].includes(runtime.lifecycle)) processFinaleMusic(runtime, Instance.GetGameTime());
   if (runtime.lifecycle === "spawning") {
                                                                         
                                                                            
@@ -14448,7 +14600,6 @@ function processFinaleEnding(runtime = state.endingRuntime) {
   if (runtime.lifecycle !== "active") return;
   if (runtime.bossMode === "boss" || runtime.bossPhase) {
     const now = Instance.GetGameTime();
-    processFinaleMusic(runtime, now);
     if (runtime.bossPhase === "escape" || runtime.bossPhase === "boss_defeated") {
                                                                           
                                                                               
@@ -14464,6 +14615,7 @@ function processFinaleEnding(runtime = state.endingRuntime) {
     }
     processFinaleStructure(runtime, now);
     if (runtime.bossPhase === "boss_active" || runtime.bossPhase === "boss_intro") processFinaleBossFight(runtime);
+    if (runtime.debugSkipToEscape && runtime.bossPhase === "boss_active") debugSkipFinaleBoss(runtime, now);
     return;
   }
   const now = Instance.GetGameTime();
@@ -14612,6 +14764,19 @@ function finaleBossAliveHumans() {
   return allLivingPawns().filter((pawn) => pawn.GetTeamNumber?.() === 3 && pawn.IsAlive?.());
 }
 
+// CS2 CSMoveType NOCLIP=4, OBSERVER=5. Script damage (TakeDamage/SetHealth)
+// ignores move type, so every Finale hazard must check it before hurting.
+function finalePawnNoclipping(pawn) {
+  if (pawn?.IsNoclipping?.() === true) return true;
+  const moveType = pawn?.GetMoveType?.();
+  return moveType === 4 || moveType === 5;
+}
+
+function finaleBossCanHurtPawn(pawn) {
+  return validEntity(pawn) && pawn.IsAlive?.() === true
+    && pawn.GetTeamNumber?.() === 3 && !finalePawnNoclipping(pawn);
+}
+
 function finaleMapPoolCount(runtime) {
   const explicit = Number(runtime?.finaleMapPoolCount);
   if (Number.isFinite(explicit) && explicit > 0) return Math.floor(explicit);
@@ -14660,7 +14825,6 @@ function finaleBossSpawnCount(runtime, infinite = false) {
 }
 
 function finaleBossHealth(runtime, aliveHumans, count, infinite = false) {
-  if (FINALE_BOSS_CONFIG.healthOverride != null) return FINALE_BOSS_CONFIG.healthOverride;
   const stagePool = finaleMapPoolCount(runtime);
   const stageAdd = Math.min(FINALE_BOSS_CONFIG.healthStageCap, stagePool * FINALE_BOSS_CONFIG.healthPerStage);
   const perHuman = infinite ? FINALE_BOSS_CONFIG.healthPerHumanInfinite : FINALE_BOSS_CONFIG.healthPerHuman;
@@ -14861,7 +15025,7 @@ function finaleBossPieceTouchesPawn(piece, pawn, hull = playerCollisionHull(pawn
 }
 
 function finaleBossFallTouch(runtime, pawn, now = Instance.GetGameTime()) {
-  if (!runtime || !pawn?.IsAlive?.()) return false;
+  if (!runtime || !pawn?.IsAlive?.() || finalePawnNoclipping(pawn)) return false;
   const center = finaleBossArenaCenter(runtime);
   const origin = add(center, vec(0, 0, -FINALE_BOSS_CONFIG.fallTriggerZOffset));
   const position = pawn.GetAbsOrigin?.();
@@ -14943,7 +15107,7 @@ function finaleBossIsGrenade(entity) {
 }
 
 function finaleBossTouchDamage(runtime, boss, pawn, amount, source) {
-  if (!pawn?.IsAlive?.() || pawn.GetTeamNumber?.() !== 3 || boss.dead) return false;
+  if (!finaleBossCanHurtPawn(pawn) || boss.dead) return false;
   const now = Instance.GetGameTime();
   const until = boss.touchCooldowns.get(pawn) ?? 0;
   if (until > now) return false;
@@ -15408,7 +15572,7 @@ function explodeFinaleKamikaze(runtime, reason = "impact") {
   event.explodedAt = Instance.GetGameTime();
   const origin = clone(event.position ?? event.pawn?.GetAbsOrigin?.() ?? runtime.anchor);
   const radius = FINALE_KAMIKAZE_CONFIG.explodeRadius;
-  const humans = allLivingPawns().filter((pawn) => pawn.GetTeamNumber?.() === 3 && pawn.IsAlive?.());
+  const humans = allLivingPawns().filter(finaleBossCanHurtPawn);
   let hitCount = 0;
   for (const pawn of humans) {
     const position = pawn.GetAbsOrigin?.();
@@ -15420,6 +15584,7 @@ function explodeFinaleKamikaze(runtime, reason = "impact") {
     hitCount++;
   }
   event.hitCount = hitCount;
+  message(`[KAMIKAZE] exploded reason=${reason} hits=${hitCount} flight=${(event.explodedAt - event.startedAt).toFixed(2)}s`);
   for (let index = 0; index < 5; index++) {
     playCatalogSound(FINALE_KAMIKAZE_CONFIG.soundExplosion, origin, {radius:FINALE_KAMIKAZE_CONFIG.soundExplosion === FINALE_KAMIKAZE_CONFIG.soundExplosion ? 15000 : 500000,lifetime:2,...{ pitch: 95 + Math.floor(Math.random() * 6) }});
     playCatalogSound(FINALE_KAMIKAZE_CONFIG.soundExplosionTail, origin, {radius:FINALE_KAMIKAZE_CONFIG.soundExplosion === FINALE_KAMIKAZE_CONFIG.soundExplosionTail ? 15000 : 500000,lifetime:2,...{ pitch: 95 + Math.floor(Math.random() * 6) }});
@@ -15445,9 +15610,10 @@ function explodeFinaleKamikaze(runtime, reason = "impact") {
   return true;
 }
 
-function startFinaleKamikaze(runtime, reason = "pyramid") {
+// options.pawn / options.target let ze_debug_kamikaze force a pilot and aim point.
+function startFinaleKamikaze(runtime, reason = "pyramid", options = {}) {
   if (!runtime || runtime.lifecycle !== "active" || runtime.kamikaze || runtime.bossPhase === "boss_active") return false;
-  const candidates = finaleKamikazeCandidates();
+  const candidates = options.pawn ? [options.pawn] : finaleKamikazeCandidates();
   if (candidates.length === 0) {
     runtime.kamikazeHistory ??= [];
     runtime.kamikazeHistory.push({ startedAt: Instance.GetGameTime(), skipped: true, reason: "no-zombie-candidate" });
@@ -15456,7 +15622,7 @@ function startFinaleKamikaze(runtime, reason = "pyramid") {
     return false;
   }
   const pawn = candidates[Math.floor(Math.random() * candidates.length)];
-  const target = finaleKamikazeTarget(runtime);
+  const target = options.target ? clone(options.target) : finaleKamikazeTarget(runtime);
   const radial = finaleKamikazeNormalize(vec(-target.x, -target.y, 0), mul(runtime.direction ?? vec(1, 0, 0), -1));
   const start = add(add(target, mul(radial, FINALE_KAMIKAZE_CONFIG.startDistance)), vec(0, 0, FINALE_KAMIKAZE_CONFIG.startHeight));
   start.z = Math.max(-14000, Math.min(16000, start.z));
@@ -15535,27 +15701,30 @@ function processFinaleKamikaze(runtime, now = Instance.GetGameTime()) {
   }
   const elapsed = Math.max(0, Math.min(0.1, now - (event.lastAt ?? now)));
   event.lastAt = now;
-  const origin = pawn.GetAbsOrigin?.() ?? event.position;
-  event.position = clone(origin);
+  // The script-owned flight path is authoritative. If anything else moves the
+  // pilot (deferred Teleport, map teleports, other features), following the
+  // pawn would drag the plane back to the ground and detonate it in place.
+  const origin = clone(event.position);
+  const actual = pawn.GetAbsOrigin?.();
+  if (actual && Math.hypot(actual.x - origin.x, actual.y - origin.y, actual.z - origin.z) > 512
+    && now - (event.driftLoggedAt ?? -Infinity) > 1) {
+    event.driftLoggedAt = now;
+    message(`[KAMIKAZE] pilot drifted from flight path; re-teleporting `
+      + `actual=${Math.round(actual.x)},${Math.round(actual.y)},${Math.round(actual.z)} `
+      + `flight=${Math.round(origin.x)},${Math.round(origin.y)},${Math.round(origin.z)}`);
+  }
   const humans = allLivingPawns().filter((candidate) => candidate.GetTeamNumber?.() === 3 && candidate.IsAlive?.());
-  let targetHuman;
-  let targetDistance = Infinity;
   for (const human of humans) {
-    const position = human.GetAbsOrigin?.();
-    if (!position) continue;
-    const distance = Math.hypot(position.x - origin.x, position.y - origin.y, position.z - origin.z);
-    if (distance < targetDistance) {
-      targetDistance = distance;
-      targetHuman = position;
-    }
     if (projectileTouchesPlayerHull(human, origin, add(origin, mul(event.direction, FINALE_KAMIKAZE_CONFIG.explodeTraceDistance)), 24)) {
       explodeFinaleKamikaze(runtime, "human-contact");
       return;
     }
   }
-  if (targetHuman) {
-    const desired = finaleKamikazeNormalize(sub(targetHuman, origin), event.direction);
-    event.direction = finaleKamikazeNormalize(add(event.direction, mul(desired, 0.07 * FINALE_KAMIKAZE_CONFIG.turnSpeed)), event.direction);
+  // Source steers by the pilot's own eye direction: dir += eye * 0.07 per 0.05s tick.
+  const eye = viewAngles(pawn);
+  if (eye) {
+    const weight = 0.07 * FINALE_KAMIKAZE_CONFIG.turnSpeed * (elapsed / FINALE_KAMIKAZE_CONFIG.tickRate);
+    event.direction = finaleKamikazeNormalize(add(event.direction, mul(forwardFromAngles(eye), weight)), event.direction);
   }
   const next = add(origin, mul(event.direction, FINALE_KAMIKAZE_CONFIG.flySpeed * elapsed));
   if (next.z <= event.bottomLimit) {
@@ -15563,7 +15732,8 @@ function processFinaleKamikaze(runtime, now = Instance.GetGameTime()) {
     return;
   }
   const trace = typeof Instance.TraceLine === "function"
-    ? Instance.TraceLine({ start: origin, end: next, ignoreEntity: pawn, ignorePlayers: true })
+    ? Instance.TraceLine({ start: origin, end: next,
+      ignoreEntity: [pawn, event.visual, event.damageHitbox].filter(validEntity), ignorePlayers: true })
     : undefined;
   if (trace?.didHit || trace?.hit) {
     explodeFinaleKamikaze(runtime, "world-contact");
@@ -15571,7 +15741,8 @@ function processFinaleKamikaze(runtime, now = Instance.GetGameTime()) {
   }
   event.position = next;
   const angles = anglesFromDirection(event.direction);
-  pawn.Teleport?.({ position: next, angles, velocity: mul(event.direction, FINALE_KAMIKAZE_CONFIG.flySpeed) });
+  // No angles here: overriding them every tick locks the pilot's view, and the view is the steering input.
+  pawn.Teleport?.({ position: next, velocity: mul(event.direction, FINALE_KAMIKAZE_CONFIG.flySpeed) });
   if (validEntity(event.visual)) event.visual.Teleport?.({ position: next, angles, velocity: vec() });
   if (validEntity(event.damageHitbox)) {
     event.damageHitbox.Teleport?.({ position: next, angles, velocity: vec() });
@@ -16928,7 +17099,7 @@ function finaleBossSyncChain(boss) {
 }
 
 function finaleBossDamagePieceTouch(runtime, pawn, damage, now) {
-  if (!validEntity(pawn) || !pawn.IsAlive?.() || pawn.GetTeamNumber?.() !== 3) return false;
+  if (!finaleBossCanHurtPawn(pawn)) return false;
                                                                          
                                                                             
   runtime.bossPieceTouchCooldowns ??= new Map();
@@ -17325,6 +17496,7 @@ function finaleBossSightAttack(runtime, boss, now) {
     : finaleBossChooseTarget(boss);
   if (!target?.pawn) return;
   const pawn = target.pawn;
+  if (!finaleBossCanHurtPawn(pawn)) return;
   const targetOrigin = pawn.GetAbsOrigin?.();
   const targetPosition = pawn.EyePosition?.()
     ?? pawn.GetEyePosition?.()
@@ -17370,6 +17542,7 @@ function finaleBossFlingAttack(runtime, boss, now) {
   if (!boss.flingAppliedAt) {
     boss.flingAppliedAt = now;
     for (const pawn of finaleBossAliveHumans()) {
+      if (finalePawnNoclipping(pawn)) continue;
       const position = pawn.GetAbsOrigin?.();
       if (!position || Math.hypot(position.x - boss.position.x, position.y - boss.position.y, position.z - boss.position.z) > FINALE_BOSS_CONFIG.attackFlingDistance) continue;
       const eyePosition = pawn.EyePosition?.()
@@ -20046,6 +20219,7 @@ function resetRoundState({ preserveCampaignOutcome = false } = {}) {
   state.debugNextEnding = undefined;
   roundCleanupStep("clearThemeTerrainWarmup", () => clearThemeTerrainWarmup());
   roundCleanupStep("stopDebugThunder", () => stopDebugThunder());
+  roundCleanupStep("stopDebugKamikaze", () => stopDebugKamikaze());
   roundCleanupStep("flushDeferredEntityKills", () => flushDeferredEntityKills());
   roundCleanupStep("terrain preload", () => clearTerrainPreload(true));
   state.itemParticleFxWindows?.clear();
@@ -20624,9 +20798,16 @@ function entryExitElevations(rows, markers) {
     surfaceHeight(rows[y + dy]?.[x + dx])
     ?? sourceNeighborElevationPass(rows, x, y, true)
     ?? sourceDirectionalSurface(rows, x, y, dx, dy)?.elevation
-    ?? sourceNeighborElevationPass(rows, x, y, false)
-    ?? CONFIG.defaultElevation;
-  const entrance = markers.entrance[0];
+    ?? sourceNeighborElevationPass(rows, x, y, false);
+  // Source keeps start/end_elevation null and retries on the next marker
+  // until one has a surface; only then fall back to the default.
+  const firstElevation = (points, dx, dy) => {
+    for (const point of points) {
+      const elevation = markerElevation(point, dx, dy);
+      if (elevation !== undefined) return elevation;
+    }
+    return CONFIG.defaultElevation;
+  };
   const exit = markers.exit[0];
   const exitInward = exit.x === CONFIG.mapSize - 1
     ? { dx: -1, dy: 0 }
@@ -20634,8 +20815,8 @@ function entryExitElevations(rows, markers) {
       ? { dx: 0, dy: 1 }
       : { dx: 0, dy: -1 };
   return {
-    entry: markerElevation(entrance, 1, 0),
-    exit: markerElevation(exit, exitInward.dx, exitInward.dy),
+    entry: firstElevation(markers.entrance, 1, 0),
+    exit: firstElevation(markers.exit, exitInward.dx, exitInward.dy),
   };
 }
 
@@ -31498,6 +31679,8 @@ function deployHealOrb(runtime, holder, item, now) {
   visual.SetColor?.({ r: 255, g: 255, b: 255, a: 100 });
   visual.Glow?.({ r: 100, g: 200, b: 255, a: 255 });
   const growDuration = (2.3 - 0.5) / 4;
+  // Engine-side backstop in case the item tick stops before removeAt.
+  scheduleDeployableKill([visual], growDuration + definition.healDuration + 1.3);
   runtime.itemDeployables.add({
     id: state.nextItemEffectId++,
     kind: "heal_orb",
@@ -31558,6 +31741,15 @@ function refillHealOrbAmmo(pawn, orb) {
   if (hasGrenade || orb.grenadeRecipients.has(pawn)) return;
   pawn.GiveNamedItem?.("weapon_hegrenade", false);
   orb.grenadeRecipients.add(pawn);
+}
+
+function retireHealOrbs(runtime) {
+  for (const deployable of [...runtime?.itemDeployables ?? []]) {
+    if (deployable.kind !== "heal_orb") continue;
+    cleanupDeployable(runtime, deployable);
+    const item = deployable.item;
+    if (item && item.state !== "consumed" && item.state !== "cleaned") consumeItem(runtime, item);
+  }
 }
 
 function processHealOrb(runtime, orb, now, humans) {
@@ -33325,7 +33517,8 @@ function processCaptainPlanet(runtime, deployable, now, pawns) {
     spawnCaptainPlanetHitParticles(runtime, deployable, () => boss.position, attackDirection, true);
     return;
   }
-  const zombies = pawns.filter(validZombieTarget);
+  // The punch has no human attacker, so modifyPlayerDamage cannot apply spawn invincibility.
+  const zombies = pawns.filter(pawn => validZombieTarget(pawn) && !zombieStartAreaProtected(pawn));
   if (zombies.length === 0) return;
   const pawn = zombies[Math.floor(Math.random() * zombies.length)];
   const position = pawn.GetAbsOrigin?.() ?? deployable.position;
@@ -33340,7 +33533,7 @@ function processCaptainPlanet(runtime, deployable, now, pawns) {
     () => (validEntity(pawn) ? pawn.GetAbsOrigin?.() : undefined), mul(approach, -1));
   pawn.Teleport({ velocity: vec(0, 0, 500) });
   schedule(0.5, () => {
-    if (validZombieTarget(pawn)) pawn.Teleport({ velocity: vec(0, 0, -700) });
+    if (validZombieTarget(pawn) && !zombieStartAreaProtected(pawn)) pawn.Teleport({ velocity: vec(0, 0, -700) });
   }, runtime.index);
 }
 
@@ -34928,7 +35121,9 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
     event.kamikazeRuntime = event.entityRuntime;
     const delay = Math.random() * FINALE_KAMIKAZE_CONFIG.dispatchDelayMax;
     genericEventTask(event, delay, () => {
-      if (!startFinaleKamikaze(event.kamikazeRuntime, "generic_event")) endGenericEvent(event);
+      if (startFinaleKamikaze(event.kamikazeRuntime, "generic_event")) return;
+      message(`[KAMIKAZE] launch skipped: ${event.kamikazeRuntime.kamikazeNote ?? "runtime not ready"}`);
+      endGenericEvent(event);
     });
     event.endsAt = now + delay + FINALE_KAMIKAZE_CONFIG.explodeTime + 1;
     announce("EVENT: incoming kamikaze");
@@ -35413,15 +35608,66 @@ function touchMazeJumpscare(runtime, data) {
   return true;
 }
 
+// Source spawned every My Thighs spider on one point; CS2 collision jams them.
+// Give each its own floor tile in the room around that point: flood-fill the
+// exit-height floor connected to the nearest tile, take the closest tiles, and
+// jitter inside each tile so the swarm looks scattered rather than gridded.
+function stageSpiderSpawnPoints(runtime, center, count) {
+  const rows = runtime.previewRows;
+  const markers = markerData(rows);
+  const elevations = entryExitElevations(rows, markers);
+  const world = (x, y) => {
+    const point = gridWorld(runtime.entry, runtime.incoming, markers.entryCenter, x, y,
+      elevations.exit, elevations.entry);
+    return vec(point.x, point.y, runtime.end.z);
+  };
+  const isFloor = (x, y) => {
+    const tile = rows[y]?.[x];
+    // floor or floorceiling (the event point sits in My Thighs' floorceiling pool)
+    return ((tile >= 5 && tile <= 24) || (tile >= 45 && tile <= 64))
+      && surfaceHeight(tile) === elevations.exit;
+  };
+  const distance = (p) => Math.hypot(p.x - center.x, p.y - center.y);
+  let start;
+  for (let y = 0; y < CONFIG.mapSize; y++) for (let x = 0; x < CONFIG.mapSize; x++) {
+    if (isFloor(x, y) && (!start || distance(world(x, y)) < distance(world(start.x, start.y)))) start = { x, y };
+  }
+  const tiles = [];
+  if (start) {
+    const seen = new Set([`${start.x},${start.y}`]);
+    for (let queue = [start]; queue.length;) {
+      const { x, y } = queue.shift();
+      tiles.push(world(x, y));
+      for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]]) {
+        const key = `${x + dx},${y + dy}`;
+        if (seen.has(key) || !isFloor(x + dx, y + dy)) continue;
+        seen.add(key);
+        queue.push({ x: x + dx, y: y + dy });
+      }
+    }
+  }
+  tiles.sort((a, b) => distance(a) - distance(b));
+  // +-16u jitter keeps neighbours >= 64u apart on 96u tiles.
+  const jitter = () => Math.round((Math.random() * 2 - 1) * 16);
+  const points = tiles.slice(0, count).map(p => add(p, vec(jitter(), jitter(), 0)));
+  // Too little floor: pair up the nearest tiles at +-24u across the exit axis.
+  const side = leftOf(runtime.outgoing);
+  for (let i = 0; points.length < count; i++) {
+    const base = tiles[Math.floor(i / 2) % Math.max(1, tiles.length)] ?? center;
+    points.push(add(base, mul(side, i % 2 ? 24 : -24)));
+  }
+  return points;
+}
+
 function startHardCodedStageEvent(runtime) {
   if (runtime.hardCodedStageEventStarted || runtime.raceLevel) return;
   if (runtime.id === "#1660527778") {
     featureTemplate("trap_thigh_spider");
     featureTemplate("trapSpiderDamage");
-    const position = add(sub(runtime.end, mul(runtime.outgoing, 530)), mul(runtime.incoming, 40));
-    for (let i = 0; i < 10; i++) state.trapSpawnQueue.push({
+    const center = add(sub(runtime.end, mul(runtime.outgoing, 530)), mul(runtime.incoming, 40));
+    for (const position of stageSpiderSpawnPoints(runtime, center, 10)) state.trapSpawnQueue.push({
       levelIndex: runtime.index, kind: "feature", feature: "trap", tile: 88,
-      trapName: "thigh_spider", stageEvent: true, position: clone(position),
+      trapName: "thigh_spider", stageEvent: true, position,
       themeName: runtime.stageSnapshot?.theme,
     });
     const lines = [[5, "Oh my god these thighs"], [6, "I wish to dive deep into them"],
@@ -37013,6 +37259,7 @@ function thinkBody() {
   guardStep("processTasks", () => processTasks(now));
   guardStep("processThemePreloadCleanup", () => processThemePreloadCleanup());
   guardStep("processDebugThunder", () => processDebugThunder(now));
+  guardStep("processDebugKamikaze", () => processDebugKamikaze(now));
   guardStep("processThemeModelSky", () => processThemeModelSky(now));
   if (state.running && !state.fatal) {
     guardStep("processThemePreload", () => processThemePreload(now));
@@ -37219,6 +37466,7 @@ Instance.OnScriptReload({
   before: () => {
     clearThemeTerrainWarmup();
     stopDebugThunder();
+    stopDebugKamikaze();
     clearSpawnSafetyTriggers();
     clearSourceAudio();
     const memory = {
@@ -37346,7 +37594,14 @@ Instance.OnRoundEnd((event = {}) => {
       && ending.debugForced !== true
       && ["active", "defending", "collapsing"].includes(ending.lifecycle)
       && !state.campaign.endingResolved;
-    if (unresolvedOrdinaryEnding && winningTeam === 3) resolveStageEnding(true);
+    // The spawn killer's last zombie kill can end the round before the next
+    // think reaches processFinaleEnding's finalRising win check.
+    const unresolvedFinaleRise = ending?.kind === "FINALE"
+      && ending.lifecycle === "active"
+      && ending.finalRising === true
+      && ending.massKillTriggeredAt === undefined
+      && !state.campaign.endingResolved;
+    if ((unresolvedOrdinaryEnding || unresolvedFinaleRise) && winningTeam === 3) resolveStageEnding(true);
     else if (unresolvedOrdinaryEnding && winningTeam === 2) resolveStageEnding(false);
     if (!state.campaign.endingResolved)
       retainCampaignStage(ending?.debugForced ? "debug_race_round_end" : "round_end");
@@ -37979,6 +38234,15 @@ function validateDebugFinaleEntities(mode = "boss") {
   return false;
 }
 
+// ze_debug_finale escape: the boss dies through the normal defeat path as soon as it
+// opens, so the real escape route builds; the infinite stinger/screen FX start at once.
+function debugSkipFinaleBoss(runtime, now = Instance.GetGameTime()) {
+  runtime.debugSkipToEscape = false;
+  if (runtime.infinite && !runtime.finaleInfiniteMusicStaticPlayed) startFinaleMusicLoop(runtime, now);
+  for (const boss of [...(runtime.bosses ?? [])]) defeatFinaleBoss(runtime, boss);
+  message("[FINALE DEBUG] boss skipped; escape route opens after the normal death delay");
+}
+
 function prepareDebugDirectBoss(runtime) {
   if (!runtime || runtime.kind !== "FINALE" || runtime.bossMode !== "boss") return false;
   // startFinaleEnding normally queues the bridge and tower first.  A direct
@@ -38096,6 +38360,119 @@ function debugThunderCommand(args) {
   return !!state.debugThunder;
 }
 
+// ze_debug_strike [aim|me|sky] [count 1..10]: strike where the first living player aims, or at their
+// feet; sky = the 3x finale variant at the aim point.
+function debugStrikeCommand(args) {
+  const parts = String(args ?? "").trim().toLowerCase().split(/\s+/).filter(Boolean);
+  const mode = parts[0] ?? "aim";
+  const count = parts[1] === undefined ? 1 : Number(parts[1]);
+  if (!["aim", "me", "sky"].includes(mode) || !Number.isInteger(count) || count < 1 || count > 10) {
+    message("usage: ze_debug_strike [aim|me|sky] [count 1..10]"); return false;
+  }
+  const templateKey = mode === "sky" ? "lightningStrikeSky" : "lightningStrike";
+  if (!state.featureTemplates.has(templateKey)) {
+    message(`[STRIKE DEBUG] ${FEATURE_TEMPLATE_NAMES[templateKey]} missing; rebuild the map`); return false;
+  }
+  const pawn = allLivingPawns()[0];
+  if (!pawn) { message("[STRIKE DEBUG] requires a living player"); return false; }
+  let target = pawn.GetAbsOrigin();
+  if (mode !== "me") {
+    const eye = pawn.GetEyePosition?.() ?? add(target, vec(0, 0, 64));
+    const trace = Instance.TraceLine({ start: eye,
+      end: add(eye, mul(forwardFromAngles(viewAngles(pawn) ?? { pitch: 0, yaw: 0, roll: 0 }), 8192)),
+      ignoreEntity: pawn, ignorePlayers: true });
+    target = trace?.position ?? trace?.end ?? target;
+  }
+  for (let i = 0; i < count; i++) {
+    // Extra strikes scatter within 256u and are staggered so each one reads separately.
+    const spread = i === 0 ? vec() : vec((Math.random() - 0.5) * 512, (Math.random() - 0.5) * 512, 0);
+    schedule(i * 0.15, () => strikeLightning(add(target, spread), { template: templateKey }));
+  }
+  message(`[STRIKE DEBUG] ${count} strike(s) at ${Math.round(target.x)} ${Math.round(target.y)} ${Math.round(target.z)}`);
+  return true;
+}
+
+// ze_debug_kamikaze [launch|me|status|off]: launch one KAMIKAZE plane now, skipping the
+// generic-event gates (mother zombie, spawn platform, moving candidate). launch picks any
+// living zombie (bots count); me pilots the first living zombie player. The plane aims at
+// the first living human, then homes like the real event.
+function stopDebugKamikaze() {
+  const debug = state.debugKamikaze;
+  if (!debug) return false;
+  cancelFinaleKamikaze(debug.runtime);
+  debug.runtime.lifecycle = "destroyed";
+  for (const task of debug.runtime.tasks) task.cancelled = true;
+  debug.runtime.tasks.clear();
+  for (const id of debug.runtime.outputConnections) {
+    disconnectEntityOutput(id);
+    state.outputConnections.delete(id);
+  }
+  debug.runtime.outputConnections.clear();
+  destroyEntities([...debug.runtime.entities]);
+  debug.runtime.entities.clear();
+  state.debugKamikaze = undefined;
+  return true;
+}
+
+function processDebugKamikaze(now = Instance.GetGameTime()) {
+  const debug = state.debugKamikaze;
+  if (!debug) return false;
+  if (debug.runtime.kamikaze) { processFinaleKamikaze(debug.runtime, now); return true; }
+  // Flight finished (exploded or cancelled): drop the debug runtime and report.
+  const last = debug.runtime.kamikazeHistory.at(-1);
+  message(`[KAMIKAZE DEBUG] done reason=${last?.reason ?? "unknown"} hits=${last?.hitCount ?? 0}`
+    + ` visual=${last?.visual ?? false} hitbox=${last?.damageHitbox ?? false}`);
+  stopDebugKamikaze();
+  return false;
+}
+
+function debugKamikazeCommand(args) {
+  const mode = String(args?.value ?? args ?? "").trim().toLowerCase() || "launch";
+  if (mode === "status") {
+    const flight = state.debugKamikaze?.runtime.kamikaze;
+    if (!flight) { message("[KAMIKAZE DEBUG] idle"); return true; }
+    const p = flight.position;
+    message(`[KAMIKAZE DEBUG] flying ${(Instance.GetGameTime() - flight.startedAt).toFixed(2)}s`
+      + ` pos=${Math.round(p.x)},${Math.round(p.y)},${Math.round(p.z)}`
+      + ` visual=${validEntity(flight.visual)} hitbox=${validEntity(flight.damageHitbox)}`
+      + ` hp=${flight.damageHitbox?.GetHealth?.() ?? "none"}`);
+    return true;
+  }
+  if (mode === "off") {
+    message(stopDebugKamikaze() ? "[KAMIKAZE DEBUG] cancelled; pilot restored" : "[KAMIKAZE DEBUG] idle");
+    return true;
+  }
+  if (!["launch", "me"].includes(mode)) { message("usage: ze_debug_kamikaze [launch|me|status|off]"); return false; }
+  if (state.debugKamikaze) { message("[KAMIKAZE DEBUG] already flying; use ze_debug_kamikaze off first"); return false; }
+  const living = allLivingPawns();
+  let pilot;
+  if (mode === "me") {
+    pilot = living[0];
+    if (pilot?.GetTeamNumber?.() !== 2) {
+      message("[KAMIKAZE DEBUG] me requires the first living player to be a zombie (T)"); return false;
+    }
+  } else {
+    const zombies = living.filter((pawn) => pawn.GetTeamNumber?.() === 2 && !kamikazePilots.get(pawn)?.active);
+    pilot = zombies[Math.floor(Math.random() * zombies.length)];
+    if (!pilot) { message("[KAMIKAZE DEBUG] requires a living zombie; try bot_add_t"); return false; }
+  }
+  const human = living.find((pawn) => pawn.GetTeamNumber?.() === 3);
+  const target = human?.GetAbsOrigin?.() ?? state.currentLevel?.anchor ?? pilot.GetAbsOrigin();
+  const runtime = { index: "debug_kamikaze", sequence: "debug_kamikaze", owner: "debug_kamikaze",
+    lifecycle: "active", tasks: new Set(), entities: new Set(), outputConnections: new Set(),
+    rubblePieces: [], anchor: clone(target), direction: vec(1, 0, 0), kamikazeHistory: [] };
+  state.debugKamikaze = { runtime };
+  if (!startFinaleKamikaze(runtime, "debug", { pawn: pilot, target })) {
+    message(`[KAMIKAZE DEBUG] launch failed: ${runtime.kamikazeNote ?? "unknown"}`);
+    stopDebugKamikaze();
+    return false;
+  }
+  message(`[KAMIKAZE DEBUG] launched pilot=${pilot.GetPlayerController?.()?.GetPlayerName?.() ?? "zombie"}`
+    + ` target=${Math.round(target.x)},${Math.round(target.y)},${Math.round(target.z)}`
+    + ` visual=${validEntity(runtime.kamikaze?.visual)}${runtime.kamikazeNote ? ` note=${runtime.kamikazeNote}` : ""}`);
+  return true;
+}
+
 function debugFinaleCommand(args) {
   const command = String(args?.value ?? args ?? "").trim().toLowerCase();
   const tokens = command.split(/\s+/).filter(Boolean);
@@ -38171,10 +38548,13 @@ function debugFinaleCommand(args) {
     message("debug FINALE is inactive");
     return false;
   }
-  const directBoss = ["direct", "boss_direct", "bossdirect"].includes(command);
-  const infinite = command === "infinite";
-  if (command && !["restart", "start", "boss", "pyramid", "direct", "boss_direct", "bossdirect", "infinite"].includes(command)) {
-    message("usage: ze_debug_finale [start|restart|status|pyramid|boss_direct|infinite] or attack [sight|spin|tailsnap|tailshoot|fling|stun]");
+  const skipToEscape = ["escape", "infinite_escape"].includes(command);
+  const directBoss = ["direct", "boss_direct", "bossdirect"].includes(command) || skipToEscape;
+  const infinite = command === "infinite" || command === "infinite_escape";
+  if (command && !["restart", "start", "boss", "pyramid", "direct", "boss_direct", "bossdirect", "infinite",
+    "escape", "infinite_escape"].includes(command)) {
+    message("usage: ze_debug_finale [start|restart|status|pyramid|boss_direct|infinite|escape|infinite_escape]"
+      + " or attack [sight|spin|tailsnap|tailshoot|fling|stun]");
     return false;
   }
   const mode = command === "pyramid" ? "pyramid" : "boss";
@@ -38238,9 +38618,12 @@ function debugFinaleCommand(args) {
     runtime.debugCommand = command || "start";
     runtime.debugUsesFormalTimeline = true;
     runtime.debugMode = mode;
+    runtime.debugSkipToEscape = skipToEscape;
     announce(mode === "pyramid"
       ? "DEBUG: entering Finale pyramid tail"
-      : directBoss
+      : skipToEscape
+        ? `DEBUG: entering ${infinite ? "infinite " : ""}Finale escape route (boss auto-skipped)`
+        : directBoss
         ? "DEBUG: entering direct Finale Boss arena"
         : "DEBUG: entering full Finale Boss ending");
     return true;
@@ -39236,6 +39619,8 @@ const DEBUG_COMMAND_HANDLERS = Object.freeze({
   debugKartsCommand,
   debugFinaleCommand,
   debugThunderCommand,
+  debugStrikeCommand,
+  debugKamikazeCommand,
   debugDebrisCommand,
   debugTeleportCommand,
   debugTeleportMapCommand,
