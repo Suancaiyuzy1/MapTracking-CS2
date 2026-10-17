@@ -2635,7 +2635,7 @@
         "target": "[PR#]door_7",
         "input": "Break",
         "param": "",
-        "delay": 38,
+        "delay": 40,
         "limit": 1
       },
       {
@@ -2667,7 +2667,7 @@
         "target": "[PR#]zt2",
         "input": "Enable",
         "param": "",
-        "delay": 35,
+        "delay": 38,
         "limit": 1
       },
       {
@@ -5858,7 +5858,7 @@
         "target": "[PR#]zt5",
         "input": "Enable",
         "param": "",
-        "delay": 1,
+        "delay": 3,
         "limit": 1
       },
       {
@@ -8394,7 +8394,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]cmd",
         "input": "Command",
-        "param": "say 40s\u540E\u6ED1\u7FD4\u7ED3\u675F",
+        "param": "say 20s\u540E\u6ED1\u7FD4\u7ED3\u675F",
         "delay": 0,
         "limit": 1
       },
@@ -8403,7 +8403,7 @@
         "target": "[PR#]door_25",
         "input": "Open",
         "param": "",
-        "delay": 10,
+        "delay": 20,
         "limit": 1
       },
       {
@@ -8411,23 +8411,7 @@
         "target": "[PR#]ht5",
         "input": "Enable",
         "param": "",
-        "delay": 10,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]zt6",
-        "input": "Enable",
-        "param": "",
-        "delay": 40,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]cmd",
-        "input": "Command",
-        "param": "sv_airaccelerate 20",
-        "delay": 40,
+        "delay": 20,
         "limit": 1
       }
     ]
@@ -11012,14 +10996,6 @@
       },
       {
         "output": "OnPressed",
-        "target": "[PR#]ht6",
-        "input": "Disable",
-        "param": "",
-        "delay": 55,
-        "limit": 1
-      },
-      {
-        "output": "OnPressed",
         "target": "[PR#]end1at1",
         "input": "Enable",
         "param": "",
@@ -11136,7 +11112,23 @@
         "input": "RunScriptInput",
         "param": "Play",
         "delay": 0,
-        "limit": -1
+        "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]zt6",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]tiaodaotrigger",
+        "input": "Enable",
+        "param": "",
+        "delay": 70,
+        "limit": 1
       }
     ]
   },
@@ -11635,6 +11627,22 @@
         "input": "Command",
         "param": "sv_airaccelerate 90",
         "delay": 280,
+        "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]zt6",
+        "input": "Enable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]cmd",
+        "input": "Command",
+        "param": "sv_airaccelerate 20",
+        "delay": 0,
         "limit": 1
       }
     ]
@@ -13693,13 +13701,13 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "",
+    "targetname": "[PR#]tiaodaotrigger",
     "classname": "trigger_multiple",
     "origin": "-11022.570312 3422.000000 11099.531250",
     "angles": "0.000000 90.000008 -179.999969",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2029",
-    "model": "maps/ze_surf_nannoimi/entities/unnamed_2029.vmdl",
+    "model": "maps/ze_surf_nannoimi/entities/tiaodaotrigger_2029.vmdl",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -14519,7 +14527,7 @@
   },
   {
     "InitialDelay": "0.500000",
-    "RefireTime": "1.200000",
+    "RefireTime": "1.000000",
     "UpperRandomBound": "0.000000",
     "LowerRandomBound": "0.000000",
     "PauseAfterFiring": "0",
@@ -14548,7 +14556,7 @@
     "filtername": "",
     "spawnflags": "4097",
     "globalname": "",
-    "StartDisabled": "0",
+    "StartDisabled": "1",
     "local.scales": "1.000000 1.000000 1.000000",
     "local.angles": "0.000000 0.000000 0.000000",
     "local.origin": "0.000000 0.000000 0.000000",
@@ -18487,7 +18495,7 @@
   },
   {
     "triggeronstarttouch": "0",
-    "speed": "300",
+    "speed": "500",
     "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "",
     "spawnflags": "4097",
@@ -22024,8 +22032,8 @@
     "targetname": "[PR#]jinlu3",
     "vscripts": "",
     "classname": "func_movelinear",
-    "origin": "2656.999512 13833.908203 9035.000000",
-    "angles": "0.000000 0.000000 10.000002",
+    "origin": "2657.000000 13833.908203 9035.000000",
+    "angles": "-89.999985 10.000002 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2684",
     "model": "maps/ze_surf_nannoimi/entities/jinlu3_2684.vmdl"
@@ -22156,5 +22164,68 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2759"
+  },
+  {
+    "triggeronstarttouch": "0",
+    "speed": "500",
+    "pushdir": "0.000000 0.000000 0.000000",
+    "filtername": "[PR#]zombie",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "1.000000 1.000000 1.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "",
+    "classname": "trigger_push",
+    "origin": "1122.000000 12988.000000 9875.000000",
+    "angles": "0.000000 90.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "2770",
+    "model": "maps/ze_surf_nannoimi/entities/unnamed_2770.vmdl"
+  },
+  {
+    "AllowMovableNavMeshDockingOnEntireEntity": "0",
+    "CreateMovableNavMesh": "0",
+    "CreateNavObstacle": "0",
+    "stopsound": "",
+    "startsound": "",
+    "blockdamage": "0.000000",
+    "movedistance": "100.000000",
+    "speed": "100",
+    "MoveWithoutPushingBlockers": "0",
+    "NoInterpolate": "0",
+    "authoredposition": "0",
+    "startposition": "0.000000",
+    "movedir": "0.000000 0.000000 0.000000",
+    "lightmapstatic": "0",
+    "rendertocubemaps": "0",
+    "object_culling": "0",
+    "fademaxdist": "0.000000",
+    "fademindist": "-1.000000",
+    "disablereceiveshadows": "0",
+    "rendercolor": "255 255 255",
+    "renderamt": "255",
+    "rendermode": "kRenderNormal",
+    "renderfx": "kRenderFxNone",
+    "spawnflags": "0",
+    "local.scales": "1.000000 1.000000 1.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]door_33",
+    "targetname": "",
+    "vscripts": "",
+    "classname": "func_movelinear",
+    "origin": "-10972.000000 6377.500000 10292.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "2780",
+    "model": "maps/ze_surf_nannoimi/entities/unnamed_2780.vmdl"
   }
 ]

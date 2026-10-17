@@ -150,7 +150,7 @@
         "target": "[PR#]fire_button\u00260000",
         "input": "Unlock",
         "param": "",
-        "delay": 10,
+        "delay": 15,
         "limit": -1
       },
       {
