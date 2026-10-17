@@ -19031,10 +19031,10 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "[PR#]cam_on_trigger",
+        "target": "[PR#]cam_trigger",
         "input": "Disable",
         "param": "",
-        "delay": 0,
+        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]
@@ -29037,7 +29037,7 @@
   },
   {
     "wait": "1.000000",
-    "filtername": "[PR#]cam_user_context",
+    "filtername": "",
     "spawnflags": "4097",
     "globalname": "",
     "StartDisabled": "1",
@@ -29048,13 +29048,13 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]cam_on_trigger",
+    "targetname": "[PR#]cam_trigger",
     "classname": "trigger_multiple",
     "origin": "-43.000000 -1430.000000 -4733.897461",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1168",
-    "model": "maps/ze_x_game_room/entities/cam_on_trigger_1168.vmdl",
+    "model": "maps/ze_x_game_room/entities/cam_trigger_1168.vmdl",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -29079,14 +29079,6 @@
         "param": "StartCam1",
         "delay": 0,
         "limit": 1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "!activator",
-        "input": "removecontext",
-        "param": "iscamuser",
-        "delay": 0,
-        "limit": -1
       }
     ]
   },
@@ -29381,56 +29373,6 @@
         "limit": -1
       }
     ]
-  },
-  {
-    "filtername": "",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]cam_trigger",
-    "classname": "trigger_once",
-    "origin": "-43.000000 -1430.000000 -4887.625000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1184",
-    "model": "maps/ze_x_game_room/entities/cam_trigger_1184.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "addcontext",
-        "param": "iscamuser:1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]cam_on_trigger",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "ResponseContext": "iscamuser",
-    "Negated": "0",
-    "clientSideEntity": "0",
-    "targetname": "[PR#]cam_user_context",
-    "vscripts": "",
-    "classname": "filter_activator_context",
-    "origin": "1282.625000 -617.250000 -3143.897461",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1186"
   },
   {
     "filterattribute": "76561199572045634",
