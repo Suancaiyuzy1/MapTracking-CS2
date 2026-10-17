@@ -7,6 +7,7 @@
     "min": "0",
     "startvalue": "2000",
     "StartDisabled": "0",
+    "vscripts": "",
     "targetname": "[PR#]boss2_health_counter3",
     "classname": "math_counter",
     "origin": "46.406738 -20.183105 -6.000000",

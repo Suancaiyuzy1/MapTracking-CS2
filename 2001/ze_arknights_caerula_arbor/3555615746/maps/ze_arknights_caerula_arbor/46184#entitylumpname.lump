@@ -7,6 +7,7 @@
     "min": "0",
     "startvalue": "2000",
     "StartDisabled": "0",
+    "vscripts": "",
     "targetname": "[PR#]boss2_dragon_health_counter2",
     "classname": "math_counter",
     "origin": "46.406738 33.958496 -6.000000",
