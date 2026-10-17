@@ -6,9 +6,6 @@
         <include src="s2r://panorama/styles/custom_game/collective_pledge.vcss" />
     </styles>
     <Panel class="PledgeRoot" hittest="false">
-        <Panel id="collective_troll_message" class="TrollMessage" hittest="false">
-            <Label id="troll_message_text" class="TrollMessageText" text="{s:troll_message}" html="false" hittest="false" />
-        </Panel>
         <Panel id="collective_invincibility_prompt" class="InvincibilityPrompt" hittest="false">
             <Label class="InvincibilityText" text="[INVINCIBLE]" hittest="false" />
             <Label class="InvincibilityText" text="You are within the start area" hittest="false" />

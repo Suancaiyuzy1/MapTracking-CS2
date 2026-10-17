@@ -22,6 +22,16 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2015",
     "model": "maps/ze_collective/entities/race_proto_rubble_touch_5_2015.vmdl",
-    "_template_lump_ent_index": "0"
+    "_template_lump_ent_index": "0",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]manager",
+        "input": "RunScriptInput",
+        "param": "RubbleStartTouch",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
