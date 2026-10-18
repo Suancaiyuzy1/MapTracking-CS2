@@ -1585,7 +1585,7 @@ class HpLimiterSystem extends BaseSystem {
             if (p.pawn.GetTeamNumber() === 2) {
                 const name = p.pawn.GetEntityName();
                 // 排除僵尸神器
-                if (name && name.startsWith("zombie_")) continue;
+                if (name && name.startsWith("Zombie_")) continue;
                 if (p.pawn.GetHealth() > this.limit) {
                     p.pawn.SetMaxHealth(this.limit);
                     p.pawn.SetHealth(this.limit);

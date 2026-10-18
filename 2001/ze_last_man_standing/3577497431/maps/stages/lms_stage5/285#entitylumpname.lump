@@ -1185,6 +1185,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnFullyOpen",
+        "target": "[PR#]stage_5_auto_blue",
+        "input": "Trigger",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -1253,6 +1261,14 @@
         "param": "close",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]stage_5_auto_blue",
+        "input": "CancelPending",
+        "param": "",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -1302,6 +1318,14 @@
         "output": "OnPressed",
         "target": "[PR#]stage_5_core_column_end_button_red",
         "input": "TestActivator",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPressed",
+        "target": "[PR#]stage_5_auto_blue",
+        "input": "CancelPending",
         "param": "",
         "delay": 0,
         "limit": -1
