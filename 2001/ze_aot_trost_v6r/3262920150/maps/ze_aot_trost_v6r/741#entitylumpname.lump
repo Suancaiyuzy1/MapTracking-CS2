@@ -367,7 +367,7 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "speed 1",
-        "delay": 6,
+        "delay": 4,
         "limit": -1
       },
       {
