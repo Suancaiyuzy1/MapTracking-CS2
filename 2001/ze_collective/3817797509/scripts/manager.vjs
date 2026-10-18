@@ -233,6 +233,9 @@ const CONFIG = Object.freeze({
   zombieItemMotherPriorityTime: 7,
   itemUsePingRadius: 256,
   itemMaximum: 30,
+  // Tester 10-18: unclaimed world items sat ~30u too low. Lifts only the
+  // visual anchor until first pickup; the carrier (pickup reach) stays put.
+  itemWorldVisualLift: 50,
   itemForceDesire: 5,
   itemDesireShared: true,
   ensureHealOrbSpawns: 9999,
@@ -1982,7 +1985,7 @@ function rememberSilentHillVisual(runtime, entity, model, request, restore) {
 
 function queueSilentHillVisualChange(dark) {
   const world = state.silentHillWorld;
-  for (const transition of world.active) transition.record.restore?.();
+  for (const transition of world.active) restoreSilentHillVisual(transition.entity, transition.record);
   world.active.length = 0;
   world.visualDark = dark === true;
                                                                         
@@ -2011,16 +2014,22 @@ function setSilentHillFog(dark, restore = false) {
     fireTarget(fog, "SetFogStartDistance", restore ? "1000" : dark ? "-2500" : "-1000");
     fireTarget(fog, "SetFogEndDistance", restore ? "300000" : dark ? "2500" : "5000");
     fireTarget(fog, "SetFogMaxOpacity", "1");
+    // CS2 gradient fog defaults to a steep falloff and never fogs env_sky; CS:GO fog was linear
+    // and covered the sky, so SH uses linear falloff plus a flat sky in the fog color.
+    fireTarget(fog, "SetFogFalloffExponent", restore ? FOG_DEFAULT_FALLOFF : "1");
   }
 }
 
 function setSilentHillSky(dark) {
   themeModelSky.silentHillDarkTarget = dark ? 1 : 0;
-  if (!setCollectiveSkybox(dark ? "silenthill_dark" : "generic", true)) {
-    if (dark && !themeModelSky.missingSilentHillSkyWarned) {
+  // Silent Hill pieces in the Finale mix must not swap the Finale's black sky back to flat grey.
+  if (finaleUsesFinaleSky(state.endingRuntime) && state.endingRuntime.finaleSky) return;
+  if (!setCollectiveSkybox(dark ? "silenthill_dark" : "silenthill_light", true)) {
+    if (!themeModelSky.missingSilentHillSkyWarned) {
       themeModelSky.missingSilentHillSkyWarned = true;
-      message("[SILENTHILL] dark env_sky is missing; cloud tint will change but the 2D sky will stay light");
+      message("[SILENTHILL] flat env_sky is missing; distant silhouettes will show against the sky");
     }
+    if (!dark) setCollectiveSkybox("generic", true);
     return;
   }
 }
@@ -2047,7 +2056,7 @@ function processSilentHillVisualChange() {
         transition.switched = true;
       }
       if (step >= SILENTHILL_FADE_STEPS * 2 + 1) {
-        record.restore?.();
+        restoreSilentHillVisual(entity, record);
         entity.SetColor?.({ ...record.color, a: terrainRenderAlpha(entity, record.color.a) });
         world.active.splice(index, 1);
         continue;
@@ -2105,7 +2114,27 @@ function silentHillSwapModel(entity, record, dark) {
   entity.SetModel(dark ? record.light.replace(/\.vmdl$/i, "dark.vmdl") : record.light);
   entity.collectiveFalldownCandidate = undefined;
   if (position && angles) entity.Teleport?.({ position, angles });
-  record.restore?.();
+  restoreSilentHillVisual(entity, record);
+}
+
+// SetModel does not keep the Main bodygroup, so terrain models without a
+// restore (trapfloors, plain visuals, model blocks) could show the crack
+// mesh after a light/dark swap. Reapply the last choice, else the default.
+const SILENTHILL_MAIN_BODYGROUP_MODEL = /collective_(?:floor|platform|floorceiling|floorceilingtall|blockwall)(?:_slope|_slopehalf)?silenthill\.vmdl$/i;
+function restoreSilentHillVisual(entity, record) {
+  if (record.restore) {
+    record.restore();
+    return;
+  }
+  if (!validEntity(entity)) return;
+  const bodyGroup = entity.collectiveBodyGroup
+    ?? (SILENTHILL_MAIN_BODYGROUP_MODEL.test(record.light) ? 0 : undefined);
+  if (bodyGroup === undefined) return;
+  const apply = () => {
+    if (validEntity(entity)) fireTarget(entity, "SetBodyGroup", `Main,${bodyGroup}`);
+  };
+  apply();
+  afterThink(apply);
 }
 
 function toggleSilentHillWorld(dark, delay = 0) {
@@ -2901,8 +2930,15 @@ const FINALE_SKY_CONFIG = Object.freeze({
   modelScale: 100,
   rotationSpeed: 200,
   fogStart: -500, fogEnd: 3000, fogOpacity: 0.7,
-  redColor: Object.freeze({ r: 100, g: 0, b: 0, a: 255 }),
-  blackColor: Object.freeze({ r: 0, g: 0, b: 0, a: 255 }),
+  // Source tinted the clouds with SetColor 100 0 0 / 0 0 0. collective_clouds is csgo_unlitgeneric
+  // since 10-18 and render colour no longer darkens it, so the tint is baked into material groups
+  // of collective_skybox_clouds.vmdl (0 default, 1 finale_black, 2 finale_red); colour stays white.
+  redSkin: 2,
+  blackSkin: 1,
+  cloudColor: Object.freeze({ r: 255, g: 255, b: 255, a: 255 }),
+  // Source's black finale fog also fogged the 2D sky; CS2 env_gradient_fog never fogs env_sky, so
+  // basicsky showed through grey. The flat black Silent Hill dark env_sky stands in for it.
+  skybox: "silenthill_dark",
 });
 
                                                                               
@@ -3159,6 +3195,15 @@ const GENERIC_EVENT_DEFINITIONS = Object.freeze({
   WORLD_EATER: Object.freeze({ cost: 5, supported: true }),
 });
 const GENERIC_EVENT_NAMES = Object.freeze(Object.keys(GENERIC_EVENT_DEFINITIONS));
+// Source lines queued for the end of each timed event: [text, repeats].
+const GENERIC_EVENT_END_LINES = Object.freeze({
+  LOWGRAV: Object.freeze(["Gravity is back to normal again", 3]),
+  BLOODLUST: Object.freeze(["The bloodthirst has ended!", 3]),
+  PHASING: Object.freeze(["Our eyes are back to normal again", 1]),
+  BIGNADES: Object.freeze(["Our grenades are back to normal now...", 1]),
+  DISTORT: Object.freeze(["Our human eyes are back to normal", 1]),
+  SILENCE: Object.freeze(["Our human ears are starting to work again!", 1]),
+});
                                                                             
                                                
                                                                           
@@ -3314,6 +3359,7 @@ const GENERIC_EVENT_MODEL_DEPENDENCIES = Object.freeze({
   WORLD_EATER: Object.freeze({ entity: "assetdep_generic_event_vauff_world_eater", model: GENERIC_WORLD_EATER_CONFIG.model }),
 });
 
+const FOG_DEFAULT_FALLOFF = "4";
 const THEME_FOG_PROFILES = Object.freeze({
   generic: Object.freeze({ start: 500, end: 15000, density: 0, color: "255 255 255" }),
   castle: Object.freeze({ start: 500, end: 10000, density: 0.20, color: "200 255 100" }),
@@ -4226,9 +4272,11 @@ const ITEM_DEFINITIONS = Object.freeze({
     healRate: 0.5,
     healDuration: 15,
     healRadius: 200,
-    worldScale: 0.5,
+    // Tester feedback 10-16: the idle orb at the original 0.5 reads far too big
+    // in CS2; the requested size is about a quarter of that diameter.
+    worldScale: 0.15,
     pickupUseRadius: 96,
-    attachment: Object.freeze({ scale: 0.5 }),
+    attachment: Object.freeze({ scale: 0.15 }),
   }),
   moonboost: Object.freeze({
     carrierTemplate: "moonboost",
@@ -6514,7 +6562,7 @@ function infiniteCheckoutShot(vote, event) {
     ? "VOTE PASSED" : `${vote.voters.size}/${vote.needed}`}]`);
   if (vote.passed) {
     vote.checkoutValue = state.campaign.stageLevelCount;
-    announce(`[INFINITE FINALE] YOU CHECKED OUT AT ${vote.checkoutValue} LEVELS`);
+    announceRepeated(`[INFINITE FINALE] YOU CHECKED OUT AT ${vote.checkoutValue} LEVELS`, 5);
     for (const pitch of [20 + Math.floor(Math.random() * 11), 50 + Math.floor(Math.random() * 11)])
       playCatalogSound("eye_terror", vec(), { radius: 0, lifetime: 10, volume: 10, pitch });
   }
@@ -6618,18 +6666,18 @@ function flushEndingTimeline(runtime, handlers) {
   }
 }
 
-function endingAnnounce(runtime, delay, text) {
+function endingAnnounce(runtime, delay, text, times = 1) {
   if (delay <= 0) {
-    announce(text);
+    announceRepeated(text, times);
     return undefined;
   }
-  return endingTask(runtime, delay, () => announce(text));
+  return endingTask(runtime, delay, () => announceRepeated(text, times));
 }
 
-function endingCountdown(runtime, totalTime, prefix, checkpoints = [60, 30, 10, 5, 4, 3, 2, 1]) {
+function endingCountdown(runtime, totalTime, prefix, checkpoints = [60, 30, 10, 5, 4, 3, 2, 1], suffix = "") {
   for (const seconds of checkpoints) {
     const delay = totalTime - seconds;
-    if (delay > 0) endingAnnounce(runtime, delay, `${prefix} ${seconds}s`);
+    if (delay > 0) endingAnnounce(runtime, delay, `${prefix} ${seconds}s${suffix}`);
   }
 }
 
@@ -8079,13 +8127,20 @@ function processBunkerDoorTick(runtime) {
   door.processed = true;
   const { humans, zombies } = bunkerTeamCounts();
   const ratio = zombies > 0 ? humans / zombies : Infinity;
+  // Source TickDoorOpen(): a ratio only exists with both teams alive;
+  // otherwise the door opens fully with "(no opposition)".
+  const opposed = humans > 0 && zombies > 0;
   let stateName = "closed";
-  if (zombies === 0 || ratio > opening.ratioFull) stateName = "full";
+  if (!opposed || ratio > opening.ratioFull) stateName = "full";
   else if (ratio > opening.ratioCrouch) stateName = "crouch";
   setBunkerDoorState(runtime, door, stateName);
   runtime.doorHistory.push({ index: door.index, state: stateName, ratio, opening });
-  const ratioText = Number.isFinite(ratio) ? ratio.toFixed(2) : "no opposition";
-  endingAnnounce(runtime, 0, `BUNKER ENDING: door ${door.index + 1} ${stateName.toUpperCase()} (ratio ${ratioText})`);
+  const action = { full: "OPENING EXTRA DOOR (FULLY)", crouch: "OPENING EXTRA DOOR (CROUCH)",
+    closed: "KEEPING EXTRA DOOR CLOSED" }[stateName];
+  const detail = !opposed ? "(no opposition)"
+    : `(H:${humans}/Z:${zombies} = RATIO:${sqNumber(ratio)}) `
+      + (stateName === "full" ? `(target_full:${sqNumber(opening.ratioFull)})` : `(target_crouch:${sqNumber(opening.ratioCrouch)})`);
+  endingAnnounce(runtime, 0, `[BUNKER ENDING] ${action}___________${detail}`);
 }
 
 function destroyEndingEntity(runtime, entity, deferKill = false) {
@@ -8209,6 +8264,7 @@ function processBunkerCollapseTick(runtime) {
   }
   runtime.collapseFinishedAt = Instance.GetGameTime();
   runtime.timeoutTask = endingTask(runtime, BUNKER_CONFIG.timeoutSlayAll, () => {
+    announce("[BUNKER ENDING] YOU TOOK TOO LONG TO FINISH OFF THE ZOMBIES");
     const counts = bunkerTeamCounts();
     if (counts.zombies > 0) {
       for (const pawn of allLivingPawns()) {
@@ -8224,7 +8280,6 @@ function processBunkerCollapseTick(runtime) {
       resolveStageEnding(false);
     }
   });
-  endingAnnounce(runtime, 0, `BUNKER ENDING: YOU TOOK TOO LONG; ${BUNKER_CONFIG.timeoutSlayAll}s REMAIN`);
 }
 
 function startBunkerCollapse(runtime, scheduledAt) {
@@ -8232,7 +8287,7 @@ function startBunkerCollapse(runtime, scheduledAt) {
   runtime.lifecycle = "collapsing";
   runtime.lifecycleHistory.push("collapsing");
   runtime.collapseStartedAt = scheduledAt ?? Instance.GetGameTime();
-  endingAnnounce(runtime, 0, "BUNKER ENDING: THE OUTSIDE IS STARTING TO CRUMBLE");
+  endingAnnounce(runtime, 0, "[BUNKER ENDING] THE OUTSIDE IS STARTING TO CRUMBLE");
   setAllBunkerDoorsClosed(runtime);
                                                                              
                                                                               
@@ -8338,10 +8393,10 @@ function startBunkerEnding(stageSnapshot, sourceRuntime) {
                                                                            
   scheduleBunkerTimeline(runtime);
   playEndingMusic(runtime, ENDING_MUSIC.BUNKER);
-  endingAnnounce(runtime, 0, "BUNKER ENDING: THIS IS YOUR LAST STAND");
-  endingAnnounce(runtime, 1.03, "BUNKER ENDING: DEFEND THE BUNKER WITH YOUR LIFE");
-  endingAnnounce(runtime, 5, `BUNKER ENDING: HOLD OUT FOR ${BUNKER_CONFIG.defendTime - 5}s`);
-  endingCountdown(runtime, BUNKER_CONFIG.defendTime, "BUNKER ENDING: THE OUTSIDE WILL CRUMBLE IN");
+  endingAnnounce(runtime, 0, "[BUNKER ENDING] THIS IS YOUR LAST STAND", 3);
+  endingAnnounce(runtime, 1.03, "[BUNKER ENDING] DEFEND THE BUNKER WITH YOUR LIFE", 3);
+  endingAnnounce(runtime, 5, `[BUNKER ENDING] HOLD OUT FOR ${Math.trunc(BUNKER_CONFIG.defendTime - 5)}s`, 3);
+  endingCountdown(runtime, BUNKER_CONFIG.defendTime, "[BUNKER ENDING] THE OUTSIDE WILL CRUMBLE IN");
   try {
     for (const shape of ["floor", "platform", "wall"]) {
       const template = state.templates.get(shape);
@@ -8351,7 +8406,7 @@ function startBunkerEnding(stageSnapshot, sourceRuntime) {
     }
     spawnBunkerGeometry(runtime);
     if (runtime.remaining <= 0) throw new Error("BUNKER produced no terrain spawn requests");
-    announce("BUNKER ending terrain is generating");
+    message("BUNKER ending terrain is generating");
     return runtime;
   } catch (error) {
     destroyEndingRuntime(runtime, "startup_failed");
@@ -8557,7 +8612,8 @@ function finishBridgeCollapse(runtime) {
   if (!runtime || runtime.collapseFinishedAt !== undefined) return;
   runtime.collapseFinishedAt = Instance.GetGameTime();
   runtime.lifecycle = "collapsing";
-  endingTask(runtime, 5, () => announce(`BRIDGE: kill all zombies within ${BRIDGE_CONFIG.delaySlayTime - 5} seconds`));
+  if (BRIDGE_CONFIG.delaySlayTime - 5 > 0) endingTask(runtime, 5, () => announceRepeated(
+    `[BRIDGE ENDING] KILL ALL ZOMBIES WITHIN ${sqNumber(BRIDGE_CONFIG.delaySlayTime - 5)}s TO WIN`));
   runtime.timeoutTask = endingTask(runtime, BRIDGE_CONFIG.delaySlayTime, () => {
     const counts = bunkerTeamCounts();
     if (counts.zombies <= 0 && counts.humans > 0) {
@@ -8617,10 +8673,10 @@ function startBridgeCollapse(runtime, scheduledAt) {
   runtime.crumblePosition = add(runtime.anchor, mul(runtime.left, BRIDGE_CONFIG.crumbleLeftRightTravel));
   runtime.crumbleTravelled = 0;
   runtime.crumbleLeft = false;
-  endingAnnounce(runtime, 0, "BRIDGE ENDING: THE BRIDGE IS STARTING TO CRUMBLE");
+  endingAnnounce(runtime, 0, "[BRIDGE ENDING] THE BRIDGE IS STARTING TO CRUMBLE", 3);
   endingTask(runtime, 1, () => enableEndingSpawnKiller(runtime));
-  endingAnnounce(runtime, 2.03, "BRIDGE ENDING: RESPAWN IS DISABLED");
-  endingAnnounce(runtime, 3.06, "BRIDGE ENDING: DEFEND!");
+  endingAnnounce(runtime, 2.03, "[BRIDGE ENDING] RESPAWN IS DISABLED", 3);
+  endingAnnounce(runtime, 3.06, "[BRIDGE ENDING] DEFEND!", 3);
   endingTask(runtime, 1.5, () => {
     for (const part of runtime.layout.parts.filter((entry) => entry.startBlock)) {
       for (const entity of part.entities) destroyEndingEntity(runtime, entity);
@@ -8640,9 +8696,9 @@ function startBridgeEnding(stageSnapshot, sourceRuntime) {
                                                                             
   scheduleBridgeTimeline(runtime);
   playEndingMusic(runtime, ENDING_MUSIC.BRIDGE);
-  endingAnnounce(runtime, 0, "BRIDGE ENDING");
-  endingAnnounce(runtime, 1.05, `BRIDGE ENDING: HOLD THE BRIDGE FOR ${BRIDGE_CONFIG.holdTime + 1}s`);
-  endingCountdown(runtime, BRIDGE_CONFIG.holdTime, "BRIDGE ENDING: BRIDGE CRUMBLING IN");
+  endingAnnounce(runtime, 0, "[BRIDGE ENDING]", 3);
+  endingAnnounce(runtime, 1.05, `[BRIDGE ENDING] HOLD THE BRIDGE FOR ${sqNumber(BRIDGE_CONFIG.holdTime + 1)}s`, 3);
+  endingCountdown(runtime, BRIDGE_CONFIG.holdTime, "[BRIDGE ENDING] BRIDGE CRUMBLING IN");
   try {
     for (const shape of ["floor", "platform", "wall", "detail"]) {
       const template = state.templates.get(shape);
@@ -8656,7 +8712,7 @@ function startBridgeEnding(stageSnapshot, sourceRuntime) {
     }
     spawnBridgeGeometry(runtime);
     if (runtime.remaining <= 0) throw new Error("BRIDGE produced no terrain spawn requests");
-    announce("BRIDGE ending terrain is generating");
+    message("BRIDGE ending terrain is generating");
     return runtime;
   } catch (error) {
     destroyEndingRuntime(runtime, "startup_failed");
@@ -8812,6 +8868,7 @@ function startHuntEnding(stageSnapshot, sourceRuntime) {
   runtime.timeoutTask = endingTask(runtime, HUNT_CONFIG.slayTime, () => {
     if (runtime.timeoutTriggered || runtime.lifecycle !== "active") return;
     runtime.timeoutTriggered = true;
+    announce("[HUNT ENDING] YOU RAN OUT OF TIME - YOU LOSE!");
                                                                           
                                                                          
                                                      
@@ -8835,13 +8892,17 @@ function startHuntEnding(stageSnapshot, sourceRuntime) {
     });
   });
   playEndingMusic(runtime, ENDING_MUSIC.HUNT);
-  endingAnnounce(runtime, 0, "HUNT ENDING");
-  endingAnnounce(runtime, 1.03, "HUNT ENDING: zombies have low HP - kill them all!");
-  endingAnnounce(runtime, 2.1, `HUNT ENDING: the stage-end rift grants ${HUNT_CONFIG.teleportInfectionImmunity}s infection immunity`);
-  endingAnnounce(runtime, 5, `HUNT ENDING: YOU HAVE ${HUNT_CONFIG.slayTime - 5}s TO KILL THE ZOMBIES`);
-  endingAnnounce(runtime, 6, "HUNT ENDING: IF THE TIME RUNS OUT YOU LOSE");
-  endingAnnounce(runtime, HUNT_CONFIG.spawnKillerDelay + 0.2, "HUNT ENDING: RESPAWN IS DISABLED");
-  endingCountdown(runtime, HUNT_CONFIG.slayTime, "HUNT ENDING: YOU HAVE", [60, 30, 10, 5, 4, 3, 2, 1]);
+  endingAnnounce(runtime, 0, "[HUNT ENDING]", 3);
+  endingAnnounce(runtime, 1.03, "[HUNT ENDING] zombies have low HP - kill them all!", 3);
+  endingAnnounce(runtime, 2.1, "[HUNT ENDING] the human stage-end TP brings you back to the stage-start "
+    + `(with ${sqNumber(HUNT_CONFIG.teleportInfectionImmunity)}s infect-immunity)`);
+  if (HUNT_CONFIG.slayTime > 5) {
+    endingAnnounce(runtime, 5, `[HUNT ENDING] YOU HAVE ${Math.trunc(HUNT_CONFIG.slayTime - 5)}s TO KILL THE ZOMBIES`);
+    endingAnnounce(runtime, 6, "[HUNT ENDING] IF THE TIME RUNS OUT YOU LOSE");
+  }
+  endingAnnounce(runtime, HUNT_CONFIG.spawnKillerDelay + 0.2, "[HUNT ENDING] RESPAWN IS DISABLED", 3);
+  endingCountdown(runtime, HUNT_CONFIG.slayTime, "[HUNT ENDING] YOU HAVE", [60, 30, 10, 5, 4, 3, 2, 1],
+    " LEFT TO KILL THE ZOMBIES");
   return runtime;
 }
 
@@ -9247,7 +9308,7 @@ function scheduleRiseTimeline(runtime) {
       }
       resolveStageEnding(false);
     },
-    rise_announce_0: () => announce("[RISE ENDING]"),
+    rise_announce_0: () => announceRepeated("[RISE ENDING]"),
     rise_announce_1: () => announce("[RISE ENDING] DEFEND YOUR WAY TO THE TOP"),
     rise_announce_2: () => announce("[RISE ENDING] THE VERY END IS YOUR SAFE HAVEN"),
     rise_announce_3: () => announce("[RISE ENDING] THE HILL WILL GRADUALLY COLLAPSE"),
@@ -9674,14 +9735,16 @@ function scheduleClimbTimeline(runtime) {
       for (const pawn of allLivingPawns()) pawn.TakeDamage?.({ damage: 999999, damageFlags: CSDamageFlags.FORCE_DEATH ?? 0 });
       resolveStageEnding(false);
     },
-    climb_announce_0: () => announce("[CLIMB ENDING] WE MUST CLIMB THE TOWER"),
-    climb_announce_1: () => announce("[CLIMB ENDING] ONLY THE VERY TOP WILL BE SAFE"),
-    climb_announce_go: () => announce("[CLIMB ENDING] NOW GO!"),
-    climb_announce_rain: () => announce("[CLIMB ENDING] RAIN IS STARTING"),
+    climb_announce_0: () => announceRepeated("[CLIMB ENDING] WE MUST CLIMB THE TOWER"),
+    climb_announce_1: () => announceRepeated("[CLIMB ENDING] ONLY THE VERY TOP WILL BE SAFE"),
+    climb_announce_go: () => announceRepeated("[CLIMB ENDING] NOW GO!"),
+    climb_announce_survive: () => announceRepeated(
+      `[CLIMB ENDING] SURVIVE FOR ${Math.trunc(CLIMB_CONFIG.crumbleTime - 13)}s`),
     climb_announce_crumble: () => announce("[CLIMB ENDING] THE TOWER IS STARTING TO CRUMBLE"),
+    // Source StartCrumble() repeats the spawn-killer notice 0.20s later.
+    climb_announce_respawn: () => announceRepeated("[CLIMB ENDING] RESPAWN IS DISABLED"),
     climb_announce_flight: () => announce("[CLIMB ENDING] THE ANGELS ARE DEAD"),
   };
-  runtime.climbTimelineHandlers = handlers;
   const delays = {
     climb_precipitation: CLIMB_CONFIG.precipitationDelay,
     climb_boost: CLIMB_CONFIG.boostEnableDelay,
@@ -9694,10 +9757,24 @@ function scheduleClimbTimeline(runtime) {
     climb_announce_0: 0,
     climb_announce_1: 1.03,
     climb_announce_go: CLIMB_CONFIG.boostEnableDelay,
-    climb_announce_rain: CLIMB_CONFIG.precipitationDelay,
+    climb_announce_survive: 13,
     climb_announce_crumble: CLIMB_CONFIG.crumbleTime,
+    climb_announce_respawn: CLIMB_CONFIG.crumbleTime + 0.2,
     climb_announce_flight: CLIMB_CONFIG.flightSlayTime,
   };
+  if (!(13 < CLIMB_CONFIG.crumbleTime)) delete handlers.climb_announce_survive;
+  for (const [prefix, total, checkpoints] of [
+    ["[CLIMB ENDING] THE TOWER WILL CRUMBLE IN", CLIMB_CONFIG.crumbleTime, [80, 60, 30, 10, 5, 4, 3, 2, 1]],
+    ["[CLIMB ENDING] THE ANGELS WILL DIE IN", CLIMB_CONFIG.flightSlayTime, [30, 20, 10, 5, 4, 3, 2, 1]],
+  ]) {
+    for (const seconds of checkpoints) {
+      if (total - seconds <= 0) continue;
+      const key = `climb_announce_${total}_${seconds}`;
+      handlers[key] = () => announce(`${prefix} ${seconds}s`);
+      delays[key] = total - seconds;
+    }
+  }
+  runtime.climbTimelineHandlers = handlers;
   for (const [key, callback] of Object.entries(handlers)) endingTaskAt(runtime, at(delays[key]), callback, key);
 }
 
@@ -10132,7 +10209,7 @@ function finishConflictSpawn(runtime) {
     runtime.timeRemaining = CONFLICT_CONFIG.battleTime;
   }, "prepare");
   scheduleConflictItems(runtime);
-  announce(`CONFLICT ending started; defend the flag for ${CONFLICT_CONFIG.battleTime} seconds`);
+  message(`CONFLICT ending started; defend the flag for ${CONFLICT_CONFIG.battleTime} seconds`);
 }
 
 function startConflictEnding(stageSnapshot, sourceRuntime) {
@@ -10148,6 +10225,11 @@ function startConflictEnding(stageSnapshot, sourceRuntime) {
   }
   const runtime = createEndingRuntime("CONFLICT", stageSnapshot, sourceRuntime);
   playEndingMusic(runtime, CONFLICT_CONFIG.music);
+  endingAnnounce(runtime, 0, "[CONFLICT ENDING]", 3);
+  endingAnnounce(runtime, 1.03, "[CONFLICT ENDING] prepare for battle");
+  endingAnnounce(runtime, 2.04, "[CONFLICT ENDING] gather items to defend your flag");
+  endingAnnounce(runtime, 3.05, "[CONFLICT ENDING] if the zombies capture the flag you lose");
+  endingAnnounce(runtime, 4.06, `[CONFLICT ENDING] survive for ~${sqNumber(CONFLICT_CONFIG.battleTime)}s`);
   buildConflictGeometry(runtime);
   return runtime;
 }
@@ -10690,6 +10772,8 @@ function buildRaceLevel(runtime, slot) {
   record.raceSpawnQueuedAt = Instance.GetGameTime();
   runtime.raceLevelBuilds ??= [];
   runtime.raceLevelBuilds.push({ slot, record, queued: record.remaining, requestedAt: runtime.runStartedAt + RACE_CONFIG.generateRequestTimes[slot] });
+  // Source RACE keeps noprint until tofs+16.50, so only checkout maps print.
+  if (Instance.GetGameTime() >= runtime.runStartedAt + 21.5) announceLevelEntry(level);
   return record;
 }
 
@@ -11542,7 +11626,7 @@ function processRaceKartPreparation(runtime) {
       runtime.raceStartedAt - (runtime.runStartedAt + RACE_CONFIG.startAt));
     scheduleRaceDrivingTimeline(runtime);
     raceLog(runtime, `karts ready=${preparation.spawned} failed=${preparation.failed ?? 0} preparation=${(runtime.raceStartedAt - preparation.startedAt).toFixed(2)}s maxJob=${preparation.maxJobMs.toFixed(2)}ms`);
-    announce("RACE ending: GO");
+    message("RACE ending: GO");
   });
 }
 
@@ -12486,6 +12570,14 @@ function scheduleRaceTimeline(runtime) {
     runtime.tpCapturedAt = Instance.GetGameTime();
   });
   at(RACE_CONFIG.startAt, "start", () => beginRace(runtime));
+  // Source ENDINGS.RACE.Run() chat (tofs = 5s).
+  for (const [time, text, times] of [[5, "[RACE ENDING]", 3], [6.03, "[RACE ENDING] prepare to race..."],
+    [7.04, `[RACE ENDING] survive for ${sqNumber(RACE_CONFIG.winTime - 23)}s (or z-team-death) to win`],
+    [8.05, "[RACE ENDING] zombies jihad-explode if they touch you"],
+    [9.06, "[RACE ENDING] drive fast to stay away from them"],
+    [10.07, "[RACE ENDING] may only the best racist win!"]]) {
+    at(time, `chat_${time}`, () => announceRepeated(text, times ?? 1));
+  }
 }
 
 function scheduleRaceDrivingTimeline(runtime) {
@@ -12513,6 +12605,12 @@ function scheduleRaceDrivingTimeline(runtime) {
     runtime.raceBgmStartedAt = Instance.GetGameTime();
     runtime.nextRaceMusicAt = runtime.runStartedAt + runtime.raceTimelineDelay + RACE_CONFIG.musicAt + RACE_CONFIG.musicRepeat;
   });
+  // Source schedules these at win_time - N without tofs, i.e. 5s before EndWin.
+  for (const seconds of [80, 60, 30, 10, 5, 4, 3, 2, 1]) {
+    if (RACE_CONFIG.winTime - seconds <= 0) continue;
+    at(RACE_CONFIG.winTime - seconds, `human_win_${seconds}`,
+      () => announce(`[RACE ENDING] HUMAN-WIN IN ${seconds}s`));
+  }
   at(RACE_CONFIG.killZombiesAt, "kill_zombies", () => finishRaceRound(runtime));
   at(RACE_CONFIG.massFallbackAt, "mass_fallback", () => {
     runtime.massFallbackAt = Instance.GetGameTime();
@@ -12588,9 +12686,7 @@ function finishRaceSpawn(runtime) {
     maxY: Math.max(runtime.raceStart.y, runtime.raceFinish.y) + RACE_CONFIG.gridSize * 10,
   };
   scheduleRaceTimeline(runtime);
-  endingAnnounce(runtime, 0, "RACE ENDING: GET READY TO RACE");
-  endingCountdown(runtime, RACE_CONFIG.startAt, "RACE ENDING STARTS IN", [10, 5, 3, 2, 1]);
-  announce("RACE ending started; authored RACE levels are generating");
+  message("RACE ending started; authored RACE levels are generating");
 }
 
 function startRaceEnding(stageSnapshot, sourceRuntime) {
@@ -12618,7 +12714,7 @@ function startRaceEnding(stageSnapshot, sourceRuntime) {
   for (const event of [...state.genericEvents.active.values()]) {
     if (event.name !== "BLOODLUST") continue;
     endGenericEvent(event);
-    announce("EVENT: the bloodthirst has ended for the race");
+    announceRepeated("The bloodthirst has ended!");
   }
   runtime.raceProfile = undefined;
   runtime.remaining = 0;
@@ -13514,7 +13610,7 @@ function finishFinaleBossArenaSpawn(runtime) {
       const spot = team === 3 ? humanSpot : team === 2 ? zombieSpot : undefined;
       if (spot) pawn.Teleport?.({ position: spot, angles: anglesFor(runtime.direction), velocity: vec() });
     }
-    announce("DEBUG: direct Boss arena ready");
+    consoleNotice("DEBUG: direct Boss arena ready");
   }
   flushEndingTimeline(runtime, {
     finaleArenaTeleport: () => releaseFinaleArenaTeleport(runtime),
@@ -13681,18 +13777,36 @@ function cleanupFinaleApproach(runtime) {
   structure.approachCleanedAt = Instance.GetGameTime();
 }
 
+// Source ::finalecpf, switched by InfiniteCheckOut().
+function finaleChatPrefix(runtime) {
+  return runtime?.infinite === true ? "[INFINITE FINALE]" : "[FINALE]";
+}
+
+// Source final-result decorations: ::legit_win + SID, and the infinite tally
+// "(finale_checkout_mapspawnindex levels | maps.len() map_pool)".
+function finaleLegitTag(congratulate) {
+  const sid = `(SID:${state.reportSessionId})`;
+  if (state.campaign.legitWin === false) return `*NOT LEGIT* ${sid}`;
+  return congratulate ? `CONGRATULATIONS! ${sid}` : sid;
+}
+
+function finaleCheckoutTally(runtime, levels = runtime?.stageSnapshot?.checkoutValue) {
+  return `(${levels ?? 0} levels | ${finaleMapPoolCount(runtime)} map_pool)`;
+}
+
 function scheduleFinaleElevatorCountdown(runtime, readyAt, leaveAt) {
   const leaveTime = leaveAt - readyAt;
-  endingTaskAt(runtime, readyAt, () => announce(`FINALE: elevator leaves in ${Math.round(leaveTime)}s`),
+  const prefix = finaleChatPrefix(runtime);
+  endingTaskAt(runtime, readyAt, () => announce(`${prefix} elevator leaves in ${sqNumber(leaveTime)}s`),
     `finale_elevator_countdown_${runtime.sequence}`);
   for (const seconds of [30, 10, 5]) {
     if (leaveTime - seconds <= 0) continue;
-    endingTaskAt(runtime, leaveAt - seconds, () => announce(`FINALE: elevator leaves in ${seconds}s`),
+    endingTaskAt(runtime, leaveAt - seconds, () => announce(`${prefix} elevator leaves in ${seconds}s`),
       `finale_elevator_countdown_${seconds}_${runtime.sequence}`);
   }
-  endingTaskAt(runtime, leaveAt, () => announce("FINALE: elevator is leaving"),
+  endingTaskAt(runtime, leaveAt, () => announce(`${prefix} elevator is leaving`),
     `finale_elevator_leaving_${runtime.sequence}`);
-  endingTaskAt(runtime, leaveAt + 1.01, () => announce("FINALE: prepare for the end"),
+  endingTaskAt(runtime, leaveAt + 1.01, () => announce(`${prefix} prepare for the end`),
     `finale_elevator_prepare_${runtime.sequence}`);
 }
 
@@ -13796,7 +13910,7 @@ function processFinaleElevatorDebris(runtime, now) {
     };
     runtime.rubbleSpawnedCount = 0;
     runtime.nextRubbleAt = now;
-    announce("FINALE: watch out from above!");
+    announceRepeated(`${finaleChatPrefix(runtime)} watch out from above!`);
   }
   if (runtime.finaleElevatorDebrisStarted) {
     processRaceRubble(runtime, now);
@@ -14264,7 +14378,7 @@ function startFinaleDefense(runtime) {
   if (!runtime || runtime.lifecycle !== "active") return;
   runtime.defenseStartedAt = Instance.GetGameTime();
   runtime.defending = true;
-  announce(`FINALE: defend the pyramid for ${FINALE_CONFIG.finalHoldTime} seconds`);
+  announceRepeated(`${finaleChatPrefix(runtime)} DEFEND FOR ${sqNumber(FINALE_CONFIG.finalHoldTime)}s`);
 }
 
 // Source RaiseFinalElevator(): ::Process(pq,0.20) reaches its third entry at
@@ -14330,7 +14444,7 @@ function processFinaleTopCollapse(runtime, now) {
 function finaleMassKill(runtime, scheduledAt) {
   if (!runtime || runtime.lifecycle !== "active" || runtime.massKillTriggeredAt !== undefined) return;
   runtime.massKillTriggeredAt = scheduledAt;
-  announce("FINALE: YOU TOOK TOO LONG - SLAYING");
+  message("FINALE: YOU TOOK TOO LONG - SLAYING");
   endingMassKillAll(runtime);
   resolveStageEnding(false);
 }
@@ -14357,7 +14471,15 @@ function raiseFinaleTop(runtime) {
   // Source RaiseFinalElevator() fires EnableSpawnKiller(), which also slays flight.
   enableEndingSpawnKiller(runtime);
   const zombies = allLivingPawns().filter((pawn) => pawn.GetTeamNumber?.() === 2);
-  if (zombies.length <= 0) resolveStageEnding(true);
+  if (zombies.length <= 0) {
+    // Source RaiseFinalElevator() declares this win itself and registers no
+    // round-end result line for it.
+    runtime.finaleDefaultWin = true;
+    announceRepeated(runtime.infinite === true
+      ? `[INFINITE FINALE ENDING] NO ZOMBIES ALIVE - YOU WON BY DEFAULT! ${finaleLegitTag(false)} ${finaleCheckoutTally(runtime)}`
+      : `[FINALE ENDING] NO ZOMBIES ALIVE - YOU WON BY DEFAULT! ${finaleLegitTag(false)}`);
+    resolveStageEnding(true);
+  }
 }
 
 function updateFinaleElevators(runtime, elapsed) {
@@ -14378,7 +14500,7 @@ function finishFinaleSpawn(runtime) {
                                                                                
                                    
     startFinaleStructureTimeline(runtime);
-    announce("FINALE ending started; the tower bridge is rising");
+    message("FINALE ending started; the tower bridge is rising");
     return;
   }
   const runAt = runtime.runStartedAt;
@@ -14401,9 +14523,10 @@ function finishFinaleSpawn(runtime) {
     runtime.raceRubbleStopped = true;
     runtime.finalePyramidRubbleStoppedAt = Instance.GetGameTime();
   }, "finale_pyramid_rubble_stop");
-  endingTaskAt(runtime, runAt, () => announce("FINALE: YOU REACHED THE END"), "finale_pyramid_reached");
-  endingTaskAt(runtime, runAt + 8, () => announce("FINALE: THE TOP OF THE PYRAMID IS YOUR ESCAPE"), "finale_pyramid_escape_hint");
-  endingTaskAt(runtime, runAt + 9, () => announce("FINALE: DEFEND IT WITH YOUR LIFE"), "finale_pyramid_defend_hint");
+  const prefix = finaleChatPrefix(runtime);
+  endingTaskAt(runtime, runAt, () => announceRepeated(`${prefix} YOU REACHED THE END`), "finale_pyramid_reached");
+  endingTaskAt(runtime, runAt + 8, () => announceRepeated(`${prefix} THE TOP OF THE PYRAMID IS YOUR ESCAPE`), "finale_pyramid_escape_hint");
+  endingTaskAt(runtime, runAt + 9.03, () => announceRepeated(`${prefix} DEFEND IT WITH YOUR LIFE`), "finale_pyramid_defend_hint");
   endingTaskAt(runtime, runAt + FINALE_KAMIKAZE_CONFIG.delay,
     () => startFinaleKamikaze(runtime, "pyramid"), "finale_pyramid_kamikaze");
   endingTaskAt(runtime, runAt + FINALE_CONFIG.elevatorSetupDelay,
@@ -14414,10 +14537,10 @@ function finishFinaleSpawn(runtime) {
     () => raiseFinaleTop(runtime), "finale_pyramid_rise");
   for (const seconds of [30, 20, 10, 5, 4, 3, 2, 1]) {
     const at = runAt + FINALE_CONFIG.defenseStartDelay + FINALE_CONFIG.finalHoldTime - seconds;
-    endingTaskAt(runtime, at, () => announce(`FINALE: RISING IN ${seconds}s`), `finale_pyramid_rising_${seconds}`);
+    endingTaskAt(runtime, at, () => announce(`${prefix} RISING IN ${seconds}s`), `finale_pyramid_rising_${seconds}`);
   }
   endingTaskAt(runtime, runAt + FINALE_CONFIG.defenseStartDelay + FINALE_CONFIG.finalHoldTime,
-    () => announce("FINALE: RISING"), "finale_pyramid_rising_now");
+    () => announceRepeated(`${prefix} RISING`), "finale_pyramid_rising_now");
   endingTaskAt(runtime, runAt + FINALE_CONFIG.defenseStartDelay + FINALE_CONFIG.finalHoldTime + FINALE_CONFIG.massKillDelay,
     () => {
                                                                               
@@ -14436,18 +14559,18 @@ function finishFinaleSpawn(runtime) {
     finale_pyramid_defense: () => startFinaleDefense(runtime),
     finale_pyramid_rise: () => raiseFinaleTop(runtime),
     finale_pyramid_kamikaze: () => startFinaleKamikaze(runtime, "pyramid"),
-    finale_pyramid_rising_30: () => announce("FINALE: RISING IN 30s"),
-    finale_pyramid_rising_20: () => announce("FINALE: RISING IN 20s"),
-    finale_pyramid_rising_10: () => announce("FINALE: RISING IN 10s"),
-    finale_pyramid_rising_5: () => announce("FINALE: RISING IN 5s"),
-    finale_pyramid_rising_4: () => announce("FINALE: RISING IN 4s"),
-    finale_pyramid_rising_3: () => announce("FINALE: RISING IN 3s"),
-    finale_pyramid_rising_2: () => announce("FINALE: RISING IN 2s"),
-    finale_pyramid_rising_1: () => announce("FINALE: RISING IN 1s"),
-    finale_pyramid_rising_now: () => announce("FINALE: RISING"),
+    finale_pyramid_rising_30: () => announce(`${prefix} RISING IN 30s`),
+    finale_pyramid_rising_20: () => announce(`${prefix} RISING IN 20s`),
+    finale_pyramid_rising_10: () => announce(`${prefix} RISING IN 10s`),
+    finale_pyramid_rising_5: () => announce(`${prefix} RISING IN 5s`),
+    finale_pyramid_rising_4: () => announce(`${prefix} RISING IN 4s`),
+    finale_pyramid_rising_3: () => announce(`${prefix} RISING IN 3s`),
+    finale_pyramid_rising_2: () => announce(`${prefix} RISING IN 2s`),
+    finale_pyramid_rising_1: () => announce(`${prefix} RISING IN 1s`),
+    finale_pyramid_rising_now: () => announceRepeated(`${prefix} RISING`),
     finale_pyramid_masskill: () => finaleMassKill(runtime, Instance.GetGameTime()),
   });
-  announce("FINALE ending started; the pyramid is your escape");
+  message("FINALE ending started; the pyramid is your escape");
 }
 
                                                                                     
@@ -14641,19 +14764,25 @@ function finaleBossArenaCenter(runtime) {
   return clone(runtime?.topCenter ?? runtime?.anchor ?? vec());
 }
 
+// Source only runs SetupFinaleSky + the black finale fog for the campaign Finale (stage == STAGES.len()).
+// The infinite-mode checkout calls StartFinale() directly and keeps the current infinite theme sky/fog.
+function finaleUsesFinaleSky(runtime) {
+  return runtime?.kind === "FINALE" && runtime.infinite !== true;
+}
+
 function setupFinaleSky(runtime) {
-  if (!runtime || runtime.kind !== "FINALE") return false;
+  if (!finaleUsesFinaleSky(runtime)) return false;
   if (runtime.finaleSky) return runtime.finaleSky.clouds.length > 0;
   clearThemeModelSky();
                                                                          
                                                                        
-  setCollectiveSkybox("generic");
+  if (!setCollectiveSkybox(FINALE_SKY_CONFIG.skybox, true)) setCollectiveSkybox("generic");
   setFinaleSkyFog();
   const center = finaleSkyCenter(runtime);
   const clouds = [];
   const groups = [
-    { name: "red", count: FINALE_SKY_CONFIG.cloudCount.red, color: FINALE_SKY_CONFIG.redColor, direction: 1 },
-    { name: "black", count: FINALE_SKY_CONFIG.cloudCount.black, color: FINALE_SKY_CONFIG.blackColor, direction: -1 },
+    { name: "red", count: FINALE_SKY_CONFIG.cloudCount.red, skin: FINALE_SKY_CONFIG.redSkin, direction: 1 },
+    { name: "black", count: FINALE_SKY_CONFIG.cloudCount.black, skin: FINALE_SKY_CONFIG.blackSkin, direction: -1 },
   ];
   for (const group of groups) {
     for (let index = 0; index < group.count; index++) {
@@ -14667,7 +14796,8 @@ function setupFinaleSky(runtime) {
         }, FINALE_SKY_CONFIG.model);
         if (!validEntity(visual)) throw new Error("cloud visual did not spawn");
         visual.SetModelScale?.(FINALE_SKY_CONFIG.modelScale);
-        visual.SetColor?.(group.color);
+        visual.SetColor?.(FINALE_SKY_CONFIG.cloudColor);
+        applyThemeSkin(visual, group.skin);
         fireTarget(visual, "SetDefaultAnimation", "baseidle");
         fireTarget(visual, "SetAnimation", "baseidle");
                                                                              
@@ -14719,6 +14849,7 @@ function setFinaleSkyFog() {
   fireTarget(fog, "SetFogStartDistance", String(FINALE_SKY_CONFIG.fogStart));
   fireTarget(fog, "SetFogEndDistance", String(FINALE_SKY_CONFIG.fogEnd));
   fireTarget(fog, "SetFogMaxOpacity", String(FINALE_SKY_CONFIG.fogOpacity));
+  fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
   fireTarget(fog, "Enable");
   return true;
 }
@@ -15688,6 +15819,9 @@ function startFinaleKamikaze(runtime, reason = "pyramid", options = {}) {
   event.explodeTask = endingTaskAt(runtime, event.explodeAt, () => {
     if (runtime.kamikaze === event) explodeFinaleKamikaze(runtime, "timeout");
   }, `finale_kamikaze_explode_${runtime.sequence}_${Math.round(now * 100)}`);
+  // Source EVENTS.KAMIKAZE plane spawn; the finale reuses the same event.
+  announceRepeated("KAMIKAZE INCOMING!");
+  schedule(1.03, () => announceRepeated("SHOOT IT DOWN OR TAKE COVER"));
   return true;
 }
 
@@ -15856,7 +15990,7 @@ function beginFinaleEscape(runtime) {
 
 
   if (runtime.infinite) scheduleNextFinaleInfiniteKamikaze(runtime, runtime.escapeStartedAt);
-  announce("FINALE: boss defeated; escape route is opening");
+  message("FINALE: boss defeated; escape route is opening");
 }
 
 function scheduleFinaleTopCollapse(runtime) {
@@ -16140,6 +16274,7 @@ function processFinaleEscapeSpawn(runtime) {
     setLevelLifecycle(level, "active");
     try { startHardCodedStageEvent(level); }
     catch (error) { failRuntime(`escape stage event failed: ${error}`); return; }
+    announceLevelEntry(level);
     spawnEndIndicator(level);
     updateTerrainPreviewHud(level, "finale-escape-spawn-complete");
   }
@@ -16278,7 +16413,7 @@ function startFinalePyramidAfterEscape(runtime) {
   buildFinaleGeometry(runtime);
   if (runtime.remaining <= 0) throw new Error("FINALE final pyramid produced no terrain spawn requests");
   moveTeleportDestination(runtime.tpPosition, chase?.tp ? chase.incoming : runtime.direction);
-  announce("FINALE: escape route complete; the final pyramid is rising");
+  message("FINALE: escape route complete; the final pyramid is rising");
   return true;
 }
 
@@ -16333,14 +16468,16 @@ function processFinaleEscape(runtime) {
           endingTask(runtime, duration, () => destroyLevel(expired.index, false, true));
         }, `finaleEscapeRetire_${current.escapeNumber}`);
       }
+      // Source EndFound() during the finale end-run says only this.
+      announce("***ESCAPE***");
       if (escape.levelCount >= escape.levelTarget) {
         escape.completedAt = now;
         runtime.raceRubbleStopped = true;
-        announce("FINALE: escape route complete; humans reached safety");
+        message("FINALE: escape route complete; humans reached safety");
         escape.lastEnd = clone(current.end);
         startFinalePyramidAfterEscape(runtime);
       } else {
-        announce(`FINALE ESCAPE: level ${escape.levelCount}/${escape.levelTarget} complete`);
+        message(`FINALE ESCAPE: level ${escape.levelCount}/${escape.levelTarget} complete`);
       }
       break;
     }
@@ -16570,6 +16707,8 @@ function spawnFinaleBoss(runtime, options = {}) {
       feature: `finaleBossVisual_${index}`,
     }, FINALE_BOSS_CONFIG.model);
     if (!validEntity(boss.visual)) throw new Error("FINALE boss visual did not spawn");
+    // Unique name so boss sounds can follow the eye (SetSourceEntity).
+    boss.visual.SetEntityName?.(`finale_boss_visual_${runtime.sequence}_${index}`);
     boss.visual.SetModelScale?.(FINALE_BOSS_CONFIG.modelScale);
     finaleBossSetAnimation(boss, "idle_closed", "idle_closed");
     boss.hitbox = finaleBossTrigger(runtime, boss, "eye", FINALE_BOSS_CONFIG.eyeMins, FINALE_BOSS_CONFIG.eyeMaxs);
@@ -16602,7 +16741,7 @@ function spawnFinaleBoss(runtime, options = {}) {
                                                                            
                                                   
   runtime.nextBossAliveCountAt = runtime.bossStartedAt + FINALE_BOSS_CONFIG.aliveHumanCheckInterval;
-  announce(`FINALE: ${count} boss eye${count === 1 ? "" : "s"} entered the arena`);
+  message(`FINALE: ${count} boss eye${count === 1 ? "" : "s"} entered the arena`);
   return runtime.bosses;
 }
 
@@ -17158,7 +17297,7 @@ function finaleBossStartSpin(boss, now) {
     + (Math.random() * 2 - 1) * FINALE_BOSS_CONFIG.tailAimForceRandomOffset;
   boss.shouldMove = true;
   finaleBossSetAnimation(boss, "idle_open", "idle_open", 1.5, now);
-  playSourceAudioCue(14826, boss.position);
+  playSourceAudioCue(14826, boss.position, {parent:boss.visual});
   playFinaleBossTerrorBurst(boss.position, 2, 4, 20, 200);
 }
 
@@ -17568,9 +17707,11 @@ function finaleBossFlingAttack(runtime, boss, now) {
     }
     for (let index = 0; index < 3; index++) {
       playSourceAudioCue(14726, boss.position, {
+        parent: boss.visual,
         pitch: 200 + Math.floor(Math.random() * 56),
       });
       playSourceAudioCue(14727, boss.position, {
+        parent: boss.visual,
         pitch: 200 + Math.floor(Math.random() * 56),
       });
     }
@@ -17599,7 +17740,7 @@ function processFinaleBossBlink(boss, now) {
       + Math.random() * (FINALE_BOSS_CONFIG.blinkPlaybackMax - FINALE_BOSS_CONFIG.blinkPlaybackMin),
     now,
   );
-  playSourceAudioCue(14895, boss.position);
+  playSourceAudioCue(14895, boss.position, {parent:boss.visual});
                                                                             
                                                                            
                                                                          
@@ -17677,8 +17818,8 @@ function processFinaleBossFight(runtime) {
     for (const boss of runtime.bosses ?? []) {
       boss.eyelidOpen = true;
       finaleBossSetAnimation(boss, "open", "idle_open", 1, now);
-      playSourceAudioCue(14901, boss.position, { pitch: 20 + Math.floor(Math.random() * 21) });
-      playSourceAudioCue(14903, boss.position, { pitch: 65 + Math.floor(Math.random() * 11) });
+      playSourceAudioCue(14901, boss.position, { parent: boss.visual, pitch: 20 + Math.floor(Math.random() * 21) });
+      playSourceAudioCue(14903, boss.position, { parent: boss.visual, pitch: 65 + Math.floor(Math.random() * 11) });
     }
   }
   const humans = finaleBossAliveHumans();
@@ -17798,6 +17939,7 @@ function removeAscendHumanMoonboosts(runtime) {
       }
     }
   }
+  if (runtime.humanMoonboostRemoved > 0) announce("[ASCEND ENDING] removing human moonboost item(s)");
 }
 
 function spawnAscendZombieItems(runtime) {
@@ -17830,6 +17972,11 @@ function spawnAscendZombieItems(runtime) {
   for (let index = 0; index < ASCEND_CONFIG.moonboostZombieAmount; index++) spawnOne("moonboost", index);
   for (let index = 0; index < ASCEND_CONFIG.flightZombieAmount; index++) spawnOne("flight", index);
   runtime.zombieItemsSpawnedAt = Instance.GetGameTime();
+  if (ASCEND_CONFIG.moonboostZombieAmount > 0 || ASCEND_CONFIG.flightZombieAmount > 0) {
+    announceRepeated(`[ASCEND ENDING] ${ASCEND_CONFIG.moonboostZombieAmount} Z-moonboost + `
+      + `${ASCEND_CONFIG.flightZombieAmount} Z-flight items spawned`);
+    endingTask(runtime, 1.03, () => announceRepeated("[ASCEND ENDING] (Available at TP/start of previous stage)"));
+  }
 }
 
 function clearAscendFlightItems(runtime) {
@@ -17923,7 +18070,7 @@ function beginAscension(runtime) {
   runtime.nextAscendTickAt = runtime.ascendStartedAt;
   runtime.fadeTicking = false;
   triggerAscendFade(runtime, "ascension", runtime.ascendStartedAt);
-  announce("ASCEND ending: the ascension has begun");
+  announceRepeated("[ASCEND ENDING] THE ASCENSION HAS BEGUN!");
 }
 
 function resolveAscension(runtime, { roundEnded = false } = {}) {
@@ -17946,6 +18093,11 @@ function resolveAscension(runtime, { roundEnded = false } = {}) {
   runtime.safeMovementType = "none";
   for (const pawn of survivors) freezeAscendSurvivor(runtime, pawn);
   if (roundEnded) return;
+  // Source ENDINGS.ASCEND.Win() prints the result itself, not at round end.
+  if (survivors.length <= 0) announceRepeated("[ASCEND ENDING] NO HUMANS ASCENDED - YOU LOSE!");
+  else if (runtime.roundLost === true) announceRepeated("[ASCEND ENDING] YOU FAILED DURING ASCENSION - YOU LOSE!");
+  else if (survivors.length === 1) announceRepeated("[ASCEND ENDING] 1 HUMAN ASCENDED - SOLO WIN!");
+  else announceRepeated(`[ASCEND ENDING] ${survivors.length} HUMANS ASCENDED - YOU WIN!`);
   clearAscendFlightItems(runtime);
   for (const pawn of allLivingPawns()) {
     if (runtime.safePlayers.has(pawn)) continue;
@@ -17993,7 +18145,11 @@ function startAscendEnding(stageSnapshot, sourceRuntime) {
   endingTaskAt(runtime, at(ASCEND_CONFIG.defendTime + ASCEND_CONFIG.winDelay), () => resolveAscension(runtime), "ascend_settlement");
   scheduleAscendFadeTick(runtime, at(ASCEND_CONFIG.fadeStartDelay));
   playEndingMusic(runtime, ASCEND_CONFIG.music);
-  announce(`ASCEND ending started; survive for ${ASCEND_CONFIG.defendTime} seconds`);
+  endingAnnounce(runtime, 0, "[ASCEND ENDING]", 3);
+  endingAnnounce(runtime, 1.05, "[ASCEND ENDING] YOU WILL SOON ASCEND TO THE HEAVENS", 3);
+  if (ASCEND_CONFIG.defendTime > 5) endingAnnounce(runtime, 5,
+    `[ASCEND ENDING] SURVIVE FOR ${Math.trunc(ASCEND_CONFIG.defendTime - 5)}s`, 3);
+  endingCountdown(runtime, ASCEND_CONFIG.defendTime, "[ASCEND ENDING] ASCENSION IN");
   return runtime;
 }
 
@@ -18098,6 +18254,12 @@ function message(text) {
   Instance.Msg(`[ze_collective] ${text}`);
 }
 
+// Server console only, regardless of loggingEnabled: faults and debug-command
+// feedback an operator must see without spamming player chat.
+function consoleNotice(text) {
+  Instance.Msg(`[ze_collective] ${text}`);
+}
+
                                                                           
                                                                                
                                                                            
@@ -18158,10 +18320,30 @@ function playerNameMessage(player, prefix = "", affix = "", delay = 0) {
   return true;
 }
 
+// Player chat carries only Source's `say` lines (manager.nut). Diagnostics,
+// debug feedback and port-only status belong in message() (console).
 function announce(text) {
   message(text);
   const safe = String(text).replace(/[\r\n;"]/g, " ");
   Instance.ServerCommand(`say ${safe}`);
+}
+
+// Source stressed a line by re-sending it at +0.01s steps (3x, or 5x for
+// results); the duplicates land in the same chat burst.
+function announceRepeated(text, times = 3) {
+  for (let i = 0; i < times; i++) announce(text);
+}
+
+// Squirrel float tostring() is printf("%g"): 60.0 -> "60", 2/3 -> "0.666667".
+function sqNumber(value) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return String(number);
+  if (number === 0) return "0";
+  const exponent = Math.floor(Math.log10(Math.abs(number)));
+  if (exponent < -4 || exponent >= 6) {
+    return number.toExponential(5).replace(/\.?0+e/, "e").replace(/e([+-])(\d)$/, "e$10$2");
+  }
+  return String(Number(number.toPrecision(6)));
 }
 
 function createTrollMessageState() {
@@ -18306,7 +18488,37 @@ function captureRoundReport(ending) {
     escapeLevel: ending?.escape?.levelCount ?? levels.filter(level => level.special === "escape").length,
     escapeTarget: ending?.escape?.levelTarget,
     finalPyramid: ending?.finalPyramidStartedAt !== undefined,
+    finalRising: ending?.finalRising === true,
+    finaleDefaultWin: ending?.finaleDefaultWin === true,
+    infiniteFinale: ending?.kind === "FINALE" && ending?.infinite === true,
+    mapPool: ending?.kind === "FINALE" ? finaleMapPoolCount(ending) : undefined,
   };
+}
+
+// Source ListenRoundEnd result lines per ending: [repeats, extra won line].
+const ENDING_RESULT_REPEATS = Object.freeze({ RISE: 3, BRIDGE: 3 });
+
+// Chat lines Source printed at round end for this outcome. Returns
+// { lines, summary, deferred }: summary false means Source stayed silent
+// (ending_called suppresses RoundEndMessagePost on a loss).
+function roundEndChat(report, humansWon) {
+  const kind = report.endingKind;
+  if (!kind || report.debug) return { lines: [], summary: true, deferred: [] };
+  if (kind === "FINALE") {
+    if (!report.finalRising) return { lines: [], summary: humansWon || !report.finalPyramid, deferred: [] };
+    const label = report.infiniteFinale ? "[INFINITE FINALE ENDING]" : "[FINALE ENDING]";
+    if (!humansWon) return { lines: [[`${label} YOU LOST!`, 1]], summary: false, deferred: [] };
+    if (report.finaleDefaultWin) return { lines: [], summary: true, deferred: [] };
+    const tally = report.infiniteFinale
+      ? ` (${report.stage.checkoutValue ?? report.reached} levels | ${report.mapPool} map_pool)` : "";
+    return { lines: [[`${label} YOU WON - ${finaleLegitTag(true)}${tally}`, 5]], summary: true, deferred: [] };
+  }
+  // ASCEND printed its own result at settlement.
+  if (kind === "ASCEND") return { lines: [], summary: humansWon, deferred: [] };
+  const repeats = ENDING_RESULT_REPEATS[kind] ?? 1;
+  const deferred = humansWon && kind === "RACE" ? [[1.01, "[RACE ENDING] YOU ARE TRUE RACISTS!"]] : [];
+  return { lines: [[`[${kind} ENDING] ${humansWon ? "YOU WON!" : "YOU LOST!"}`, repeats]],
+    summary: humansWon, deferred };
 }
 
 function roundReportSummary(report, humansWon) {
@@ -18317,7 +18529,7 @@ function roundReportSummary(report, humansWon) {
   if (report.debug) return `debug ${report.endingKind ?? "level"} run ended`;
   if (humansWon) {
     if (finale) return stage.infiniteMode
-      ? `YOU WON THE MAP IN INFINITE MODE (${stage.checkoutValue ?? report.reached} levels) - REPEATING INFINITY MODE`
+      ? `YOU WON THE MAP IN INFINITE MODE (${stage.checkoutValue ?? report.reached} levels | ${report.mapPool ?? finaleMapPoolCount()} map_pool) - REPEATING INFINITY MODE`
       : "YOU WON THE MAP - ENABLING INFINITY MODE";
     const next = state.campaign.stageIndex >= FINALE_STAGE_INDEX ? "the finale"
       : `stage ${state.campaign.stageIndex + 1} (${campaignStageSnapshot().theme})`;
@@ -18338,12 +18550,19 @@ function roundReportSummary(report, humansWon) {
 }
 
 function printRoundReport(report, ending) {
-  if (!report || state.roundReportPrinted) return;
+  if (!report || state.roundReportPrinted) return [];
   state.roundReportPrinted = true;
+  let deferred = [];
   // Settlement advances the campaign and clears its level counter. Report
   // the pre-settlement stage and the ending's explicit outcome instead.
   const humansWon = !report.debug && !state.adminSlayActive && ending?.outcome?.humansWon === true;
-  announce(`${humansWon ? "[STAGE]" : "[ROUND END]"}${report.debug ? " [DEBUG]" : ""} ${roundReportSummary(report, humansWon)} (SID:${state.reportSessionId})`);
+  const summary = `${humansWon ? "[STAGE]" : "[ROUND END]"}${report.debug ? " [DEBUG]" : ""} ${roundReportSummary(report, humansWon)} (SID:${state.reportSessionId})`;
+  const chat = report.adminReset ? { lines: [], summary: true, deferred: [] } : roundEndChat(report, humansWon);
+  for (const [line, times] of chat.lines) announceRepeated(line, times);
+  // Debug runs and Source-silent outcomes keep the summary on the console.
+  if (chat.summary && !report.debug) announce(summary);
+  else message(summary);
+  deferred = chat.deferred;
   message("[MAP DEATH SUMMARY]");
   const levels = report.levels.slice().reverse();
   if (!levels.length) message("     no generated levels");
@@ -18353,7 +18572,7 @@ function printRoundReport(report, ending) {
   }
   // Source suppresses compact chat export in single-player. Chunk long runs
   // into bounded ASCII commands so no map IDs disappear through truncation.
-  if ((Instance.GetAllPlayerControllers()?.length ?? 0) <= 1) return;
+  if ((Instance.GetAllPlayerControllers()?.length ?? 0) <= 1) return deferred;
   let chunk = "ID_DEATHS|";
   for (const level of levels) {
     const id = level.id.replace(/^#/, "").replace(/[^a-zA-Z0-9_-]/g, "").slice(0, 64) || "unknown";
@@ -18362,6 +18581,7 @@ function printRoundReport(report, ending) {
     chunk += token;
   }
   if (levels.length) announce(chunk);
+  return deferred;
 }
 
 function findTerrainPreviewHud() {
@@ -19377,7 +19597,7 @@ function failRuntime(reason) {
   clearSourceAudio();
   clearGenericEvents();
   clearThemeModelSky();
-  if (!state.fatal) announce(`FATAL: ${reason}`);
+  if (!state.fatal) consoleNotice(`FATAL: ${reason}`);
   stopThemeMusic("fatal");
   state.themeMusic.enabled = false;
   state.fatal = true;
@@ -19405,13 +19625,14 @@ const COLLECTIVE_SKYBOX_ENTITIES = Object.freeze({
   castle: "collective_sky_castle",
   factory: "collective_sky_factory",
   hell: "collective_sky_hell",
+  silenthill_light: "collective_sky_silenthill_light",
   silenthill_dark: "collective_sky_silenthill_dark",
 });
 let collectiveSkyboxSelection = "generic";
 
 function setCollectiveSkybox(key, quiet = false) {
   if (!Object.hasOwn(COLLECTIVE_SKYBOX_ENTITIES, key)) {
-    if (!quiet) message("skybox: use generic, castle, factory, hell or silenthill_dark");
+    if (!quiet) message("skybox: use generic, castle, factory, hell, silenthill_light or silenthill_dark");
     return false;
   }
                                                                        
@@ -19420,7 +19641,7 @@ function setCollectiveSkybox(key, quiet = false) {
                                                                          
                                                                        
   const missing = targets.filter(({ name, entity }) => !validEntity(entity)
-    && (name !== "silenthill_dark" || key === "silenthill_dark"));
+    && (!name.startsWith("silenthill_") || key === name));
   if (missing.length) {
     if (!quiet) message("skybox entities missing: " + missing.map(({ target }) => target).join(", "));
     return false;
@@ -19452,7 +19673,7 @@ function resetCollectiveSkybox() {
 const THEME_MODEL_SKY_PROFILES = Object.freeze({
   generic: { sky: "generic", clouds: 2, color: [100,100,100], backgrounds: 0 },
   castle: { sky: "castle", clouds: 2, color: [0,0,0], backgrounds: 1,
-    model: "skybox_castle", spread: 5000, z: [-8000,-7500], scale: [3,3], tint: [150,150,120] },
+    model: "skybox_castle", spread: 5000, z: [-8000,-7500], scale: [1,1], tint: [150,150,120] },
   factory: { sky: "factory", clouds: 2, color: [100,150,100], backgrounds: 2,
     model: "skybox_factory", spread: 5000, z: [-5000,-4000], scale: [3,4], tint: [120,180,150] },
   temple: { sky: "castle", clouds: 2, color: [255,0,0], backgrounds: 4,
@@ -19463,7 +19684,7 @@ const THEME_MODEL_SKY_PROFILES = Object.freeze({
     model: "skybox_hell", spread: 1000, z: [-3000,3000], scale: [8,10], gray: [100,120] },
   frost: { sky: "generic", clouds: 2, color: [0,200,255], cloudExtraZ: -3500, backgrounds: 1,
     model: "skybox_frost", scale: [12,12], tint: [255,255,255], frost: true },
-  silenthill: { sky: "generic", clouds: 2, color: [100,100,100], backgrounds: 0 },
+  silenthill: { sky: "silenthill_light", clouds: 2, color: [100,100,100], backgrounds: 0 },
 });
 const themeModelSky = { active: undefined, retiring: [], serial: 0, nextTick: 0, override: undefined, failedTheme: undefined,
   silentHillDarkTarget: 0, silentHillDarkAmount: 0, missingSilentHillSkyWarned: false };
@@ -19505,7 +19726,9 @@ function themeSkySpawn(scene, model, position, yaw, scale, tint, maxAlpha = 255,
   for (const entity of spawned) if (entity !== visual && validEntity(entity)) {
     entity.Kill(); scene.entities.delete(entity);
   }
-  visual.SetEntityName("theme_sky_" + scene.serial + "_" + scene.records.length);
+  // Nothing looks sky parts up by name; one shared name avoids a new engine
+  // name string per part per theme change.
+  visual.SetEntityName("theme_sky");
   if (!authored) visual.SetModel(model);
   visual.SetModelScale(scale);
                                                                           
@@ -19534,7 +19757,7 @@ function moveThemeModelSky(scene, endZ) {
 function ensureThemeModelSky(theme, endZ = state.currentLevel?.end?.z ?? 0, force = false) {
                                                                         
                                                                            
-  if (!force && state.endingRuntime?.kind === "FINALE" && state.endingRuntime.finaleSky
+  if (!force && finaleUsesFinaleSky(state.endingRuntime) && state.endingRuntime.finaleSky
       && ["spawning", "active"].includes(state.endingRuntime.lifecycle)) return false;
   if (!force && themeModelSky.override === "off") return false;
   const key = !force && themeModelSky.override ? themeModelSky.override : theme;
@@ -19593,7 +19816,7 @@ function ensureThemeModelSky(theme, endZ = state.currentLevel?.end?.z ?? 0, forc
   }
   themeModelSky.active = scene;
   themeModelSky.failedTheme = undefined;
-  setCollectiveSkybox(profile.sky);
+  if (!setCollectiveSkybox(profile.sky, true)) setCollectiveSkybox("generic");
   return true;
 }
 function processThemeModelSky(now = Instance.GetGameTime()) {
@@ -19725,7 +19948,7 @@ function spawnEndIndicator(runtime) {
       feature: "endindicator",
     }, END_INDICATOR_MODEL);
     if (!validEntity(indicator)) throw new Error("floor indicator did not spawn");
-    indicator.SetEntityName?.(`block_${runtime.index}_endindicator`);
+    indicator.SetEntityName?.("block_endindicator");
     runtime.endIndicator = indicator;
     setEndIndicatorState(runtime, runtime.endProvider === "button" ? "button" : "touch");
                                                                             
@@ -19807,7 +20030,7 @@ function startCampaignFinale() {
   try {
     const runtime = startFinaleEnding(stageSnapshot, source);
     runtime.campaignFinale = true;
-    announce("FINALE: the fourth stage is complete; the final approach is opening");
+    message("FINALE: the fourth stage is complete; the final approach is opening");
     return true;
   } catch (error) {
     failRuntime(`campaign Finale startup failed: ${error}`);
@@ -19896,7 +20119,7 @@ function fallbackThemePreload(theme, reason, pending = state.themePreload) {
   const completion = pending?.onComplete;
   cleanupThemePreload(pending);
   detachThemePreload(pending);
-  if (!completion) announce(`theme '${theme}' resources unavailable (${reason}); continuing with authored theme models`);
+  if (!completion) consoleNotice(`theme '${theme}' resources unavailable (${reason}); continuing with authored theme models`);
   finishThemeTerrainPreload(completion ? reason : "theme_unpreloaded", completion, false);
 }
 
@@ -22865,7 +23088,8 @@ function prepareTerrainRequest(preload, request, slot) {
   const prepared = { entity, inPlace, model: request.themeName === "silenthill"
     ? silentHillDesiredModel(request.terrainModel) : request.terrainModel };
   request.preloadedTerrain = prepared;
-  entity.SetEntityName(`collective_terrain_preload_${preload.runtime.index}_${slot}`);
+  // No staging name: deployment renames the prop block_<shape>, and a
+  // per-level/slot name here only added a new engine name string per block.
   // Do not register with live terrain, Silent Hill, fades, or event ownership.
   entity.collectiveSpawnFadeAlpha = 0;
   if (prepared.model) entity.SetModel(prepared.model);
@@ -23569,7 +23793,7 @@ function spawnNativeHold(runtime, request, child) {
     throw new Error("hold: template_movelinear must spawn exactly one func_movelinear");
   }
   runtime.entities.add(driver);
-  driver.SetEntityName?.(`hold_driver_${runtime.index}_${runtime.entities.size}`);
+  assignRecycledEntityName(driver, "hold_driver");
   const anchor = spawnVisual(runtime, { ...request, feature: "holdFrame",
     angles: { pitch: 0, yaw: 0, roll: 0 } }, request.themeModel ?? "models/luffaren/collective_hold.vmdl");
   if (!validEntity(anchor) || !validEntity(child)) throw new Error("hold: native child/frame did not spawn");
@@ -23701,11 +23925,11 @@ function startGenericHoldGroup(runtime, record, announceCountdown = true) {
   const openTime = stageSnapshotForRuntime(runtime).genericHoldTime;
                                                                          
                                                                   
-  if (announceCountdown) announce(`Level ${runtime.index}: defend for ${openTime} seconds`);
+  if (announceCountdown && openTime > 0) announce(`***HOLD OPENS IN ${sqNumber(openTime)} SECONDS***`);
   schedule(openTime, () => {
+    if (announceCountdown) announce("***OPENING HOLD***");
     if (runtime.lifecycle === "destroyed" || runtime.interactionsRetired) return;
     for (const member of connected) openGenericHold(runtime, member);
-    if (announceCountdown) announce(`Level ${runtime.index}: generic hold opened`);
   }, runtime.index);
 }
 
@@ -23801,7 +24025,9 @@ function finalizeSpawned(runtime, request, spawned, preserveTemplateTransforms =
     if (!preserveTemplateTransforms) {
       entity.Teleport({ position: request.position, angles: request.angles, velocity: vec() });
     }
-    entity.SetEntityName(`block_${runtime.index}_${request.feature}`);
+    // Level-independent: readers only need the block_ prefix and feature, and
+    // a per-level index made a fresh engine name string for every level.
+    entity.SetEntityName(`block_${request.feature}`);
     runtime.entities.add(entity);
     if (request.phasingTerrain) registerPhasingTerrain(runtime, entity);
   }
@@ -24081,7 +24307,7 @@ function spawnBakedClimb(runtime, request) {
       const record = state.silentHillWorld.visuals.get(entity);
       if (record) record.restore = () => applyTerrainAppearance(entity, 0, request.renderColor);
     }
-    entity.SetEntityName(`block_${runtime.index}_${request.feature}`);
+    entity.SetEntityName(`block_${request.feature}`);
     runtime.entities.add(entity);
     if (request.phasingTerrain) registerPhasingTerrain(runtime, entity);
     visual ??= entity;
@@ -24131,7 +24357,8 @@ function spawnTriggerFeature(runtime, request) {
       entry.mode = DEBUG_DATA.teleportLanes.find((lane) => lane.group === request.group)?.mode;
       trigger.SetEntityName(`debug_teleport_${entry.mode}_trigger`);
     } else {
-      trigger.SetEntityName(`block_${runtime.index}_teleport_${request.group}_${runtime.teleportEntries?.size ?? 0}`);
+      // Only logs read this name; keep it level-independent (see finalizeSpawned).
+      trigger.SetEntityName(`block_teleport_${request.group}`);
     }
     runtime.teleportEntries ??= new Set();
     runtime.teleportEntries.add(entry);
@@ -24260,7 +24487,8 @@ function spawnTriggerFeature(runtime, request) {
     trigger.__lowgravVolume = volume;
     runtime.lowgravSpawnCounts ??= {};
     const count = runtime.lowgravSpawnCounts[request.tile] = (runtime.lowgravSpawnCounts[request.tile] ?? 0) + 1;
-    const entityName = `block_${runtime.index}_lowgrav_${request.tile}_${count}`;
+    // Only the logs below read this name; keep it level-independent.
+    const entityName = `block_lowgrav_${request.tile}`;
     trigger.SetEntityName(entityName);
     volume.outputConnections.add(connectOwnedOutput(runtime, trigger, "OnStartTouch", (data) => {
       if (!volume.active) return;
@@ -24409,8 +24637,9 @@ function spawnButtonFeature(runtime, request) {
     applyTerrainAppearance(button, 0, request.renderColor);
   }
   runtime.buttons.add(button);
-  button.SetEntityName?.(`block_${runtime.index}_${request.feature}_${record.id}_use`);
-  record.visual?.SetEntityName?.(`block_${runtime.index}_${request.feature}_${record.id}_visual`);
+  // Unique among live buttons without a new name string per level/button.
+  assignRecycledEntityName(button, `block_${request.feature}_use`);
+  if (record.visual) assignRecycledEntityName(record.visual, `block_${request.feature}_visual`);
   record.button = button;
   record.output = output;
   if (request.feature === "genericHold") {
@@ -24435,12 +24664,14 @@ function spawnButtonFeature(runtime, request) {
       if (remaining > 0) return;
       const stage = stageSnapshotForRuntime(runtime);
       const open = () => {
+        announce("***OPENING HOLD***");
         if (runtime.lifecycle === "destroyed" || runtime.interactionsRetired) return;
         openHoldGroup(runtime, request.group);
-        announce(`Level ${runtime.index}: hold ${request.group} opened`);
       };
-      if (stage.holdOpenTime > 0) schedule(stage.holdOpenTime, open, runtime.index);
-      else open();
+      if (stage.holdOpenTime > 0) {
+        announce(`***HOLD OPENS IN ${sqNumber(stage.holdOpenTime)} SECONDS***`);
+        schedule(stage.holdOpenTime, open, runtime.index);
+      } else open();
     } else if (request.feature === "endButton") {
                                                                            
                                                                           
@@ -25283,7 +25514,8 @@ function spawnLiquidPushTrigger(runtime, request) {
   }
   const trigger = spawned[0];
   runtime.entities.add(trigger);
-  trigger.SetEntityName?.(`liquid_push_${runtime.index}_${runtime.entities.size}`);
+  // Nothing looks push triggers up by name; one shared string for all.
+  trigger.SetEntityName?.("liquid_push");
   if (request.race) trigger.SetModelScale?.(RACE_CONFIG.gridSize / CONFIG.gridSize);
   fireTarget(trigger, "Disable");
   fireTarget(trigger, "SetPushDirection", `${plan.angles.pitch} ${plan.angles.yaw} ${plan.angles.roll}`);
@@ -25414,7 +25646,7 @@ function spawnElevatorFeature(runtime, request) {
     destroyEntities(spawned);
     throw new Error("elevator: template_movelinear must spawn exactly one func_movelinear");
   }
-  driver.SetEntityName(`elevator_driver_${runtime.index}_${runtime.entities.size}`);
+  assignRecycledEntityName(driver, "elevator_driver");
   runtime.entities.add(driver);
   const model = request.themeModel ?? request.model;
   const anchor = spawnVisual(runtime, { ...request, feature: "elevatorFrame",
@@ -25548,8 +25780,8 @@ function spawnNativeMoverLeg(runtime, request, model, position, destination, spe
     destroyEntities(spawned);
     throw new Error(`${request.feature}: ${FEATURE_TEMPLATE_NAMES[templateKey]} must spawn exactly one func_movelinear`);
   }
-  runtime.nativeMoverSerial = (runtime.nativeMoverSerial ?? 0) + 1;
-  driver.SetEntityName(`block_${runtime.index}_${request.feature}_driver_${runtime.nativeMoverSerial}`);
+  // Unique among live drivers (boss tail sounds bind to it by name).
+  assignRecycledEntityName(driver, `block_${request.feature}_driver`);
   runtime.entities.add(driver);
   let anchor;
   try {
@@ -25620,7 +25852,7 @@ function spawnNativeHazardPlaneTrigger(runtime, request, driver) {
   }
   const trigger = spawned[0];
   runtime.entities.add(trigger);
-  trigger.SetEntityName?.(`block_${runtime.index}_hazardPlane_trigger_${runtime.nativeMoverSerial}`);
+  trigger.SetEntityName?.("block_hazardPlane_trigger");
   fireTarget(trigger, "Disable");
   trigger.SetParent(driver);
   trigger.Teleport({ position: clone(request.position), angles, velocity: vec() });
@@ -25687,7 +25919,7 @@ function spawnHazardPlaneFeature(runtime, request) {
   leg.connections.push(connectOwnedOutput(runtime, leg.driver, "OnFullyClosed", () => reverse("Open")));
                                                                           
   if (leg.distance > 15) fireTarget(leg.driver, "Open", undefined, 0.1);
-  if (request.harsh) announce(`Level ${runtime.index}: WARNING - harsh hazard plane`);
+  if (request.harsh) announceRepeated("WARNING: HARSH INSTAKILLING HAZPLANE");
 }
 
 function retireNativeLevelMover(runtime, mover) {
@@ -26076,7 +26308,7 @@ function trapSpawnTransform(name, request) {
 
 function configureTrapController(runtime, controller, request) {
   const { name, definition, visual } = controller;
-  visual.SetEntityName?.(`trap_${name}_${runtime.index}`);
+  visual.SetEntityName?.(`trap_${name}`);
   if (name === "buttonmimic") {
     const themeName = themeProfile(request.themeName ?? runtime.themeSnapshot).name;
     const renderColor = { r: 255, g: 150, b: 150, a: 255 };
@@ -26164,7 +26396,7 @@ function spawnThighSpiderDamageHitbox(runtime, controller) {
   }
   controller.damageHitbox = hitbox;
   controller.damageHitboxHealth = controller.definition.healthSentinel + controller.health;
-  hitbox.SetEntityName?.(`trap_spider_damage_${runtime.index}_${runtime.traps.size + 1}`);
+  hitbox.SetEntityName?.("trap_spider_damage");
   hitbox.SetMaxHealth?.(controller.damageHitboxHealth);
   hitbox.SetHealth(controller.damageHitboxHealth);
   hitbox.SetColor?.({ r: 255, g: 255, b: 255, a: 0 });
@@ -27574,7 +27806,7 @@ function spawnItemFeature(runtime, request) {
     carrierBundle = spawnItemCarrier(runtime, { ...carrierRequest, itemVariant: variant }, definition, itemId);
   } catch (error) {
     if (!request.debugShowcase || error?.code !== "ITEM_AUTHORED_LMM_INCOMPLETE") throw error;
-    announce(`DEBUG: skipped '${name}' gallery item: ${error.message}`);
+    consoleNotice(`DEBUG: skipped '${name}' gallery item: ${error.message}`);
     return;
   }
                                                                             
@@ -27626,6 +27858,7 @@ function spawnItemFeature(runtime, request) {
     stripUnlocked: itemCarrierClass(definition) !== "weapon_knife",
   };
   attachItemVisual(item, item.carrier);
+  liftItemWorldVisual(item);
   applyInitialItemVisualState(item);
   if (definition.idleAnimation) {
     fireTarget(visual, "SetAnimation", definition.idleAnimation);
@@ -27952,6 +28185,29 @@ function attachItemVisual(item, carrier) {
                                                                             
                                                                             
                                             
+// The authored logic_measure_movement copies the anchor (child of the carrier)
+// onto the visual, so moving the anchor moves the visual. Spawned carriers are
+// start-constrained and upright, so a world-space lift is a local +Z lift.
+function liftItemWorldVisual(item) {
+  const lift = CONFIG.itemWorldVisualLift;
+  const anchor = item?.measureReference;
+  if (!(lift > 0) || item.worldVisualLifted || item.state === "held" || !validEntity(anchor)) return;
+  const origin = anchor.GetAbsOrigin?.();
+  if (!origin) return;
+  anchor.Teleport({ position: add(origin, vec(0, 0, lift)), velocity: vec() });
+  item.worldVisualLifted = true;
+}
+
+// Put the anchor back on its authored carrier-local pose before the held
+// visual is used; dropped items keep the authored pose (they lie on physics).
+function restoreItemWorldVisual(item, carrier) {
+  if (!item?.worldVisualLifted) return;
+  item.worldVisualLifted = false;
+  if (!validEntity(item.measureReference)) return;
+  const transform = itemVisualTransform(item, carrier, carrier);
+  if (transform) item.measureReference.Teleport({ ...transform, velocity: vec() });
+}
+
 function applyInitialItemVisualState(item) {
   if (!validEntity(item?.visual)) return;
   switch (item.name) {
@@ -28070,6 +28326,7 @@ function claimItem(item, pawn, carrier) {
 
 
   cleanupItemStripTrigger(runtime, item);
+  restoreItemWorldVisual(item, carrier);
   attachItemVisual(item, carrier);
   if (firstPickup) {
     item.nextUseAt = Math.max(
@@ -28077,6 +28334,8 @@ function claimItem(item, pawn, carrier) {
       Instance.GetGameTime() + CONFIG.itemFirstPickupCooldown,
     );
     item.readyNotified = false;
+    // Source ::ITEM_PRINT_PICKUP (on by default), first pickup only.
+    announce(`[ITEM] ${item.definition.team === 3 ? "human" : "zombie"} picked up ${itemDisplayName(item)}`);
   }
   behavior.onPickup?.(runtime, item, pawn);
   showItemTutorial(item, pawn);
@@ -28250,7 +28509,7 @@ function dropActiveWeapon(pawn) {
 function useGreasyFingers(runtime, item, holder, now) {
   const origin = holder.GetAbsOrigin?.();
   if (!origin) return false;
-  playSourceAudioCue(8735, origin);
+  playSourceAudioCue(8735, origin, {parent:holder});
   const buttonPosition = sourceItemButtonPosition(item, holder);
   spawnItemParticle(runtime, item, "explosion_child_distort01b", buttonPosition, undefined, 0.10);
   for (let yaw = 0; yaw < 360; yaw += 50) {
@@ -28332,7 +28591,7 @@ function useFling(runtime, item, holder, now) {
 function useRoar(runtime, item, holder, now) {
   const origin = holder.GetAbsOrigin?.();
   if (!origin) return false;
-  playSourceAudioCue(8638, add(origin, vec(0, 0, 50)));
+  playSourceAudioCue(8638, add(origin, vec(0, 0, 50)), {parent:holder});
   spawnItemParticles(runtime, item, ["explosion_child_distort01b", "explosion_child_distort01d_1k"],
     sourceItemButtonPosition(item, holder), undefined, 0.10);
   const direction = horizontalViewDirection(holder);
@@ -28550,8 +28809,8 @@ function usePuller(runtime, item, holder, now) {
   const effectAngles = anglesFromDirection(direction);
                                                                         
                                                                               
-  playSourceAudioCue(9330, origin);
-  playSourceAudioCue(9331, origin);
+  playSourceAudioCue(9330, origin, {parent:holder});
+  playSourceAudioCue(9331, origin, {parent:holder});
                                                                           
                                                                          
   item.visual?.SetColor?.({ r: 50, g: 0, b: 80, a: 40 });
@@ -28697,8 +28956,9 @@ function spawnBallisticZombieProjectile(runtime, item, holder, now, kind) {
     detonateAt: kind === "bomb_chuck" ? now + item.definition.fuseTime : undefined,
     nextTrailAt: item.definition.trailInterval ? now + item.definition.trailInterval : undefined,
   };
-  if (kind === "bomb_chuck") playSourceAudioCue(8532, origin);
-  if (kind === "squid") playSourceAudioCue(6779, origin);
+  visual.SetEntityName?.(`item_projectile_${controller.id}_sound_source`);
+  if (kind === "bomb_chuck") playSourceAudioCue(8532, origin, {parent:visual});
+  if (kind === "squid") playSourceAudioCue(6779, origin, {parent:visual});
   visual.Teleport?.({
     position: controller.position,
     angles: controller.angles,
@@ -28710,7 +28970,7 @@ function spawnBallisticZombieProjectile(runtime, item, holder, now, kind) {
 
 function useStone(runtime, item, holder, now) {
   spawnBallisticZombieProjectile(runtime, item, holder, now, "stone");
-  playSourceAudioCue(9609, holder.GetAbsOrigin?.() ?? item.position);
+  playSourceAudioCue(9609, holder.GetAbsOrigin?.() ?? item.position, {parent:holder});
   item.visual?.SetColor?.({ r: 255, g: 0, b: 0, a: 150 });
   return true;
 }
@@ -28958,6 +29218,32 @@ function entityName(entity) {
   return entity?.GetEntityName?.() ?? entity?.GetName?.() ?? "";
 }
 
+// Engine ForceSpawn cost grows with every spawn until a map change, and the
+// engine's entity-name strings are a suspect: per-level/per-instance serial
+// names created thousands of new strings per hour. Where a name must stay
+// unique among live entities, reuse a per-prefix slot whose holder is gone, so
+// the number of distinct names stays at peak concurrency, not total spawns.
+// Holders mostly die oldest-first, so the scan starts after the last slot
+// handed out; names that need no uniqueness use one shared string instead.
+const recycledEntityNames = new Map();
+function assignRecycledEntityName(entity, prefix) {
+  if (!validEntity(entity) || typeof entity.SetEntityName !== "function") return undefined;
+  let pool = recycledEntityNames.get(prefix);
+  if (!pool) recycledEntityNames.set(prefix, pool = { slots: [], cursor: 0 });
+  const { slots } = pool;
+  let index = -1;
+  for (let n = 0; n < slots.length && index < 0; n++) {
+    const candidate = (pool.cursor + n) % slots.length;
+    if (!validEntity(slots[candidate].entity)) index = candidate;
+  }
+  if (index < 0) index = slots.push({ name: `${prefix}_${slots.length}`, entity: undefined }) - 1;
+  pool.cursor = (index + 1) % slots.length;
+  const slot = slots[index];
+  slot.entity = entity;
+  entity.SetEntityName(slot.name);
+  return slot.name;
+}
+
 const ITEM_SOUND_EMITTER_CLASSES = new Set(["ambient_generic", "point_soundevent"]);
 
 function spawnItemSoundTemplate(runtime, item, templateKey, position, roles) {
@@ -28965,7 +29251,7 @@ function spawnItemSoundTemplate(runtime, item, templateKey, position, roles) {
   if (!template || !template.IsValid()) {
     if (!state.missingOptionalTemplateWarnings.has(templateKey)) {
       state.missingOptionalTemplateWarnings.add(templateKey);
-      announce(`WARN: optional sound template '${FEATURE_TEMPLATE_NAMES[templateKey]}' is unavailable`);
+      consoleNotice(`WARN: optional sound template '${FEATURE_TEMPLATE_NAMES[templateKey]}' is unavailable`);
     }
     return new Map();
   }
@@ -29453,7 +29739,7 @@ const SOURCE_AUDIO_CUES = Object.freeze({
                     
                                                                                   
 const PRIVATE_QUIET_AUDIO = new Set(["tp_bounce", "tp_tpbounce", "tp_tp", "boostpad", "boostpad_wet"]);
-const sourceAudio = { live: new Set(), templates: new Map(), warnings: new Set(), serial: 0, nextFollowAt: 0 };
+const sourceAudio = { live: new Set(), templates: new Map(), warnings: new Set(), nextFollowAt: 0 };
 function sourceAudioWarn(key, text) {
   if (sourceAudio.warnings.has(key)) return;
   sourceAudio.warnings.add(key);
@@ -29470,7 +29756,7 @@ function retireSourceAudio(record) {
       record.sound.Kill();
       return;
     }
-    fireTarget(record.sound, "Volume", "0");
+    if (!record.soundEvent) fireTarget(record.sound, "Volume", "0");
     fireTarget(record.sound, "StopSound");
     fireTarget(record.sound, "Kill", "", 0.02);
   }
@@ -29501,6 +29787,10 @@ function spawnSourceAudio(token, position, options = {}) {
   }
   const radius = Number(options.radius ?? 10000);
   const key = `${token}_${radius === 0 ? "global" : `r${radius}`}`;
+  if (radius > 0 && validEntity(options.parent)) {
+    const followed = spawnFollowSourceAudio(token, asset, key, position, options);
+    if (followed) return followed;
+  }
   let template = sourceAudio.templates.get(key);
   if (!validEntity(template)) {
     template = Instance.FindEntityByName(`template_audio_${key}`);
@@ -29528,7 +29818,7 @@ function spawnSourceAudio(token, position, options = {}) {
     position: clone(position), followUntil: now + life,
     expiresAt: now + Math.max(life, clipTime + 0.1), pitch, volume, radius,
     killOnly: options.killOnly === true };
-  sound.SetEntityName?.(`audio_live_${++sourceAudio.serial}_${token}`);
+  // Inputs go to the handle, so the sound needs no name of its own.
   sound.Teleport?.({position:clone(position)});
   if (validEntity(record.parent)) {
     const origin = record.parent.GetAbsOrigin?.();
@@ -29543,6 +29833,62 @@ function spawnSourceAudio(token, position, options = {}) {
   fireTarget(sound, "Volume", String(volume));
   fireTarget(sound, "Pitch", String(pitch), 0.01);
   fireTarget(sound, "Volume", String(volume), 0.02);
+  return record;
+}
+// A started ambient_generic stays where PlaySound fired (teleporting it later
+// is inaudible), so sounds owned by a moving item/system play through a
+// point_soundevent bound with SetSourceEntity, like the pizza launch sounds.
+// It has no Pitch/Volume inputs: generate_follow_soundevents.mjs bakes each
+// cue's pitch/volume into ze_collective.audio.follow.l<line>.
+function soundSourceName(entity, renameShared = false) {
+  const name = entityName(entity);
+  if (name) {
+    const sharing = Instance.FindEntitiesByName?.(name);
+    if (sharing?.length === 1) return name;
+    if (!renameShared) return undefined;
+  }
+  // Unnamed entities (and our own sound entity) are not referenced by name
+  // anywhere, so naming one is safe.
+  const assigned = assignRecycledEntityName(entity, name ? "audio_live" : "audio_source");
+  return assigned && entityName(entity) === assigned ? assigned : undefined;
+}
+function spawnFollowSourceAudio(token, asset, key, position, options) {
+  let template = sourceAudio.templates.get("follow");
+  if (!validEntity(template)) {
+    template = Instance.FindEntityByName("template_audio_follow");
+    if (validEntity(template)) sourceAudio.templates.set("follow", template);
+  }
+  if (!validEntity(template) || typeof template.ForceSpawn !== "function") {
+    sourceAudioWarn("follow", "missing template_audio_follow; moving sounds stay where they started");
+    return undefined;
+  }
+  let spawned;
+  try { spawned = spawnRoundEntities(template, position, {pitch:0,yaw:0,roll:0}) ?? []; }
+  catch (error) { sourceAudioWarn("follow-spawn", `cannot spawn template_audio_follow: ${error}`); return undefined; }
+  const sound = spawned.find(e => validEntity(e) && e.GetClassName?.() === "point_soundevent");
+  for (const e of spawned) if (e !== sound && validEntity(e)) e.Kill();
+  if (!sound) { sourceAudioWarn("follow-class", "template_audio_follow has no point_soundevent"); return undefined; }
+  const parent = options.parent, now = Instance.GetGameTime();
+  sound.Teleport?.({position:clone(position)});
+  // A shared name would bind every same-named entity, so track a parented
+  // copy of the sound entity instead of renaming the owner. The sound entity
+  // is ours: keep its template-fixup name when unique, else give it a slot.
+  let sourceName = soundSourceName(parent);
+  if (!sourceName) {
+    try { sound.SetParent?.(parent); sourceName = soundSourceName(sound, true); } catch {}
+  }
+  if (!sourceName) { sound.Kill(); return undefined; }
+  const pitch = Number(options.pitch ?? 100);
+  const life = Math.max(0.02, Number(options.lifetime ?? 0.05));
+  const clipTime = asset.seconds / Math.max(0.01, pitch / 100);
+  const record = { token, sound, owner: options.owner, parent, soundEvent: true,
+    position: clone(position), followUntil: now + life,
+    expiresAt: now + Math.max(life, clipTime + 0.1), pitch, volume: Number(options.volume ?? 10), radius: Number(options.radius),
+    killOnly: options.killOnly === true };
+  sourceAudio.live.add(record);
+  fireTarget(sound, "SetSoundEventName", options.followEvent ?? `ze_collective.audio.follow.${key}`);
+  fireTarget(sound, "SetSourceEntity", sourceName);
+  fireTarget(sound, "StartSound");
   return record;
 }
 function processSourceAudio(now) {
@@ -29567,9 +29913,12 @@ function playSourceAudioCue(line, position, options = {}) {
                                                                              
   const radius = Array.isArray(authoredRadius)
     ? Math.round(sourceAudioSample(authoredRadius) / 500) * 500 : authoredRadius;
+  // An explicit parent from the call site means the sound belongs to that
+  // moving item/system, whatever the Source cue's own follow flag was.
   return playCatalogSound(token, position, { radius, lifetime:sourceAudioSample(lifetime),
     pitch:sourceAudioSample(pitch), volume:sourceAudioSample(volume), ...options,
-    parent: follow ? options.parent : undefined });
+    parent: options.parent,
+    followEvent: Array.isArray(authoredRadius) ? undefined : `ze_collective.audio.follow.l${line}` });
 }
 function playSourceAudioStack(lines, position, options = {}) {
   let played = false;
@@ -29827,8 +30176,9 @@ function restoreDestructoHammerReady(runtime, item) {
 }
 
 function useHealOrb(runtime, item, holder, now) {
-  if (!deployHealOrb(runtime, holder, item, now)) return false;
-  playSourceAudioStack([11554, 11555, 11556], add(holder.GetAbsOrigin?.() ?? item.position, vec(0, 0, 48)));
+  const orb = deployHealOrb(runtime, holder, item, now);
+  if (!orb) return false;
+  playSourceAudioStack([11554, 11555, 11556], orb.position, {parent:orb.visual});
   item.spent = true;
   return { success: true, deferConsume: true };
 }
@@ -29895,7 +30245,7 @@ function tickPiggyback(runtime, item, holder) {
 
 function useMoonBoost(runtime, item, holder) {
   const velocity = holder.GetAbsVelocity?.() ?? vec();
-  playSourceAudioCue(11617, holder.GetAbsOrigin?.() ?? item.position);
+  playSourceAudioCue(11617, holder.GetAbsOrigin?.() ?? item.position, {parent:holder});
   const moonPosition = clone(item.carrier?.GetAbsOrigin?.() ?? holder.GetAbsOrigin?.() ?? item.position);
   spawnItemParticles(runtime, item, ["explosion_child_distort01b", "chicken_gone"], moonPosition, undefined, 0.10);
   holder.Teleport({ velocity: add(velocity, vec(0, 0, 500)) });
@@ -29910,7 +30260,7 @@ function onMiniSlotsPickup(runtime, item) {
 }
 
 function useMiniSlots(runtime, item, holder) {
-  playSourceAudioCue(7535, add(holder.GetAbsOrigin?.() ?? item.position, vec(0, 0, 48)));
+  playSourceAudioCue(7535, add(holder.GetAbsOrigin?.() ?? item.position, vec(0, 0, 48)), {parent:holder});
   fireTarget(item.visual, "SetAnimation", "spin");
   fireTarget(item.visual, "SetDefaultAnimation", "spin", 0.02);
   fireTarget(item.visual, "SetPlaybackRate", "11", 0.03);
@@ -29927,6 +30277,7 @@ function useMiniSlots(runtime, item, holder) {
     playSourceAudioCue(
       won ? 5680 : 5689,
       add(item.visual?.GetAbsOrigin?.() ?? item.position, vec(0, 0, 48)),
+      {parent:user},
     );
   });
   return true;
@@ -29965,7 +30316,9 @@ function tickBhopSteroids(runtime, item, holder, now) {
     stopBhopSteroids(runtime, item);
     return;
   }
-  const elapsed = Math.max(0, Math.min(0.25, now - (item.data.bhopLastAt ?? now)));
+  // Charge real elapsed time. A per-tick cap let server hitches stretch the
+  // 30 fuel past its wall-clock duration (EntWatch/song ended, bhop kept going).
+  const elapsed = Math.max(0, now - (item.data.bhopLastAt ?? now));
   item.data.bhopLastAt = now;
   item.fuel = Math.max(0, item.fuel - elapsed);
   syncItemEntWatchFuel(item);
@@ -30099,8 +30452,8 @@ function resolveBaguetteSwing(runtime, item, holder) {
 function useBaguette(runtime, item, holder) {
   if (!infectionHasStarted()) return false;
   const swingOrigin = holder.GetAbsOrigin?.() ?? item.position;
-  playSourceAudioCue(7479, swingOrigin);
-  playSourceAudioCue(7480, swingOrigin);
+  playSourceAudioCue(7479, swingOrigin, {parent:holder});
+  playSourceAudioCue(7480, swingOrigin, {parent:holder});
   fireTarget(item.visual, "SetAnimation", `swing_${((item.data.swing ?? 0) % 2) + 1}`);
   fireTarget(item.visual, "SetPlaybackRate", "0.1", 0.01);
   fireTarget(item.visual, "SetPlaybackRate", "0.1", 0.03);
@@ -30486,7 +30839,7 @@ function useHackerman(runtime, item, holder, now) {
     expiresAt: now + item.definition.duration,
   };
   hurtFinaleBossAt(sourceItemButtonPosition(item, holder), item.definition.bossRadius, item.definition.bossDamage, item.definition.bossStunChance, item.definition.bossStunTimeAdd, undefined, "hackerman");
-  playSourceAudioCue(8330, add(controller.position, vec(0, 0, 50)));
+  playSourceAudioCue(8330, add(controller.position, vec(0, 0, 50)), {parent:holder});
   spawnItemParticle(runtime, item, "explosion_child_distort01b", sourceItemButtonPosition(item, holder), undefined, 0.05);
   runtime.itemDeployables.add(controller);
   spawnHackermanIndicators(runtime, item, controller.position, now);
@@ -30745,6 +31098,16 @@ function useFlight(runtime, item, holder, now) {
   item.data.flightSound = flightSounds.get("wing");
   item.data.nextFlightSoundAt = now + item.definition.flapSoundFirstDelay;
   holder.Teleport?.({ velocity: clone(item.data.flightVelocity) });
+  // Source CLIMB FlightEnabled(): each new angel is counted once per round.
+  const climb = state.endingRuntime;
+  if (climb?.kind === "CLIMB" && climb.lifecycle === "active") {
+    climb.climbAngels ??= new Set();
+    if (!climb.climbAngels.has(holder)) {
+      climb.climbAngels.add(holder);
+      const count = climb.climbAngels.size;
+      announce(`[CLIMB ENDING] ${count}${count === 1 ? " angel is approaching" : " angels are approaching"}`);
+    }
+  }
   return { success: true, deferConsume: true };
 }
 
@@ -30905,7 +31268,7 @@ function useImpostor(runtime, item, holder, now) {
   const originalModel = holder.GetModelName?.();
   const humanModel = item.definition.forceModel ?? target.GetModelName?.();
   if (humanModel) holder.SetModel?.(humanModel);
-  playSourceAudioStack([9842, 9843], add(targetPosition, vec(0, 0, 48)));
+  playSourceAudioStack([9842, 9843], add(targetPosition, vec(0, 0, 48)), {parent:target});
   holder.Teleport?.({
     position: add(targetPosition, vec(0, 0, 1)),
     angles: {
@@ -30945,6 +31308,8 @@ function useImpostor(runtime, item, holder, now) {
     nextHealthCapAt: now + item.definition.healthCapInterval,
   });
   Instance.ServerCommand("sv_disable_radar 1");
+  announce("an impostor is among us...");
+  schedule(1.01, () => announce("find and kill him before it's too late!"));
   return true;
 }
 
@@ -30962,7 +31327,8 @@ function breakTerrainForHammer(itemRuntime, item, center, now) {
     for (const entity of runtime.entities ?? []) {
       if (!validEntity(entity) || runtime.brokenTerrain.has(entity)) continue;
       const name = entity.GetEntityName?.() ?? "";
-      if (!name.startsWith(`block_${runtime.index}_`)) continue;
+      // Names are level-independent; runtime.entities already scopes the level.
+      if (!name.startsWith("block_")) continue;
       const position = entity.GetAbsOrigin?.();
       if (!position || terrainNearEndpoint(runtime, position)) continue;
       if (Math.hypot(position.x - center.x, position.y - center.y) > item.definition.tileRadius) continue;
@@ -30995,6 +31361,8 @@ function breakTerrainForHammer(itemRuntime, item, center, now) {
 }
 
 function destroyHumanItemsForHammer(center, item) {
+  // Source tallies in this order: item, peanut, claymore, earth, billye, stormblade.
+  const hits = { item: 0, peanutbutter: 0, claymore: 0, planet_earth: 0, billnye: 0, storm_blade: 0 };
   for (const runtime of activeRuntimes()) {
     for (const humanItem of [...runtime.items ?? []]) {
       if (humanItem.definition.team !== 3 || humanItem.state === "consumed") continue;
@@ -31005,8 +31373,10 @@ function destroyHumanItemsForHammer(center, item) {
         ? item.definition.heldItemRadius
         : item.definition.placedItemRadius;
       if (position && Math.hypot(position.x - center.x, position.y - center.y, position.z - center.z) <= radius) {
-        if (humanItem.state === "held")
+        if (humanItem.state === "held") {
           playerNameMessage(humanItem.holder, `DestructoHammer destructed ${itemDisplayName(humanItem)} (held by `, ")");
+          hits.item++;
+        }
         consumeItem(runtime, humanItem);
       }
     }
@@ -31018,12 +31388,22 @@ function destroyHumanItemsForHammer(center, item) {
         deployable.released = true;
         playSourceAudioStack([11126,11127,11128], position);
         cleanupDeployable(runtime, deployable);
+        hits.storm_blade++;
       } else if (
         ["peanutbutter", "claymore", "planet_earth", "billnye"].includes(deployable.kind)
         && distance <= item.definition.placedItemRadius
-      ) cleanupDeployable(runtime, deployable);
+      ) {
+        cleanupDeployable(runtime, deployable);
+        hits[deployable.kind]++;
+      }
     }
   }
+  const labels = { item: "item", peanutbutter: "peanut", claymore: "claymore", planet_earth: "earth",
+    billnye: "billye", storm_blade: "stormblade" };
+  const parts = Object.entries(hits).filter(([, count]) => count > 0)
+    .map(([kind, count]) => `${count}x_${labels[kind]}`);
+  if (parts.length) announce(`DestructoHammer destructed ${parts.join(" + ")}`);
+  else message("DestructoHammer destructed no items");
 }
 
 function useDestructoHammer(runtime, item, holder, now) {
@@ -31319,7 +31699,8 @@ function advancePlanetCombo(runtime, item, variant, position, now) {
     nextTickAt: now + 6,
     buffed: false,
   });
-  playSourceAudioStack([10475, 10477, 10477], combo.position);
+  visual.SetEntityName?.(`captain_planet_${state.nextItemEffectId}`);
+  playSourceAudioStack([10475, 10477, 10477], combo.position, {parent:visual});
   // Source ShowTheCaptain at +0.82 s, around the captain's spawn origin.
   const captainShowPosition = add(combo.position, vec(0, 0, 50));
   scheduleItemParticle(runtime, item, 0.82, (activeRuntime) => {
@@ -31328,7 +31709,7 @@ function advancePlanetCombo(runtime, item, variant, position, now) {
     captainShowPosition, undefined, 0.10);
   });
   state.planetCombo = undefined;
-  announce("Captain Planet combo completed");
+  message("Captain Planet combo completed");
 }
 
 function spawnPlanetCrystalEffect(runtime, item, controller, position, angles, type, now) {
@@ -31681,7 +32062,7 @@ function deployHealOrb(runtime, holder, item, now) {
   const growDuration = (2.3 - 0.5) / 4;
   // Engine-side backstop in case the item tick stops before removeAt.
   scheduleDeployableKill([visual], growDuration + definition.healDuration + 1.3);
-  runtime.itemDeployables.add({
+  const orb = {
     id: state.nextItemEffectId++,
     kind: "heal_orb",
     item,
@@ -31699,9 +32080,12 @@ function deployHealOrb(runtime, holder, item, now) {
     removeAt: now + growDuration + definition.healDuration + 0.3,
     nextHealAt: now + growDuration,
     grenadeRecipients: new Set(),
-  });
+  };
+  runtime.itemDeployables.add(orb);
+  // Unique name so the orb's sound can follow it (SetSourceEntity).
+  visual.SetEntityName?.(`heal_orb_active_${orb.id}`);
   playerNameMessage(holder, "", " used heal orb");
-  return true;
+  return orb;
 }
 
 function heldWeapons(pawn) {
@@ -32876,12 +33260,15 @@ function processBillNye(runtime, deployable, now, zombies) {
     deployable.startSoundPlayed = true;
     fireTarget(deployable.visual, "Skin", "1");
     hurtFinaleBossAt(add(deployable.position, vec(0, 0, 78)), definition.bossRadius, definition.bossDamage, definition.bossStunChance, definition.bossStunTimeAdd, undefined, "billnye");
-    playSourceAudioCue(7679, add(deployable.position, vec(0, 0, 78)), {parent:deployable.visual,owner:deployable});
+    // Source soundstack = 2: the VHS track is played twice on top of itself.
+    playSourceAudioStack([7679, 7679], add(deployable.position, vec(0, 0, 78)), {parent:deployable.visual,owner:deployable});
   }
   if (now >= deployable.stopsAt) {
     if (!deployable.stopSoundPlayed) {
       deployable.stopSoundPlayed = true;
       fireTarget(deployable.visual, "Skin", "0");
+      // Source Stop() kills the stacked VHS sounds before the turn-off click.
+      clearSourceAudio(deployable);
       playSourceAudioCue(7661, add(deployable.position, vec(0, 0, 78)), {parent:deployable.visual,owner:deployable});
     }
     return;
@@ -33215,7 +33602,7 @@ function processImpostor(runtime, deployable, now) {
   deployable.hidden = false;
   playerNameMessage(user, "", " revealed himself as an impostor, kill him before he kills you!");
   if (deployable.originalModel) user.SetModel?.(deployable.originalModel);
-  playSourceAudioCue(9865, add(user.GetAbsOrigin?.() ?? vec(), vec(0, 0, 48)));
+  playSourceAudioCue(9865, add(user.GetAbsOrigin?.() ?? vec(), vec(0, 0, 48)), {parent:user});
   if (!otherHiddenImpostorExists(deployable)) Instance.ServerCommand("sv_disable_radar 0");
 }
 
@@ -33953,7 +34340,7 @@ function spawnOne(request) {
     }
     // Road templates already have RACE dimensions; other terrain keeps its model.
     if (request.race && !request.raceSurfaceKey) entity.SetModelScale?.(RACE_CONFIG.gridSize / CONFIG.gridSize);
-    entity.SetEntityName(`block_${runtime.index}_${request.shape}`);
+    entity.SetEntityName(`block_${request.shape}`);
     runtime.entities.add(entity);
     registerTerrainEntity(runtime, entity, request.safe === true);
     beginTerrainSpawnFade(entity, runtime);
@@ -34056,11 +34443,13 @@ function genericEventResourceIssue(name) {
 }
 function setThemeFog(runtime) {
   if ([...state.genericEvents.active.values()].some(e => e.name === "THICK_FOG" && !e.ended)) return;
-  if (state.endingRuntime?.kind === "FINALE"
+  if (finaleUsesFinaleSky(state.endingRuntime)
       && ["spawning", "active"].includes(state.endingRuntime.lifecycle)) {
     setFinaleSkyFog(); return;
   }
-  const stage = campaignStageSnapshot().infiniteMode && !state.endingRuntime
+  // The infinite checkout Finale keeps the running infinite theme's fog, like Source.
+  const stage = campaignStageSnapshot().infiniteMode
+      && (!state.endingRuntime || (state.endingRuntime.kind === "FINALE" && state.endingRuntime.infinite))
     ? campaignStageSnapshot() : stageSnapshotForRuntime(runtime);
   if (themeProfile(stage.theme).name === "silenthill") {
     setSilentHillFog(state.silentHillWorld.visualDark); return;
@@ -34072,6 +34461,7 @@ function setThemeFog(runtime) {
   fireTarget(fog, "SetFogEndDistance", String(profile.end));
   fireTarget(fog, "SetFogMaxOpacity", String(profile.density));
   fireTarget(fog, "SetFogColor", profile.color);
+  fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
 }
 function clearGenericEvents() {
   for (const event of [...state.genericEvents.active.values()]) endGenericEvent(event, { reset: true });
@@ -34163,8 +34553,10 @@ function genericPizzaBreak(event) {
   event.pizza.broken = true;
   event.pizza.brokenAt = Instance.GetGameTime();
   event.pizza.visual?.SetColor?.({ r: 100, g: 50, b: 50, a: 255 });
-  for (const [delay, text] of [[0, "WE DID IT!"], [1.03, "the pizza of doom is flying away"], [2.06, "we are finally safe"]])
-    for (let i = 0; i < 3; i++) genericEventTask(event, delay + i * 0.01, () => announce(`EVENT: ${text}`));
+  // Source EntFire lines outlive the shrinking pizza, so they are not event-owned.
+  for (const [delay, text] of [[0, "***WE DID IT***"], [1.03, "***THE PIZZA OF DOOM IS FLYING AWAY***"],
+    [2.06, "***WE ARE FINALLY SAFE***"]])
+    schedule(delay, () => announceRepeated(text));
   return true;
 }
 
@@ -34262,8 +34654,8 @@ function startGenericBeamMove(event) {
   event.beamKillAt = now + config.lifetime;
   event.endsAt = event.beamKillAt + config.activeEndPadding;
   for (const beam of event.beams) beam.moveAt = event.beamMoveAt;
-  announce("EVENT: look out for the grid of beams above");
-  genericEventTask(event, 1.03, () => announce("EVENT: they're coming down"));
+  announceRepeated("Look out for the grid of beams above");
+  genericEventTask(event, 1.03, () => announceRepeated("They're coming down!"));
   genericEventTask(event, config.lifetime, () => retireGenericBeams(event));
   genericEventTask(event, config.lifetime + config.activeEndPadding,
     () => endGenericEvent(event, { natural: true }));
@@ -34369,9 +34761,9 @@ function spawnGenericPizza(event, runtime) {
     sound.Teleport({ position }); fireTarget(sound, "Pitch", "50");
     fireTarget(sound, "PlaySound"); fireTarget(sound, "Volume", "100");
   }
-  for (const [delay, text, repeats] of [[0.7, "WHAT THE HELL IS THAT?!", 1], [6, "LOOK UP!", 3],
-    [9, "THE PIZZA OF DOOM IS COMING OUR WAY!", 3], [11, "SHOOT IT OR PERISH!", 3]])
-    for (let i = 0; i < repeats; i++) genericEventTask(event, delay + i * 0.01, () => announce(`EVENT: ${text}`));
+  for (const [delay, text, repeats] of [[0.7, "***WHAT IS THAT...?***", 1], [6, "***LOOK UP!***", 3],
+    [9, "***THE PIZZA OF DOOM IS COMING OUR WAY***", 3], [11, "***SHOOT IT OR PERISH***", 3]])
+    genericEventTask(event, delay, () => announceRepeated(text, repeats));
   return true;
 }
 
@@ -34473,7 +34865,7 @@ function processGenericPizza(event, now) {
     pizza.pawnCenters.set(pawn, clone(hull.center));
     const contactPosition = touches ? clone(pawn.GetAbsOrigin()) : undefined;
     if (touches && genericEventKillHuman(event, pawn, pizza.visual)) {
-      genericEventTask(event, 1.55, () => announce("EVENT: THE PIZZA IS AGGRESSIVE!"));
+      schedule(1.55, () => announce("***THE PIZZA IS AGGRESSIVE***"));
       spawnGenericPizzaContactFx(event, contactPosition, now);
     }
   }
@@ -34632,9 +35024,10 @@ function spawnGenericWorldEater(event, runtime) {
     if (!validEntity(carrier) || Number(carrier.GetHealth()) <= 0) genericWorldEaterDie(event);
   });
   genericEventTask(event, 0.10, () => fireTarget(trigger, "Enable"));
-  for (const [delay, text] of [[10, "you're feeling watched"], [30, "something is coming for you"],
-    [50, "you sense a looming presence above you"]])
-    genericEventTask(event, delay, () => announce(`EVENT: ${text}`));
+  // Source SpawnVauff() queues these with EntFire; they fire even if it dies.
+  for (const [delay, text] of [[10, "You're feeling watched..."], [30, "Something is coming for you..."],
+    [50, "You sense a looming presence above you..."]])
+    schedule(delay, () => announce(text));
   return true;
 }
 
@@ -34968,6 +35361,11 @@ function genericEventVisibleAlpha(entity, baseAlpha = 255) {
 
 function endGenericEvent(event, { reset = false, natural = false } = {}) {
   if (!event || event.ended) return;
+  if (natural && !event.endLineAnnounced) {
+    event.endLineAnnounced = true;
+    const [line, times] = GENERIC_EVENT_END_LINES[event.name] ?? [];
+    if (line) announceRepeated(line, times);
+  }
                                                                        
                                                                               
   if (natural && event.name === "BIGNADES" && event.projectiles?.size) {
@@ -35114,8 +35512,8 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
     event.projectiles = new Map();
     event.acceptingThrows = true;
     event.endsAt = now + GENERIC_BIGNADES_CONFIG.duration;
-    announce("EVENT: our grenades are big and strong");
-    genericEventTask(event, 1, () => announce("EVENT: beware the knockback"));
+    announceRepeated("Our grenades are big and strong!");
+    genericEventTask(event, 1.03, () => announceRepeated("Maybe too powerful.. beware knockback!"));
   } else if (name === "KAMIKAZE") {
     if (!state.motherZombies.size || !state.spawnPlatformKilled) return false;
     event.kamikazeRuntime = event.entityRuntime;
@@ -35126,7 +35524,6 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       endGenericEvent(event);
     });
     event.endsAt = now + delay + FINALE_KAMIKAZE_CONFIG.explodeTime + 1;
-    announce("EVENT: incoming kamikaze");
   } else if (name === "PIZZADOOM") {
     const delay = GENERIC_PIZZADOOM_CONFIG.runtimeMin
       + Math.random() * (GENERIC_PIZZADOOM_CONFIG.runtimeMax - GENERIC_PIZZADOOM_CONFIG.runtimeMin);
@@ -35141,14 +35538,14 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       const humans = genericEventPlayers();
       const target = humans[Math.floor(Math.random() * humans.length)];
       event.beamOrigin = clone(target?.GetAbsOrigin?.() ?? runtime.center ?? runtime.anchor ?? vec());
-      announce("EVENT: something is happening above us");
+      announce("Something is happening above us...");
     });
     genericEventTask(event, GENERIC_BEAMGRID_CONFIG.startDelay + 0.1, () => spawnGenericBeamTick(event));
   } else if (name === "DOORHUG_BOMB") {
     if (runtime.kind === "FINALE" || runtime.raceLevel || Number(runtime.index) <= 1) return false;
     event.endsAt = now + GENERIC_DOORHUG_CONFIG.explodeTime + GENERIC_DOORHUG_CONFIG.activeEndPadding;
     genericEventTask(event, GENERIC_DOORHUG_CONFIG.spawnDelay, () => spawnGenericDoorhug(event, runtime));
-    announce("EVENT: doorhuggers watch out");
+    announceRepeated("Woah, doorhuggers watch out!");
   } else if (name === "WORLD_EATER") {
     event.endsAt = Infinity;
     if (!spawnGenericWorldEater(event, runtime)) return false;
@@ -35161,15 +35558,18 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       playSourceAudioCue(3544, pawn.GetAbsOrigin?.() ?? vec(), { recipient: pawn });
     event.lastTickAt = now + 0.05;
     state.genericEvents.pledgeUntil = event.endsAt;
+    // Source PLEDGE has no chat line; the [STATE YOUR PLEDGE] prompt is HUD-only.
     syncPledgePrompt(event);
-    announce("EVENT: pledge to do your part for the collective");
   } else if (name === "LOWGRAV") {
     state.genericEvents.fallDamageDisabledUntil = event.endsAt + 5;
-    announce("EVENT: low gravity");
+    announceRepeated("Gravity suddenly became lower for humans");
+    if (event.endsAt - now - 5 > 0) genericEventTask(event, event.endsAt - now - 5,
+      () => announceRepeated("Gravity reverts in 5s"));
   } else if (name === "BLOODLUST") {
     if (state.motherZombies.size === 0 || genericEventPlayers(2).length === 0) return false;
     state.genericEvents.bloodlustHits.clear();
-    announce("EVENT: shoot zombies to quench the bloodthirst");
+    announceRepeated("You humans suddenly feel a thirst for blood...");
+    genericEventTask(event, 1.05, () => announceRepeated("Shoot the zombies to prevent dying from bloodthirst!"));
   } else if (name === "THICK_FOG") {
     const fog = Instance.FindEntityByName("fog");
     if (!validEntity(fog)) return false;
@@ -35178,7 +35578,9 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
     fireTarget(fog, "SetFogStartDistance", "-500");
     fireTarget(fog, "SetFogEndDistance", "750");
     fireTarget(fog, "SetFogMaxOpacity", "1");
-    announce("EVENT: thick fog");
+    fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
+    genericEventTask(event, 1, () => announce("The fog is turning thick..."));
+    genericEventTask(event, 3, () => announce("We must find our way through the limited visibility"));
   } else if (name === "SILENCE") {
     event.ringingEmitter = genericSilenceEmitter();
     if (!event.ringingEmitter) return false;
@@ -35189,9 +35591,9 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
     fireTarget(event.ringingEmitter, "Volume", "10");
     fireTarget(event.ringingEmitter, "PlaySound", "");
     message("SILENCE ringing substitute requested: 15s global low-volume ring; no explosion, blindness, DSP or voice mute (game verification pending)");
-    announce("EVENT: ringing (test)");
+    for (const delay of [1, 2, 3, 4, 5]) genericEventTask(event, delay, () => announce("Our human ears are falling deaf..."));
   } else if (name === "WEAPON_JAM") {
-    announce("EVENT: weapon jam");
+    announceRepeated("Weapons jammed - RELOAD!", 5);
   } else if (name === "WALLBREAK") {
     event.targets = [];
     for (const level of activeRuntimes()) {
@@ -35202,6 +35604,8 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       }
     }
     genericEventTask(event, event.activeAt - now, () => {
+      // Source WALLBREAK.RunPost() announces at run_delay, not at Run().
+      announceRepeated("All the 'WALL' tiles are disappearing!");
       for (const target of event.targets ?? []) {
         const { entity } = target;
         if (!validEntity(entity)) continue;
@@ -35216,16 +35620,17 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
         });
       }
     });
-    announce("EVENT: wall tiles are disappearing");
   } else if (name === "PHASING") {
     event.targets = new Set();
     for (const level of activeRuntimes()) {
       for (const entity of level.terrainEntities ?? []) registerPhasingTerrain(level, entity);
       for (const entity of level.phasingTerrainEntities ?? []) registerPhasingTerrain(level, entity);
     }
-    announce("EVENT: our eyes are phasing");
+    announce("Our eyes are phasing");
+    genericEventTask(event, 1, () => announce("We can see through the world"));
+    genericEventTask(event, 2, () => announce("Tread carefully or wait it out..."));
   } else if (name === "DISTORT") {
-    announce("EVENT: our eyes are tripping out");
+    announce("Our human eyes are tripping out...");
   } else if (name === "DEBRIS") {
                                                                           
                                                                              
@@ -35259,9 +35664,9 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       event.endsAt = event.repeatAfter = Infinity;
     } else {
       genericEventTask(event, GENERIC_DEBRIS_CONFIG.duration, () => { runtime.raceRubbleStopped = true; });
-      genericEventTask(event, GENERIC_DEBRIS_CONFIG.duration + 3, () => announce("EVENT: the debris has stopped falling"));
+      genericEventTask(event, GENERIC_DEBRIS_CONFIG.duration + 3, () => announce("The debris seems to have stopped falling..."));
     }
-    announce("EVENT: watch out for falling debris");
+    announce("Watch out for falling debris!");
   } else if (name === "COLLAPSE") {
     const collapseSource = genericCollapseSource(runtime);
     const candidates = genericCollapseCandidates(collapseSource);
@@ -35281,9 +35686,9 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
       + GENERIC_COLLAPSE_CONFIG.fadeEndPadding;
     event.endsAt = now + elapsed + lastFade + 0.1;
     genericEventTask(event, elapsed + lastFade, () => finishGenericCollapse(event));
-    announce("EVENT: the old stage is unstable");
-    genericEventTask(event, 1, () => announce("EVENT: get out before it collapses"));
-    genericEventTask(event, GENERIC_COLLAPSE_CONFIG.startDelay, () => announce("EVENT: the old stage is collapsing"));
+    announceRepeated("The old stage is unstable");
+    genericEventTask(event, 1.03, () => announceRepeated("Get out of there before it collapses!"));
+    genericEventTask(event, GENERIC_COLLAPSE_CONFIG.startDelay, () => announceRepeated("The old stage is collapsing!"));
   }
   state.genericEvents.active.set(event.id, event);
   state.genericEvents.history.push({ name, level: runtime.index, at: now });
@@ -35686,7 +36091,7 @@ function startHardCodedStageEvent(runtime) {
     const trigger = spawnTriggerVolume(runtime, { templateKey: "jumpscare",
       feature: "mazeJumpscare", position, angles: { pitch: 0, yaw: 0, roll: 0 } },
       vec(-100, -100, -100), vec(100, 100, 200));
-    trigger.SetEntityName?.(`block_${runtime.index}_jumpscare`);
+    trigger.SetEntityName?.("block_jumpscare");
     runtime.mazeJumpscare = { trigger, touchers: new Set() };
     connectOwnedOutput(runtime, trigger, "OnStartTouch", data => touchMazeJumpscare(runtime, data));
     fireTarget(trigger, "Enable", "", 0.05);
@@ -35694,6 +36099,13 @@ function startHardCodedStageEvent(runtime) {
       [7, "What could go wrong?"]]) stageEventTask(runtime, delay, () => announce(line));
   } else return;
   runtime.hardCodedStageEventStarted = true;
+}
+
+// Source map_server_printout, sent ::STAGE_ENTRY_MSG_DELAY after postspawn.
+function announceLevelEntry(level) {
+  if (!level?.name) return;
+  const text = `Now entering: '${level.name}' by '${level.author}' [${level.id}]`;
+  schedule(0.7, () => announce(text));
 }
 
 function finishPendingLevel() {
@@ -35748,7 +36160,7 @@ function finishPendingLevel() {
   }
   if (!runtime.sourceGenerationScheduled)
     schedule(CONFIG.previousLevelRetention, () => cleanupExpiredLevels(runtime.index), runtime.index);
-  announce(`Level ${runtime.index}: '${runtime.name}' by ${runtime.author}`);
+  announceLevelEntry(runtime);
   setThemeFog(runtime);
   armThemeTerrainWarmup(runtime);
   if (runtime.debugTeleport) {
@@ -36401,9 +36813,15 @@ function reachEnd() {
   state.lastTriggeredEndIndicator = reached;
   const legacyRuntime = !reached.stageSnapshot;
   const delay = legacyRuntime ? CONFIG.transitionDelay : stageEndDelay(reached);
-  announce(reached.debugEndingSnapshot
-    ? `DEBUG: level ${reached.index} complete; entering ${reached.debugEndingSnapshot.ending} after the normal endpoint handoff`
-    : `Level ${reached.index} complete; generating next level in ${delay} seconds`);
+  if (reached.debugEndingSnapshot) {
+    consoleNotice(`DEBUG: level ${reached.index} complete; entering ${reached.debugEndingSnapshot.ending} after the normal endpoint handoff`);
+  }
+  // Source EndFound() / endbutton Press().
+  const found = reached.endProvider === "button" ? "END BUTTON PRESSED" : "END FOUND";
+  if (delay > 0) {
+    announce(`***${found} - GENERATING NEXT MAP IN ${sqNumber(delay)} SECONDS***`);
+    schedule(delay, () => announce("***GENERATING NEXT MAP***"));
+  } else announce(`***${found} - GENERATING NEXT MAP***`);
   if (legacyRuntime) schedule(delay, () => handoffTransition(reached), reached.index);
   else schedule(delay, () => beginTransition(reached), reached.index);
 }
@@ -37606,9 +38024,12 @@ Instance.OnRoundEnd((event = {}) => {
     if (!state.campaign.endingResolved)
       retainCampaignStage(ending?.debugForced ? "debug_race_round_end" : "round_end");
   });
-  roundCleanupStep("round report", () => printRoundReport(report, ending));
+  let deferredChat = [];
+  roundCleanupStep("round report", () => { deferredChat = printRoundReport(report, ending) ?? []; });
   // The world stays up through the round-end delay; the round restart removes it.
   releaseRoundToEngine({ preserveCampaignOutcome: true });
+  // Queued after the release so the fresh round scope keeps them.
+  for (const [delay, text] of deferredChat) schedule(delay, () => announce(text));
   if (raceAudio) scheduleRaceRoundAudio(raceAudio, winningTeam);
 });
 Instance.OnRoundStart(roundStartRuntime);
@@ -37786,7 +38207,7 @@ function debugKartsCommand(args) {
   state.debugMovementThemesMode = false;
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
-  announce("debug kart lab enabled: flat floor + 100 driveable karts; rebuilding generated area");
+  consoleNotice("debug kart lab enabled: flat floor + 100 driveable karts; rebuilding generated area");
   beginRound();
   return true;
 }
@@ -38619,7 +39040,7 @@ function debugFinaleCommand(args) {
     runtime.debugUsesFormalTimeline = true;
     runtime.debugMode = mode;
     runtime.debugSkipToEscape = skipToEscape;
-    announce(mode === "pyramid"
+    consoleNotice(mode === "pyramid"
       ? "DEBUG: entering Finale pyramid tail"
       : skipToEscape
         ? `DEBUG: entering ${infinite ? "infinite " : ""}Finale escape route (boss auto-skipped)`
@@ -38750,7 +39171,7 @@ function debugEndingCommand(args) {
   schedule(CONFIG.interactionRetirementDelay, () => {
     if (state.endingRuntime === runtime && source.lifecycle !== "destroyed") retireInteractions(source);
   }, source.index);
-  announce(`DEBUG: entering formal ${name}; restart the round before selecting another ordinary ending`);
+  consoleNotice(`DEBUG: entering formal ${name}; restart the round before selecting another ordinary ending`);
   return true;
 }
 
@@ -38834,7 +39255,7 @@ function debugRaceCommand(args) {
     runtime.debugForced = true;
     runtime.debugCommand = command || "start";
     runtime.debugUsesFormalTimeline = true;
-    announce(`DEBUG: entering formal RACE; authored RACE levels build at +${RACE_CONFIG.generateBuildTimes[0]}s and +${RACE_CONFIG.generateBuildTimes[1]}s`);
+    consoleNotice(`DEBUG: entering formal RACE; authored RACE levels build at +${RACE_CONFIG.generateBuildTimes[0]}s and +${RACE_CONFIG.generateBuildTimes[1]}s`);
     return true;
   } catch (error) {
     failRuntime(`debug RACE startup failed: ${error}`);
@@ -38933,7 +39354,7 @@ function debugLiquidFallCommand(args) {
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
   printDebugLiquidFallLayout();
-  announce("debug LIQUID FALL skin lab enabled; rebuilding generated area");
+  consoleNotice("debug LIQUID FALL skin lab enabled; rebuilding generated area");
   beginRound();
   return true;
 }
@@ -38979,7 +39400,7 @@ function debugTeleportMapCommand(args) {
   state.debugMovementThemesMode = false;
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
-  announce("debug TELEPORT lab enabled; rebuilding generated area");
+  consoleNotice("debug TELEPORT lab enabled; rebuilding generated area");
   beginRound();
   return true;
 }
@@ -39172,7 +39593,7 @@ function debugStageCommand(args) {
     }
     state.debugStageId = undefined;
     state.debugStageMirror = false;
-    announce("debug stage disabled; rebuilding generated area");
+    consoleNotice("debug stage disabled; rebuilding generated area");
     beginRound();
     return true;
   }
@@ -39193,7 +39614,7 @@ function debugStageCommand(args) {
   state.debugMovementThemesMode = false;
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
-  announce(`debug stage ${level.id} '${level.name}' by ${level.author}`
+  consoleNotice(`debug stage ${level.id} '${level.name}' by ${level.author}`
     + ` selected; mirror=${mirrored}; rebuilding generated area`);
   beginRound();
   return true;
@@ -39226,7 +39647,7 @@ function debugShowcaseCommand(args) {
   state.debugMovementThemesMode = false;
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
-  announce(`debug showcase ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+  consoleNotice(`debug showcase ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
   beginRound();
 }
 
@@ -39257,7 +39678,7 @@ function debugGravityCommand(args) {
     state.debugStageId = undefined;
     state.debugStageMirror = false;
   }
-  announce(`debug gravity lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+  consoleNotice(`debug gravity lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
   beginRound();
 }
 
@@ -39288,7 +39709,7 @@ function debugMovementThemesCommand(args) {
     state.debugStageId = undefined;
     state.debugStageMirror = false;
   }
-  announce(`debug movement themes lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+  consoleNotice(`debug movement themes lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
   beginRound();
 }
 
@@ -39330,7 +39751,7 @@ function debugAllModelsCommand(args) {
     state.debugStageId = undefined;
     state.debugStageMirror = false;
   }
-  announce(`debug all models gallery ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+  consoleNotice(`debug all models gallery ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
   beginRound();
 }
 
@@ -39363,7 +39784,7 @@ function debugSilentHillCommand(args) {
       state.debugStageId = undefined;
       state.debugStageMirror = false;
     }
-    announce(`Silent Hill theme override ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+    consoleNotice(`Silent Hill theme override ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
     beginRound();
     return;
   }
@@ -39410,7 +39831,7 @@ function debugSpidersCommand(args) {
   state.debugMovementThemesMode = false;
   state.debugAllModelsMode = false;
   state.debugTrapMode = false;
-  announce("debug flat spider lab enabled: 12 thigh spiders; rebuilding generated area");
+  consoleNotice("debug flat spider lab enabled: 12 thigh spiders; rebuilding generated area");
   beginRound();
   return true;
 }
@@ -39451,7 +39872,7 @@ function debugTrapsCommand(args) {
     state.debugStageId = undefined;
     state.debugStageMirror = false;
   }
-  announce(`debug trap pixel lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
+  consoleNotice(`debug trap pixel lab ${enabled ? "enabled" : "disabled"}; rebuilding generated area`);
   beginRound();
 }
 
