@@ -6029,10 +6029,10 @@
       },
       {
         "output": "OnPass",
-        "target": "[PR#]boss_minion_chooser_pick",
+        "target": "[PR#]lt_minion_chooser",
         "input": "Enable",
         "param": "",
-        "delay": 21,
+        "delay": 1,
         "limit": -1
       },
       {
@@ -11073,14 +11073,6 @@
         "input": "Disable",
         "param": "",
         "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "Enable",
-        "param": "",
-        "delay": 21,
         "limit": -1
       },
       {
@@ -45304,6 +45296,41 @@
         "target": "[PR#]Cyber_hueland_train",
         "input": "Stop",
         "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "InitialDelay": "0.000000",
+    "RefireTime": "20.000000",
+    "UpperRandomBound": "0.000000",
+    "LowerRandomBound": "0.000000",
+    "PauseAfterFiring": "0",
+    "UseRandomTime": "0",
+    "spawnflags": "0",
+    "StartDisabled": "1",
+    "targetname": "[PR#]lt_minion_chooser",
+    "vscripts": "",
+    "classname": "logic_timer",
+    "origin": "3643.000000 8462.000000 762.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "11183",
+    "connections": [
+      {
+        "output": "OnTimer",
+        "target": "[PR#]boss_minion_chooser_pick",
+        "input": "Enable",
+        "param": "",
+        "delay": 0.10000000149011612,
+        "limit": -1
+      },
+      {
+        "output": "OnTimer",
+        "target": "[PR#]ps_script",
+        "input": "RunScriptInput",
+        "param": "RecastTeleport",
         "delay": 0,
         "limit": -1
       }
