@@ -30,7 +30,7 @@
         "target": "[PR#]location_button",
         "input": "Unlock",
         "param": "",
-        "delay": 60,
+        "delay": 30,
         "limit": 1
       },
       {
@@ -54,7 +54,7 @@
         "target": "[PR#]location_mdl",
         "input": "StartGlowing",
         "param": "",
-        "delay": 60,
+        "delay": 30,
         "limit": 1
       },
       {
