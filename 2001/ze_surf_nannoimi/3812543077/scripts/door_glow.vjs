@@ -24,6 +24,7 @@ const CFG = {
     radiusOn: 320,        // 玩家进入这个距离 → 亮
     radiusOff: 420,       // 玩家离开到这个距离外 → 灭（必须 > radiusOn）
     interval: 0.2,        // 检测间隔（秒）
+    reassertEvery: 5.0,   // 每隔多少秒强制重发一次 Glow（回合重置会清掉发光状态，用它补回来）
 };
 
 /** @type {{name: string, ent: any, on: boolean}[]} */
@@ -60,13 +61,26 @@ function distSq(a, b) {
     return dx * dx + dy * dy + dz * dz;
 }
 
+let lastAssert = 0;   // 上次「强制重发光」的时间
+
 function think() {
     if (!resolved) resolveDoors();
+    const now = Instance.GetGameTime();
+    const reassert = now - lastAssert >= CFG.reassertEvery;
+    if (reassert) lastAssert = now;
+
     const ps = playerPositions();
     const onSq = CFG.radiusOn * CFG.radiusOn;
     const offSq = CFG.radiusOff * CFG.radiusOff;
     for (const d of doors) {
-        if (!d.ent || !d.ent.IsValid()) continue;      // 实体被 kill/替换后跳过
+        // 回合重建实体后旧句柄会失效：每 reassertEvery 秒按名字重解析一次
+        if (!d.ent || !d.ent.IsValid()) {
+            if (reassert) {
+                const list = Instance.FindEntitiesByName(d.name);
+                if (list && list.length > 0) { d.ent = list[0]; d.on = false; }
+            }
+            continue;
+        }
         const o = d.ent.GetAbsOrigin();
         if (!o) continue;
         let nearest = Number.MAX_VALUE;
@@ -74,8 +88,11 @@ function think() {
             const q = distSq(o, p);
             if (q < nearest) nearest = q;
         }
-        if (!d.on && nearest < onSq) {
-            try { d.ent.Glow(CFG.color); d.on = true; } catch (e) { /* 个别类不支持发光 */ }
+        if (nearest < onSq) {
+            // 新回合会把发光清掉、但 d.on 仍是 true，所以定期无条件重发一次
+            if (!d.on || reassert) {
+                try { d.ent.Glow(CFG.color); d.on = true; } catch (e) { /* 个别类不支持发光 */ }
+            }
         } else if (d.on && nearest > offSq) {
             try { d.ent.Unglow(); d.on = false; } catch (e) { /* 同上 */ }
         }
@@ -83,10 +100,21 @@ function think() {
     Instance.SetNextThink(Instance.GetGameTime() + CFG.interval);
 }
 
-/** 由地图 IO 的 RunScriptInput "door_glow_start" 触发（point_script 首次收到脚本输入时才会真正加载/启动本脚本） */
+/** 由地图 IO 的 RunScriptInput "door_glow_start" 触发：只把下一次检测提前。
+ *  注意不能再 SetThink —— 模块加载时已在下方注册过，重复注册会报 "Callback Think already registered"。 */
 Instance.OnScriptInput("door_glow_start", () => {
-    Instance.SetThink(think);
-    Instance.SetNextThink(Instance.GetGameTime() + 0.5);
+    Instance.SetNextThink(Instance.GetGameTime() + 0.1);
+});
+
+/** 回合重启时引擎会清掉发光，但脚本里的 d.on 仍是 true → 必须一起清零，下一回合才会重新发光 */
+Instance.OnBeginRoundRestart(() => {
+    for (const d of doors) d.on = false;
+    lastAssert = 0;
+});
+
+/** point_script 被激活时把 think 踢起来（不依赖 logic_auto） */
+Instance.OnActivate(() => {
+    Instance.SetNextThink(Instance.GetGameTime() + 0.2);
 });
 
 // think 回调只注册一次；首帧延后 1s，等地图实体全部就绪
