@@ -38,7 +38,7 @@
         "target": "[PR#]player_lightgun_target\u00260000",
         "input": "FireUser1",
         "param": "",
-        "delay": 0.10000000149011612,
+        "delay": 0,
         "limit": -1
       },
       {
@@ -97,7 +97,7 @@
     "connections": [
       {
         "output": "OnPressed",
-        "target": "[PR#]lightgun_filter",
+        "target": "[PR#]lightgun_filter\u00260000",
         "input": "TestActivator",
         "param": "",
         "delay": 0,
@@ -376,5 +376,68 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4308",
     "_template_lump_ent_index": "8"
+  },
+  {
+    "clientSideEntity": "0",
+    "filtername": "[PR#]player_lightgun\u00260000",
+    "Negated": "0",
+    "vscripts": "",
+    "targetname": "[PR#]lightgun_filter\u00260000",
+    "classname": "filter_activator_name",
+    "origin": "-57.000000 3.000000 7.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "573",
+    "_template_lump_ent_index": "9",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_button\u00260000",
+        "input": "Unlock",
+        "param": "",
+        "delay": 15,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_button\u00260000",
+        "input": "Lock",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_model\u00260000",
+        "input": "StopGlowing",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_model\u00260000",
+        "input": "StartGlowing",
+        "param": "",
+        "delay": 15,
+        "limit": -1
+      }
+    ]
   }
 ]
