@@ -2,7 +2,7 @@
 // https://github.com/Kxnrl
 
 // 原生 JS 专项修复；不含 Lua 执行层、整图表或测试命令。
-// gravity_bow_fix_20261017_r5/src/native.js
+// elves_second_lua_20261018_r9/src/native.js
 import { Instance, CSMoveType } from "cs_script/point_script";
 var roundHandlers = /* @__PURE__ */ new Set();
 var roundResetHandlers = /* @__PURE__ */ new Set();
@@ -202,7 +202,7 @@ function wiring(templates, install) {
   return { refresh, bind, connect, connections };
 }
 
-// gravity_bow_fix_20261017_r5/src/map_text.js
+// elves_second_lua_20261018_r9/src/map_text.js
 var roar = /* @__PURE__ */ new Map();
 var damp = /* @__PURE__ */ new Map();
 var zhongliCD = /* @__PURE__ */ new Map();
@@ -213,6 +213,8 @@ var inDamage = false;
 var initialized = false;
 var gravityWeapons = /* @__PURE__ */ new Set();
 var gravityCasts = 0;
+var gravityFinalAllowed = true;
+var gravityTemporaryDisabled = false;
 var missing = /* @__PURE__ */ new Set();
 var dynamic = /* @__PURE__ */ new Set();
 var items = {
@@ -233,6 +235,9 @@ loop.setInspect(() => ({
   gravityHits: gravityHits.size,
   gravityWeapons: gravityWeapons.size,
   gravityCasts,
+  gravityEnabled: gravityEnabled(),
+  gravityFinalAllowed,
+  gravityTemporaryDisabled,
 }));
 function missingFunction(name) {
   if (!missing.has(name)) {
@@ -253,8 +258,23 @@ function reset() {
   missing.clear();
   gravityWeapons.clear();
   gravityCasts = 0;
+  gravityFinalAllowed = true;
+  gravityTemporaryDisabled = false;
   ex = false;
   initialized = false;
+}
+function gravityEnabled() {
+  return gravityFinalAllowed && !gravityTemporaryDisabled;
+}
+function gravityAvailability(finalAllowed, temporaryDisabled) {
+  if (finalAllowed !== void 0) gravityFinalAllowed = finalAllowed;
+  if (temporaryDisabled !== void 0) gravityTemporaryDisabled = temporaryDisabled;
+  const ready =
+    gravityEnabled() &&
+    [...gravityWeapons].some(
+      (w) => valid(w) && live(w.GetOwner(), 3) && now() >= (zhongliCD.get(w.GetOwner()) ?? 0),
+    );
+  fire("zhongli_ready_particle", ready ? "Start" : "Stop");
 }
 function drop(p, slot) {
   const playerSlot = slot ?? (valid(p) ? p.GetPlayerController()?.GetPlayerSlot() : void 0);
@@ -287,6 +307,7 @@ function gravityHit(p, source) {
   loop.wake();
 }
 function gravityShot(p) {
+  if (!gravityEnabled()) return false;
   const template = find("zhongli_trigger_tem");
   if (!valid(template)) return false;
   const spawned = template.ForceSpawn(p.GetAbsOrigin(), p.GetAbsAngles());
@@ -302,6 +323,7 @@ function pickup(kind, p) {
   if (kind === "zhongli") {
     for (const q of players()) fire(q, "RemoveContext", "zhongli");
     fire(p, "AddContext", "zhongli:2");
+    if (!gravityEnabled()) fire("zhongli_ready_particle", "Stop");
   }
 }
 function getroar({ activator: p }) {
@@ -355,7 +377,7 @@ function tick(t) {
     if (!live(p, 3) || t >= until) {
       if (live(p, 3)) {
         fire(p, "AddContext", "zhongli:2");
-        fire("zhongli_ready_particle", "Start");
+        if (gravityEnabled()) fire("zhongli_ready_particle", "Start");
       }
       zhongliCD.delete(p);
     }
@@ -390,6 +412,7 @@ function onDamage(event) {
     const weapon = event.weapon;
     const isBow = rememberGravityWeapon(weapon);
     if (
+      gravityEnabled() &&
       live(attacker, 3) &&
       live(p, 2) &&
       isBow &&
@@ -451,22 +474,24 @@ function tianqian({ caller }) {
 }
 var io = wiring(
   [
-    "zm_life_tap_random_template",
-    "elos_curse_pick_template",
-    "heal_random_template",
-    "blizzard_random_template",
-    "frost_path_random_template",
-    "shield_random_template",
-    "wind_random_template",
-    "zhongli_random_template",
-    "zhongli_trigger_tem",
-    "zm_Circle_of_Winter_random_template",
-    "zm_flycutter_random_template",
-    "devilian_pick_template",
-    "frost_path_push_tem",
-    "ice_barrier_weapon_tmp",
-    "drg2_tem",
-    "frost_path_random_template2",
+    ...[
+      "zm_life_tap_random_template",
+      "elos_curse_pick_template",
+      "heal_random_template",
+      "blizzard_random_template",
+      "frost_path_random_template",
+      "shield_random_template",
+      "wind_random_template",
+      "zhongli_random_template",
+      "zhongli_trigger_tem",
+      "zm_Circle_of_Winter_random_template",
+      "zm_flycutter_random_template",
+      "devilian_pick_template",
+      "frost_path_push_tem",
+      "ice_barrier_weapon_tmp",
+      "drg2_tem",
+      "frost_path_random_template2",
+    ],
   ],
   (bind) => {
     for (const weapon of all("zhongli_weapon")) rememberGravityWeapon(weapon);
@@ -493,6 +518,22 @@ var io = wiring(
     bind("tianqian_finder", "OnFoundEntity", "spawn", tianqian);
     bind("grzzly_Thunder_roar_area", "OnHurtPlayer", "roar", getroar);
     bind("ex_relay1", "OnTrigger", "ex", () => (ex = true), true);
+    bind("disable_human_item_relay", "OnUser3", "gravity-off", () =>
+      gravityAvailability(void 0, true),
+    );
+    bind("disable_human_item_relay", "OnUser4", "gravity-on", () =>
+      gravityAvailability(void 0, false),
+    );
+    bind("disable_allhuman_item_relay", "OnTrigger", "gravity-final-off", () =>
+      gravityAvailability(false),
+    );
+    for (let i = 1; i <= 7; i++)
+      bind(
+        "end_random_item_case",
+        "OnCase" + String(i).padStart(2, "0"),
+        "gravity-final-" + i,
+        () => gravityAvailability(i === 7),
+      );
     for (const [name, output, method] of [
       ["life_tap_weapon", "OnPlayerPickup", "life_tapText"],
       ["Circle_of_Winter_weapon", "OnPlayerPickup", "Circle_of_WinterText"],
@@ -566,4 +607,4 @@ var io = wiring(
   },
 );
 
-Instance.Msg("SLICOO_NATIVE_LOAD:map_text:20261017-r5");
+Instance.Msg("SLICOO_NATIVE_LOAD:map_text:20261018-r9");

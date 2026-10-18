@@ -2,7 +2,7 @@
 // https://github.com/Kxnrl
 
 // 原生 JS 专项修复；不含 Lua 执行层、整图表或测试命令。
-// artifact_survival_fix_20261018_r6/src/native.js
+// elves_second_lua_20261018_r9/src/native.js
 import { Instance, CSMoveType } from "cs_script/point_script";
 var roundHandlers = /* @__PURE__ */ new Set();
 var roundResetHandlers = /* @__PURE__ */ new Set();
@@ -228,7 +228,7 @@ function wiring(templates, install) {
   return { refresh, bind, connect, connections };
 }
 
-// artifact_survival_fix_20261018_r6/src/artifact_identity.js
+// elves_second_lua_20261018_r9/src/artifact_identity.js
 var artifactTemplates = [
   "zm_flycutter_random_template",
   "zm_Circle_of_Winter_random_template",
@@ -308,7 +308,7 @@ function artifactIdentity(includeElder = false) {
   return { bind, held, drop: drop2, reset: () => records.clear(), size: () => records.size };
 }
 
-// artifact_survival_fix_20261018_r6/src/elves_attack3_area.json
+// elves_second_lua_20261018_r9/src/elves_attack3_area.json
 var elves_attack3_area_default = {
   minimum: [-1000.0001220703, -1e3, -739],
   maximum: [1000.0001220703, 1e3, 781],
@@ -350,7 +350,7 @@ var elves_attack3_area_default = {
   ],
 };
 
-// artifact_survival_fix_20261018_r6/src/volume.js
+// elves_second_lua_20261018_r9/src/volume.js
 function basis(angles) {
   const radians = Math.PI / 180;
   const pitch = (angles.pitch || 0) * radians,
@@ -436,7 +436,7 @@ function insidePreparedVolume(pawn, volume, frame) {
   return true;
 }
 
-// artifact_survival_fix_20261018_r6/src/elves.js
+// elves_second_lua_20261018_r9/src/elves.js
 var second = /* @__PURE__ */ new Map();
 var ultimate = /* @__PURE__ */ new Map();
 var roots = /* @__PURE__ */ new Map();
@@ -603,7 +603,12 @@ function discover() {
     if (!seen2.has(e)) {
       seen2.add(e);
       if (second.size >= 32) second.delete(second.keys().next().value);
-      second.set(e, { born: now(), players: /* @__PURE__ */ new Map() });
+      second.set(e, {
+        born: now(),
+        center: { ...e.GetAbsOrigin() },
+        yaw: e.GetAbsAngles().yaw,
+        players: /* @__PURE__ */ new Map(),
+      });
       const suffix = e.GetEntityName().slice("elves_attack2_particle".length);
       for (const base of [
         "elves_attack2_area",
@@ -639,43 +644,47 @@ function hitUltimate(e, r, p, t) {
     roots.set(p, { until: t + 5, next: t + 5, finalOnly: true });
   } else p.Kill();
 }
+function secondDue(s, key, age, start, end, period) {
+  if (age + 1e-6 < start || age > end + 0.12) return false;
+  const index = Math.min(
+    Math.round((end - start) / period),
+    Math.floor((age - start + 1e-6) / period),
+  );
+  if (index <= (s[key] ?? -1)) return false;
+  s[key] = index;
+  return true;
+}
 function skill2(e, r, p, t) {
   const age = t - r.born,
-    c = e.GetAbsOrigin(),
-    o = p.GetAbsOrigin(),
-    height = Math.max(36, Math.min(72, p.GetEyePosition().z - o.z + 8));
+    c = r.center,
+    o = p.GetAbsOrigin();
   const radius = Math.hypot(o.x - c.x, o.y - c.y);
-  if (radius > 360 || o.z + height < c.z - 3 || o.z > c.z + 221) return;
+  if (radius > 360) return;
   let s = r.players.get(p);
-  if (!s) r.players.set(p, (s = { push: 0, edge: 0, center: 0, pull: 0 }));
-  const d = direction(p, c, e.GetAbsAngles().yaw);
-  if (age < 6 && radius <= 300 && t + 1e-6 >= s.push) {
+  if (!s) r.players.set(p, (s = {}));
+  const d = direction(p, c, r.yaw);
+  if (radius <= 300 && secondDue(s, "push", age, 0, 6, 0.15)) {
     const v = p.GetAbsVelocity();
     move(p, { x: v.x + d.x * 300, y: v.y + d.y * 300, z: v.z + 30 });
-    s.push = s.push > 0 && t - s.push < 0.15 ? s.push + 0.15 : t + 0.15;
   }
-  if (age >= 4 && age < 8 && radius >= 300 && t + 1e-6 >= s.edge) {
+  if (radius >= 300 && secondDue(s, "edge", age, 4, 8, 0.5)) {
     damage(p, 300);
     effect(p, "elvesEdge");
     const root = roots.get(p);
     roots.set(p, { until: Math.max(root?.until ?? 0, t + 1), next: root?.next ?? t });
-    s.edge = t + 0.5;
   }
-  if (live(p, 2) && age >= 6 && age < 12 && radius <= 300 && t + 1e-6 >= s.center) {
+  if (live(p, 2) && radius <= 300 && secondDue(s, "center", age, 6, 12, 0.5)) {
     damage(p, 200);
     effect(p, "elvesCenter");
-    s.center = t + 0.5;
   }
-  if (live(p, 2) && age >= 10 && age < 13 && radius >= 60 && t + 1e-6 >= s.pull) {
+  if (live(p, 2) && radius >= 60 && secondDue(s, "pull", age, 10, 13, 0.1))
     move(p, { x: -d.x * 500, y: -d.y * 500, z: 100 });
-    s.pull = t + 0.1;
-  }
 }
 function tick(t) {
   control(t);
   const ps = second.size || ultimate.size ? players(2) : [];
   for (const [e, r] of second) {
-    if (!valid(e) || t >= r.born + 13) {
+    if (t > r.born + 13.12 || (!valid(e) && t < r.born + 12.9)) {
       second.delete(e);
       continue;
     }
@@ -783,4 +792,4 @@ Instance.OnScriptInput("silence4", () => {
 });
 Instance.OnScriptInput("jineng2", discover);
 
-Instance.Msg("SLICOO_NATIVE_LOAD:elves:20261018-r6");
+Instance.Msg("SLICOO_NATIVE_LOAD:elves:20261018-r9");

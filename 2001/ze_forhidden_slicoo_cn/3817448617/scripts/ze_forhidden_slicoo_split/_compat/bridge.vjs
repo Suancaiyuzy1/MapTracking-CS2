@@ -2,7 +2,7 @@
 // https://github.com/Kxnrl
 
 // 原生 JS 专项修复；不含 Lua 执行层、整图表或测试命令。
-// life_blizzard_lua_order_20261018_r8/src/native.js
+// elves_second_lua_20261018_r9/src/native.js
 import { Instance, CSMoveType } from "cs_script/point_script";
 var roundHandlers = /* @__PURE__ */ new Set();
 var roundResetHandlers = /* @__PURE__ */ new Set();
@@ -181,7 +181,7 @@ function wiring(templates, install) {
   return { refresh, bind, connect, connections };
 }
 
-// life_blizzard_lua_order_20261018_r8/src/effects.js
+// elves_second_lua_20261018_r9/src/effects.js
 var states = /* @__PURE__ */ new Map();
 var resetPawns = /* @__PURE__ */ new Set();
 var luaBatches = /* @__PURE__ */ new Map();
@@ -279,10 +279,11 @@ function apply(p, record, t, force = false) {
       else fast = Math.max(fast, value);
     }
   const speed = slow < 1 ? slow : fast;
+  const refreshInterval = record.effects.has("elvesCenter") ? 0.1 : 0.2;
   if (force || record.written !== speed || t >= record.refresh) {
     fire(p, "KeyValue", "speed " + speed);
     record.written = speed;
-    record.refresh = t + 0.2;
+    record.refresh = t + refreshInterval;
   }
   if (!(record.luaPending > 0)) {
     record.luaLast = void 0;
@@ -471,4 +472,4 @@ wiring(
   },
 );
 
-Instance.Msg("SLICOO_NATIVE_LOAD:effects:20261018-r8");
+Instance.Msg("SLICOO_NATIVE_LOAD:effects:20261018-r9");
