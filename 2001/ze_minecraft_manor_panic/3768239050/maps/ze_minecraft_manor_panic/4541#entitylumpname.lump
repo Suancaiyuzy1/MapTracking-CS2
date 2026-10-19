@@ -332,7 +332,7 @@
         "target": "!self",
         "input": "Disable",
         "param": "",
-        "delay": 0,
+        "delay": 0.019999999552965164,
         "limit": -1
       },
       {
@@ -356,7 +356,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 60,
+        "delay": 60.02000045776367,
         "limit": -1
       },
       {
