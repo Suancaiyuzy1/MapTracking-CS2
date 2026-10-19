@@ -216,7 +216,7 @@ function MapperReset(player) {
  */
 function VipReset(player) {
     ShowVipHud(player);
-    Instance.EntFireAtTarget({ target: player, input: "AddContext", value: "vip:1" });
+    Instance.EntFireAtTarget({ target: player, input: "AddContext", value: "vipuser:1" });
     vipPlayers.set(player, { healthTimes: 1 });
 }
 

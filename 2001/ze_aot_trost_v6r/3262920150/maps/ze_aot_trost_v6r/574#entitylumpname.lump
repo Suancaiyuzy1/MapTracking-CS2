@@ -400,22 +400,6 @@
       },
       {
         "output": "OnPass",
-        "target": "[PR#]lightgun_maker\u00260000",
-        "input": "ForceSpawn",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnPass",
-        "target": "[PR#]lightgun_sound\u00260000",
-        "input": "PlaySound",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnPass",
         "target": "[PR#]lightgun_button\u00260000",
         "input": "Lock",
         "param": "",
@@ -436,6 +420,251 @@
         "input": "StartGlowing",
         "param": "",
         "delay": 15,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]lightgun_case\u00260000",
+        "input": "PickRandom",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "Case32": "",
+    "Case31": "",
+    "Case30": "",
+    "Case29": "",
+    "Case28": "",
+    "Case27": "",
+    "Case26": "",
+    "Case25": "",
+    "Case24": "",
+    "Case23": "",
+    "Case22": "",
+    "Case21": "",
+    "Case20": "",
+    "Case19": "",
+    "Case18": "",
+    "Case17": "",
+    "Case16": "",
+    "Case15": "",
+    "Case14": "",
+    "Case13": "",
+    "Case12": "",
+    "Case11": "",
+    "Case10": "",
+    "Case09": "",
+    "Case08": "",
+    "Case07": "",
+    "Case06": "",
+    "Case05": "",
+    "Case04": "",
+    "Case03": "",
+    "Case02": "",
+    "Case01": "",
+    "filtername": "player_lightgun",
+    "vscripts": "",
+    "targetname": "[PR#]lightgun_case\u00260000",
+    "classname": "logic_case",
+    "origin": "-57.000000 24.000000 7.000000",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "4325",
+    "_template_lump_ent_index": "10",
+    "connections": [
+      {
+        "output": "OnCase01",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase04",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase04",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase05",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase05",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase06",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase06",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase07",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase07",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase08",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase08",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase09",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase09",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 0.5,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 0.5,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_maker\u00260000",
+        "input": "ForceSpawn",
+        "param": "",
+        "delay": 1,
+        "limit": -1
+      },
+      {
+        "output": "OnCase10",
+        "target": "[PR#]lightgun_sound\u00260000",
+        "input": "PlaySound",
+        "param": "",
+        "delay": 1,
         "limit": -1
       }
     ]
