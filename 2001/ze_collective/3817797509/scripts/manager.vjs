@@ -44,9 +44,6 @@ const CONFIG = Object.freeze({
   // Stage props at their final transform (hidden, collision off) so deployment
   // only re-enables them. false restores the parking-area + origin-move path.
   terrainPreloadInPlace: true,
-  // TEMPORARY inspection switch: draw in-place staged props half-transparent
-  // (collision stays off). Set back to false before release.
-  terrainPreloadDebugVisible: false,
   spawnFadeStep: 60,
   spawnFadeInterval: 0.05,
   despawnFadeStep: 10,
@@ -2006,17 +2003,23 @@ function queueSilentHillVisualChange(dark) {
 
 function setSilentHillFog(dark, restore = false) {
   if ([...state.genericEvents.active.values()].some(event => event.name === "THICK_FOG" && !event.ended)) return;
-  if (state.endingRuntime) return;
+  // CS:GO pushed the SH fade distance out to 20000 once an ending or the Finale started;
+  // the campaign Finale has its own sky fog instead.
+  const ending = state.endingRuntime !== undefined;
+  if (ending && (restore || finaleUsesFinaleSky(state.endingRuntime))) return;
   const fog = Instance.FindEntityByName?.("fog");
   if (validEntity(fog)) {
                                                                    
     fireTarget(fog, "SetFogColor", restore ? "255 255 255" : dark ? "0 0 0" : "100 100 100");
-    fireTarget(fog, "SetFogStartDistance", restore ? "1000" : dark ? "-2500" : "-1000");
-    fireTarget(fog, "SetFogEndDistance", restore ? "300000" : dark ? "2500" : "5000");
+    // Source ends: light 5000, dark 2500, ending 20000. Start is 128 (~4 player widths clear)
+    // instead of Source's -1000/-2500 so players' immediate surroundings stay unfogged.
+    fireTarget(fog, "SetFogStartDistance", restore ? "1000" : String(FOG_CLEAR_DISTANCE));
+    fireTarget(fog, "SetFogEndDistance", restore ? "300000"
+      : ending ? String(SILENTHILL_ENDING_FOG_END) : dark ? "2500" : "5000");
     fireTarget(fog, "SetFogMaxOpacity", "1");
     // CS2 gradient fog defaults to a steep falloff and never fogs env_sky; CS:GO fog was linear
     // and covered the sky, so SH uses linear falloff plus a flat sky in the fog color.
-    fireTarget(fog, "SetFogFalloffExponent", restore ? FOG_DEFAULT_FALLOFF : "1");
+    fireTarget(fog, "SetFogFalloffExponent", restore ? FOG_DEFAULT_FALLOFF : FOG_LINEAR_FALLOFF);
   }
 }
 
@@ -2922,14 +2925,42 @@ const FINALE_BOSS_CONFIG = Object.freeze({
                                                                         
                                                                              
                                                   
+// vmap fog keeps CS2's steep exponent 4 (effectively off at its 1000..300000 range). Script fog
+// ports CS:GO env_fog_controller values, which were linear, so exponent 4 left near/mid range clear.
+const FOG_DEFAULT_FALLOFF = "4";
+const FOG_LINEAR_FALLOFF = "1";
+const SILENTHILL_ENDING_FOG_END = 20000;
+// Every theme keeps ~4 player widths around players unfogged (Source started at -1000..500).
+const FOG_CLEAR_DISTANCE = 128;
+const THEME_FOG_OPACITY_SCALE = 0.3;
+// Source used modelscale 15 on the same ~300u-radius mesh, but in CS2 the clouds read far smaller
+// than Source at that size; 75 was picked in game with ze_debug_sky_models scale (10-19).
+const SKY_CLOUD_MODEL_SCALE = 75;
+// ze_debug_sky_models scale <n> sets this so clouds spawned later (theme switch, Finale) match.
+let skyCloudScaleOverride;
+function skyCloudScale() { return skyCloudScaleOverride ?? SKY_CLOUD_MODEL_SCALE; }
 const FINALE_SKY_CONFIG = Object.freeze({
   model: "models/luffaren/collective_skybox_clouds.vmdl",
   cloudCount: Object.freeze({ red: 2, black: 5 }),
-  cloudOffsetZ: -(2000 + 300),
+  // Source spawned the clouds at z -2300, parented them to a func_rotating at the origin, then moved
+  // the rotator to end.z - 2300 every 5s, so the clouds sat at end.z - 4600 at scale 15 and the bowl
+  // dome top (mesh top 150u) at end.z - 2350. In CS2 the cloud origin sits at end.z itself per user (10-19).
+  cloudOffsetZ: 0,
                                                                           
-  modelScale: 100,
+  // Finale clouds sit 4600u below the end (theme clouds 2300u), so they need their own size; 150 per user (10-19).
+  modelScale: 150,
+  // Source func_rotating maxspeed 200, fanfriction 5, spawnflags 80/82 (no Start ON, acc/dcc):
+  // still until StartFinaleBoss fires Start, then speeds up by maxspeed * fanfriction / 100 per
+  // second (about 20s to full speed); RaiseFinalElevator's Stop slows it down the same way.
+  // All seven clouds share one centre and shape at random yaws; the 32-sided rings of the copies cut
+  // through each other along meridians and showed as streaks in CS2 (gone once the 5 black ones were
+  // killed in game, 10-19). Each layer is 1% larger than the last (ring facet sag is ~0.5%) so the
+  // shells nest instead of intersecting.
+  layerScaleStep: 0.01,
   rotationSpeed: 200,
-  fogStart: -500, fogEnd: 3000, fogOpacity: 0.7,
+  rotationAcceleration: 200 * 5 / 100,
+  // Source -500..3000 at 0.7; start and opacity follow the theme fog rules (128 clear, x0.3).
+  fogStart: FOG_CLEAR_DISTANCE, fogEnd: 3000, fogOpacity: Math.round(0.7 * THEME_FOG_OPACITY_SCALE * 1000) / 1000,
   // Source tinted the clouds with SetColor 100 0 0 / 0 0 0. collective_clouds is csgo_unlitgeneric
   // since 10-18 and render colour no longer darkens it, so the tint is baked into material groups
   // of collective_skybox_clouds.vmdl (0 default, 1 finale_black, 2 finale_red); colour stays white.
@@ -3359,16 +3390,15 @@ const GENERIC_EVENT_MODEL_DEPENDENCIES = Object.freeze({
   WORLD_EATER: Object.freeze({ entity: "assetdep_generic_event_vauff_world_eater", model: GENERIC_WORLD_EATER_CONFIG.model }),
 });
 
-const FOG_DEFAULT_FALLOFF = "4";
 const THEME_FOG_PROFILES = Object.freeze({
-  generic: Object.freeze({ start: 500, end: 15000, density: 0, color: "255 255 255" }),
-  castle: Object.freeze({ start: 500, end: 10000, density: 0.20, color: "200 255 100" }),
-  factory: Object.freeze({ start: -500, end: 5000, density: 0.50, color: "0 80 50" }),
-  temple: Object.freeze({ start: -200, end: 7000, density: 0.60, color: "200 50 0" }),
-  nature: Object.freeze({ start: -1000, end: 15000, density: 0.70, color: "120 140 70" }),
-  hell: Object.freeze({ start: 500, end: 15000, density: 0.40, color: "150 0 0" }),
-  frost: Object.freeze({ start: 500, end: 15000, density: 0.40, color: "0 200 255" }),
-  silenthill: Object.freeze({ start: -1000, end: 5000, density: 1, color: "100 100 100" }),
+  generic: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 15000, density: 0, color: "255 255 255" }),
+  castle: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 10000, density: 0.20, color: "255 255 255" }),
+  factory: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 5000, density: 0.50, color: "0 80 50" }),
+  temple: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 7000, density: 0.60, color: "200 50 0" }),
+  nature: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 15000, density: 0.70, color: "120 140 70" }),
+  hell: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 15000, density: 0.40, color: "150 0 0" }),
+  frost: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 15000, density: 0.40, color: "0 200 255" }),
+  silenthill: Object.freeze({ start: FOG_CLEAR_DISTANCE, end: 5000, density: 1, color: "100 100 100" }),
 });
 const THEME_SKYBOXES = Object.freeze({
   generic: "basicsky",
@@ -3534,6 +3564,26 @@ const TEMPLATE_NAMES = Object.freeze({
   hiddenwall: "template_terrain_hiddenwall",
 
 });
+
+// Optional 2x1 packing: one ForceSpawn yields the props of two flat, same-tile
+// neighbours (ForceSpawn cost grows per call, not per entity). Each family has
+// its own pair so collision matches the single template; a map without these
+// templates keeps per-tile spawning.
+const TERRAIN_PAIR_TEMPLATE_NAMES = Object.freeze({
+  floor: "template_terrain_floor_pair",
+  platform: "template_terrain_platform_pair",
+  floorceiling: "template_terrain_floorceiling_pair",
+  tall: "template_terrain_tall_pair",
+});
+const terrainPairTemplates = new Map();
+// Terrain pool (phase 1): flat floor-family props of a normally retired level
+// are hidden in place and handed to preload staging instead of a new
+// ForceSpawn. Keyed by template so collision always matches; round-scoped, so
+// the engine's round restart drops it.
+const TERRAIN_POOL_KEYS = new Set(Object.keys(TERRAIN_PAIR_TEMPLATE_NAMES));
+const TERRAIN_POOL_MAX_PER_KEY = 200;
+// Delayed work aimed at a retired prop (fades, event tasks) must run out first.
+const TERRAIN_POOL_COOLDOWN = 5;
 
 const ENTWATCH_CARRIER_KEYS = Object.freeze([
   "squid",
@@ -3839,11 +3889,19 @@ const TRAP_DEFINITIONS = Object.freeze({
     healthBase: 300, healthPerHuman: 100,
   }),
   buttonmimic: Object.freeze({ printChat: true, pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 1, useRadius: 105 }),
-  banana: Object.freeze({ printChat: true, pool: "step", model: "models/luffaren/ck_banana.vmdl", cost: 2, radius: 8, zRange: 4, spinDegrees: 2000, spinTime: 4.0 }),
+  // Trap trigger boxes are Source trigger_multiple mins/maxs expanded by the
+  // CT hull (±16 wide, 72 tall), tested against the pawn origin.
+  banana: Object.freeze({
+    printChat: true, pool: "step", model: "models/luffaren/ck_banana.vmdl", cost: 2,
+    // Source trigger mins -2 -2 -1 / maxs 2 2 2.
+    triggerHalfSize: 18, triggerMinZ: -73, triggerMaxZ: 2,
+    spinDegrees: 2000, spinTime: 4.0,
+  }),
   flinger: Object.freeze({
     printChat: true,
     pool: "vicinity", model: "models/luffaren/heal_orb.vmdl", cost: 2,
-    triggerRadius: 150, triggerMinZ: -100, triggerMaxZ: 200,
+    // Source trigger_size 150: mins -150 -150 -100 / maxs 150 150 200.
+    triggerHalfSize: 166, triggerMinZ: -172, triggerMaxZ: 200,
     radius: 600, force: 1400, zMin: 300, zMax: 700,
   }),
   blackhole: Object.freeze({
@@ -3854,17 +3912,22 @@ const TRAP_DEFINITIONS = Object.freeze({
   }),
   spikes: Object.freeze({
     printChat: true,
-    pool: "step", model: "models/luffaren/spikes.vmdl", cost: 2, radius: 36,
-    runSpeed: 150, fallSpeed: 50, runDamage: 23, fallDamage: 132, zRange: 18,
+    pool: "step", model: "models/luffaren/spikes.vmdl", cost: 2,
+    // Source trigger mins -25 -25 -1 / maxs 25 25 16.
+    triggerHalfSize: 41, triggerMinZ: -73, triggerMaxZ: 16,
+    runSpeed: 150, fallSpeed: 50, runDamage: 23, fallDamage: 132,
   }),
   chatter_curse: Object.freeze({
-    pool: "step", model: "models/luffaren/roar.vmdl", cost: 2, radius: 12,
-    tickInterval: 0.8, damage: 2, zRange: 4,
+    pool: "step", model: "models/luffaren/roar.vmdl", cost: 2,
+    // Source trigger mins -5 -5 -1 / maxs 5 5 2 around the +5 model origin.
+    triggerHalfSize: 21, triggerMinZ: -73, triggerMaxZ: 2,
+    tickInterval: 0.8, damage: 2,
   }),
   guster: Object.freeze({
     printChat: true,
     pool: "vicinity", model: "models/luffaren/gust.vmdl", cost: 2,
-    triggerRadius: 300, triggerMinZ: -100, triggerMaxZ: 200,
+    // Source trigger_size 300 around the +40 model origin.
+    triggerHalfSize: 316, triggerMinZ: -172, triggerMaxZ: 200,
     waveSpeed: 300, waveRadius: 32, waveLifetime: 20,
     pushSpeed: 400, pushUp: 251,
   }),
@@ -3879,7 +3942,7 @@ const TRAP_DEFINITIONS = Object.freeze({
   bomb: Object.freeze({
     printChat: true,
     pool: "vicinity", model: "models/luffaren/bomb_chuck.vmdl", cost: 2,
-    triggerRadius: 150, triggerMinZ: -100, triggerMaxZ: 200,
+    triggerHalfSize: 166, triggerMinZ: -172, triggerMaxZ: 200,
     fuseTime: 8, explosionDamage: 400, explosionRadius: 400,
   }),
   explosive_barrel: Object.freeze({
@@ -3887,26 +3950,36 @@ const TRAP_DEFINITIONS = Object.freeze({
     hitsMin: 1, hitsMax: 30, explosionDamage: 200, explosionRadius: 200,
     igniteTime: 5, igniteRadius: 200,
   }),
-  mimic: Object.freeze({ printChat: true, pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 10, radius: 18, zRange: 4 }),
+  mimic: Object.freeze({
+    printChat: true, pool: "spawn", model: "models/luffaren/beartrap.vmdl", cost: 10,
+    // Source trigger mins -2 -2 -1 / maxs 2 2 2 at the tile, under the fake item.
+    triggerHalfSize: 18, triggerMinZ: -73, triggerMaxZ: 2,
+  }),
   landmine: Object.freeze({
     printChat: true,
-    pool: "step", model: "models/luffaren/landmine.vmdl", cost: 2, radius: 8, zRange: 4,
+    pool: "step", model: "models/luffaren/landmine.vmdl", cost: 2,
     // Source trigger_multiple mins -3 -3 -1 / maxs 3 3 2 touching the player hull
     // (±16 wide, 72 tall): the pawn origin may be 19 units off and up to 73 below.
     triggerHalfSize: 19, triggerMinZ: -73, triggerMaxZ: 2,
     explosionDamage: 5000, explosionRadius: 100,
   }),
   pizza: Object.freeze({
-    printChat: true, pool: "step", model: "models/luffaren/pizza.vmdl", cost: 2, radius: 12, zRange: 6,
+    printChat: true, pool: "step", model: "models/luffaren/pizza.vmdl", cost: 2,
     // Source trigger mins -4 -4 -1 / maxs 4 4 2, expanded by the player hull.
     triggerHalfSize: 20, triggerMinZ: -73, triggerMaxZ: 2,
   }),
   beartrap: Object.freeze({
     printChat: true,
     pool: "step", model: "models/luffaren/beartrap.vmdl", cost: 2,
-    radius: 12, zRange: 4, damage: 69, freezeTime: 10,
+    // Source trigger mins -4 -4 -1 / maxs 4 4 4.
+    triggerHalfSize: 20, triggerMinZ: -73, triggerMaxZ: 4,
+    damage: 69, freezeTime: 10,
   }),
 });
+
+// Source TRAPFLOOR broke on physical touch of its 94-wide tile (top at the
+// spawn position), i.e. a CT hull overlapping the block from above or a side.
+const TRAPFLOOR_TRIGGER = Object.freeze({ halfSize: 47 + 16, minZ: -73, maxZ: 2 });
 
                                                                             
                                                       
@@ -6026,6 +6099,7 @@ function createRoundScope() {
     zombieItemInflateCalledOut: new WeakSet(),
     terrainPreloadRetiring: new Set(),
     terrainPreloadRestores: [],
+    terrainPool: new Map(),       // template key -> [{ entity, readyAt }], oldest first
     themePreloadCleanup: [],
     levels: new Map(),
     roundEntities: new Set(),
@@ -7497,7 +7571,12 @@ function createEndingRuntime(kind, stageSnapshot, sourceRuntime) {
   runtime.direction = endingCardinalDirection(runtime);
   runtime.left = leftOf(runtime.direction);
   state.endingRuntime = runtime;
+  if (ending !== "FINALE") applySilentHillEndingFog();
   return runtime;
+}
+
+function applySilentHillEndingFog() {
+  if (themeProfile(campaignStageSnapshot().theme).name === "silenthill") setSilentHillFog(state.silentHillWorld.visualDark);
 }
 
 function endingPosition(runtime, forwardCell, sideCell, elevation = 0) {
@@ -14625,6 +14704,7 @@ function startFinaleEnding(stageSnapshot, sourceRuntime) {
   runtime.infinite = stageSnapshot?.finaleInfiniteMusic === true
     || sourceRuntime?.finaleInfiniteMusic === true;
   runtime.eventEvaluateInfiniteEnabled = runtime.infinite;
+  applySilentHillEndingFog();
   if (runtime.infinite) runtime.nextGenericEventAt = runtime.runStartedAt + genericInfiniteFinaleDelay();
                                                                              
                                                                             
@@ -14784,10 +14864,12 @@ function setupFinaleSky(runtime) {
     { name: "red", count: FINALE_SKY_CONFIG.cloudCount.red, skin: FINALE_SKY_CONFIG.redSkin, direction: 1 },
     { name: "black", count: FINALE_SKY_CONFIG.cloudCount.black, skin: FINALE_SKY_CONFIG.blackSkin, direction: -1 },
   ];
+  let layer = 0;
   for (const group of groups) {
     for (let index = 0; index < group.count; index++) {
       const yaw = Math.floor(Math.random() * 361);
-      const position = add(center, vec(0, 0, FINALE_SKY_CONFIG.cloudOffsetZ));
+      const position = add(center, vec(0, 0, finaleSkyCloudOffsetZ()));
+      const layerScale = 1 + FINALE_SKY_CONFIG.layerScaleStep * layer++;
       try {
         const visual = spawnVisual(runtime, {
           position,
@@ -14795,7 +14877,7 @@ function setupFinaleSky(runtime) {
           feature: `finaleSky_${group.name}_${index}`,
         }, FINALE_SKY_CONFIG.model);
         if (!validEntity(visual)) throw new Error("cloud visual did not spawn");
-        visual.SetModelScale?.(FINALE_SKY_CONFIG.modelScale);
+        visual.SetModelScale?.(finaleSkyCloudScale() * layerScale);
         visual.SetColor?.(FINALE_SKY_CONFIG.cloudColor);
         applyThemeSkin(visual, group.skin);
         fireTarget(visual, "SetDefaultAnimation", "baseidle");
@@ -14811,6 +14893,7 @@ function setupFinaleSky(runtime) {
           visual,
           group: group.name,
           center: clone(center),
+          layerScale,
           yaw,
           direction: group.direction,
         });
@@ -14821,7 +14904,8 @@ function setupFinaleSky(runtime) {
   }
   runtime.finaleSky = {
     clouds,
-    rotating: clouds.length > 0,
+    rotating: false,
+    speed: 0,
     rotation: 0,
     startedAt: Instance.GetGameTime(),
     lastTickAt: Instance.GetGameTime(),
@@ -14833,6 +14917,11 @@ function setupFinaleSky(runtime) {
     return false;
   }
   return true;
+}
+
+function finaleSkyCloudScale() { return skyCloudScaleOverride ?? FINALE_SKY_CONFIG.modelScale; }
+function finaleSkyCloudOffsetZ() {
+  return FINALE_SKY_CONFIG.cloudOffsetZ;
 }
 
 function finaleSkyCenter(runtime) {
@@ -14849,30 +14938,38 @@ function setFinaleSkyFog() {
   fireTarget(fog, "SetFogStartDistance", String(FINALE_SKY_CONFIG.fogStart));
   fireTarget(fog, "SetFogEndDistance", String(FINALE_SKY_CONFIG.fogEnd));
   fireTarget(fog, "SetFogMaxOpacity", String(FINALE_SKY_CONFIG.fogOpacity));
-  fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
+  fireTarget(fog, "SetFogFalloffExponent", FOG_LINEAR_FALLOFF);
   fireTarget(fog, "Enable");
   return true;
 }
 
 function processFinaleSky(runtime, now = Instance.GetGameTime(), elapsed) {
   const sky = runtime?.finaleSky;
-  if (!sky?.rotating || sky.clouds.length === 0) return false;
+  if (!sky || sky.clouds.length === 0) return false;
+  // Still clouds keep following end.z like Source's 5s UpdateSkyboxPos Move().
                                                                           
                                                                    
   if (sky.lastTickAt >= now) return false;
   const delta = elapsed ?? now - (sky.lastTickAt ?? now);
-  const step = FINALE_SKY_CONFIG.rotationSpeed * Math.max(0, Math.min(0.1, Number(delta) || 0));
+  const dt = Math.max(0, Math.min(0.1, Number(delta) || 0));
+  const target = sky.rotating ? FINALE_SKY_CONFIG.rotationSpeed : 0;
+  const change = FINALE_SKY_CONFIG.rotationAcceleration * dt;
+  const speed = sky.speed ?? 0;
+  sky.speed = speed < target ? Math.min(target, speed + change) : Math.max(target, speed - change);
+  const step = sky.speed * dt;
   sky.rotation = normalizeYaw(sky.rotation + step);
   const center = finaleSkyCenter(runtime);
   for (const cloud of sky.clouds) {
     if (!validEntity(cloud.visual)) continue;
+    // Still clouds only move when end.z changes; no per-tick Teleport while nothing changed.
+    if (step === 0 && cloud.center?.z === center.z) continue;
     const angles = {
       pitch: 0,
       yaw: normalizeYaw(cloud.yaw + cloud.direction * sky.rotation),
       roll: 0,
     };
     cloud.visual.Teleport?.({
-      position: add(center, vec(0, 0, FINALE_SKY_CONFIG.cloudOffsetZ)),
+      position: add(center, vec(0, 0, finaleSkyCloudOffsetZ())),
       angles,
       velocity: vec(),
     });
@@ -14880,6 +14977,15 @@ function processFinaleSky(runtime, now = Instance.GetGameTime(), elapsed) {
   }
   sky.lastTickAt = now;
   sky.tickCount = (sky.tickCount ?? 0) + 1;
+  return true;
+}
+
+// Source StartFinaleBoss: EntFire finale_skyboxrot Start (spins up from still).
+function startFinaleSky(runtime) {
+  const sky = runtime?.finaleSky;
+  if (!sky || sky.rotating || sky.clouds.length === 0) return false;
+  sky.rotating = true;
+  sky.startedRotatingAt = Instance.GetGameTime();
   return true;
 }
 
@@ -17919,6 +18025,7 @@ function startFinaleBossFight(runtime = state.endingRuntime, options = {}) {
   setSnowstormOverlayEnabled(false);
   spawnFinaleBoss(runtime, options);
   setupFinaleSky(runtime);
+  startFinaleSky(runtime);
   startFinaleBossMusic(runtime, runtime.bossStartedAt);
                                                                         
                                                                        
@@ -19398,6 +19505,11 @@ function cacheEntities(parentCosmetics = true) {
       state.templates.set(shape, entity);
     }
   }
+  terrainPairTemplates.clear();
+  for (const [shape, name] of Object.entries(TERRAIN_PAIR_TEMPLATE_NAMES)) {
+    const entity = Instance.FindEntityByName(name);
+    if (validEntity(entity) && typeof entity.ForceSpawn === "function") terrainPairTemplates.set(shape, entity);
+  }
   state.featureTemplates.clear();
   for (const [capability, name] of Object.entries(FEATURE_TEMPLATE_NAMES)) {
     const entity = Instance.FindEntityByName(name);
@@ -19673,13 +19785,16 @@ function resetCollectiveSkybox() {
 const THEME_MODEL_SKY_PROFILES = Object.freeze({
   generic: { sky: "generic", clouds: 2, color: [100,100,100], backgrounds: 0 },
   castle: { sky: "castle", clouds: 2, color: [0,0,0], backgrounds: 1,
-    model: "skybox_castle", spread: 5000, z: [-8000,-7500], scale: [1,1], tint: [150,150,120] },
+    model: "skybox_castle", spread: 5000, z: [-8000,-7500], scale: [3,3], tint: [150,150,120] },
   factory: { sky: "factory", clouds: 2, color: [100,150,100], backgrounds: 2,
     model: "skybox_factory", spread: 5000, z: [-5000,-4000], scale: [3,4], tint: [120,180,150] },
   temple: { sky: "castle", clouds: 2, color: [255,0,0], backgrounds: 4,
     model: "skybox_temple", spread: 10000, z: [-3000,3000], scale: [2,4], tint: [180,150,120], alpha: 254 },
+  // Source drew nature at 43x under fog_farz 600000; CS2's env_gradient_fog farz is 200000, which culled
+  // the whole model (nearest vertex ~72k, vines ~255k-473k). Scale and offsets shrink by the same 1/3 so
+  // the same part of the model stays inside the far plane.
   nature: { sky: "castle", clouds: 3, color: [50,150,0], backgrounds: 3,
-    model: "skybox_nature", spread: 1000, z: [-3000,3000], scale: [43,43], tint: [160,170,100] },
+    model: "skybox_nature", spread: 330, z: [-1000,1000], scale: [14,14], tint: [160,170,100] },
   hell: { sky: "hell", clouds: 1, color: [200,50,0], backgrounds: 5,
     model: "skybox_hell", spread: 1000, z: [-3000,3000], scale: [8,10], gray: [100,120] },
   frost: { sky: "generic", clouds: 2, color: [0,200,255], cloudExtraZ: -3500, backgrounds: 1,
@@ -19737,10 +19852,11 @@ function themeSkySpawn(scene, model, position, yaw, scale, tint, maxAlpha = 255,
     fireTarget(visual, "SetDefaultAnimation", "baseidle");
     fireTarget(visual, "SetAnimation", "baseidle");
   }
-  if (parent) visual.SetParent(parent);
                                                                          
   visual.Teleport({position, angles: {pitch: 0, yaw, roll: 0}, velocity: vec()});
-  const record = {visual, tint: [...tint], baseTint: [...tint], maxAlpha, alpha: undefined};
+  // Parent after placement so the position stays world space.
+  if (parent) visual.SetParent(parent);
+  const record = {visual, tint: [...tint], baseTint: [...tint], maxAlpha, alpha: undefined, position, scale};
   themeSkyAlpha(record, 0);
   scene.records.push(record);
   return record;
@@ -19780,7 +19896,7 @@ function ensureThemeModelSky(theme, endZ = state.currentLevel?.end?.z ?? 0, forc
   try {
     for (let i = 0; i < profile.clouds; i++) {
       scene.clouds.push(themeSkySpawn(scene, "models/luffaren/collective_skybox_clouds.vmdl",
-        base, Math.floor(skyRandomRange(0, 361)), 100, profile.color));
+        base, Math.floor(skyRandomRange(0, 361)), skyCloudScale(), profile.color));
     }
     for (let i = 0; i < profile.backgrounds; i++) {
       const masterIndex = key === "factory" ? i : key === "temple" ? Math.floor(i / 2) : 0;
@@ -20491,8 +20607,6 @@ function resetRoundState({ preserveCampaignOutcome = false } = {}) {
   state.silentHillWorld.active.length = 0;
   state.silentHillWorld.nextDispatchAt = 0;
   state.silentHillWorld.nextActiveAt = 0;
-  state.silentHillWorld.slowThink = undefined;
-  state.silentHillWorld.nextPerfAt = 0;
   roundCleanupStep("collective title", () => stopCollectiveTitle("round_reset"));
   roundCleanupStep("ending", () => destroyEndingRuntime(state.endingRuntime, "round_reset"));
   for (const index of [...state.levels.keys()])
@@ -21976,6 +22090,7 @@ function buildLevel(level, mirrored, index, entry, incoming, bridgeStart, buffer
 
   // A speculative level plans into its own queue until the handoff adopts it.
   const planningQueue = () => runtime.preloadRequests ?? state.spawnQueue;
+  const terrainPairCells = new Map();
   function* planPixels() {
   for (const pixel of sourcePixelProcessingOrder(CONFIG.mapSize, Math.random, rows)) {
     const { x, y } = pixel;
@@ -22252,6 +22367,11 @@ function buildLevel(level, mirrored, index, entry, incoming, bridgeStart, buffer
         themeShape,
         { sourceTile: supportTile ?? tile, themeName: debugThemeName },
       );
+      // Flat (no slope chosen) explicit-height floor-family tile: pairable.
+      if (shape === family && supportTile === undefined && !detailFloorData
+        && explicitElevation(tile) !== undefined && terrainPairTemplates.has(shape)) {
+        terrainPairCells.set(y * CONFIG.mapSize + x, { tile, request: planningQueue().at(-1) });
+      }
       if (detailFloorData) {
                                                                            
                                                                              
@@ -22284,6 +22404,7 @@ function buildLevel(level, mirrored, index, entry, incoming, bridgeStart, buffer
                                                                                
                                                                         
                                                                           
+  runtime.terrainPairs = pairFlatTerrainRequests(terrainPairCells);
   const step2QueueStart = planningQueue().length;
   if (!state.finaleEscapeActive) enqueueLevelWideMovers(runtime, rows, entry, incoming, markers.entryCenter, elevations.entry);
   enqueueBridge(runtime, bridgeStart, entry, incoming, bufferSize);
@@ -22381,6 +22502,128 @@ function enqueueSpawn(runtime, shape, position, angles, themeShape = shape, opti
     bufferBridge: options.bufferBridge === true,
   });
   runtime.remaining++;
+}
+
+// Greedy row-major 2x1 pairing of flat cells with the same tile id (same
+// family and height). Both requests keep their own queue slot and accounting.
+function pairFlatTerrainRequests(cells, size = CONFIG.mapSize) {
+  let pairs = 0;
+  for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
+    const cell = cells.get(y * size + x);
+    if (!cell || cell.request.terrainPair) continue;
+    const right = x + 1 < size ? cells.get(y * size + x + 1) : undefined;
+    const below = cells.get((y + 1) * size + x);
+    const partner = [right, below].find((other) => other && other.tile === cell.tile && !other.request.terrainPair);
+    if (!partner) continue;
+    cell.request.terrainPair = partner.request.terrainPair = { requests: [cell.request, partner.request] };
+    pairs++;
+  }
+  return pairs;
+}
+
+// The pair this request may still create with one ForceSpawn (cold or staged),
+// or undefined to use the single template (partner gone, placed or preloaded).
+function pendingTerrainPair(request) {
+  const pair = request.terrainPair;
+  if (!pair || pair.spawned || pair.failed) return undefined;
+  const partner = pair.requests.find((other) => other !== request);
+  const template = terrainPairTemplates.get(request.shape);
+  if (!partner || partner.terrainPairDone || partner.preloadedTerrain || partner.shape !== request.shape
+    || partner.levelIndex !== request.levelIndex || !validEntity(template)) {
+    pair.failed = true;
+    return undefined;
+  }
+  return { pair, partner, template };
+}
+
+// Both props of a pair template, or undefined after disabling pairs for the
+// family and destroying whatever a malformed template produced.
+function terrainPairProps(pending, spawned) {
+  const props = spawned.filter((entity) => validEntity(entity)
+    && ["prop_dynamic", "prop_dynamic_override"].includes(String(entity.GetClassName?.() ?? "").toLowerCase()));
+  if (spawned.length === 2 && props.length === 2) {
+    pending.pair.spawned = true;
+    return props;
+  }
+  const shape = pending.partner.shape;
+  destroyEntities(spawned, true);
+  pending.pair.failed = true;
+  terrainPairTemplates.delete(shape);
+  consoleNotice(`[TERRAIN PAIR] ${TERRAIN_PAIR_TEMPLATE_NAMES[shape]} must spawn two prop_dynamic`
+    + ` (got ${spawned.length}); ${shape} pairs disabled`);
+  return undefined;
+}
+
+// Spawn both props of a pair on its first cold request.
+function spawnTerrainPair(runtime, request) {
+  const pending = pendingTerrainPair(request);
+  if (!pending) return undefined;
+  const props = terrainPairProps(pending, spawnRoundEntities(pending.template, request.position, request.angles) ?? []);
+  if (!props) return undefined;
+  for (const entity of props) runtime.entities.add(entity);
+  return { own: props[0], partner: pending.partner, partnerEntity: props[1] };
+}
+
+function terrainPoolSize() {
+  let size = 0;
+  for (const bucket of state.terrainPool.values()) size += bucket.length;
+  return size;
+}
+
+// Entities a live generic event may still touch later (WALLBREAK's delayed
+// Kill, PHASING alpha, COLLAPSE pieces). Those are never pooled.
+function terrainReferencedByEvents() {
+  const referenced = new Set();
+  for (const event of state.genericEvents.active.values()) {
+    for (const list of [event.targets, event.collapsed, event.entities]) {
+      for (const item of list ?? []) referenced.add(item?.entity ?? item);
+    }
+  }
+  return referenced;
+}
+
+// Hide a retiring level's clean flat props in place instead of killing them.
+// Anything that may have been altered, or is still referenced, is killed as before.
+function releaseTerrainToPool(runtime) {
+  if (entityReleaseByEngine || !state.running || state.fatal
+    || runtime.kind || runtime.raceLevel || !runtime.terrainEntities?.size) return 0;
+  const referenced = terrainReferencedByEvents();
+  const readyAt = Instance.GetGameTime() + TERRAIN_POOL_COOLDOWN;
+  const pooled = new Set();
+  for (const entity of runtime.terrainEntities) {
+    const key = entity?.collectivePoolKey;
+    if (!key || !validEntity(entity) || referenced.has(entity) || runtime.terrainCompanions?.has(entity)
+      || runtime.phasingTerrainEntities?.has(entity) || entity.GetParent?.()) continue;
+    const bucket = state.terrainPool.get(key) ?? [];
+    if (bucket.length >= TERRAIN_POOL_MAX_PER_KEY) continue;
+    fireTarget(entity, "DisableCollision");
+    fireTarget(entity, "TurnOff");
+    state.terrainSpawnFades.delete(entity);
+    // Drop every per-placement script mark (fade alphas, base colour, placement).
+    for (const field of Object.keys(entity)) if (field.startsWith("collective")) delete entity[field];
+    bucket.push({ entity, readyAt });
+    state.terrainPool.set(key, bucket);
+    runtime.entities.delete(entity);
+    pooled.add(entity);
+  }
+  if (pooled.size) {
+    for (const [pawn, checkpoint] of state.falldownCheckpoints) {
+      if (pooled.has(checkpoint)) state.falldownCheckpoints.delete(pawn);
+    }
+  }
+  runtime.terrainPoolReleased = pooled.size;
+  return pooled.size;
+}
+
+// Oldest cooled-down pooled prop for this template, if any.
+function takePooledTerrain(key) {
+  const bucket = state.terrainPool.get(key);
+  const now = Instance.GetGameTime();
+  while (bucket?.length && bucket[0].readyAt <= now) {
+    const { entity } = bucket.shift();
+    if (validEntity(entity)) return entity;
+  }
+  return undefined;
 }
 
 function projectedWithinLimits(runtime) {
@@ -23054,10 +23297,31 @@ function prepareTerrainRequest(preload, request, slot) {
   // Parking staging stays inside engine coordinates, outside the playable limits.
   // No triggers/physics are staged either way.
   const inPlace = CONFIG.terrainPreloadInPlace === true;
-  const position = inPlace ? clone(request.position)
-    : vec(11000 + (slot % 32) * 128, 11000 + Math.floor(slot / 32) * 128, -8000);
-  const spawned = (bakedSlope ? spawnRoundEntities(template, position)
+  const parking = (index) => vec(11000 + (index % 32) * 128, 11000 + Math.floor(index / 32) * 128, -8000);
+  const position = inPlace ? clone(request.position) : parking(slot);
+  // A pooled prop from a retired level needs no ForceSpawn at all. It is
+  // hidden and non-solid; parking staging keeps staged props drawn and solid.
+  const pooled = bakedSlope || preload.kind === "finale_escape" ? undefined : takePooledTerrain(request.shape);
+  if (pooled) {
+    if (!inPlace) { fireTarget(pooled, "TurnOn"); fireTarget(pooled, "EnableCollision"); }
+    stagePreloadedTerrain(preload, request, pooled, position, false, inPlace);
+    return true;
+  }
+  // A flat pair stages both of its props with one ForceSpawn; deployment then
+  // reuses each like any staged block.
+  const pending = bakedSlope ? undefined : pendingTerrainPair(request);
+  const spawned = (pending ? spawnRoundEntities(pending.template, position, request.angles)
+    : bakedSlope ? spawnRoundEntities(template, position)
     : spawnRoundEntities(template, position, request.angles)) ?? [];
+  if (pending) {
+    const props = terrainPairProps(pending, spawned);
+    // A malformed pair template disabled its family; stage this one alone.
+    if (!props) return prepareTerrainRequest(preload, request, slot);
+    stagePreloadedTerrain(preload, request, props[0], position, false, inPlace);
+    stagePreloadedTerrain(preload, pending.partner, props[1],
+      inPlace ? clone(pending.partner.position) : parking(slot + 1), false, inPlace);
+    return 2;
+  }
   // The engine may report prop_dynamic_override as prop_dynamic; both are
   // the same static dynamic prop. Physics props and multi-entity templates stay out.
   const classNames = spawned.map(entity => String(entity?.GetClassName?.() ?? "invalid").toLowerCase());
@@ -23080,9 +23344,15 @@ function prepareTerrainRequest(preload, request, slot) {
     // null: the request stays cold, but this spawn still spent preload budget.
     return null;
   }
+  stagePreloadedTerrain(preload, request, entity, position, bakedSlope, inPlace);
+  return true;
+}
+
+// Hide one staged prop at its staging transform and hand it to its request.
+function stagePreloadedTerrain(preload, request, entity, position, bakedSlope, inPlace) {
   if (inPlace) {
     fireTarget(entity, "DisableCollision");
-    if (CONFIG.terrainPreloadDebugVisible !== true) fireTarget(entity, "TurnOff");
+    fireTarget(entity, "TurnOff");
   }
   preload.runtime.terrainPreloadedEntities.add(entity);
   const prepared = { entity, inPlace, model: request.themeName === "silenthill"
@@ -23102,12 +23372,11 @@ function prepareTerrainRequest(preload, request, slot) {
     const color = colorToEntityColor(request.renderColor) ?? { r: 255, g: 255, b: 255, a: 255 };
     entity.collectiveBaseColor = color;
     entity.collectiveBodyGroup = 0;
-    entity.SetColor({ ...color, a: inPlace && CONFIG.terrainPreloadDebugVisible === true ? 128 : 0 });
+    entity.SetColor({ ...color, a: 0 });
     fireTarget(entity, "SetBodyGroup", "Main,0");
   };
   restore();
   state.terrainPreloadRestores.push(restore);
-  return true;
 }
 
 function bakedSlopeOrientationMatches(entity, yaw) {
@@ -23193,12 +23462,14 @@ function processTerrainPreloadBudgeted(foregroundUsed) {
     let budget = CONFIG.terrainPreloadPerThink;
     while (budget > 0 && preload.cursor < runtime.preloadRequests.length && backgroundGenerationWorkAvailable()) {
       if (terrainPreloadEntityCount() >= CONFIG.terrainPreloadMaxEntities
-        || live + terrainPreloadEntityCount() >= 10000) break;
+        || live + terrainPreloadEntityCount() + terrainPoolSize() >= 10000) break;
       const request = runtime.preloadRequests[preload.cursor++];
-      if (request.kind !== "terrain") continue;
+      // A pair partner was already staged together with its first request.
+      if (request.kind !== "terrain" || request.preloadedTerrain) continue;
       let prepared;
       runGenerationWork(() => { prepared = prepareTerrainRequest(preload, request, preload.prepared); });
-      if (prepared) preload.prepared++;
+      // true: one staged block; 2: a pair (two parking slots).
+      if (prepared) preload.prepared += prepared === 2 ? 2 : 1;
       if (prepared || prepared === null) budget--;
     }
     if (!preload.ready && state.terrainPreloadRestores.length === 0
@@ -26320,9 +26591,7 @@ function configureTrapController(runtime, controller, request) {
   } else if (name === "mimic") {
     const itemName = HUMAN_ITEM_SELECTION_POOL[Math.floor(Math.random() * HUMAN_ITEM_SELECTION_POOL.length)];
     controller.fakeItemName = itemName;
-    visual.SetModel?.(ITEM_DEFINITIONS[itemName]?.model ?? ITEM_DEFINITIONS.heal_orb.model);
-    visual.SetModelScale?.(1.5);
-    visual.SetColor?.({ r: 255, g: 0, b: 0, a: 255 });
+    configureMimicItemVisual(runtime, controller, itemName);
   } else if (name === "banana") visual.SetModelScale?.(0.8);
   else if (name === "flinger") {
     visual.SetModelScale?.(0.8);
@@ -26382,6 +26651,117 @@ function configureTrapController(runtime, controller, request) {
     spawnThighSpiderDamageHitbox(runtime, controller);
   }
 }
+
+// Carrier-local anchor pose per authored item carrier template, read once.
+const itemCarrierPoseCache = new Map();
+
+function itemCarrierTemplateKind(definition, variant) {
+  const kind = itemCarrierClass(definition) === "weapon_knife" ? "knife" : "p250";
+  let templateKind = definition.carrierTemplate ?? kind;
+  if (templateKind === "planetcrystal") templateKind += `_${variant}`;
+  if (templateKind === "moonboost" && kind === "knife") templateKind = "moonboost_knife";
+  return templateKind;
+}
+
+function readItemCarrierPose(definition, variant) {
+  const templateKind = itemCarrierTemplateKind(definition, variant);
+  if (itemCarrierPoseCache.has(templateKind)) return itemCarrierPoseCache.get(templateKind);
+  let pose;
+  const spawned = spawnRoundEntities(featureTemplate(`item_carrier_${templateKind}`),
+    clone(THEME_PRELOAD_ORIGIN), { pitch: 0, yaw: 0, roll: 0 }) ?? [];
+  try {
+    const carrier = spawned.find((entity) => validEntity(entity)
+      && entity.GetClassName?.() === itemCarrierClass(definition));
+    const anchorName = `item_carrier_anchor_proto_${templateKind}`.toLowerCase();
+    const anchor = spawned.find((entity) => validEntity(entity) && entity.GetClassName?.() === "info_target"
+      && String(entity.GetEntityName?.() ?? entity.GetName?.() ?? "").toLowerCase().startsWith(anchorName));
+    if (carrier && anchor) pose = readItemMapPose(anchor, carrier);
+  } finally {
+    for (const entity of spawned) if (validEntity(entity)) entity.Kill();
+  }
+  itemCarrierPoseCache.set(templateKind, pose);
+  return pose;
+}
+
+// Source mimic spawned a real item and tinted it, so the fake copies a ground
+// item's world pose: carrier +40, authored anchor/attachment, then the lift.
+function configureMimicItemVisual(runtime, controller, itemName) {
+  const { visual } = controller;
+  const definition = ITEM_DEFINITIONS[itemName] ?? ITEM_DEFINITIONS.heal_orb;
+  const variant = itemName === "planetcrystal" ? nextPlanetCrystalVariant() : undefined;
+  controller.fakeItemVariant = variant;
+  const attachment = createItemVisualAttachment(definition);
+  if (definition.mapAuthoredAttachmentAngles) {
+    try {
+      Object.assign(attachment, readItemPrototypeAngles(itemName));
+    } catch (error) {
+      message(`WARNING: mimic '${itemName}' prototype angles unavailable: ${error.message}`);
+    }
+  }
+  let pose;
+  try {
+    pose = readItemCarrierPose(definition, variant);
+  } catch (error) {
+    message(`WARNING: mimic '${itemName}' carrier pose unavailable: ${error.message}`);
+  }
+  const origin = add(controller.position, vec(0, 0, 40));
+  const carrierAngles = { pitch: 0, yaw: 0, roll: 0 };
+  let transform;
+  if (definition.mapAuthoredVisualPose && pose) {
+    transform = applyItemMapPose(pose, origin, carrierAngles);
+  } else {
+    const anchorUp = pose ? pose.position.z + (definition.mapVisualUpCorrection ?? 0) : SOURCE_ITEM_BUTTON_ANCHOR.up;
+    transform = {
+      position: add(origin, add(
+        mul(forwardFromAngles(carrierAngles), SOURCE_ITEM_BUTTON_ANCHOR.forward + (attachment.forward ?? 0)),
+        add(mul(leftFromAngles(carrierAngles), attachment.left ?? 0),
+          mul(upFromAngles(carrierAngles), anchorUp + (attachment.up ?? 0))),
+      )),
+      angles: {
+        pitch: attachment.pitch ?? 0,
+        yaw: normalizeYaw(attachment.yaw ?? 0),
+        roll: attachment.roll ?? 0,
+      },
+    };
+  }
+  visual.SetModel?.(definition.model);
+  visual.SetModelScale?.(attachment.scale ?? definition.worldScale ?? 1);
+  visual.Teleport?.({
+    position: add(transform.position, vec(0, 0, Math.max(0, CONFIG.itemWorldVisualLift ?? 0))),
+    angles: transform.angles,
+    velocity: vec(),
+  });
+  if (variant) {
+    const colors = {
+      earth: { r: 200, g: 150, b: 0, a: 80 },
+      fire: { r: 255, g: 0, b: 0, a: 80 },
+      wind: { r: 255, g: 255, b: 255, a: 80 },
+      water: { r: 0, g: 255, b: 255, a: 80 },
+    };
+    visual.SetColor?.(colors[variant] ?? colors.wind);
+  } else {
+    visual.SetColor?.({ r: 255, g: 0, b: 0, a: 255 });
+  }
+  if (definition.idleAnimation) {
+    fireTarget(visual, "SetAnimation", definition.idleAnimation);
+    fireTarget(visual, "SetDefaultAnimation", definition.idleAnimation, 0.02);
+  }
+  // Real ground items sit on a weapon carrier; Source tinted that holder red.
+  // Display-only prop, so nobody can pick it up and EntWatch never sees it.
+  try {
+    controller.fakeCarrierVisual = spawnVisual(runtime, {
+      position: origin, angles: carrierAngles, feature: "mimic_carrier",
+      renderColor: { r: 255, g: 0, b: 0, a: 255 },
+    }, MIMIC_CARRIER_MODELS[itemCarrierClass(definition)]);
+  } catch (error) {
+    message(`WARNING: mimic '${itemName}' carrier prop unavailable: ${error.message}`);
+  }
+}
+
+const MIMIC_CARRIER_MODELS = Object.freeze({
+  weapon_p250: "weapons/models/p250/weapon_pist_p250.vmdl",
+  weapon_knife: "weapons/models/knife/knife_default_ct/weapon_knife_default_ct.vmdl",
+});
 
 function spawnThighSpiderDamageHitbox(runtime, controller) {
   const spawned = spawnRoundEntities(featureTemplate("trapSpiderDamage"), controller.position, controller.angles) ?? [];
@@ -26549,6 +26929,7 @@ function sourceDirectionDifference(from, to, direction) {
 function spendTrap(controller, keepVisual = false) {
   controller.spent = true;
   if (validEntity(controller.damageHitbox)) controller.damageHitbox.Kill?.();
+  if (validEntity(controller.fakeCarrierVisual)) controller.fakeCarrierVisual.Kill?.();
   if (!keepVisual && controller.visual?.IsValid()) controller.visual.Kill();
 }
 
@@ -27304,15 +27685,15 @@ function processTraps(now) {
       if (controller.name === "kart") {
         continue;
       } else if (controller.kind === "trapfloor") {
-        if (now >= controller.armedAt && targets.some((pawn) => pawnInsideTrap(pawn, controller.position, 52, 120))) spendTrap(controller);
+        const { halfSize, minZ, maxZ } = TRAPFLOOR_TRIGGER;
+        if (now >= controller.armedAt && targets.some((pawn) => pawnInsideTrapBox(
+          pawn, controller.position, halfSize, minZ, maxZ,
+        ))) spendTrap(controller);
       } else if (controller.definition.pool === "step") {
         const { triggerHalfSize, triggerMinZ, triggerMaxZ } = controller.definition;
         for (const pawn of targets) {
-          if (triggerHalfSize !== undefined
-            ? pawnInsideTrapBox(pawn, controller.position, triggerHalfSize, triggerMinZ, triggerMaxZ)
-            : pawnInsideTrap(
-              pawn, controller.position, controller.definition.radius, controller.definition.zRange,
-            )) activateStepTrap(runtime, controller, pawn, now);
+          if (pawnInsideTrapBox(pawn, controller.position, triggerHalfSize, triggerMinZ, triggerMaxZ))
+            activateStepTrap(runtime, controller, pawn, now);
           if (controller.spent) break;
         }
       } else if (controller.definition.pool === "vicinity") {
@@ -27323,7 +27704,7 @@ function processTraps(now) {
         } else {
           for (const pawn of targets) {
             if (pawnInsideTrapBox(
-              pawn, controller.position, controller.definition.triggerRadius,
+              pawn, controller.position, controller.definition.triggerHalfSize,
               controller.definition.triggerMinZ, controller.definition.triggerMaxZ,
             )) {
               activateVicinityTrap(runtime, controller, pawn, now);
@@ -27348,8 +27729,9 @@ function processTraps(now) {
       } else if (controller.name === "explosive_barrel") {
                                                                              
       } else if (controller.name === "mimic") {
-        const victim = targets.find((pawn) => pawnInsideTrap(
-          pawn, controller.position, controller.definition.radius, controller.definition.zRange,
+        const { triggerHalfSize, triggerMinZ, triggerMaxZ } = controller.definition;
+        const victim = targets.find((pawn) => pawnInsideTrapBox(
+          pawn, controller.position, triggerHalfSize, triggerMinZ, triggerMaxZ,
         ));
         if (victim) activateFatalMimic(controller, victim, false);
       } else if (controller.name === "buttonmimic") {
@@ -27554,9 +27936,7 @@ function configureItemMeasureMovement(measureMovement, carrier, measureReference
 function spawnItemCarrier(runtime, request, definition, itemId) {
   const carrierClass = itemCarrierClass(definition);
   const kind = carrierClass === "weapon_knife" ? "knife" : "p250";
-  let templateKind = definition.carrierTemplate ?? kind;
-  if (templateKind === "planetcrystal") templateKind += `_${request.itemVariant}`;
-  if (templateKind === "moonboost" && kind === "knife") templateKind = "moonboost_knife";
+  const templateKind = itemCarrierTemplateKind(definition, request.itemVariant);
   const spawned = spawnRoundEntities(featureTemplate(`item_carrier_${templateKind}`), request.position, request.angles) ?? [];
   const templateEntityName = (entity) => String(
     entity?.GetEntityName?.() ?? entity?.GetName?.() ?? "",
@@ -27602,6 +27982,7 @@ function spawnItemCarrier(runtime, request, definition, itemId) {
                                                                       
   const carrierMapPose = readItemMapPose(measureReference, carrier);
   const mapVisualPose = definition.mapAuthoredVisualPose ? carrierMapPose : undefined;
+  if (carrierMapPose) itemCarrierPoseCache.set(templateKind, carrierMapPose);
   if (!carrierMapPose) {
     for (const entity of spawned) if (entity?.IsValid?.()) {
       entity.Kill();
@@ -28200,12 +28581,19 @@ function liftItemWorldVisual(item) {
 
 // Put the anchor back on its authored carrier-local pose before the held
 // visual is used; dropped items keep the authored pose (they lie on physics).
+// claimItem runs after the carrier is already in the hand, so only the local
+// +Z lift is undone along the carrier's current up axis. Rebuilding the full
+// transform from in-hand angles rewrote the anchor's authored local rotation
+// (PlanetCrystal's side-by-side crystals ended up stacked).
 function restoreItemWorldVisual(item, carrier) {
   if (!item?.worldVisualLifted) return;
   item.worldVisualLifted = false;
-  if (!validEntity(item.measureReference)) return;
-  const transform = itemVisualTransform(item, carrier, carrier);
-  if (transform) item.measureReference.Teleport({ ...transform, velocity: vec() });
+  const anchor = item.measureReference;
+  if (!validEntity(anchor)) return;
+  const origin = anchor.GetAbsOrigin?.();
+  if (!origin) return;
+  const up = upFromAngles(bodyAngles(carrier) ?? { pitch: 0, yaw: 0, roll: 0 });
+  anchor.Teleport({ position: add(origin, mul(up, -CONFIG.itemWorldVisualLift)), velocity: vec() });
 }
 
 function applyInitialItemVisualState(item) {
@@ -29091,6 +29479,24 @@ const ITEM_NATIVE_PARTICLE_EFFECTS = new Set([
   "storm_lightning_01_modglow", "water_impact_bubbles_1", "weapon_sensorgren_detonate", "weapon_sensorgren_spark_02",
 ]);
 
+// Source ::Particle Kill only ended emission; emitted particles lived out. Here the
+// source lifetime sends Stop and Kill waits for the longest particle lifetime in
+// the effect tree (read from the official vpcf_c / local vpcf, 2026-10-18).
+const ITEM_PARTICLE_TAIL_SECONDS = Object.freeze({
+  weapon_taser_flash: 0.15, pizza_tesla: 0.2, storm_end_core: 1.2,
+  aztec_copter_takeoff_grass: 4, blood_impact_headshot: 1.4, chicken_gone: 3,
+  copter_takeoff_1_dust_low: 3, env_sparks_omni: 3.5, explosion_child_distort01b: 0.5,
+  explosion_child_distort01c: 0.5, explosion_child_distort01d_1k: 0.75,
+  explosion_coop_mission_shrapnel02e_1k: 2.5, explosion_hegrenade_brief: 30,
+  extinsguish_fire_blastout_01: 0.7, impact_dirt: 2.5, storm_lightning_01: 1,
+  storm_lightning_01_modglow: 0.15, water_impact_bubbles_1: 4,
+  weapon_sensorgren_detonate: 2, weapon_sensorgren_spark_02: 0.4,
+});
+
+function itemParticleTail(effect) {
+  return ITEM_PARTICLE_TAIL_SECONDS[effect] ?? 0;
+}
+
 function reserveItemParticleBurst(name, maximum, duration, countRejected = false) {
   const now = Instance.GetGameTime();
   state.itemParticleFxWindows ??= new Map();
@@ -29138,13 +29544,15 @@ function spawnItemParticle(runtime, item, effect, position, angles = { pitch: 0,
     throw new Error(`invalid item particle '${effect}'`);
   const particle = createItemParticle(runtime, effect, position, angles);
   if (!particle) return undefined;
+  const removeAfter = lifetime + itemParticleTail(effect);
   const record = { id: state.nextItemEffectId++, kind: "native_item_particle", item,
-    visual: particle, expiresAt: Instance.GetGameTime() + lifetime };
+    visual: particle, expiresAt: Instance.GetGameTime() + removeAfter };
   runtime.itemDeployables.add(record);
   try {
     particle.Teleport({ position: clone(position), angles, velocity: vec() });
     fireTarget(particle, "Start");
-    fireTarget(particle, "Kill", undefined, lifetime);
+    fireTarget(particle, "Stop", undefined, lifetime);
+    fireTarget(particle, "Kill", undefined, removeAfter);
     return record;
   } catch (error) {
     cleanupDeployable(runtime, record);
@@ -30887,19 +31295,28 @@ function spawnHackermanIndicators(runtime, item, origin, now) {
 
 function spawnRiftSecondVisual(runtime, item) {
   // Source spawns both rift models at button origin +/-4 along the button's
-  // left vector with the same angles; mirror the attached first model.
-  const carrierAngles = bodyAngles(item.carrier) ?? { pitch: 0, yaw: 0, roll: 0 };
+  // left vector, angled button + yaw 110; both share one parent. Here the
+  // parent is the first crystal itself, so the LMM pose (world lift, pickup,
+  // hand) carries the pair rigidly. Carrier/anchor parents broke the pair:
+  // the lift undo left a carrier child 50u off, and an info_target child
+  // did not render in hand.
+  // The first crystal's pose may still be pre-LMM here; the offset is built
+  // in its own frame, so any current pose gives the right local transform.
   const firstPosition = item.visual?.GetAbsOrigin?.();
-  const firstAngles = item.visual?.GetAbsAngles?.();
-  const left = leftFromAngles(carrierAngles);
+  const firstAngles = bodyAngles(item.visual) ?? { pitch: 0, yaw: 0, roll: 0 };
+  // Button left in the crystal's own frame is yaw 90 - 110 = -20 degrees, so
+  // the pair stays beside each other across the crystal's long (Z) axis.
+  const yaw = -20 * Math.PI / 180;
+  const left = add(mul(forwardFromAngles(firstAngles), Math.cos(yaw)),
+    mul(leftFromAngles(firstAngles), Math.sin(yaw)));
   const offset = 2 * (item.visualAttachment?.left ?? 4);
   const visual = spawnItemEffectVisual(runtime, item, {
     template: "rift",
     model: "models/luffaren/rift.vmdl",
     position: firstPosition ? add(firstPosition, mul(left, -offset)) : item.position,
-    angles: firstAngles ?? carrierAngles,
+    angles: firstAngles,
   });
-  visual.SetParent?.(item.carrier);
+  visual.SetParent?.(item.visual);
   item.auxiliaryVisuals.add(visual);
 }
 
@@ -32213,42 +32630,29 @@ function useItemBehavior(runtime, item, holder, now) {
   return result;
 }
 
-// TEMP USE_DIAG: log why an E press on a held item failed; remove when done.
-function useDiag(pawn, item, reason) {
-  message(`USE_DIAG ${item?.name ?? "none"} fail=${reason} t=${Instance.GetGameTime().toFixed(2)} next=${item?.nextUseAt?.toFixed?.(2)} state=${item?.state} lc=${item ? itemRuntime(item)?.lifecycle : "-"} running=${state.running} infect=${infectionHasStarted()}`);
-}
-
 function useHeldItem(pawn) {
   const item = usableHeldPlayerItem(pawn);
-  if (!item || item.state !== "held" || item.holder !== pawn) { useDiag(pawn, item, "no_held_item"); return false; }
+  if (!item || item.state !== "held" || item.holder !== pawn) return false;
                                                                            
                                                                               
-  if (state.finaleEscapeActive && item.endingItem !== true) { useDiag(pawn, item, "finale_escape"); return false; }
+  if (state.finaleEscapeActive && item.endingItem !== true) return false;
   const runtime = itemRuntime(item);
   if (!runtime || pawn.GetTeamNumber?.() !== item.definition.team) {
-    useDiag(pawn, item, "no_runtime_or_team");
+   
     dropHeldItem(pawn);
     return false;
   }
   // processItems never ticks these runtimes, so anything spawned now would
   // freeze in place (chat/ping use bypasses the Think gate).
-  if (!state.running || state.fatal || ["outcome_pending", "resolved", "destroyed"].includes(runtime.lifecycle)) { useDiag(pawn, item, "runtime_gate"); return false; }
+  if (!state.running || state.fatal || ["outcome_pending", "resolved", "destroyed"].includes(runtime.lifecycle)) return false;
   const now = Instance.GetGameTime();
   const behavior = ITEM_BEHAVIORS[item.definition.behavior];
   if (now < item.nextUseAt) {
-    useDiag(pawn, item, "cooldown");
     behavior?.onUseFailed?.(runtime, item, pawn, "cooldown");
     return false;
   }
-  let result;
-  try {
-    result = useItemBehavior(runtime, item, pawn, now);
-  } catch (error) {
-    useDiag(pawn, item, `threw: ${error?.stack ?? error}`);
-    throw error;
-  }
+  const result = useItemBehavior(runtime, item, pawn, now);
   if (!result) {
-    useDiag(pawn, item, "behavior_returned_false");
     behavior?.onUseFailed?.(runtime, item, pawn, "failed");
     return false;
   }
@@ -32315,11 +32719,6 @@ function processHeldItemInputs(usePressed, pawns = allLivingPawns()) {
     if (usableHeldPlayerItem(pawn)) {
       consumed.add(pawn);
       useHeldItem(pawn);
-    } else {
-      // TEMP USE_DIAG
-      for (const held of slots.values()) {
-        message(`USE_DIAG ${held.name} fail=not_usable state=${held.state} holderMatch=${held.holder === pawn} carrierValid=${validEntity(held.carrier)} ownerMatch=${held.carrier?.GetOwner?.() === pawn}`);
-      }
     }
   }
   return consumed;
@@ -33795,8 +34194,18 @@ function processPlanet(runtime, deployable, now, zombies, humans = []) {
 
 // Source 10535-10545/10568-10578: three delayed flashes on the victim, then distort and blood
 // offset back along the captain's attack direction.
-// Boss punches repeat every 0.3 s. Keep a bounded pool of three flash emitters and
-// one emitter for each immediate impact instead of ForceSpawn/Kill per punch.
+// Boss punches repeat every 0.3 s. Keep a bounded pool of emitters instead of
+// ForceSpawn/Kill per punch. A lease is Stopped at its source lifetime and only
+// reused once its particles have lived out, so the pool grows to cover the tail.
+const CAPTAIN_BOSS_PUNCH_INTERVAL = 0.3;
+
+function captainBossParticlePoolSize(effect, lifetime) {
+  const busy = lifetime + itemParticleTail(effect);
+  // Flashes fire three times per punch (0, 0.12, 0.24 s); impacts once.
+  const perPunch = effect === "weapon_taser_flash" ? 3 : 1;
+  return perPunch * Math.max(1, Math.ceil(busy / CAPTAIN_BOSS_PUNCH_INTERVAL));
+}
+
 function spawnCaptainPlanetBossParticle(runtime, deployable, effect, position,
   angles = { pitch: 0, yaw: 0, roll: 0 }, lifetime = 0.1) {
   if (!runtime.itemDeployables.has(deployable)
@@ -33811,12 +34220,12 @@ function spawnCaptainPlanetBossParticle(runtime, deployable, effect, position,
     deployable.pieces?.delete(leases[index].visual);
     leases.splice(index, 1);
   }
-  let lease = leases.find(candidate => candidate.expiresAt <= now);
+  let lease = leases.find(candidate => !candidate.playing && candidate.freeAt <= now);
   if (!lease) {
-    if (leases.length >= (effect === "weapon_taser_flash" ? 3 : 1)) return;
+    if (leases.length >= captainBossParticlePoolSize(effect, lifetime)) return;
     const visual = createItemParticle(runtime, effect, position, angles);
     if (!visual) return;
-    lease = { visual, expiresAt: 0, playing: false };
+    lease = { visual, expiresAt: 0, freeAt: 0, playing: false };
     leases.push(lease);
     pool.set(effect, leases);
     (deployable.pieces ??= new Set()).add(visual);
@@ -33824,10 +34233,11 @@ function spawnCaptainPlanetBossParticle(runtime, deployable, effect, position,
     scheduleDeployableKill([visual], deployable.removeAt - now);
   }
   // Lease expiry is handled in Think, so no old delayed Stop can hit a new lease.
-  // Destroy the old simulation before restarting.
+  // A free lease's particles are already gone; this only resets the system.
   fireTarget(lease.visual, "DestroyImmediately");
   lease.visual.Teleport({ position: clone(position), angles, velocity: vec() });
   lease.expiresAt = now + lifetime;
+  lease.freeAt = lease.expiresAt + itemParticleTail(effect);
   lease.playing = true;
   fireTarget(lease.visual, "Start");
 }
@@ -33867,7 +34277,7 @@ function processCaptainPlanet(runtime, deployable, now, pawns) {
     for (const lease of leases) {
       if (!lease.playing || now < lease.expiresAt) continue;
       lease.playing = false;
-      if (validEntity(lease.visual)) fireTarget(lease.visual, "DestroyImmediately");
+      if (validEntity(lease.visual)) fireTarget(lease.visual, "Stop");
     }
   }
   if (!deployable.buffed && now >= deployable.buffAt) {
@@ -34251,6 +34661,12 @@ function spawnOne(request) {
     finishRuntimeSpawn(runtime);
     return;
   }
+  // Its prop was built and placed with the pair's first request; only the
+  // per-request accounting is left.
+  if (request.terrainPairDone) {
+    finishRuntimeSpawn(runtime);
+    return;
+  }
   let templateKey = request.shape;
   let template = state.templates.get(templateKey);
                                                                         
@@ -34288,7 +34704,9 @@ function spawnOne(request) {
     runtime.terrainPreloadedEntities?.delete(prepared.entity);
     request.preloadedTerrain = undefined;
   }
+  const pair = reuse || bakedSlope || request.race ? undefined : spawnTerrainPair(runtime, request);
   const spawned = reuse ? [prepared.entity]
+    : pair ? [pair.own]
     : bakedSlope || (request.race && templateKey === "race_surface_flat")
       ? spawnRoundEntities(template, request.position)
       : spawnRoundEntities(template, request.position, request.angles);
@@ -34298,12 +34716,32 @@ function spawnOne(request) {
     return;
   }
   for (const entity of spawned) if (entity) runtime.entities.add(entity);
+  if (!placeTerrainEntities(runtime, request, spawned, reuse, prepared, bakedSlope)) return;
+  if (pair) {
+    // The partner prop takes its own transform, model, colour and safety zone.
+    if (!placeTerrainEntities(runtime, pair.partner, [pair.partnerEntity], false, undefined, false)) return;
+    try { spawnBlockSafetyTrigger(runtime, pair.partner); }
+    catch (error) { reportGuardedError(`spawn safety pair ${pair.partner.shape}`, error); }
+    pair.partner.terrainPairDone = true;
+  }
+  try {
+    spawnBlockSafetyTrigger(runtime, request);
+  } catch (error) {
+    skipFailedSpawn(runtime, `spawn safety ${request.shape}`, error);
+    return;
+  }
+  finishRuntimeSpawn(runtime);
+}
+
+// Per-entity terrain setup shared by single, preloaded and paired spawns.
+// Returns false after failRuntime.
+function placeTerrainEntities(runtime, request, spawned, reuse, prepared, bakedSlope) {
   for (const entity of spawned) {
     if (!entity || !entity.IsValid()) continue;
     if (request.terrainModel) {
       if (typeof entity.SetModel !== "function") {
         failRuntime(`terrain model replacement is unavailable for ${request.themeName}/${request.shape}`);
-        return;
+        return false;
       }
       const model = rememberSilentHillVisual(runtime, entity, request.terrainModel, request);
       if (!reuse || prepared.model !== model) entity.SetModel(model);
@@ -34341,21 +34779,18 @@ function spawnOne(request) {
     // Road templates already have RACE dimensions; other terrain keeps its model.
     if (request.race && !request.raceSurfaceKey) entity.SetModelScale?.(RACE_CONFIG.gridSize / CONFIG.gridSize);
     entity.SetEntityName(`block_${request.shape}`);
+    // Only plain level terrain may return to the pool when its level retires.
+    entity.collectivePoolKey = !request.race && !bakedSlope && !runtime.kind && !runtime.raceLevel
+      && TERRAIN_POOL_KEYS.has(request.shape) ? request.shape : undefined;
     runtime.entities.add(entity);
     registerTerrainEntity(runtime, entity, request.safe === true);
     beginTerrainSpawnFade(entity, runtime);
   }
-  try {
-    spawnBlockSafetyTrigger(runtime, request);
-  } catch (error) {
-    skipFailedSpawn(runtime, `spawn safety ${request.shape}`, error);
-    return;
-  }
-  finishRuntimeSpawn(runtime);
+  return true;
 }
 
 function genericEventBudgetAllows(cost) {
-  let live = cost + terrainPreloadEntityCount();
+  let live = cost + terrainPreloadEntityCount() + terrainPoolSize();
   for (const runtime of activeRuntimes()) live += runtime.entities?.size ?? 0;
   for (const event of state.genericEvents.active.values()) live += event.entityRuntime.entities.size + event.cost;
   return live < 12000;
@@ -34459,9 +34894,48 @@ function setThemeFog(runtime) {
   if (!validEntity(fog) || !profile) return;
   fireTarget(fog, "SetFogStartDistance", String(profile.start));
   fireTarget(fog, "SetFogEndDistance", String(profile.end));
-  fireTarget(fog, "SetFogMaxOpacity", String(profile.density));
+  // CS2 blends fog in linear space, so CS:GO opacities read much denser; scale non-SH themes.
+  fireTarget(fog, "SetFogMaxOpacity", String(Math.round(profile.density * THEME_FOG_OPACITY_SCALE * 1000) / 1000));
   fireTarget(fog, "SetFogColor", profile.color);
-  fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
+  fireTarget(fog, "SetFogFalloffExponent", FOG_LINEAR_FALLOFF);
+}
+// THICK_FOG is the Silent Hill light look made denser: gray fog over the flat gray SH sky, so fully
+// fogged geometry blends into the sky instead of showing as a cutout (CS2 env_sky is never fogged).
+// Where the sky is already black (campaign Finale sky, SH dark) the fog goes black to match it.
+const THICK_FOG_END = 1200;
+function thickFogSkyTheme() {
+  const runtime = state.currentLevel ?? state.transitionLevel;
+  return campaignStageSnapshot().infiniteMode ? campaignStageSnapshot().theme
+    : runtime?.stageSnapshot?.theme ?? campaignStageSnapshot().theme;
+}
+function applyThickFog(event, fog) {
+  const finaleSky = finaleUsesFinaleSky(state.endingRuntime) && state.endingRuntime.finaleSky
+    && ["spawning", "active"].includes(state.endingRuntime.lifecycle);
+  const shDark = themeProfile(thickFogSkyTheme()).name === "silenthill" && state.silentHillWorld.visualDark;
+  const black = finaleSky || shDark;
+  if (!black) {
+    event.previousSkyOverride = themeModelSky.override;
+    event.skySwapped = true;
+    themeModelSky.failedTheme = undefined;
+    if (ensureThemeModelSky("silenthill", state.currentLevel?.end?.z ?? 0, true)) themeModelSky.override = "silenthill";
+    else setCollectiveSkybox("silenthill_light", true);
+  }
+  fireTarget(fog, "SetFogColor", black ? "0 0 0" : "100 100 100");
+  fireTarget(fog, "SetFogStartDistance", String(FOG_CLEAR_DISTANCE));
+  fireTarget(fog, "SetFogEndDistance", String(THICK_FOG_END));
+  fireTarget(fog, "SetFogMaxOpacity", "1");
+  fireTarget(fog, "SetFogFalloffExponent", FOG_LINEAR_FALLOFF);
+}
+function restoreThickFogSky(event) {
+  if (!event.skySwapped) return;
+  event.skySwapped = false;
+  if (themeModelSky.override === "silenthill") themeModelSky.override = event.previousSkyOverride;
+  themeModelSky.failedTheme = undefined;
+  if (themeModelSky.override === "off") { clearThemeModelSky(); themeModelSky.override = "off"; return; }
+  const theme = themeModelSky.override ?? thickFogSkyTheme();
+  ensureThemeModelSky(theme, state.currentLevel?.end?.z ?? 0, themeModelSky.override !== undefined);
+  // SH theme: ensure keeps the SH scene, so re-apply the light/dark flat sky it expects.
+  if (themeProfile(theme).name === "silenthill") setSilentHillSky(state.silentHillWorld.visualDark);
 }
 function clearGenericEvents() {
   for (const event of [...state.genericEvents.active.values()]) endGenericEvent(event, { reset: true });
@@ -35404,6 +35878,7 @@ function endGenericEvent(event, { reset = false, natural = false } = {}) {
     state.genericEvents.pledgeUntil = 0;
     clearPledgePrompt();
   } else if (event.name === "THICK_FOG") {
+    restoreThickFogSky(event);
     setThemeFog(state.currentLevel ?? state.transitionLevel ?? { stageSnapshot: event.stageSnapshot });
   } else if (event.name === "BLOODLUST") {
     state.genericEvents.bloodlustHits.clear();
@@ -35575,10 +36050,7 @@ function startGenericEvent(name, runtime, { manualProbe = false, continuousDebug
     if (!validEntity(fog)) return false;
                                                                           
                                                                        
-    fireTarget(fog, "SetFogStartDistance", "-500");
-    fireTarget(fog, "SetFogEndDistance", "750");
-    fireTarget(fog, "SetFogMaxOpacity", "1");
-    fireTarget(fog, "SetFogFalloffExponent", FOG_DEFAULT_FALLOFF);
+    applyThickFog(event, fog);
     genericEventTask(event, 1, () => announce("The fog is turning thick..."));
     genericEventTask(event, 3, () => announce("We must find our way through the limited visibility"));
   } else if (name === "SILENCE") {
@@ -36610,6 +37082,8 @@ function destroyLevel(index, preservePickedItems = false, deferKill = false) {
   for (const [entity, record] of state.silentHillWorld.visuals) {
     if (record.runtime === runtime) state.silentHillWorld.visuals.delete(entity);
   }
+  // Normal history retirement (fade, then destroy) keeps clean flat terrain.
+  if (preservePickedItems && deferKill) releaseTerrainToPool(runtime);
   const destroy = deferKill ? queueEntityKills : destroyEntities;
   destroy([...runtime.entities]);
   destroy([...(runtime.terrainPreloadedEntities ?? [])]);
@@ -37588,40 +38062,7 @@ function resetPlayerEffects(event) {
 // An uncaught throw used to skip SetNextThink and freeze the whole script.
 // Each step is isolated and the next Think is always scheduled.
 const guardedErrorLog = new Map();
-let raceThinkProfile;
 
-// Include ordinary Silent Hill play: a hitch need not coincide with a world
-// switch. Other themes keep the fast path without per-step timing.
-function profileRaceThink(callback) {
-  const runtime = state.endingRuntime;
-  const race = runtime?.kind === "RACE" && runtime.lifecycle === "active";
-  const silentHill = !race && state.running && !state.fatal
-    && campaignStageSnapshot().theme === "silenthill";
-  if (!race && !silentHill) return callback();
-  const owner = race ? runtime : state.silentHillWorld;
-  const previous = raceThinkProfile;
-  const sample = { startedAt: generationClock(), steps: new Map() };
-  raceThinkProfile = sample;
-  try {
-    return callback();
-  } finally {
-    raceThinkProfile = previous;
-    sample.ms = generationClock() - sample.startedAt;
-    if (sample.ms >= 8 && sample.ms > (owner.slowThink?.ms ?? 0)) owner.slowThink = sample;
-    const now = Instance.GetGameTime();
-    if (owner.slowThink && now >= (owner.nextPerfAt ?? 0)) {
-      const peak = owner.slowThink;
-      const steps = [...peak.steps].sort((a, b) => b[1] - a[1]).slice(0, 4)
-        .map(([name, ms]) => `${name}=${ms.toFixed(2)}ms`).join(" ");
-      owner.slowThink = undefined;
-      owner.nextPerfAt = now + 5;
-      const context = race ? `karts=${runtime.karts?.size ?? 0}`
-        : `dark=${owner.visualDark} pending=${owner.pending.length} active=${owner.active.length}`
-          + ` visuals=${owner.visuals.size} tasks=${state.scheduledTasks.length}`;
-      message(`[${race ? "RACE" : "SILENTHILL"} PERF] think=${peak.ms.toFixed(2)}ms ${context} ${steps}`);
-    }
-  }
-}
 function reportGuardedError(step, error) {
   const now = Instance.GetGameTime();
   if ((guardedErrorLog.get(step) ?? -Infinity) > now) return;
@@ -37630,25 +38071,19 @@ function reportGuardedError(step, error) {
 }
 
 function guardStep(step, callback, fallback) {
-  const profile = raceThinkProfile;
-  const startedAt = profile ? generationClock() : 0;
   try {
     return callback();
   } catch (error) {
     reportGuardedError(step, error);
     return fallback;
-  } finally {
-    if (profile) profile.steps.set(step, (profile.steps.get(step) ?? 0) + generationClock() - startedAt);
   }
 }
 
 function think() {
   try {
     withGenerationBudget(() => {
-      profileRaceThink(() => {
-        thinkPlayerPawns = guardStep("resolvePlayerPawns", () => resolvePlayerPawns(), []);
-        thinkBody();
-      });
+      thinkPlayerPawns = guardStep("resolvePlayerPawns", () => resolvePlayerPawns(), []);
+      thinkBody();
     });
   } catch (error) {
     reportGuardedError("think", error);
@@ -38291,10 +38726,31 @@ function debugSkyboxCommand(args) {
 
 function debugSkyModelsCommand(args) {
   const key = String(args?.value ?? args ?? "").trim().toLowerCase();
+  const scaleMatch = /^scale\s+([\d.]+)$/.exec(key);
+  if (scaleMatch) {
+    // Live A/B of the cloud size: rescales theme and Finale clouds in place and keeps the value for
+    // clouds spawned later this session (scale 0 resets to SKY_CLOUD_MODEL_SCALE); not saved to config.
+    const scale = Number(scaleMatch[1]);
+    skyCloudScaleOverride = scale > 0 ? scale : undefined;
+    const applied = skyCloudScale();
+    const clouds = [...(themeModelSky.active?.clouds ?? []), ...(state.endingRuntime?.finaleSky?.clouds ?? [])];
+    for (const cloud of clouds) if (validEntity(cloud.visual)) {
+      cloud.scale = applied * (cloud.layerScale ?? 1);
+      cloud.visual.SetModelScale(cloud.scale);
+    }
+    message("cloud scale " + applied + " applied to " + clouds.length + " clouds and later spawns (Source 15)");
+    return true;
+  }
   if (key === "status") {
     message("model sky: " + (themeModelSky.active?.theme ?? "none") + ", clouds=" +
       (themeModelSky.active?.clouds.length ?? 0) + ", entities=" + (themeModelSky.active?.entities.size ?? 0) +
       ", retiring=" + themeModelSky.retiring.length);
+    for (const record of themeModelSky.active?.records ?? []) if (validEntity(record.visual)) {
+      const at = record.visual.GetAbsOrigin(), want = record.position;
+      message("  " + record.visual.GetModelName?.() + " scale=" + Number(record.scale).toFixed(2) +
+        " engineScale=" + (record.visual.GetModelScale?.() ?? "n/a") +
+        " at=" + [at.x, at.y, at.z].map(Math.round).join(",") + " spawn=" + [want.x, want.y, want.z].map(Math.round).join(","));
+    }
     return true;
   }
   if (key === "off") {
@@ -38306,7 +38762,7 @@ function debugSkyModelsCommand(args) {
     return ensureThemeModelSky(campaignStageSnapshot().theme);
   }
   if (!Object.hasOwn(THEME_MODEL_SKY_PROFILES, key)) {
-    message("usage: ze_debug_sky_models [generic|castle|factory|temple|nature|hell|frost|silenthill|off|auto|status]");
+    message("usage: ze_debug_sky_models [generic|castle|factory|temple|nature|hell|frost|silenthill|off|auto|status|scale <n>]");
     return false;
   }
   themeModelSky.failedTheme = undefined;
@@ -38948,8 +39404,9 @@ function debugFinaleCommand(args) {
         + ` rainStarted=${runtime.finaleRainStartedAt ?? "waiting"}`);
       const sky = runtime.finaleSky;
       message(`[FINALE SKY] clouds=${sky?.clouds.filter(cloud => validEntity(cloud.visual)).length ?? 0}/7`
-        + ` rotating=${sky?.rotating === true} scale=${FINALE_SKY_CONFIG.modelScale}`
-        + ` z=${finaleSkyCenter(runtime).z + FINALE_SKY_CONFIG.cloudOffsetZ}`);
+        + ` rotating=${sky?.rotating === true} speed=${Number(sky?.speed ?? 0).toFixed(1)} scale=${finaleSkyCloudScale()}`
+        + ` engineScale=${sky?.clouds.find(cloud => validEntity(cloud.visual))?.visual.GetModelScale?.() ?? "n/a"}`
+        + ` z=${finaleSkyCenter(runtime).z + finaleSkyCloudOffsetZ()}`);
       if (runtime.escape) message(`[FINALE ESCAPE] maps=${runtime.escape.levelCount}/${runtime.escape.levelTarget}`
         + ` history=${runtime.escape.history.length} vellerJobs=${runtime.escape.vellerPlayers.size}`);
       for (const bullet of [...runtime.bossBullets ?? []].slice(0, 4)) {

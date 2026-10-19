@@ -82,7 +82,7 @@
     "snapshot_file": "",
     "no_save": "0",
     "start_active": "0",
-    "effect_name": "particles/weapons/cs_weapon_fx/weapon_taser_flash.vpcf",
+    "effect_name": "particles/luffaren/item_taser_flash.vpcf",
     "clientSideEntity": "0",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
