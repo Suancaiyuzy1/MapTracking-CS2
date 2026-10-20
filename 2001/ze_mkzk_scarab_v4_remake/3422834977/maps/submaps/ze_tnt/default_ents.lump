@@ -12008,6 +12008,14 @@
         "param": "255 0 0",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_6b",
+        "delay": 0,
+        "limit": -1
       }
     ]
   },
@@ -12045,6 +12053,14 @@
         "target": "!activator",
         "input": "Color",
         "param": "255 0 0",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]script_hud",
+        "input": "RunScriptInput",
+        "param": "tnt_6b",
         "delay": 0,
         "limit": -1
       }
@@ -146249,15 +146265,15 @@
     "Template17": "",
     "Template16": "",
     "Template15": "",
-    "Template14": "[PR#]potato_tnt",
-    "Template13": "[PR#]potato_text",
+    "Template14": "",
+    "Template13": "",
     "Template12": "",
     "Template11": "[PR#]potato_sound",
     "Template10": "[PR#]potato_give_t",
     "Template09": "[PR#]potato_give_ct",
-    "Template08": "[PR#]potato_relayct",
+    "Template08": "[PR#]potato_tnt",
     "Template07": "[PR#]potato_act",
-    "Template06": "[PR#]potato_relayt",
+    "Template06": "[PR#]potato_relay",
     "Template05": "[PR#]potato_root",
     "Template04": "[PR#]logf_potato",
     "Template03": "[PR#]potato_tg",
@@ -146408,7 +146424,7 @@
         "output": "OnFail",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 1.2",
+        "param": "speed 1.1",
         "delay": 0.6000000238418579,
         "limit": -1
       }
@@ -150721,7 +150737,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "Speed 1.6",
+        "param": "Speed 1.4",
         "delay": 0,
         "limit": -1
       },
@@ -150729,7 +150745,7 @@
         "output": "OnStartTouch",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "Speed 1.2",
+        "param": "Speed 1.1",
         "delay": 12,
         "limit": -1
       },

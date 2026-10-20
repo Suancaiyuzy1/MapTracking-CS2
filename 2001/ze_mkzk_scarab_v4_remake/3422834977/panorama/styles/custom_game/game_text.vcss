@@ -73,7 +73,7 @@
     color: #ffffff;
 }
 .DynamicText.ColorGrey {
-    color: #bbbbbb;
+    color: #cccccc;
 }
 .DynamicText.ColorRed {
     color: #ff5c5c;
@@ -82,10 +82,10 @@
     color: #ff9f43;
 }
 .DynamicText.ColorYellow {
-    color: #ffd2a4;
+    color: #EBE132;
 }
 .DynamicText.ColorGreen {
-    color: #55d98b;
+    color: #98FF98;
 }
 .DynamicText.ColorBlue {
     color: #5ab0ff;
@@ -93,8 +93,8 @@
 .DynamicText.ColorPurple {
     color: #bf8cff;
 }
-.DynamicText.ColorYellowb {
-    color: #ffff66;
+.DynamicText.ColorLime {
+    color: #88ee88;
 }
 .DynamicText.ColorFF0000 {
     color: #ff0000;

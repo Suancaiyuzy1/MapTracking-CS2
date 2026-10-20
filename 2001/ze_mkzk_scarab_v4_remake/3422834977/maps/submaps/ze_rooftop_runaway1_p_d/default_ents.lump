@@ -15567,7 +15567,7 @@
         "target": "[PR#]sm_tptg1",
         "input": "Enable",
         "param": "",
-        "delay": 5,
+        "delay": 6,
         "limit": 1
       },
       {
@@ -16080,7 +16080,7 @@
     "vscripts": "",
     "targetname": "[PR#]sm_snd2",
     "classname": "point_soundevent",
-    "origin": "12.000099 -5952.000000 1702.459961",
+    "origin": "44.000099 -5952.000000 1702.459961",
     "angles": "0.000000 180.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "6286"
@@ -16126,8 +16126,8 @@
     "vscripts": "",
     "targetname": "[PR#]sm_sl2",
     "classname": "func_breakable",
-    "origin": "76.000092 -5952.000000 1702.458008",
-    "angles": "0.000000 179.999969 0.000000",
+    "origin": "111.000000 -5760.000000 1784.000000",
+    "angles": "0.000000 180.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "6287",
     "model": "maps/submaps/ze_rooftop_runaway1_p_d/entities/sm_sl2_6287.vmdl"
@@ -16180,7 +16180,7 @@
     "targetname": "",
     "vscripts": "",
     "classname": "trigger_multiple",
-    "origin": "64.000000 -5952.000000 1672.000000",
+    "origin": "88.000000 -5952.000000 1672.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "6300",
@@ -16191,7 +16191,7 @@
         "target": "!activator",
         "input": "KeyValue",
         "param": "runspeed 1.00",
-        "delay": 0,
+        "delay": 1.2000000476837158,
         "limit": -1
       },
       {
@@ -16199,7 +16199,7 @@
         "target": "!activator",
         "input": "SetDamageFilter",
         "param": "buddhat",
-        "delay": 0,
+        "delay": 1.2000000476837158,
         "limit": -1
       },
       {
@@ -16207,7 +16207,7 @@
         "target": "!activator",
         "input": "Color",
         "param": "0 0 255",
-        "delay": 0,
+        "delay": 1.2000000476837158,
         "limit": -1
       }
     ]
