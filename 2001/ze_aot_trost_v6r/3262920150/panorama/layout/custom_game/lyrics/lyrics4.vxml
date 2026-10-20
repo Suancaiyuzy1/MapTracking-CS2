@@ -3,7 +3,7 @@
 <!-- xml reconstructed from compiled AST -->
 <root>
     <styles>
-        <include src="s2r://panorama/styles/custom_game/lyrics/lyrics.vcss" />
+        <include src="s2r://panorama/styles/custom_game/lyrics/lyrics4.vcss" />
     </styles>
     <Panel class="Root">
         <Panel id="lyrics_hud4" class="Hidden">

@@ -6425,7 +6425,7 @@
         "output": "OnPass",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 1.6",
+        "param": "speed 2",
         "delay": 0,
         "limit": -1
       },
@@ -6443,6 +6443,38 @@
         "input": "Unlock",
         "param": "",
         "delay": 30,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]qxz_ui",
+        "input": "Deactivate",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]qxz_ui",
+        "input": "Activate",
+        "param": "",
+        "delay": 8,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationLooping",
+        "param": "walk_copy",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationLooping",
+        "param": "walk",
+        "delay": 8,
         "limit": -1
       }
     ]
@@ -6605,7 +6637,7 @@
         "output": "OnPass",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "speed 1.4",
+        "param": "speed 2",
         "delay": 0,
         "limit": -1
       },
@@ -6622,14 +6654,22 @@
         "target": "[PR#]qxz2_button",
         "input": "Unlock",
         "param": "",
-        "delay": 8,
+        "delay": 10,
         "limit": -1
       },
       {
         "output": "OnPass",
         "target": "!activator",
         "input": "KeyValue",
-        "param": "gravity 0.35",
+        "param": "gravity 0.3",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]qxz2_titan",
+        "input": "SetAnimationLooping",
+        "param": "walk_copy",
         "delay": 0,
         "limit": -1
       }
@@ -8544,8 +8584,8 @@
       {
         "output": "OnPass",
         "target": "[PR#]armor_titan",
-        "input": "SetAnimation",
-        "param": "walk",
+        "input": "SetAnimationLooping",
+        "param": "walk_copy",
         "delay": 2,
         "limit": -1
       },
@@ -8626,6 +8666,30 @@
         "target": "!activator",
         "input": "SetDamageFilter",
         "param": "",
+        "delay": 8,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]armor_ui",
+        "input": "Deactivate",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]armor_ui",
+        "input": "Activate",
+        "param": "",
+        "delay": 8,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]armor_titan",
+        "input": "SetAnimationLooping",
+        "param": "walk",
         "delay": 8,
         "limit": -1
       }
@@ -9355,6 +9419,30 @@
         "target": "[PR#]armor_titan",
         "input": "SetAnimation",
         "param": "attack_combo",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase04",
+        "target": "[PR#]armor_titan",
+        "input": "SetAnimation",
+        "param": "attack_jump",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase05",
+        "target": "[PR#]armor_titan",
+        "input": "SetAnimation",
+        "param": "attack_ground",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase06",
+        "target": "[PR#]armor_titan",
+        "input": "SetAnimation",
+        "param": "roar",
         "delay": 0,
         "limit": -1
       }
@@ -22683,7 +22771,7 @@
     "precomputedobbangles0": "45.000004 0.000000 -5.000000",
     "precomputedobborigin0": "10137.994141 8448.624023 -4317.923340",
     "precomputedboundsmaxs": "11541.304688 10333.435547 -1359.213379",
-    "precomputedboundsmins": "4054.086426 5771.873047 -5938.853516",
+    "precomputedboundsmins": "4054.086426 5771.873047 -5938.809570",
     "precomputedobbextent": "3712.949707 2140.209229 2387.051025",
     "precomputedobbangles": "2.000000 -3.000000 -6.000001",
     "precomputedobborigin": "7742.662598 8087.151855 -3553.677246",
@@ -23035,9 +23123,9 @@
     "precomputedobbextent1": "240.568542 354.000977 176.675293",
     "precomputedobbangles1": "-0.000000 0.000000 0.000000",
     "precomputedobborigin1": "687.554504 10609.873047 -5875.612793",
-    "precomputedobbextent0": "63.087433 127.064941 127.072021",
+    "precomputedobbextent0": "63.087433 127.064941 127.036377",
     "precomputedobbangles0": "-0.000000 0.000000 0.000000",
-    "precomputedobborigin0": "865.024902 10609.982422 -5698.012695",
+    "precomputedobborigin0": "865.024902 10609.982422 -5697.977539",
     "precomputedboundsmaxs": "1488.294312 14200.222656 -2108.082031",
     "precomputedboundsmins": "-2789.060059 7120.513184 -6218.858887",
     "precomputedobbextent": "2096.361816 3555.650146 2058.145752",
@@ -28305,9 +28393,9 @@
     "precomputedobborigin0": "3113.972656 8733.936523 -4455.394531",
     "precomputedboundsmaxs": "4701.539062 10874.855469 -1534.448242",
     "precomputedboundsmins": "-1718.240479 6284.392578 -6052.504883",
-    "precomputedobbextent": "2671.526367 2109.104004 2339.903076",
+    "precomputedobbextent": "2668.682129 2109.104004 2339.903076",
     "precomputedobbangles": "-26.999998 3.000000 -9.000000",
-    "precomputedobborigin": "1492.137939 8524.615234 -3269.791504",
+    "precomputedobborigin": "1494.668579 8524.748047 -3268.500488",
     "precomputedfieldsvalid": "1",
     "transmit_always": "0",
     "bakespeculartocubemaps_scale": "1.000000",
@@ -29025,7 +29113,7 @@
     "precomputedobbangles0": "-0.000000 45.000004 0.000000",
     "precomputedobborigin0": "-4828.767578 9285.765625 -5628.791992",
     "precomputedboundsmaxs": "-3992.843262 12147.947266 -2717.073730",
-    "precomputedboundsmins": "-8445.468750 5767.561035 -6052.701660",
+    "precomputedboundsmins": "-8445.468750 5767.859375 -6052.701660",
     "precomputedobbextent": "2173.018066 3189.230469 1667.813965",
     "precomputedobbangles": "0.000000 -6.000000 0.000000",
     "precomputedobborigin": "-6266.956055 9064.176758 -4384.887695",
@@ -30363,9 +30451,9 @@
     "precomputedobbextent5": "89.876465 274.983154 194.517700",
     "precomputedobbangles5": "-45.000004 0.000000 0.000000",
     "precomputedobborigin5": "21.991943 7702.043945 -5624.007812",
-    "precomputedobbextent4": "1186.120117 1432.561279 1804.041992",
-    "precomputedobbangles4": "2.000000 -3.000000 43.000000",
-    "precomputedobborigin4": "1008.669556 5406.158691 -5390.217773",
+    "precomputedobbextent4": "1202.386353 1801.935791 1412.679688",
+    "precomputedobbangles4": "3.000000 0.000000 -45.999992",
+    "precomputedobborigin4": "968.286865 5453.107910 -5422.807129",
     "precomputedobbextent3": "1044.679199 1399.973145 1797.125488",
     "precomputedobbangles3": "-2.000000 -3.999999 -45.000000",
     "precomputedobborigin3": "986.395996 9895.941406 -5382.220703",
@@ -31327,7 +31415,7 @@
     "precomputedobbangles0": "-0.000000 0.000000 0.000000",
     "precomputedobborigin0": "-11693.656250 12421.996094 -5899.829102",
     "precomputedboundsmaxs": "-9237.143555 16203.336914 -2118.784912",
-    "precomputedboundsmins": "-13466.600586 8640.381836 -6309.719238",
+    "precomputedboundsmins": "-13466.600586 8641.738281 -6309.719238",
     "precomputedobbextent": "2084.630371 3781.252441 2024.944092",
     "precomputedobbangles": "-5.000000 -3.000000 1.000000",
     "precomputedobborigin": "-11244.407227 12365.050781 -4093.137451",
@@ -31416,7 +31504,7 @@
     "precomputedobbangles0": "-0.000000 0.000000 0.000000",
     "precomputedobborigin0": "-11693.556641 11497.978516 -5900.018555",
     "precomputedboundsmaxs": "-9236.943359 15279.336914 -2118.985107",
-    "precomputedboundsmins": "-15487.588867 7716.381836 -6826.554688",
+    "precomputedboundsmins": "-15487.588867 7718.708008 -6826.554688",
     "precomputedobbextent": "3270.273438 3594.475586 2094.802246",
     "precomputedobbangles": "-3.999999 -43.999992 7.000000",
     "precomputedobborigin": "-11952.562500 11155.138672 -4238.644531",
@@ -31732,7 +31820,7 @@
     "precomputedobbangles0": "-0.000000 0.000000 0.000000",
     "precomputedobborigin0": "-10168.886719 14834.681641 -5505.483887",
     "precomputedboundsmaxs": "-8519.584961 15055.396484 -4157.418457",
-    "precomputedboundsmins": "-11031.341797 9988.006836 -6144.623047",
+    "precomputedboundsmins": "-11031.341797 9988.006836 -6143.338867",
     "precomputedobbextent": "596.975098 2700.875000 994.847168",
     "precomputedobbangles": "1.000000 16.999996 0.000000",
     "precomputedobborigin": "-9863.017578 12587.877930 -5148.665527",
@@ -32494,9 +32582,9 @@
     "precomputedobborigin0": "-2295.218262 14105.861328 -4218.228027",
     "precomputedboundsmaxs": "-637.080811 15155.729492 -1748.932129",
     "precomputedboundsmins": "-7756.059570 11334.476562 -5978.682617",
-    "precomputedobbextent": "3570.141113 1811.859863 2089.702637",
-    "precomputedobbangles": "-0.000000 2.000000 30.999996",
-    "precomputedobborigin": "-4184.200195 13883.649414 -3624.080566",
+    "precomputedobbextent": "3539.928711 1877.186035 2060.841553",
+    "precomputedobbangles": "0.000000 -3.000000 10.999998",
+    "precomputedobborigin": "-4242.680176 13444.839844 -3878.322998",
     "precomputedfieldsvalid": "1",
     "transmit_always": "0",
     "bakespeculartocubemaps_scale": "1.000000",
@@ -33635,18 +33723,10 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]qxz_titan",
-        "input": "SetAnimation",
-        "param": "attack2",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]qxz_hurt1",
         "input": "Enable",
         "param": "",
-        "delay": 1,
+        "delay": 1.3600000143051147,
         "limit": -1
       },
       {
@@ -33654,23 +33734,23 @@
         "target": "[PR#]qxz_hurt1",
         "input": "Disable",
         "param": "",
-        "delay": 1.2999999523162842,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]qxz_titan",
-        "input": "SetAnimation",
-        "param": "walk",
         "delay": 2,
         "limit": -1
       },
       {
         "output": "OnTrigger",
+        "target": "[PR#]qxz_case",
+        "input": "PickRandom",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -33679,6 +33759,14 @@
         "input": "Disable",
         "param": "",
         "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationLooping",
+        "param": "walk",
+        "delay": 2.359999895095825,
         "limit": -1
       }
     ]
@@ -33699,9 +33787,9 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]qxz2_titan",
-        "input": "SetAnimation",
+        "input": "SetAnimationLooping",
         "param": "walk",
-        "delay": 2,
+        "delay": 2.359999895095825,
         "limit": -1
       },
       {
@@ -33709,7 +33797,7 @@
         "target": "[PR#]qxz2_hurt1",
         "input": "Disable",
         "param": "",
-        "delay": 1.2999999523162842,
+        "delay": 2,
         "limit": -1
       },
       {
@@ -33717,14 +33805,14 @@
         "target": "[PR#]qxz2_hurt1",
         "input": "Enable",
         "param": "",
-        "delay": 1,
+        "delay": 1.3600000143051147,
         "limit": -1
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]qxz2_titan",
-        "input": "SetAnimation",
-        "param": "attack2",
+        "target": "[PR#]qxz2_case",
+        "input": "PickRandom",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
@@ -33733,7 +33821,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 5,
+        "delay": 8,
         "limit": -1
       },
       {
@@ -38915,7 +39003,7 @@
     "flood_fill": "1",
     "voxel_size": "48.0",
     "box_maxs": "5138.000000 1951.897461 1368.000000",
-    "box_mins": "-4154.000000 -5048.102539 -504.000000",
+    "box_mins": "-7509.000000 -5048.102539 -504.000000",
     "bakefarz": "4096.000000",
     "cubemaptexture": "maps/ze_aot_trost_v6r/cubemaps/env_cubemap_array.vtex",
     "StartDisabled": "0",
@@ -38934,12 +39022,12 @@
     "hammerUniqueId": "4296",
     "handshake": "507735583",
     "light_probe_size_x": "128",
-    "light_probe_size_y": "96",
-    "light_probe_size_z": "25",
+    "light_probe_size_y": "70",
+    "light_probe_size_z": "18",
     "array_index": "0",
     "light_probe_atlas_x": "1",
     "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "93"
+    "light_probe_atlas_Z": "125"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -38952,8 +39040,8 @@
     "voxelize": "1",
     "flood_fill": "1",
     "voxel_size": "48.0",
-    "box_maxs": "6167.000000 2897.000000 1368.000000",
-    "box_mins": "-3499.000000 -4103.000000 -504.000000",
+    "box_maxs": "2812.000000 2897.000000 1368.000000",
+    "box_mins": "-1658.000000 -4103.000000 -504.000000",
     "bakefarz": "4096.000000",
     "cubemaptexture": "maps/ze_aot_trost_v6r/cubemaps/env_cubemap_array.vtex",
     "StartDisabled": "0",
@@ -38971,13 +39059,13 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4297",
     "handshake": "507735584",
-    "light_probe_size_x": "128",
-    "light_probe_size_y": "92",
-    "light_probe_size_z": "24",
+    "light_probe_size_x": "82",
+    "light_probe_size_y": "128",
+    "light_probe_size_z": "34",
     "array_index": "1",
-    "light_probe_atlas_x": "1",
+    "light_probe_atlas_x": "57",
     "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "121"
+    "light_probe_atlas_Z": "41"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -38990,7 +39078,7 @@
     "voxelize": "1",
     "flood_fill": "1",
     "voxel_size": "48.0",
-    "box_maxs": "3041.000000 1684.000000 1368.000000",
+    "box_maxs": "4882.000000 1684.000000 1368.000000",
     "box_mins": "-3191.000000 -5316.000000 -504.000000",
     "bakefarz": "4096.000000",
     "cubemaptexture": "maps/ze_aot_trost_v6r/cubemaps/env_cubemap_array.vtex",
@@ -39009,13 +39097,13 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4298",
     "handshake": "507735585",
-    "light_probe_size_x": "113",
-    "light_probe_size_y": "128",
-    "light_probe_size_z": "34",
+    "light_probe_size_x": "128",
+    "light_probe_size_y": "110",
+    "light_probe_size_z": "29",
     "array_index": "2",
-    "light_probe_atlas_x": "57",
+    "light_probe_atlas_x": "1",
     "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "41"
+    "light_probe_atlas_Z": "93"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -39089,9 +39177,9 @@
     "light_probe_size_y": "19",
     "light_probe_size_z": "23",
     "array_index": "4",
-    "light_probe_atlas_x": "133",
-    "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "121"
+    "light_probe_atlas_x": "57",
+    "light_probe_atlas_Y": "109",
+    "light_probe_atlas_Z": "1"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -39127,9 +39215,9 @@
     "light_probe_size_y": "28",
     "light_probe_size_z": "25",
     "array_index": "5",
-    "light_probe_atlas_x": "1",
-    "light_probe_atlas_Y": "101",
-    "light_probe_atlas_Z": "93"
+    "light_probe_atlas_x": "57",
+    "light_probe_atlas_Y": "45",
+    "light_probe_atlas_Z": "1"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -39165,9 +39253,9 @@
     "light_probe_size_y": "27",
     "light_probe_size_z": "24",
     "array_index": "6",
-    "light_probe_atlas_x": "1",
-    "light_probe_atlas_Y": "97",
-    "light_probe_atlas_Z": "121"
+    "light_probe_atlas_x": "57",
+    "light_probe_atlas_Y": "77",
+    "light_probe_atlas_Z": "1"
   },
   {
     "lightprobetexture_sh2_l1": "",
@@ -39242,8 +39330,8 @@
     "light_probe_size_z": "9",
     "array_index": "8",
     "light_probe_atlas_x": "57",
-    "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "77"
+    "light_probe_atlas_Y": "45",
+    "light_probe_atlas_Z": "29"
   },
   {
     "cpoint7_parent": "0",
@@ -39781,5 +39869,143 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "4333",
     "model": "maps/ze_aot_trost_v6r/entities/unnamed_4333.vmdl"
+  },
+  {
+    "Case32": "",
+    "Case31": "",
+    "Case30": "",
+    "Case29": "",
+    "Case28": "",
+    "Case27": "",
+    "Case26": "",
+    "Case25": "",
+    "Case24": "",
+    "Case23": "",
+    "Case22": "",
+    "Case21": "",
+    "Case20": "",
+    "Case19": "",
+    "Case18": "",
+    "Case17": "",
+    "Case14": "",
+    "Case13": "",
+    "Case12": "",
+    "Case11": "",
+    "Case10": "",
+    "Case09": "",
+    "Case08": "",
+    "Case07": "",
+    "Case06": "",
+    "Case05": "",
+    "Case04": "",
+    "Case03": "",
+    "Case02": "",
+    "Case01": "",
+    "Case15": "PressedAttack",
+    "Case16": "PressedAttack2",
+    "spawnflags": "0",
+    "FieldOfView": "-1.000000",
+    "vscripts": "",
+    "targetname": "[PR#]qxz_case",
+    "classname": "logic_case",
+    "origin": "7046.000000 1462.000000 2859.500000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "4334",
+    "connections": [
+      {
+        "output": "OnCase01",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack2",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack3",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]qxz_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "FieldOfView": "-1.000000",
+    "spawnflags": "0",
+    "Case32": "",
+    "Case31": "",
+    "Case30": "",
+    "Case29": "",
+    "Case28": "",
+    "Case27": "",
+    "Case26": "",
+    "Case25": "",
+    "Case24": "",
+    "Case23": "",
+    "Case22": "",
+    "Case21": "",
+    "Case20": "",
+    "Case19": "",
+    "Case18": "",
+    "Case17": "",
+    "Case16": "PressedAttack2",
+    "Case15": "PressedAttack",
+    "Case14": "",
+    "Case13": "",
+    "Case12": "",
+    "Case11": "",
+    "Case10": "",
+    "Case09": "",
+    "Case08": "",
+    "Case07": "",
+    "Case06": "",
+    "Case05": "",
+    "Case04": "",
+    "Case03": "",
+    "Case02": "",
+    "Case01": "",
+    "vscripts": "",
+    "targetname": "[PR#]qxz2_case",
+    "classname": "logic_case",
+    "origin": "7046.000000 1181.000000 2859.500000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "4335",
+    "connections": [
+      {
+        "output": "OnCase01",
+        "target": "[PR#]qxz2_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack2",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]qxz2_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack3",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnCase03",
+        "target": "[PR#]qxz2_titan",
+        "input": "SetAnimationNotLooping",
+        "param": "attack1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
