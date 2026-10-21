@@ -3,6 +3,9 @@
 
 [
   {
+    "novis_max_triangles_per_cluster": "0",
+    "novis_min_draw_volume_size": "0.000000",
+    "targetname": "",
     "skyname": "light_test_sky_default",
     "startdark": "0",
     "startcolor": "0 0 0",
@@ -57,6 +60,9 @@
     "mapUsageType": "skybox"
   },
   {
+    "bakedshadowindex": "0",
+    "light_map_uniqueid": "-1685008104",
+    "light_path_uniqueid": "1351499617",
     "brightness_legacy": "-nan(ind)",
     "brightness_lumens": "0",
     "targetname": "[PR#]sky_main",
@@ -67,10 +73,15 @@
     "shadowpriority": "-1",
     "rendertocubemaps": "1",
     "style": "0",
-    "directlight": "2",
+    "pattern": "",
+    "nearclipplane": "0.000000",
+    "fademindist": "",
+    "fademaxdist": "",
+    "directlight": "1",
     "bouncescale": "1.600000",
     "skycolor": "87 99 119",
     "skyintensity": "0.000000",
+    "skytexture": "",
     "skytexturescale": "1.100000",
     "skybouncescale": "2.600000",
     "skyambientbounce": "0 0 0",
@@ -98,11 +109,11 @@
     "origin": "0.000000 0.000000 0.000000",
     "angles": "51.760674 124.342743 62.913731",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "7",
-    "nearclipplane": "1.000000"
+    "hammerUniqueId": "7"
   },
   {
     "targetname": "[PR#]LevelCounter",
+    "vscripts": "",
     "StartDisabled": "0",
     "startvalue": "5",
     "min": "1",
@@ -125,7 +136,13 @@
   },
   {
     "targetname": "[PR#]env_sky_main",
+    "vscripts": "",
+    "parentname": "",
+    "parentAttachmentName": "",
     "useLocalOffset": "0",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.scales": "0.000000 0.000000 0.000000",
     "StartDisabled": "0",
     "skyname": "materials/skybox/light_test_sky_default.vmat",
     "tint_color": "120 119 119",
@@ -137,9 +154,18 @@
     "hammerUniqueId": "8"
   },
   {
-    "lightprobetexture_dlshd": "_bakeresourcecache/maps/ze_trepang_skybox_baked/env_light_probe_volume_dlshd_25.vtex",
+    "lightprobetexture_sh2_l1": "",
+    "lightprobetexture_sh2_dc": "",
+    "lightprobetexture_dlshd": "maps/ze_trepang_skybox/lightmaps/env_light_probe_volume_atlas_dlshd.vtex",
     "lightprobetexture": "maps/ze_trepang_skybox/lightmaps/env_light_probe_volume_atlas.vtex",
+    "vscripts": "",
+    "targetname": "",
+    "parentname": "",
+    "parentAttachmentName": "",
     "useLocalOffset": "0",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.scales": "0.000000 0.000000 0.000000",
     "StartDisabled": "0",
     "cubemaptexture": "maps/ze_trepang_skybox/cubemaps/env_cubemap_array.vtex",
     "bakefarz": "4096.000000",
@@ -160,10 +186,7 @@
     "light_probe_size_x": "67",
     "light_probe_size_y": "67",
     "light_probe_size_z": "54",
-    "array_index": "0",
-    "light_probe_atlas_x": "1",
-    "light_probe_atlas_Y": "1",
-    "light_probe_atlas_Z": "1"
+    "array_index": "0"
   },
   {
     "scale": "16",
@@ -182,6 +205,7 @@
   },
   {
     "targetname": "[PR#]DifficultyCounter",
+    "vscripts": "",
     "StartDisabled": "0",
     "startvalue": "1",
     "min": "1",
@@ -204,6 +228,7 @@
   },
   {
     "targetname": "[PR#]EE_Counter",
+    "vscripts": "",
     "StartDisabled": "0",
     "startvalue": "1",
     "min": "1",

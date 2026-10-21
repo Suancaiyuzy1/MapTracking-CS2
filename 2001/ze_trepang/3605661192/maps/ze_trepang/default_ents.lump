@@ -58246,15 +58246,15 @@
     "model": "maps/ze_trepang/entities/spider_boss_forcefield_bis_110254.vmdl"
   },
   {
-    "force": "2500000",
+    "force": "100000",
     "forcetime": "0",
     "attach1": "[PR#]spider_top",
     "spawnflags": "14",
     "vscripts": "",
     "targetname": "[PR#]spider_explode",
     "classname": "phys_thruster",
-    "origin": "-11601.423828 0.318146 -4286.000000",
-    "angles": "0.000000 179.999969 0.000000",
+    "origin": "-10762.634766 0.318146 -3484.824219",
+    "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "110257"
   },
@@ -94773,11 +94773,15 @@
     ]
   },
   {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "0",
-    "landmark": "",
-    "target": "[PR#]ze_teleport_boss_control_room_b",
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "20",
+    "damage": "0",
+    "master": "",
     "filtername": "",
     "spawnflags": "1",
     "globalname": "",
@@ -94790,7 +94794,7 @@
     "parentname": "",
     "targetname": "[PR#]ze_teleport_boss_control_room",
     "vscripts": "",
-    "classname": "trigger_teleport",
+    "classname": "trigger_hurt",
     "origin": "-2209.500000 939.500000 -3797.500000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
@@ -94798,35 +94802,11 @@
     "model": "maps/ze_trepang/entities/ze_teleport_boss_control_room_127166.vmdl",
     "connections": [
       {
-        "output": "OnStartTouch",
-        "target": "!self",
-        "input": "FireUser1",
+        "output": "OnHurtPlayer",
+        "target": "[PR#]ze_teleport_boss_control_room_b",
+        "input": "Teleport",
         "param": "",
         "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnUser1",
-        "target": "!self",
-        "input": "FireUser1",
-        "param": "",
-        "delay": 0.5,
-        "limit": -1
-      },
-      {
-        "output": "OnUser1",
-        "target": "!self",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnUser1",
-        "target": "!self",
-        "input": "Disable",
-        "param": "",
-        "delay": 0.47999998927116394,
         "limit": -1
       }
     ]
@@ -114807,7 +114787,7 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]LevelCounter",
-        "input": "SetValue",
+        "input": "SetValueNoFire",
         "param": "3",
         "delay": 0,
         "limit": 1
@@ -120539,6 +120519,7 @@
     "hammerUniqueId": "227610"
   },
   {
+    "filterteam": "3",
     "filterclass": "",
     "clientSideEntity": "0",
     "vscripts": "",
@@ -120551,6 +120532,7 @@
     "hammerUniqueId": "227611"
   },
   {
+    "filterteam": "2",
     "filterclass": "",
     "clientSideEntity": "0",
     "vscripts": "",
@@ -120606,18 +120588,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "227614"
-  },
-  {
-    "filterclass": "",
-    "Negated": "0",
-    "clientSideEntity": "0",
-    "vscripts": "",
-    "targetname": "[PR#]filter_nobody",
-    "classname": "filter_activator_team",
-    "origin": "14771.418945 13607.151367 -13450.500000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "227615"
   },
   {
     "entityIndexSelection": "0",
@@ -122003,14 +121973,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]trg_zm_spawn_phase2",
-        "input": "Enable",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]trg_humans_spawn_phase2",
         "input": "Enable",
         "param": "",
@@ -122179,14 +122141,6 @@
       },
       {
         "output": "OnTrigger",
-        "target": "[PR#]HMV_EXCELSUS",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnTrigger",
         "target": "[PR#]HMV_EXCELSUS_PROP",
         "input": "Kill",
         "param": "",
@@ -122222,6 +122176,14 @@
         "target": "[PR#]srv_warmup_cd",
         "input": "Command",
         "param": "mp_roundtime 40; mp_freezetime 10",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]phase1_boss_world_layer",
+        "input": "HideWorldLayerAndDestroyEntities",
+        "param": "",
         "delay": 0,
         "limit": -1
       }
@@ -122449,7 +122411,7 @@
       {
         "output": "OnPressed",
         "target": "[PR#]LevelCounter",
-        "input": "SetValue",
+        "input": "SetValueNoFire",
         "param": "1",
         "delay": 0,
         "limit": 1
@@ -122686,7 +122648,7 @@
       {
         "output": "OnPressed",
         "target": "[PR#]LevelCounter",
-        "input": "SetValue",
+        "input": "SetValueNoFire",
         "param": "2",
         "delay": 0,
         "limit": 1
@@ -122971,39 +122933,16 @@
     "hammerUniqueId": "230412"
   },
   {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_only_t",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]trg_zm_spawn_phase2",
-    "classname": "trigger_multiple",
-    "origin": "15463.292969 10770.641602 -3700.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "230414",
-    "model": "maps/ze_trepang/entities/trg_zm_spawn_phase2_230414.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]tp_zm_phase2_randomizer",
-        "input": "PickRandomShuffle",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]filter_only_ct",
+    "thinkalways": "0",
+    "damageforce": "0.000000 0.000000 0.000000",
+    "nodmgforce": "0",
+    "forgivedelay": "3.000000",
+    "damagemodel": "0",
+    "damagetype": "0",
+    "damagecap": "20",
+    "damage": "0",
+    "master": "",
+    "filtername": "",
     "spawnflags": "1",
     "globalname": "",
     "StartDisabled": "1",
@@ -123015,7 +122954,7 @@
     "parentname": "",
     "vscripts": "",
     "targetname": "[PR#]trg_humans_spawn_phase2",
-    "classname": "trigger_multiple",
+    "classname": "trigger_hurt",
     "origin": "15463.292969 10770.641602 -3699.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
@@ -123023,9 +122962,9 @@
     "model": "maps/ze_trepang/entities/trg_humans_spawn_phase2_230416.vmdl",
     "connections": [
       {
-        "output": "OnStartTouch",
-        "target": "[PR#]tp_humans_phase2_randomizer",
-        "input": "PickRandomShuffle",
+        "output": "OnHurtPlayer",
+        "target": "[PR#]filter_only_ct_spawn_stage2",
+        "input": "TestActivator",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -130314,7 +130253,7 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]LevelCounter",
-        "input": "SetValue",
+        "input": "SetValueNoFire",
         "param": "2",
         "delay": 44.59000015258789,
         "limit": 1
@@ -130404,8 +130343,8 @@
         "target": "[PR#]spider_top",
         "input": "EnableMotion",
         "param": "",
-        "delay": 25,
-        "limit": -1
+        "delay": 29,
+        "limit": 1
       }
     ]
   },
@@ -228358,6 +228297,22 @@
         "param": "targetname standard",
         "delay": 1,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]hud_script",
+        "input": "RunScriptInput",
+        "param": "ShowHUD",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnEndTouch",
+        "target": "[PR#]hud_script",
+        "input": "RunScriptInput",
+        "param": "CloseHUD",
+        "delay": 15,
+        "limit": -1
       }
     ]
   },
@@ -230553,8 +230508,8 @@
         "target": "[PR#]spider_top",
         "input": "EnableMotion",
         "param": "",
-        "delay": 25,
-        "limit": -1
+        "delay": 29,
+        "limit": 1
       }
     ]
   },
@@ -378924,14 +378879,6 @@
         "param": "",
         "delay": 0,
         "limit": -1
-      },
-      {
-        "output": "OnTrigger",
-        "target": "[PR#]HMV_EXCELSUS",
-        "input": "Kill",
-        "param": "",
-        "delay": 0,
-        "limit": -1
       }
     ]
   },
@@ -399174,7 +399121,7 @@
       {
         "output": "OnTrue",
         "target": "[PR#]LevelCounter",
-        "input": "SetValue",
+        "input": "SetValueNoFire",
         "param": "5",
         "delay": 0,
         "limit": -1
@@ -400807,61 +400754,6 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "322773"
-  },
-  {
-    "thinkalways": "0",
-    "damageforce": "0.000000 0.000000 0.000000",
-    "nodmgforce": "0",
-    "forgivedelay": "3.000000",
-    "damagemodel": "0",
-    "damagetype": "1024",
-    "damagecap": "20",
-    "damage": "0",
-    "master": "",
-    "filtername": "[PR#]filter_only_ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]buy_menu01",
-    "classname": "trigger_hurt",
-    "origin": "15463.292969 10770.641602 -3699.000000",
-    "angles": "0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "322776",
-    "model": "maps/ze_trepang/entities/buy_menu01_322776.vmdl",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]hud_script",
-        "input": "RunScriptInput",
-        "param": "ShowHUD",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]buy_menu01",
-        "input": "Kill",
-        "param": "",
-        "delay": 5,
-        "limit": -1
-      },
-      {
-        "output": "OnEndTouch",
-        "target": "[PR#]hud_script",
-        "input": "RunScriptInput",
-        "param": "CloseHUD",
-        "delay": 15,
-        "limit": -1
-      }
-    ]
   },
   {
     "local.scales": "0.000000 0.000000 0.000000",
@@ -405510,5 +405402,36 @@
     "angles": "0.000000 179.999939 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "326907"
+  },
+  {
+    "filterteam": "3",
+    "filterclass": "",
+    "Negated": "0",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]filter_only_ct_spawn_stage2",
+    "classname": "filter_activator_team",
+    "origin": "15113.535156 10249.308594 -3232.000000",
+    "angles": "0.000000 270.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "327493",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "[PR#]tp_humans_phase2_randomizer",
+        "input": "PickRandomShuffle",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnFail",
+        "target": "[PR#]tp_zm_phase2_randomizer",
+        "input": "PickRandomShuffle",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
