@@ -204,17 +204,27 @@ function SetPlayerSpeed(pawn, speed) {
 let cachedLayout;
 let hudWarned = false;
 
-/** 取状态提示条的布局实体（缓存句柄，但引擎可能重建面板，所以先 IsValid 再复用） */
+/**
+ * 取状态提示条的布局实体（缓存句柄，但引擎可能重建面板，所以先 IsValid 再复用）。
+ * 只接受带 SetHasClass 的实体：同名实体可能是别的类型（如 point_script），
+ * 直接拿 found[0] 会在调用时抛 "SetHasClass is not a function"。
+ */
 function GetHud() {
-	if (cachedLayout && cachedLayout.IsValid()) {
+	if (cachedLayout && cachedLayout.IsValid() && typeof cachedLayout.SetHasClass === "function") {
 		return cachedLayout;
 	}
 	const found = Instance.FindEntitiesByName(HUD_NAME);
-	cachedLayout = found.length > 0 ? found[0] : undefined;
-	if (!cachedLayout && !hudWarned) {
+	const usable = found.filter((e) => e && typeof e.SetHasClass === "function");
+	if (!usable.length && !hudWarned) {
 		hudWarned = true;
-		Log(`⚠ 找不到名为 "${HUD_NAME}" 的 custom_hud_layout，开关状态提示条不会出现`);
+		const names = found.map((e) => {
+			const cls = typeof e.GetClassName === "function" ? e.GetClassName() : "?";
+			const nm = typeof e.GetEntityName === "function" ? e.GetEntityName() : "?";
+			return `${cls}:${nm}`;
+		}).join(", ");
+		Log(`⚠ 找不到名为 "${HUD_NAME}" 的 custom_hud_layout${found.length ? `（同名实体：${names}）` : ""}，开关状态提示条不会出现`);
 	}
+	cachedLayout = usable.length > 0 ? usable[0] : undefined;
 	return cachedLayout;
 }
 
