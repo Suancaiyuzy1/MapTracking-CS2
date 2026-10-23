@@ -726,7 +726,7 @@
     "toLocalPlayer": "0",
     "startOnSpawn": "0",
     "sourceEntityName": "",
-    "soundName": "Ambient.arapche_sound",
+    "soundName": "Ambient.aparche_sound",
     "local.scales": "0.000000 0.000000 0.000000",
     "local.angles": "0.000000 0.000000 0.000000",
     "local.origin": "0.000000 0.000000 0.000000",
