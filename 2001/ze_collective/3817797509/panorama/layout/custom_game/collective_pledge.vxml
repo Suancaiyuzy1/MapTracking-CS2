@@ -6,6 +6,12 @@
         <include src="s2r://panorama/styles/custom_game/collective_pledge.vcss" />
     </styles>
     <Panel class="PledgeRoot" hittest="false">
+        <Panel id="collective_delay_invincibility_prompt" class="InvincibilityPrompt" hittest="false">
+            <Label class="InvincibilityText" text="[INVINCIBLE]" hittest="false" />
+            <Label class="InvincibilityText" text="The humans are taking too long to progress" hittest="false" />
+            <Label class="InvincibilityText" text="You are therefore invincible against humans" hittest="false" />
+            <Label class="InvincibilityText" text="(until progression is made)" hittest="false" />
+        </Panel>
         <Panel id="collective_invincibility_prompt" class="InvincibilityPrompt" hittest="false">
             <Label class="InvincibilityText" text="[INVINCIBLE]" hittest="false" />
             <Label class="InvincibilityText" text="You are within the start area" hittest="false" />
