@@ -267,7 +267,7 @@
         "target": "[PR#]ZombieSucker_Particle",
         "input": "Stop",
         "param": "",
-        "delay": 6,
+        "delay": 6.5,
         "limit": -1
       },
       {
@@ -275,7 +275,7 @@
         "target": "[PR#]ZombieSucker_Trigger",
         "input": "Disable",
         "param": "",
-        "delay": 6,
+        "delay": 6.5,
         "limit": -1
       },
       {
@@ -315,7 +315,7 @@
         "target": "[PR#]ZombieSucker_Particle2",
         "input": "Stop",
         "param": "",
-        "delay": 8,
+        "delay": 7,
         "limit": -1
       },
       {
@@ -339,7 +339,7 @@
         "target": "[PR#]Item_ZombieSucker_teleport",
         "input": "Disable",
         "param": "",
-        "delay": 8,
+        "delay": 7,
         "limit": -1
       }
     ]

@@ -162,7 +162,7 @@
         "output": "OnTrigger",
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "SetDamage",
-        "param": "160",
+        "param": "180",
         "delay": 0,
         "limit": -1
       },
@@ -345,7 +345,7 @@
         "output": "OnTrigger",
         "target": "[PR#]gt_atk_hurt0\u00260000",
         "input": "SetDamage",
-        "param": "80",
+        "param": "100",
         "delay": 0,
         "limit": -1
       },
@@ -498,8 +498,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "8",
-    "damagecap": "50",
-    "damage": "50",
+    "damagecap": "100",
+    "damage": "100",
     "master": "",
     "filtername": "[PR#]ct",
     "spawnflags": "4097",

@@ -12,7 +12,7 @@
     "startsound": "",
     "blockdamage": "0.000000",
     "movedistance": "1600.000000",
-    "speed": "700",
+    "speed": "750",
     "authoredposition": "0",
     "startposition": "0.000000",
     "spawnflags": "8",
@@ -62,7 +62,7 @@
         "target": "[PR#]extra_water_move",
         "input": "Kill",
         "param": "",
-        "delay": 2.200000047683716,
+        "delay": 2,
         "limit": -1
       },
       {
@@ -70,7 +70,7 @@
         "target": "[PR#]Item_Water_usedpar",
         "input": "Kill",
         "param": "",
-        "delay": 2.200000047683716,
+        "delay": 2,
         "limit": -1
       },
       {
@@ -94,7 +94,7 @@
         "target": "!self",
         "input": "Kill",
         "param": "",
-        "delay": 2.200000047683716,
+        "delay": 2,
         "limit": -1
       },
       {
@@ -102,7 +102,7 @@
         "target": "[PR#]water_text_trigger",
         "input": "Kill",
         "param": "",
-        "delay": 2.200000047683716,
+        "delay": 2,
         "limit": -1
       },
       {
@@ -110,7 +110,7 @@
         "target": "[PR#]extra_water_trigger",
         "input": "Kill",
         "param": "",
-        "delay": 2.200000047683716,
+        "delay": 2,
         "limit": -1
       }
     ]

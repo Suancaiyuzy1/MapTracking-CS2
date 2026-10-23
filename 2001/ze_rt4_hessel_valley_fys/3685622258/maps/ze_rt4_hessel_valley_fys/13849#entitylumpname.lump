@@ -29,7 +29,7 @@
         "target": "[PR#]item_carl_skill_1_par",
         "input": "Kill",
         "param": "",
-        "delay": 9.5,
+        "delay": 9,
         "limit": -1
       },
       {
@@ -45,7 +45,7 @@
         "target": "[PR#]shenqi_kaiqi_relay",
         "input": "Trigger",
         "param": "",
-        "delay": 9.5,
+        "delay": 9,
         "limit": -1
       }
     ]

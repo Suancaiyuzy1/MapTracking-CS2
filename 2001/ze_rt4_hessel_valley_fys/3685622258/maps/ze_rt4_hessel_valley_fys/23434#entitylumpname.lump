@@ -37,7 +37,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_move1_2",
     "classname": "func_movelinear",
-    "origin": "-75.080078 615.665039 0.200195",
+    "origin": "-75.079102 615.665039 0.200195",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23430",
@@ -45,7 +45,6 @@
     "_template_lump_ent_index": "0"
   },
   {
-    "fadescale": "1",
     "solidbsp": "0",
     "MoveWithoutPushingBlockers": "0",
     "NoInterpolate": "0",
@@ -284,8 +283,8 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "1024",
-    "damagecap": "30",
-    "damage": "20",
+    "damagecap": "20",
+    "damage": "38",
     "master": "",
     "filtername": "[PR#]ct",
     "spawnflags": "4097",
@@ -300,7 +299,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_hurt",
     "classname": "trigger_hurt",
-    "origin": "-5.580078 608.665039 -2.299805",
+    "origin": "-5.579102 608.665039 -2.299805",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23439",
@@ -351,7 +350,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_move1_1",
     "classname": "func_movelinear",
-    "origin": "0.919922 615.665039 75.200195",
+    "origin": "0.920898 615.665039 75.200195",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23432",
@@ -411,6 +410,22 @@
         "param": "",
         "delay": 2.9000000953674316,
         "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]laser_text_trigger",
+        "input": "Enable",
+        "param": "",
+        "delay": 2,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]laser_text_trigger",
+        "input": "Kill",
+        "param": "",
+        "delay": 3,
+        "limit": -1
       }
     ]
   },
@@ -449,7 +464,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_move1_3",
     "classname": "func_movelinear",
-    "origin": "0.919922 615.665039 -74.799805",
+    "origin": "0.920898 615.665039 -74.799805",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23426",
@@ -491,7 +506,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_move1_4",
     "classname": "func_movelinear",
-    "origin": "74.919922 615.665039 0.200195",
+    "origin": "74.920898 615.665039 0.200195",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23428",
@@ -533,7 +548,7 @@
     "vscripts": "",
     "targetname": "[PR#]laser_move1_2",
     "classname": "func_movelinear",
-    "origin": "-75.080078 615.665039 0.200195",
+    "origin": "-75.079102 615.665039 0.200195",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23430",
@@ -830,5 +845,69 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "23425",
     "_template_lump_ent_index": "12"
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "[PR#]ice_filter",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "0",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "[PR#]laser_hurt",
+    "vscripts": "",
+    "targetname": "[PR#]laser_text_trigger",
+    "classname": "trigger_multiple",
+    "origin": "-33.280273 87.000000 72.502441",
+    "angles": "-0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "25882",
+    "model": "maps/ze_rt4_hessel_valley_fys/entities/laser_text_trigger_25882.vmdl",
+    "_template_lump_ent_index": "13",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]laser_fade",
+        "input": "Fade",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_ice_relay",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_ice_fire_relay",
+        "input": "Enable",
+        "param": "",
+        "delay": 0.019999999552965164,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_ice_fire_relay",
+        "input": "Disable",
+        "param": "",
+        "delay": 8,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_ice_relay",
+        "input": "Disable",
+        "param": "",
+        "delay": 8.020000457763672,
+        "limit": -1
+      }
+    ]
   }
 ]

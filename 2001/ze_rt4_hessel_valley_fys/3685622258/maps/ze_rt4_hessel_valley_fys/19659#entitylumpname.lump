@@ -82,7 +82,7 @@
     "damagemodel": "0",
     "damagetype": "8",
     "damagecap": "20",
-    "damage": "20",
+    "damage": "30",
     "master": "",
     "filtername": "[PR#]ct",
     "spawnflags": "4097",

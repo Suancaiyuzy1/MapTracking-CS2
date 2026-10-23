@@ -215,7 +215,7 @@
         "target": "[PR#]Item_tie_push\u00260000",
         "input": "KillHierarchy",
         "param": "",
-        "delay": 3.299999952316284,
+        "delay": 3,
         "limit": -1
       },
       {
@@ -231,7 +231,7 @@
         "target": "[PR#]item_tie_phys",
         "input": "Kill",
         "param": "",
-        "delay": 3.299999952316284,
+        "delay": 3,
         "limit": -1
       }
     ]

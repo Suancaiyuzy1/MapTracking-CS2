@@ -307,7 +307,7 @@
   {
     "triggeronstarttouch": "0",
     "speed": "1800",
-    "pushdir": "-40.000000 270.000000 0.000000",
+    "pushdir": "-33.000000 270.000000 0.000000",
     "filtername": "",
     "spawnflags": "1032",
     "globalname": "",

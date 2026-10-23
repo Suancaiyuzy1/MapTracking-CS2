@@ -7,10 +7,6 @@
     "interactsWith": "",
     "interactsAs": "",
     "collisionGroup": "",
-    "gibdir": "0 0 0",
-    "fadescale": "1",
-    "ExploitableByPlayer": "0",
-    "preferredcarryangles": "0 0 0",
     "touchoutputperentitydelay": "0.000000",
     "notsolid": "0",
     "hoverposeangles": "0.000000 0.000000 0.000000",
@@ -218,7 +214,15 @@
         "target": "[PR#]item_fog_usedspr",
         "input": "Kill",
         "param": "",
-        "delay": 16,
+        "delay": 18,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]item_fog_usedspr",
+        "input": "SetParent",
+        "param": "",
+        "delay": 3,
         "limit": -1
       }
     ]

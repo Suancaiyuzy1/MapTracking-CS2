@@ -313,7 +313,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "",
+    "parentname": "[PR#]item_tie_Move",
     "vscripts": "",
     "targetname": "[PR#]item_tie_phys",
     "classname": "func_physbox",
