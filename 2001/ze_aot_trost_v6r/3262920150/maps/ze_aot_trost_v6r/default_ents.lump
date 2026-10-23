@@ -6442,7 +6442,7 @@
         "target": "[PR#]qxz_button",
         "input": "Unlock",
         "param": "",
-        "delay": 30,
+        "delay": 20,
         "limit": -1
       },
       {
@@ -33829,7 +33829,7 @@
         "target": "!self",
         "input": "Enable",
         "param": "",
-        "delay": 8,
+        "delay": 5,
         "limit": -1
       },
       {
@@ -35021,7 +35021,7 @@
     "color": "236 236 236",
     "fullbright": "1",
     "enabled": "1",
-    "message": "version:2026.10.20\u51CC\u66684\u70B9",
+    "message": "version:2026.10.22",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",
