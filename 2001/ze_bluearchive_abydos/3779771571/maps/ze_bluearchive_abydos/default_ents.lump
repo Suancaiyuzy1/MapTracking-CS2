@@ -89639,5 +89639,28 @@
         "limit": -1
       }
     ]
+  },
+  {
+    "max": "99999",
+    "min": "0",
+    "startvalue": "45",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]binah_lv3_healthsave_math",
+    "classname": "math_counter",
+    "origin": "320.000000 -728.000000 1032.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "11014",
+    "connections": [
+      {
+        "output": "OnGetValue",
+        "target": "[PR#]binah_lv3_health_math",
+        "input": "Add",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
   }
 ]
