@@ -186,7 +186,7 @@
     "speed": "100",
     "startspeed": "100",
     "target": "[PR#]kbc_zombie_summoningkey_track1_esc\u00260000",
-    "spawnflags": "521",
+    "spawnflags": "523",
     "disableshadows": "0",
     "globalname": "",
     "lightmapstatic": "0",

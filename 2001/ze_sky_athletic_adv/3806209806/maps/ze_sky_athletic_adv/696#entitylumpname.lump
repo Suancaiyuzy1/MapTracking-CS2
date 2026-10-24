@@ -156,7 +156,7 @@
     "speed": "2000",
     "startspeed": "2000",
     "target": "[PR#]final_crasher_after_phys_train_track1",
-    "spawnflags": "531",
+    "spawnflags": "539",
     "disableshadows": "0",
     "globalname": "",
     "lightmapstatic": "0",

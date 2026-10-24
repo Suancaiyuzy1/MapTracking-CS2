@@ -119,7 +119,7 @@
     "burstlocation": "",
     "burstscale": "100.000000",
     "pressuredelay": "0.000000",
-    "spawnflags": "0",
+    "spawnflags": "256",
     "NoInterpolate": "0",
     "PerformanceMode": "PM_NORMAL",
     "ExplodeRadius": "0.000000",

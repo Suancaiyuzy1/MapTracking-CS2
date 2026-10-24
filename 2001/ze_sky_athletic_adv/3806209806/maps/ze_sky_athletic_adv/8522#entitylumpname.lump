@@ -603,110 +603,6 @@
     "_template_lump_ent_index": "18"
   },
   {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "1",
-    "landmark": "",
-    "target": "[PR#]ex3_unknown_tdes3",
-    "filtername": "[PR#]zombie_only",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tt_ex3",
-    "classname": "trigger_teleport",
-    "origin": "306.000000 22403.500000 18423.710938",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1653",
-    "model": "maps/ze_sky_athletic_adv/entities/tt_ex3_1653.vmdl",
-    "_template_lump_ent_index": "19"
-  },
-  {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "1",
-    "landmark": "",
-    "target": "[PR#]ex3_unknown_tdes4",
-    "filtername": "[PR#]zombie_only",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tt_ex3",
-    "classname": "trigger_teleport",
-    "origin": "219.500000 26620.000000 18423.710938",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1655",
-    "model": "maps/ze_sky_athletic_adv/entities/tt_ex3_1655.vmdl",
-    "_template_lump_ent_index": "20"
-  },
-  {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "1",
-    "landmark": "",
-    "target": "[PR#]ex3_unknown_tdes5",
-    "filtername": "[PR#]zombie_only",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tt_ex3",
-    "classname": "trigger_teleport",
-    "origin": "-5087.500000 26925.000000 18423.710938",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1657",
-    "model": "maps/ze_sky_athletic_adv/entities/tt_ex3_1657.vmdl",
-    "_template_lump_ent_index": "21"
-  },
-  {
-    "check_if_dest_clear_for_player": "0",
-    "mirror_player": "0",
-    "use_landmark_angles": "1",
-    "landmark": "",
-    "target": "[PR#]ex3_unknown_tdes2",
-    "filtername": "[PR#]zombie_only",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "0",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]tt_ex3",
-    "classname": "trigger_teleport",
-    "origin": "-4353.500000 22886.500000 18056.210938",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1651",
-    "model": "maps/ze_sky_athletic_adv/entities/tt_ex3_1651.vmdl",
-    "_template_lump_ent_index": "22"
-  },
-  {
     "thinkalways": "0",
     "damageforce": "0.000000 0.000000 0.000000",
     "nodmgforce": "0",
@@ -716,7 +612,7 @@
     "damagecap": "20",
     "damage": "100000",
     "master": "",
-    "filtername": "",
+    "filtername": "[PR#]human_only",
     "spawnflags": "4097",
     "globalname": "",
     "StartDisabled": "0",
@@ -729,12 +625,12 @@
     "vscripts": "",
     "targetname": "[PR#]th_ex1",
     "classname": "trigger_hurt",
-    "origin": "-2526.500000 24363.000000 15272.709961",
+    "origin": "-2526.500000 24363.000000 15410.709961",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "1659",
-    "model": "maps/ze_sky_athletic_adv/entities/th_ex1_1659.vmdl",
-    "_template_lump_ent_index": "23"
+    "hammerUniqueId": "8705",
+    "model": "maps/ze_sky_athletic_adv/entities/th_ex1_8705.vmdl",
+    "_template_lump_ent_index": "19"
   },
   {
     "check_if_dest_clear_for_player": "0",
@@ -760,13 +656,13 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1989",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_boss_tele_1989.vmdl",
-    "_template_lump_ent_index": "24",
+    "_template_lump_ent_index": "20",
     "connections": [
       {
         "output": "OnStartTouch",
         "target": "[PR#]final_boss_truehp_counter",
         "input": "Add",
-        "param": "700",
+        "param": "400",
         "delay": 0,
         "limit": -1
       },
@@ -785,6 +681,14 @@
         "param": "[PR#]final_boss_falldamage_protect",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]kamikaze_relay",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -807,7 +711,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1951",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_boss_start_trigger_1951.vmdl",
-    "_template_lump_ent_index": "25",
+    "_template_lump_ent_index": "21",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -915,13 +819,13 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1989",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_boss_tele_1989.vmdl",
-    "_template_lump_ent_index": "26",
+    "_template_lump_ent_index": "22",
     "connections": [
       {
         "output": "OnStartTouch",
         "target": "[PR#]final_boss_truehp_counter",
         "input": "Add",
-        "param": "700",
+        "param": "400",
         "delay": 0,
         "limit": -1
       },
@@ -940,6 +844,14 @@
         "param": "[PR#]final_boss_falldamage_protect",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]kamikaze_relay",
+        "input": "Disable",
+        "param": "",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -982,7 +894,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1999",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_unknow_bigesc_1999.vmdl",
-    "_template_lump_ent_index": "27",
+    "_template_lump_ent_index": "23",
     "connections": [
       {
         "output": "OnFullyClosed",
@@ -1030,7 +942,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "2001",
     "model": "maps/ze_sky_athletic_adv/entities/th_ex3_unknow_bigesc_2001.vmdl",
-    "_template_lump_ent_index": "28"
+    "_template_lump_ent_index": "24"
   },
   {
     "wait": "1.000000",
@@ -1052,7 +964,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8660",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_unknown_esc_stuck_8660.vmdl",
-    "_template_lump_ent_index": "29",
+    "_template_lump_ent_index": "25",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -1084,7 +996,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8663",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_unknown_esc_stuck_8663.vmdl",
-    "_template_lump_ent_index": "30",
+    "_template_lump_ent_index": "26",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -1116,7 +1028,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8665",
     "model": "maps/ze_sky_athletic_adv/entities/ex3_unknown_esc_stuck_8665.vmdl",
-    "_template_lump_ent_index": "31",
+    "_template_lump_ent_index": "27",
     "connections": [
       {
         "output": "OnStartTouch",

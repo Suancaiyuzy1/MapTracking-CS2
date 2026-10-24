@@ -52,7 +52,7 @@
     "speed": "1900",
     "startspeed": "1900",
     "target": "[PR#]ex2_final_laser_track1",
-    "spawnflags": "531",
+    "spawnflags": "539",
     "disableshadows": "0",
     "globalname": "",
     "lightmapstatic": "0",
