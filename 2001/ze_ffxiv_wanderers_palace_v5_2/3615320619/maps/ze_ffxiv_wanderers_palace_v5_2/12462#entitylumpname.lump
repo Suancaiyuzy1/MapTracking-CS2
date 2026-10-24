@@ -154,14 +154,6 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]Zombie_Knife",
-        "input": "Use",
-        "param": "",
-        "delay": 0.10000000149011612,
-        "limit": 1
-      },
-      {
-        "output": "OnTrigger",
         "target": "!activator",
         "input": "KeyValues",
         "param": "speed 0",
@@ -175,6 +167,14 @@
         "param": "",
         "delay": 0.20000000298023224,
         "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]drop_knife",
+        "input": "RunScriptInput",
+        "param": "[PR#]drop_knife",
+        "delay": 0.10000000149011612,
+        "limit": 1
       }
     ]
   },

@@ -15,5 +15,8 @@
         <Panel id="boss_portrait_wrap" class="boss_portrait_wrap">
             <Panel id="boss_portrait" class="boss_portrait" />
         </Panel>
+        <Panel id="boss_frame_container" class="boss_frame_container">
+            <Image id="boss_frame_image" class="boss_frame_image" src="s2r://panorama/layout/custom_game/icons/boss_health_frame.png" />
+        </Panel>
     </Panel>
 </root>

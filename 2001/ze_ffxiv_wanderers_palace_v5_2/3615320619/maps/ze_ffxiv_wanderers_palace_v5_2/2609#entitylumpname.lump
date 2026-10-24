@@ -1041,7 +1041,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]Behemoth_HP_attack",
         "input": "Add",
-        "param": "5",
+        "param": "6",
         "delay": 0,
         "limit": -1
       },
@@ -1049,7 +1049,7 @@
         "output": "OnStartTouch",
         "target": "[PR#]Behemoth_HP_int",
         "input": "Add",
-        "param": "5",
+        "param": "6",
         "delay": 0,
         "limit": -1
       }

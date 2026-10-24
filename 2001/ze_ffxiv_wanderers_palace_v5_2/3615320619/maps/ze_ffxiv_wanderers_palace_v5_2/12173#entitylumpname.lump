@@ -1090,7 +1090,7 @@
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]boss_hud_green_js",
+        "target": "[PR#]boss_hud_js",
         "input": "RunScriptInput",
         "param": "boss_show_full",
         "delay": 0.20000000298023224,
@@ -1100,7 +1100,7 @@
         "output": "OnUser1",
         "target": "[PR#]boss_hud_js",
         "input": "RunScriptInput",
-        "param": "boss_show_full",
+        "param": "boss_show",
         "delay": 0.20000000298023224,
         "limit": 1
       }

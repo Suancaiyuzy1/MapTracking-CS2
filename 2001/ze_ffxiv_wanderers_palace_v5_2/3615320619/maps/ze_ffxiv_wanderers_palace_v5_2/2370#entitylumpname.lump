@@ -46,17 +46,17 @@
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]re_am_i_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "start",
+        "param": "re_am_i_start",
         "delay": 0,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]re_am_i_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "re_am_i_stop",
         "delay": 347,
         "limit": 1
       }
@@ -138,33 +138,33 @@
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]hollow_world_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "start",
+        "param": "hollow_world_start",
         "delay": 0,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]hollow_world_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "hollow_world_stop",
         "delay": 192,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]cold_sun_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "cold_sun_stop",
         "delay": 0,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]re_am_i_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "re_am_i_stop",
         "delay": 0,
         "limit": 1
       }
@@ -238,9 +238,9 @@
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]hollow_world_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "hollow_world_stop",
         "delay": 0,
         "limit": 1
       }
@@ -366,17 +366,17 @@
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]cold_sun_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "start",
+        "param": "cold_sun_start",
         "delay": 0,
         "limit": 1
       },
       {
         "output": "OnUser1",
-        "target": "[PR#]cold_sun_lyrics_js",
+        "target": "[PR#]music_js",
         "input": "RunScriptInput",
-        "param": "stop",
+        "param": "cold_sun_stop",
         "delay": 309,
         "limit": 1
       }

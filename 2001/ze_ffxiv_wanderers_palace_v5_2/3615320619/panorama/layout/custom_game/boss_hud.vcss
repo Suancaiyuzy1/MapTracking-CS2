@@ -427,3 +427,23 @@
     background-image: url("s2r://panorama/layout/custom_game/icons/boss_face_4.png");
     background-size: 100% 100%;
 }
+.boss_frame_container {
+    horizontal-align: center;
+    vertical-align: top;
+    width: 47.4%;
+    height: 30px;
+    margin-top: 200px;
+    margin-left: 150px;
+    overflow: noclip;
+    opacity: 0;
+    z-index: 100;
+}
+.boss_frame_container.Visible {
+    opacity: 1;
+}
+.boss_frame_image {
+    width: 100%;
+    height: width-percentage( 7.31 );
+    horizontal-align: center;
+    vertical-align: center;
+}

@@ -137,9 +137,9 @@
     "connections": [
       {
         "output": "OnTrigger",
-        "target": "[PR#]Zombie_Knife",
-        "input": "Use",
-        "param": "",
+        "target": "[PR#]drop_knife",
+        "input": "RunScriptInput",
+        "param": "[PR#]drop_knife",
         "delay": 0.10000000149011612,
         "limit": 1
       }
