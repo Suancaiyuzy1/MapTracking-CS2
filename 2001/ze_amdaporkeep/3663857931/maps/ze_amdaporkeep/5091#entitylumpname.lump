@@ -1394,6 +1394,22 @@
         "param": "targetname Music_Omega_1",
         "delay": 0.019999999552965164,
         "limit": 1
+      },
+      {
+        "output": "OnCase01",
+        "target": "[PR#]FFXIV_Victory",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnCase02",
+        "target": "[PR#]FFXIV_Victory",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },

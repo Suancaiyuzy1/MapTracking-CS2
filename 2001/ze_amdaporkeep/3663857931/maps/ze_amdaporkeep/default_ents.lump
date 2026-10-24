@@ -56869,6 +56869,16 @@
     "origin": "-12724.000000 152.000000 271.000000",
     "angles": "-0.130519 352.501007 83.008499",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "9326"
+    "hammerUniqueId": "9326",
+    "connections": [
+      {
+        "output": "OnUser4",
+        "target": "!self",
+        "input": "Kill",
+        "param": "",
+        "delay": 0,
+        "limit": 1
+      }
+    ]
   }
 ]

@@ -197,7 +197,7 @@
     "_template_lump_ent_index": "2",
     "connections": [
       {
-        "output": "OnUser1",
+        "output": "OnUser2",
         "target": "!self",
         "input": "Start",
         "param": "",
@@ -205,7 +205,7 @@
         "limit": 1
       },
       {
-        "output": "OnUser1",
+        "output": "OnUser2",
         "target": "!self",
         "input": "Kill",
         "param": "",
@@ -213,7 +213,7 @@
         "limit": 1
       },
       {
-        "output": "OnUser1",
+        "output": "OnUser2",
         "target": "!self",
         "input": "ClearParent",
         "param": "",
@@ -225,8 +225,16 @@
         "target": "!self",
         "input": "KeyValues",
         "param": "angles 0 0 0",
-        "delay": 0.18000000715255737,
-        "limit": 1
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnUser1",
+        "target": "!self",
+        "input": "FireUser1",
+        "param": "",
+        "delay": 0.05000000074505806,
+        "limit": -1
       }
     ]
   }

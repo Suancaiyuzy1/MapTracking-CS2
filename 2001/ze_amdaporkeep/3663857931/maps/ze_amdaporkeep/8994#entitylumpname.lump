@@ -91,7 +91,7 @@
         "target": "[PR#]Omega_M_Shield_Target2_Hurt",
         "input": "Disable",
         "param": "",
-        "delay": 2.4000000953674316,
+        "delay": 2.5,
         "limit": 1
       },
       {
@@ -99,7 +99,7 @@
         "target": "[PR#]Omega_M_Shield_Target2_Math",
         "input": "GetValue",
         "param": "",
-        "delay": 2.5,
+        "delay": 2.5199999809265137,
         "limit": 1
       },
       {
@@ -113,7 +113,7 @@
       {
         "output": "OnTrigger",
         "target": "[PR#]Omega_M_Shield_Target2_Particle",
-        "input": "FireUser1",
+        "input": "FireUser2",
         "param": "",
         "delay": 2.4000000953674316,
         "limit": 1
@@ -148,6 +148,14 @@
         "input": "Kill",
         "param": "",
         "delay": 0,
+        "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]Omega_M_Shield_Target2_Particle",
+        "input": "FireUser1",
+        "param": "",
+        "delay": 1.7999999523162842,
         "limit": 1
       }
     ]

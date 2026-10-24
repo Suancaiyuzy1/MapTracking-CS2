@@ -371,7 +371,7 @@
     "add_modifier": "",
     "add_attribute": "",
     "ResponseContext": "",
-    "vscripts": "game_ui",
+    "vscripts": "",
     "targetname": "[PR#]Item_Red_Mage_Strike_Random",
     "classname": "logic_case",
     "origin": "16.000000 -27.000000 -76.000000",
