@@ -13144,6 +13144,130 @@
     "hammerUniqueId": "8145"
   },
   {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "targetname": "[PR#]mgdrdiffvote",
+    "vscripts": "",
+    "classname": "trigger_multiple",
+    "origin": "-24.000000 2280.000000 -292.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "8148",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8148.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgdrdiff2",
+        "input": "Add",
+        "param": "1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mgdrdiffvote",
+    "classname": "trigger_multiple",
+    "origin": "24.000000 2280.000000 -292.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "8149",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8149.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgdrdiff3",
+        "input": "Add",
+        "param": "1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mgdrdiffvote",
+    "classname": "trigger_multiple",
+    "origin": "72.000000 2280.000000 -292.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "8151",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8151.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgdrdiff4",
+        "input": "Add",
+        "param": "1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "wait": "1.000000",
+    "filtername": "",
+    "spawnflags": "4097",
+    "globalname": "",
+    "StartDisabled": "1",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "useLocalOffset": "0",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
+    "targetname": "[PR#]mgdrdiffvote",
+    "classname": "trigger_multiple",
+    "origin": "-72.000000 2280.000000 -292.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "8153",
+    "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdiffvote_8153.vmdl",
+    "connections": [
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]mgdrdiff1",
+        "input": "Add",
+        "param": "1",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
     "max": "32",
     "min": "0",
     "startvalue": "0",
@@ -39203,7 +39327,7 @@
     "Template56": "[PR#]mgdrtrigger4",
     "Template55": "",
     "Template54": "",
-    "Template53": "[PR#]mgdrdiffvote",
+    "Template53": "",
     "Template52": "[PR#]mgdrtrigger3",
     "Template51": "[PR#]mgdrtriggerfinal",
     "Template50": "[PR#]mgdrtrigger2",
