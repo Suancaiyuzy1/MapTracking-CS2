@@ -3,6 +3,15 @@
 
 [
   {
+    "snapshot_file": "",
+    "cpoint0": "",
+    "effect_textureOverride": "",
+    "local.scales": "0.000000 0.000000 0.000000",
+    "local.angles": "0.000000 0.000000 0.000000",
+    "local.origin": "0.000000 0.000000 0.000000",
+    "parentAttachmentName": "",
+    "parentname": "",
+    "vscripts": "",
     "_template_lump_ent_index": "0",
     "targetname": "[PR#]endsprite",
     "uselocaloffset": "0",

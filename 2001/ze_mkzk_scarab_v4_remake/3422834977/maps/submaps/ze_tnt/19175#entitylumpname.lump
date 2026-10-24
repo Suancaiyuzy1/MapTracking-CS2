@@ -231,7 +231,7 @@
     "_template_lump_ent_index": "4"
   },
   {
-    "InitialValue": "0",
+    "InitialValue": "1",
     "vscripts": "",
     "targetname": "[PR#]potato_relay\u00260000",
     "classname": "logic_branch",
