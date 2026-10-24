@@ -505,9 +505,9 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "[PR#]Zombie_Knife",
-        "input": "Use",
-        "param": "",
+        "target": "[PR#]drop_js",
+        "input": "RunScriptInput",
+        "param": "drop_knife",
         "delay": 0.10000000149011612,
         "limit": 1
       }
