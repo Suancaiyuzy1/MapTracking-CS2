@@ -789,6 +789,7 @@ for (const itemName in ITEM_CONFIG) {
 // =========================================================
 // 13. 神器丢弃
 // =========================================================
+
 Instance.OnWeaponDrop(({ weapon, dropper }) => {
     const name = weapon.GetEntityName();
     if (!name) return;
@@ -799,8 +800,10 @@ Instance.OnWeaponDrop(({ weapon, dropper }) => {
 // =========================================================
 // 13.6 玩家换阵营：清掉该玩家身上的 HUD
 // =========================================================
-Instance.OnPlayerTeamChanged(({ player }) => {
+
+Instance.OnPlayerTeamChanged(({ player, oldTeam }) => {
     if (!player || !player.IsValid()) return;
+    if (oldTeam === 0 || oldTeam === 2) return; 
 
     let controller = null;
     try {
