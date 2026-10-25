@@ -628,6 +628,8 @@ const STEAM_IDS_LIST = {
     "76561198332509880":  ["SPONSOR"],
     "76561198722034887":  ["SPONSOR"],
     "76561199376469058":  ["SPONSOR"],
+    "76561198034135783":  ["SPONSOR"],
+    "76561199476847933":  ["SPONSOR"],
 };
 
 const HUD_ALL_PANELS = [
@@ -648,7 +650,7 @@ const HUD_ALL_PANELS = [
     "knife_frenzy_banner",
 ];
 
-const VERSION = "30/09/26";
+const VERSION = "25/10/26";
 
 
 
@@ -659,7 +661,7 @@ const RADAR_STEPS = 15;
 const MAP_SIZE = 30720;
 const MAP_HALF = MAP_SIZE / 2;
 const RADAR_DOTS_PER_TEAM = 40;
-const RADAR_UPDATE_INTERVAL = 0.75;
+const RADAR_UPDATE_INTERVAL = 2.0;
 
 let lastRadarUpdate = 0;
 
@@ -670,14 +672,14 @@ const USE_TRAP_RADIUS = 96;
 const USE_TRAP_MIN_PITCH = 20;
 const SPANNER_ENTITY_NAME = "Item_Spanner_Physbox";
 
-const USE_DURATION_CLASSES = ["Dur2", "Dur4", "Dur7"];
+const USE_DURATION_CLASSES = ["Dur1"];
 
 const TRAP_TYPES = [
-    { name: "Trap_GasMine_Physbox", duration: 4.0,  isTrap: true },
-    { name: "Trap_Trap_Physbox",    duration: 2.0,  isTrap: true },
-    { name: "Trap_Mine_Physbox",    duration: 2.0,  isTrap: true },
-    { name: "Map_Chunk_02_Wall",    duration: 7.0,  isTrap: false },
-    { name: "Map_Chunk_27_Cell",    duration: 7.0, isTrap: false },
+    { name: "Trap_GasMine_Physbox", duration: 1.0, isTrap: true },
+    { name: "Trap_Trap_Physbox",    duration: 1.0, isTrap: true },
+    { name: "Trap_Mine_Physbox",    duration: 1.0, isTrap: true },
+    { name: "Map_Chunk_02_Wall",    duration: 1.0, isTrap: false },
+    { name: "Map_Chunk_27_Cell",    duration: 1.0, isTrap: false },
 ];
 
 const MENU_TABS = ["map_stats", "skin_menu", "admin_room"];
@@ -749,7 +751,7 @@ let runActive = false;
 
 let SURVIVAL_DESTINATIONS = [];
 let survivalHumanCursor = 0;
-const SURVIVAL_DEST_CHECK_TICK = 1.00;
+const SURVIVAL_DEST_CHECK_TICK = 2.00;
 const SURVIVAL_DEST_SAFE_RADIUS = 800;
 
 let survivalDestLoopActive = false;
@@ -761,7 +763,7 @@ const DEFAULT_ZM_ITEM_HP = 60000;
 const SURVIVAL_ZM_ITEM_MAX = 10;
 const SURVIVAL_ZM_ITEM_START = 5;
 const SURVIVAL_ZM_ITEM_INTERVAL = 40.0;
-const SURVIVAL_ZM_ITEM_CHECK = 1.0;
+const SURVIVAL_ZM_ITEM_CHECK = 2.0;
 let SURVIVAL_HP_TICK = 5.00;
 let SURVIVAL_ZOMBIE_DAMAGE = 10;
 
@@ -849,7 +851,7 @@ const BUFF_SCAV_EVERY       = 7;       // SCAVENGER: каждый N-й убит�
 const BUFF_SCAV_CHANCE      = 0.5;     // шанс выпадения
 const BUFF_SCAV_HP          = 40;      // минус к здоровью людей
 
-const BUFF_TICK             = 0.10;
+const BUFF_TICK             = 1.00;
 
 // ------------------------------------------------------------
 //  СПИСКИ ДЛЯ ГОЛОСОВАНИЯ
@@ -1259,6 +1261,9 @@ function StartVoting()
     votingActive = true;
     revealingWinner = false;
     voteEndTime = Instance.GetGameTime() + VOTE_DURATION;
+
+    HUD_ENT.SetHasClass("hint_container", "Visible", false);
+
     lastTimeLabelUpdate = 0;
 
     for(const id of WRAPPER_IDS)
@@ -2250,19 +2255,6 @@ Instance.OnPlayerReset((event) => {
         Instance.EntFireAtTarget({ target: player, input: "SetScale", value: "1" });
         Instance.EntFireAtTarget({ target: player, input: "SetDamageFilter" });
         Instance.EntFireAtTarget({ target: player, input: "KeyValue", value: "friction 1.0" });
-        // Instance.EntFireAtName({ name: "SteamID_Mapper_FilterMulti", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Vip_FilterMulti", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Leader_FilterMulti", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti1", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti2", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti3", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti4", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti5", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti6", input: "TestActivator", activator: player, delay: 0.10 });
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor_FilterMulti7", input: "TestActivator", activator: player, delay: 0.10 });
-
-        // Lastims
-        // Instance.EntFireAtName({ name: "SteamID_Sponsor8_Filter", input: "TestActivator", activator: player, delay: 0.10 });
 
         if(PlayerInstancesMap.has(player_slot))
         {
@@ -2316,7 +2308,12 @@ Instance.OnPlayerReset((event) => {
                 pi.StealthAlpha = 255;
                 player.SetColor({ r: 255, g: 255, b: 255, a: 255 });
                 if(isSurvivalMode) ApplyRunSpeed(player, pi);
-                if(isSurvivalMode) ApplyShrink(player);
+                if(isSurvivalMode)
+                {
+                    RoundDelay(0.50).then(() => {
+                        if(player.IsValid() && player.IsAlive()) ApplyShrink(player);
+                    });
+                }
             }
         })
     }
@@ -2787,7 +2784,23 @@ Instance.OnPlayerChat((event) => {
             // спаннер
             HUD_ENT.SetHasClassForPlayer(s, "use_progress_container", "Visible", true);
             HUD_ENT.SetHasClassForPlayer(s, "use_progress_fill", "Active", true);
-            HUD_ENT.SetHasClassForPlayer(s, "use_progress_fill", "Dur5", true);
+            for(const c of USE_DURATION_CLASSES)
+            {
+                HUD_ENT.SetHasClassForPlayer(s, "use_progress_fill", c, c === "Dur1");
+            }
+
+            // иконка убийства (пик анимации — Go + Fade + Out)
+            HUD_ENT.SetHasClassForPlayer(s, "kill_icon", "Go", true);
+            HUD_ENT.SetHasClassForPlayer(s, "kill_icon", "Fade", true);
+            HUD_ENT.SetHasClassForPlayer(s, "kill_icon", "Out", true);
+
+            // голосование за баффы
+            HUD_ENT.SetHasClassForPlayer(s, "buff_vote_container", "Visible", true);
+            for(let c = 0; c < 3; c++)
+            {
+                HUD_ENT.SetHasClassForPlayer(s, "buff_" + (c + 1) + "_" + BUFF_HUMAN[c].key, "Visible", true);
+            }
+            HUD_ENT.SetHasClassForPlayer(s, "buff_card_1", "Picked", true);
 
             n++;
         }
@@ -3463,7 +3476,7 @@ Instance.OnScriptInput("TeleportPlayersNextFloor", ({ caller, activator }) => {
         }
         else
         {
-            if(floor < 3)
+            if(floor < floors_max)
             {
                 Instance.Msg("TELEPORT TO NEXT FLOOR")
                 activator.Teleport({ position: {x: -527, y: 0, z: 13325}, angles: {pitch: 0, yaw: 0, roll: 0}});
@@ -4376,6 +4389,8 @@ Instance.OnScriptInput("LoadMode", () => {
             Instance.EntFireAtName({ name: "Map_Slot_Machine_Button", input: "Kill" });
             Instance.EntFireAtName({ name: "Spawn_SurvivalMode_ZM_Push", input: "Kill" });
             Instance.EntFireAtName({ name: "Spawn_SurvivalMode_ZM_Teleport", input: "Kill" });
+            Instance.EntFireAtName({ name: "Map_Floor_SafeZone_Trigger", input: "Kill" });
+            Instance.EntFireAtName({ name: "Map_Floor_SafeZone2_Trigger", input: "Kill" });
 
             Instance.EntFireAtName({ name: "Map_Chunk_Case_Even", input: "AddOutput", value: "OnCase01>Preset_Maker_M*>KeyValue>EntityTemplate Temp_Chunk_02>0>-1" });
             Instance.EntFireAtName({ name: "Map_Chunk_CaseNotShuffle2", input: "AddOutput", value: "OnCase02>Preset_Maker_M*>KeyValue>EntityTemplate Temp_Chunk_02>0>-1" });
@@ -4432,6 +4447,7 @@ Instance.OnScriptInput("SpawnSurvivalMap", () => {
         Instance.ServerCommand(`say >> FLOOR ${floor} <<`);
         Instance.EntFireAtName({ name: "Map_Floor_SurvivalMode_Relay", input: "Trigger" });
         Instance.EntFireAtName({ name: SCRIPT_ENT, input: "RunScriptInput", value: "ShowSamosborTimer", delay: 13.00 });
+        Instance.EntFireAtName({ name: "Admin_DoorTrigger", input: "Enable", delay: 13.00 });
 
         if(floor > 1)
         {
@@ -4706,9 +4722,19 @@ Instance.OnScriptInput("SpawnCommonMap", () => {
         }
 
         // ZOMBIE ITEMS SPAWN
-        if(floor == 1 || floor == 3 || floor == 5)
+        if(!isEasyMode)
         {
-            Instance.EntFireAtName({ name: "Map_ZM_Item_Maker5", input: "ForceSpawn", value: "", delay: 3.50 });    // ADDITIONAL ITEM (only 1, 3 and 5 FLOORS)
+            if(floor == 1 || floor == 3 || floor == 5)
+            {
+                Instance.EntFireAtName({ name: "Map_ZM_Item_Maker5", input: "ForceSpawn", value: "", delay: 3.50 });    // ADDITIONAL ITEM (only 1, 3 and 5 FLOORS)
+            }
+        }
+        else
+        {
+            if(floor == 1)
+            {
+                Instance.EntFireAtName({ name: "Map_ZM_Item_Maker5", input: "ForceSpawn", value: "", delay: 3.50 });    // ADDITIONAL ITEM (only FLOOR1 on Easy Mode)
+            }
         }
         if(floor > 1)
         {
@@ -5396,7 +5422,7 @@ function ResetVariables()
         pre_traps_percentage = 50;
         pre_npcs_percentage = 20;
         pre_miniboss_max = 1;
-        pre_floors_max = 3;
+        pre_floors_max = 2;
         pre_samosbortime = 360;
         pre_samosbordamage = 2;
         fire_percentage = 10;
@@ -6205,8 +6231,21 @@ function ApplySkin(slot, inst, key)
 
 function ApplySkinBodyGroup(player, path, delay = 0.00)
 {
-    if(!player?.IsValid() || !path || !path.includes("kletka_hero")) return;
-    Instance.EntFireAtTarget({ target: player, input: "SetBodyGroup", value: "head," + GetRandomNumber(0, 1), delay: delay });
+    if(!player?.IsValid() || !path) return;
+
+    // kletka_hero: случайная голова (head,0 или head,1)
+    if(path.includes("kletka_hero"))
+    {
+        Instance.EntFireAtTarget({ target: player, input: "SetBodyGroup", value: "head," + GetRandomNumber(0, 1), delay: delay });
+    }
+
+    // kipfel_cherry у LASTIMS: first_or_third_person,3
+    if(path.includes("kipfel_cherry"))
+    {
+        const slot = player.GetPlayerController()?.GetPlayerSlot();
+        const inst = slot != null ? PlayerInstancesMap.get(slot) : null;
+        if(inst?.Lastims) Instance.EntFireAtTarget({ target: player, input: "SetBodyGroup", value: "first_or_third_person,3", delay: delay });
+    }
 }
 
 function ResolveSkinPath(path)
@@ -6397,11 +6436,11 @@ function FinishRun(isTrueEnding)
 
 Instance.OnScriptInput("FinishRunNormal", () => {
     FinishRun(false);
-    if(!isEasyMode) GrantWinnersSkin();
+    if(!isEasyMode || STATS?.server === "gfl") GrantWinnersSkin();
 });
 Instance.OnScriptInput("FinishRunSecret", () => {
     FinishRun(true);
-    if(!isEasyMode) GrantWinnersSkin();
+    if(!isEasyMode || STATS?.server === "gfl") GrantWinnersSkin();
 });
 
 // ============================================================
@@ -7158,12 +7197,7 @@ function RestoreSpeedLater(player)
     const inst = slot != null ? PlayerInstancesMap.get(slot) : null;
     if(!inst || Math.abs(GetRunSpeedFor(player, inst) - 1.0) < 0.001) return;   // без баффа скорости — не трогаем
 
-    const token = (inst.SpeedRestoreToken || 0) + 1;
-    inst.SpeedRestoreToken = token;
-    Instance.Delay(1.5).then(() => {
-        if(inst.SpeedRestoreToken !== token) return;          // был удар позже — вернёт он
-        if(player.IsValid() && player.IsAlive()) ApplyRunSpeed(player, inst);
-    });
+    inst.SpeedRestoreAt = Instance.GetGameTime() + 1.5;      // вернёт BuffEffectsTick
 }
 
 function ApplyFog()
@@ -7486,6 +7520,16 @@ function BuffEffectsTick()
         {
             buffBeaconAcc = 0;
             BeaconHealTick();
+        }
+    }
+
+    // возврат скорости после урона (RestoreSpeedLater)
+    for(const [, inst] of PlayerInstancesMap)
+    {
+        if(inst.SpeedRestoreAt && now >= inst.SpeedRestoreAt)
+        {
+            inst.SpeedRestoreAt = 0;
+            if(inst.player?.IsValid() && inst.player.IsAlive()) ApplyRunSpeed(inst.player, inst);
         }
     }
 
