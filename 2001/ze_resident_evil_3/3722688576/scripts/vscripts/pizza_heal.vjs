@@ -86,3 +86,13 @@ Instance.OnScriptInput("Heal6", ({ activator }) => {
 Instance.OnScriptInput("Heal7", ({ activator }) => {
     healPlayer(activator, pizzas[6]);
 });
+
+function resetPizzas() {
+    for (const pizza of pizzas) {
+        pizza.uses = 0;
+    }
+}
+
+Instance.OnRoundStart(() => {
+    resetPizzas();
+});

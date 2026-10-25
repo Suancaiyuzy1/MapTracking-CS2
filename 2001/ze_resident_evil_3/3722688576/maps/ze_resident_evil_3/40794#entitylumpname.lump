@@ -9,7 +9,7 @@
     "vscripts": "",
     "targetname": "[PR#]saw_filter",
     "classname": "filter_activator_name",
-    "origin": "-16.187988 11.543213 -7.986023",
+    "origin": "-16.187988 11.543213 0.013977",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "40795",
@@ -835,38 +835,6 @@
         "input": "Stop",
         "param": "",
         "delay": 0.05000000074505806,
-        "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "0.000000",
-    "filtername": "[PR#]saw_filter",
-    "spawnflags": "4097",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "1.000000 1.000000 1.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "[PR#]saw_weapon",
-    "targetname": "[PR#]saw_imun",
-    "vscripts": "",
-    "classname": "trigger_multiple",
-    "origin": "11.323242 9.756836 57.013977",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "187135",
-    "model": "maps/ze_resident_evil_3/entities/saw_imun_187135.vmdl",
-    "_template_lump_ent_index": "12",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Zombies_Ignore",
-        "delay": 0,
         "limit": -1
       }
     ]

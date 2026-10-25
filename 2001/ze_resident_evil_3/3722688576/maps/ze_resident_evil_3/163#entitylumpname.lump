@@ -646,186 +646,18 @@
     "connections": [
       {
         "output": "OnOpen",
-        "target": "[PR#]flame_hurt",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_timer",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_particle",
-        "input": "Start",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_particle",
-        "input": "Stop",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_timer",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_hurt",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_sound",
-        "input": "StartSound",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_detect",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_detect",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]steam",
-        "input": "Start",
-        "param": "",
-        "delay": 1.5499999523162842,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]steam",
-        "input": "Stop",
-        "param": "",
-        "delay": 4,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_model",
-        "input": "SetAnimationNoResetNotLooping",
-        "param": "open_vent",
-        "delay": 0.009999999776482582,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_model",
-        "input": "SetAnimationNoResetNotLooping",
-        "param": "close_vent",
-        "delay": 0.009999999776482582,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_button",
-        "input": "Unlock",
-        "param": "",
-        "delay": 1.600000023841858,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
+        "target": "[PR#]flame_open_relay",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnClose",
-        "target": "[PR#]flame_button",
-        "input": "Unlock",
+        "target": "[PR#]flame_close_relay",
+        "input": "Trigger",
         "param": "",
-        "delay": 1.600000023841858,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_detect_npc",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5099999904632568,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_detect_npc",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5099999904632568,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_crocodetect",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5199999809265137,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_crocodetect",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5199999809265137,
-        "limit": -1
-      },
-      {
-        "output": "OnOpen",
-        "target": "[PR#]flame_sewer_nps1",
-        "input": "Enable",
-        "param": "",
-        "delay": 1.5299999713897705,
-        "limit": -1
-      },
-      {
-        "output": "OnClose",
-        "target": "[PR#]flame_sewer_nps1",
-        "input": "Disable",
-        "param": "",
-        "delay": 1.5299999713897705,
+        "delay": 0,
         "limit": -1
       }
     ]
@@ -902,26 +734,26 @@
     "connections": [
       {
         "output": "OnHitMin",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
-        "param": "",
-        "delay": 1.75,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
-        "target": "[PR#]flame_button_enable",
-        "input": "Close",
+        "target": "[PR#]flame_close_relay",
+        "input": "Trigger",
         "param": "",
         "delay": 0.009999999776482582,
         "limit": -1
       },
       {
         "output": "OnHitMin",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
+        "target": "[PR#]flame_open_relay",
+        "input": "CancelPending",
         "param": "",
-        "delay": 1.7999999523162842,
+        "delay": 1.5499999523162842,
+        "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]flame_close_relay",
+        "input": "CancelPending",
+        "param": "",
+        "delay": 1.5499999523162842,
         "limit": -1
       },
       {
@@ -929,23 +761,7 @@
         "target": "[PR#]flame_button",
         "input": "Lock",
         "param": "",
-        "delay": 1.7000000476837158,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
-        "param": "",
-        "delay": 1.649999976158142,
-        "limit": -1
-      },
-      {
-        "output": "OnHitMin",
-        "target": "[PR#]flame_button",
-        "input": "Lock",
-        "param": "",
-        "delay": 1.6100000143051147,
+        "delay": 0.009999999776482582,
         "limit": -1
       }
     ]
@@ -1424,6 +1240,222 @@
         "input": "Subtract",
         "param": "30",
         "delay": 0.10000000149011612,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "PassthroughCaller": "0",
+    "FastRetrigger": "0",
+    "TriggerOnce": "0",
+    "StartDisabled": "0",
+    "vscripts": "",
+    "targetname": "[PR#]flame_close_relay",
+    "classname": "logic_relay",
+    "origin": "-19.000122 42.000000 11.000000",
+    "angles": "-0.000000 90.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "192495",
+    "_template_lump_ent_index": "25",
+    "connections": [
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_particle",
+        "input": "Stop",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_timer",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_hurt",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_detect",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]steam",
+        "input": "Start",
+        "param": "",
+        "delay": 1.5499999523162842,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]steam",
+        "input": "Stop",
+        "param": "",
+        "delay": 4,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_model",
+        "input": "SetAnimationNoResetNotLooping",
+        "param": "close_vent",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_button",
+        "input": "Lock",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_button",
+        "input": "Unlock",
+        "param": "",
+        "delay": 1.600000023841858,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_detect_npc",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5099999904632568,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_crocodetect",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5199999809265137,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_sewer_nps1",
+        "input": "Disable",
+        "param": "",
+        "delay": 1.5299999713897705,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "PassthroughCaller": "0",
+    "FastRetrigger": "0",
+    "TriggerOnce": "0",
+    "StartDisabled": "0",
+    "targetname": "[PR#]flame_open_relay",
+    "vscripts": "",
+    "classname": "logic_relay",
+    "origin": "-47.000122 42.000000 11.000000",
+    "angles": "-0.000000 90.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "192494",
+    "_template_lump_ent_index": "26",
+    "connections": [
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_hurt",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_timer",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_particle",
+        "input": "Start",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_sound",
+        "input": "StartSound",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_detect",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_model",
+        "input": "SetAnimationNoResetNotLooping",
+        "param": "open_vent",
+        "delay": 0.009999999776482582,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_button",
+        "input": "Lock",
+        "param": "",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_button",
+        "input": "Unlock",
+        "param": "",
+        "delay": 1.600000023841858,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_detect_npc",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5099999904632568,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_crocodetect",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5199999809265137,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]flame_sewer_nps1",
+        "input": "Enable",
+        "param": "",
+        "delay": 1.5299999713897705,
         "limit": -1
       }
     ]
