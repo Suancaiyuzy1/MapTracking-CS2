@@ -105166,5 +105166,14 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11912"
+  },
+  {
+    "cs_script": "scripts/vscripts/overlord/addmoney.vjs",
+    "targetname": "[PR#]addmoney",
+    "classname": "point_script",
+    "origin": "-124.000000 4926.000000 -2574.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "11924"
   }
 ]
