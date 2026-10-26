@@ -15,6 +15,7 @@
     "renderamt": "255",
     "rendermode": "kRenderNormal",
     "renderfx": "kRenderFxNone",
+    "vscripts": "",
     "targetname": "[PR#]item_flag_1\u00260000",
     "classname": "weapon_knife",
     "origin": "-5.000000 0.100098 -1.599609",
