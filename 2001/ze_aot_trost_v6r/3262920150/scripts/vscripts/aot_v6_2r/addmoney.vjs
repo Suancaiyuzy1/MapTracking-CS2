@@ -7,10 +7,15 @@ import { Instance } from "cs_script/point_script";
  * 拾取 item_ltjd_w_deagle_* 奖励脚本
  *   - 捡到指定沙鹰（weapon_deagle 实体）：加钱 + 补满护甲（可带头盔）
  *   - 名字按前缀匹配：item_ltjd_w_deagle_1 / _2 / _3 ... 都能认（maker 生成的带编号）
- *   - 每把枪每回合只发一次奖励：
- *       谁第一个捡到「这一把」，谁拿奖励
- *       同一把被丢下再被第二个人捡起 → 不再发
- *   - 每回合刷 N 把 → 最多 N 个人能拿到
+ *
+ * 双重限制（两层去重）：
+ *   ① 每把枪每回合只发一次
+ *        谁第一个捡到「这一把」，谁拿奖励
+ *        同一把被丢下再被第二个人捡起 → 不再发
+ *   ② 每个玩家每回合只能拿一次
+ *        一个人捡了第二把、第三把 → 只有第一把生效
+ *
+ * 结果：每回合最多奖励 = min(刷枪数量, 玩家数量)
  *
  * 挂载方式：Hammer 里放一个 point_script 实体
  *   vscripts = "scripts/vscripts/aot_v6_2r/addmoney.vjs"
@@ -23,22 +28,24 @@ const REWARD      = 8000;                 // 加多少钱
 const FULL_ARMOR  = 100;                  // 护甲值，100 = 满
 const GIVE_HELMET = true;                 // 是否同时给头盔
 
-// ===== 状态：记录本回合已经发过奖励的枪 =====
-// 说明：cs_script 中同一实体的引用是稳定且可用 === 比较的，
-//       所以直接把武器实体本身当作唯一标识。
+// ===== 状态 =====
+// paidWeapons：本回合已经发过奖励的枪（用实体引用做唯一标识）
+// paidPlayers：本回合已经拿过奖励的玩家（用 player slot 做唯一标识）
 let paidWeapons = new Set();
+let paidPlayers = new Set();
+
+function resetRoundState() {
+    paidWeapons = new Set();
+    paidPlayers = new Set();
+}
 
 // 回合开始时清空
 //   maker 每回合生成的都是新实体，旧引用必须丢弃，否则 Set 会一直增长
-Instance.OnRoundStart(() => {
-    paidWeapons = new Set();
-});
+Instance.OnRoundStart(resetRoundState);
 
 // 脚本热重载时也清空，避免残留引用
 if (Instance.OnScriptReload) {
-    Instance.OnScriptReload(() => {
-        paidWeapons = new Set();
-    });
+    Instance.OnScriptReload(resetRoundState);
 }
 
 // 捡枪事件
@@ -53,8 +60,7 @@ Instance.OnWeaponPickup((event) => {
     // ② 可选：再校验一次实体类型，防止同名误判
     if (ITEM_CLASS && weapon.GetClassName() !== ITEM_CLASS) return;
 
-    // ★ 这一把枪已经发过奖励了 → 直接返回
-    //    （第二个人捡同一把不会重复拿钱）
+    // ③ 这一把枪已经发过奖励了 → 直接返回
     if (paidWeapons.has(weapon)) return;
 
     // 从武器反查捡枪的玩家
@@ -64,8 +70,14 @@ Instance.OnWeaponPickup((event) => {
     const controller = pawn.GetPlayerController();
     if (!controller) return;
 
-    // 标记这把枪已发奖
+    // ④ 这个玩家本回合已经拿过奖励了 → 直接返回
+    //    （防止一个人连捡多把枪刷钱）
+    const slot = controller.GetPlayerSlot();
+    if (paidPlayers.has(slot)) return;
+
+    // 标记：这把枪、这个人
     paidWeapons.add(weapon);
+    paidPlayers.add(slot);
 
     // 奖励 1：加钱（立刻可花）
     controller.AddMoneySpendableNow(REWARD);
