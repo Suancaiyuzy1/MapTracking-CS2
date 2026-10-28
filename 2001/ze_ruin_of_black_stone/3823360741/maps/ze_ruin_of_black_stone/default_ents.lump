@@ -45274,7 +45274,7 @@
         "target": "[PR#]item_poison_button",
         "input": "Unlock",
         "param": "",
-        "delay": 60,
+        "delay": 70,
         "limit": -1
       },
       {
@@ -45282,7 +45282,7 @@
         "target": "[PR#]item_poison_particle",
         "input": "Start",
         "param": "",
-        "delay": 60,
+        "delay": 70,
         "limit": -1
       }
     ]

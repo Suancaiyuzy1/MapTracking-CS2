@@ -93,7 +93,7 @@
     "vscripts": "",
     "targetname": "[PR#]item_poison_effect_particle",
     "classname": "info_particle_system",
-    "origin": "37.000000 22.899994 -17.000000",
+    "origin": "37.000000 22.899994 -2.000000",
     "angles": "-89.999985 -0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "896",
