@@ -6605,9 +6605,10 @@ function resolveStageEnding(humansWon) {
                                                                              
                                                                               
                                                                         
-    const source = state.endingRuntime?.sourceRuntime;
-    state.campaign.finaleAnchor = source?.end ? clone(source.end) : undefined;
-    state.campaign.finaleDirection = source?.outgoing ? clone(source.outgoing) : undefined;
+    // Campaign Finale begins in a new round, back at the spawn platform.
+    // Only an infinite checkout continues from the current level's exit.
+    state.campaign.finaleAnchor = undefined;
+    state.campaign.finaleDirection = undefined;
     state.campaign.complete = false;
     state.campaign.stageIndex = FINALE_STAGE_INDEX;
     state.campaign.phase = "finale_pending";
@@ -10485,12 +10486,17 @@ function chooseRaceLevel(runtime) {
                                                                            
                                                                 
   const pool = [];
-  for (const level of RACE_LEVELS) {
-    for (const mirrored of [false, true]) {
-      const plan = raceCandidatePlan(level, runtime, incoming, mirrored);
-      if (plan) pool.push(plan);
+  const collect = (levels) => {
+    for (const level of levels) {
+      for (const mirrored of [false, true]) {
+        const plan = raceCandidatePlan(level, runtime, incoming, mirrored);
+        if (plan) pool.push(plan);
+      }
     }
-  }
+  };
+  // !testrace: the devmap is the only pool entry while it fits the bounds.
+  if (devmap.raceTest && devmap.level) collect([devmap.level]);
+  if (pool.length === 0) collect(RACE_LEVELS);
   runtime.raceCandidateCount = pool.length;
   if (pool.length === 0) {
     runtime.raceSelectionNote = "no authored RACE layout orientation satisfies the current bounds";
@@ -19357,7 +19363,7 @@ function updateTerrainPreviewMetadata(hud, metadata) {
                                                                        
   hud.SetDialogVariableString("stage_title", "map_name", String(metadata.name ?? "unknown"));
   hud.SetDialogVariableString("stage_info", "map_author", String(metadata.author ?? "unknown"));
-  hud.SetDialogVariableString("stage_id", "map_id", String(metadata.id ?? "unknown").replace(/^#/, ""));
+  hud.SetDialogVariableString("stage_id", "map_id", displayLevelId(metadata.id ?? "unknown").replace(/^#/, ""));
                                                                              
   hud.SetHasClass("stage_header", "Hidden", false);
   hud.SetHasClass("stage_header", "MetadataVisible", true);
@@ -19695,6 +19701,246 @@ function validateLevels() {
     }
   }
   levelDataValidated = true;
+}
+
+// Offline pixel-stage test (Source devmaps). The workshop site's CS2 test
+// button downloads the CSGO devmap .nut as this addon's save data. When it
+// parses, every level is that stage and endings/events stay off like Source
+// `debugged`; anything else (no file, no marker, bad stage) is a normal round.
+// GetSaveData reads disk once per script load, so a new file needs a map load.
+const DEVMAP_MARKER = /devmaps\s*<-\s*\{\s*function\s+Run\s*\(\s*\)\s*\{\s*maps\s*\.\s*push\s*\(/;
+const devmap = { loaded: false, level: undefined, error: undefined, raceTest: false, probed: false };
+
+// Squirrel table literal reader for the maps.push({...}) argument: strings,
+// numbers, arrays, nested tables, Vector(r,g,b) and true/false/null. No eval.
+function parseDevmapTable(source) {
+  let i = 0;
+  const fail = (what) => { throw new Error(`${what} at offset ${i}`); };
+  const skip = () => {
+    for (;;) {
+      while (i < source.length && /\s/.test(source[i])) i++;
+      if (source.startsWith("//", i) || source[i] === "#") {
+        while (i < source.length && source[i] !== "\n") i++;
+      } else if (source.startsWith("/*", i)) {
+        const end = source.indexOf("*/", i + 2);
+        i = end < 0 ? source.length : end + 2;
+      } else return;
+    }
+  };
+  const expect = (char) => { skip(); if (source[i] !== char) fail(`expected '${char}'`); i++; };
+  const identifier = () => {
+    skip();
+    const match = /^[A-Za-z_][A-Za-z0-9_]*/.exec(source.slice(i, i + 64));
+    if (!match) fail("expected identifier");
+    i += match[0].length;
+    return match[0];
+  };
+  const string = () => {
+    expect("\"");
+    let text = "";
+    while (i < source.length && source[i] !== "\"") {
+      if (source[i] === "\\" && i + 1 < source.length) {
+        const next = source[i + 1];
+        text += next === "n" ? "\n" : next === "t" ? "\t" : next;
+        i += 2;
+      } else text += source[i++];
+    }
+    if (i >= source.length) fail("unterminated string");
+    i++;
+    return text;
+  };
+  const number = () => {
+    skip();
+    const match = /^-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?/.exec(source.slice(i, i + 64));
+    if (!match) fail("expected number");
+    i += match[0].length;
+    return Number(match[0]);
+  };
+  const value = () => {
+    skip();
+    const char = source[i];
+    if (char === "\"") return string();
+    if (char === "[") {
+      i++;
+      const list = [];
+      for (skip(); source[i] !== "]"; skip()) {
+        list.push(value());
+        skip();
+        if (source[i] === ",") i++;
+        else if (source[i] !== "]") fail("expected ',' or ']'");
+      }
+      i++;
+      return list;
+    }
+    if (char === "{") return table();
+    if (char === "-" || char === "." || /\d/.test(char ?? "")) return number();
+    const name = identifier();
+    if (name === "Vector") {
+      expect("(");
+      const color = [number()];
+      expect(","); color.push(number());
+      expect(","); color.push(number());
+      expect(")");
+      return { color };
+    }
+    if (name === "true") return true;
+    if (name === "false") return false;
+    if (name === "null") return null;
+    return fail(`unsupported value '${name}'`);
+  };
+  const table = () => {
+    expect("{");
+    const result = {};
+    for (skip(); source[i] !== "}"; skip()) {
+      if (i >= source.length) fail("unterminated table");
+      const key = source[i] === "\"" ? string() : identifier();
+      skip();
+      if (source[i] !== "=" && source[i] !== ":") fail(`expected '=' after '${key}'`);
+      i++;
+      result[key] = value();
+      skip();
+      if (source[i] === ",") i++;
+    }
+    i++;
+    return result;
+  };
+  return table();
+}
+
+function devmapLevelFromTable(table) {
+  if (!Array.isArray(table.map)) throw new Error("stage has no map=[...] tile list");
+  if (table.map.length !== CONFIG.mapSize * CONFIG.mapSize) {
+    throw new Error(`expected ${CONFIG.mapSize * CONFIG.mapSize} tiles, got ${table.map.length}`);
+  }
+  const direction = String(table.direction ?? "");
+  if (!["forward", "left", "right"].includes(direction)) throw new Error(`invalid direction '${direction}'`);
+  const tileFrequency = {};
+  let computedCost = 0;
+  let markerCount = 0;
+  const tiles = table.map.map((tile, index) => {
+    if (tile && Array.isArray(tile.color)) {
+      if (tile.color.length !== 3 || !tile.color.every(Number.isFinite)) throw new Error(`tile ${index}: invalid Vector color`);
+      tileFrequency.color = (tileFrequency.color ?? 0) + 1;
+      computedCost += 1;
+      return Object.freeze({ color: Object.freeze(tile.color.map(Math.round)) });
+    }
+    if (!Number.isInteger(tile) || !TILE_REGISTRY[tile]) throw new Error(`tile ${index}: unknown tile '${tile}'`);
+    if (tile === 2) markerCount++;
+    tileFrequency[tile] = (tileFrequency[tile] ?? 0) + 1;
+    computedCost += TILE_REGISTRY[tile].cost ?? 0;
+    return tile;
+  });
+  if (markerCount !== 4) throw new Error(`expected four START_END tiles, got ${markerCount}`);
+  const cost = Number(table.cost);
+  const elevation = Number(table.elevation);
+  return Object.freeze({
+    // Prefixed so per-id caches never mix it with a catalogue stage it updates;
+    // displayLevelId strips it again. Blank name/author stay blank like Source.
+    id: `devmap:${String(table.id ?? "")}`, name: String(table.name ?? ""), author: String(table.author ?? ""),
+    direction, cost: Number.isFinite(cost) ? cost : computedCost, computedCost,
+    elevation: Number.isFinite(elevation) ? elevation : 0,
+    requiredCapabilities: Object.freeze([]), tileFrequency: Object.freeze(tileFrequency),
+    tiles: Object.freeze(tiles), devmap: true,
+  });
+}
+
+function parseDevmapSource(source) {
+  const match = DEVMAP_MARKER.exec(String(source ?? ""));
+  if (!match) return undefined;
+  return devmapLevelFromTable(parseDevmapTable(source.slice(match.index + match[0].length)));
+}
+
+function loadDevmap() {
+  if (devmap.loaded) return devmap.level;
+  devmap.loaded = true;
+  let source = "";
+  try {
+    source = Instance.GetSaveData() ?? "";
+  } catch (error) {
+    consoleNotice(`devmap: save data unavailable: ${error}`);
+    return undefined;
+  }
+  try {
+    devmap.level = parseDevmapSource(source);
+    if (devmap.level) consoleNotice(`devmap: loaded '${devmap.level.name}' by '${devmap.level.author}' [${devmap.level.id}]`);
+    else consoleNotice(`devmap: no test stage in save data (${source.length} chars)`);
+  } catch (error) {
+    devmap.error = String(error?.message ?? error);
+    consoleNotice(`devmap: test file rejected: ${devmap.error}`);
+  }
+  return devmap.level;
+}
+
+function displayLevelId(id) {
+  return String(id ?? "").replace(/^devmap:/, "");
+}
+
+function devmapActive() {
+  return !!devmap.level && state.debugStageId === devmap.level.id;
+}
+
+// Round bootstrap: each round starts back on the test stage, even after
+// !testrace cleared it for the previous round's RACE.
+function applyDevmapRound() {
+  devmap.raceTest = false;
+  if (loadDevmap()) {
+    state.debugStageId = devmap.level.id;
+  } else if (devmap.error) {
+    const reason = devmap.error;
+    schedule(3, () => announce(`[DEVMAP ERROR] test stage rejected: ${reason}`));
+  }
+}
+
+function devmapChat(event) {
+  const text = String(event?.text ?? event?.message ?? "").trim().toLowerCase();
+  if (text === "!testrace") startDevmapRaceTest();
+  else if (text === "!devmapprobe") probeDevmapSavePath();
+}
+
+// Source !testrace: drop the devmap and run the RACE ending from here, with
+// the test stage as the only RACE pool entry.
+function startDevmapRaceTest() {
+  if (!devmapActive() || state.fatal || !state.running) return false;
+  if (state.endingRuntime || state.campaign.endingStarted) return false;
+  const source = state.currentLevel;
+  if (!source || source.lifecycle !== "active" || source.remaining > 0 || state.pendingLevel || state.themePreload) {
+    announce("[DEVMAP] wait for the stage to finish generating, then type !testrace again");
+    return false;
+  }
+  devmap.raceTest = true;
+  state.debugStageId = undefined;
+  const stage = Object.freeze({ ...stageSnapshotForRuntime(source), ending: "RACE", infiniteMode: false });
+  state.campaign.currentStageSnapshot = stage;
+  state.campaign.phase = "ending_handoff";
+  state.campaign.endingResolved = false;
+  state.campaign.endingOutcomePending = false;
+  state.endLockedUntil = Number.POSITIVE_INFINITY;
+  if (source.tp && source.incoming) moveTeleportDestination(source.tp, source.incoming);
+  callEndingStartContract(stage, source);
+  const runtime = state.endingRuntime;
+  if (state.fatal || !runtime || runtime.kind !== "RACE") return false;
+  // A test RACE never advances the campaign.
+  runtime.debugForced = true;
+  runtime.debugUsesFormalTimeline = true;
+  schedule(CONFIG.interactionRetirementDelay, () => {
+    if (state.endingRuntime === runtime && source.lifecycle !== "destroyed") retireInteractions(source);
+  }, source.index);
+  return true;
+}
+
+// TEMP: finds where GetSaveData lives on disk. Writes only when no save data
+// exists, so it can never overwrite a player's test file. Remove once known.
+function probeDevmapSavePath() {
+  if (devmap.probed) return;
+  devmap.probed = true;
+  let existing = "";
+  try { existing = Instance.GetSaveData() ?? ""; } catch (error) { existing = ""; }
+  if (existing.trim()) {
+    announce("[DEVMAP] save data already exists; probe skipped");
+    return;
+  }
+  Instance.SetSaveData("// ze_collective devmap probe: replace this file's contents with the downloaded test file\n");
+  announce("[DEVMAP] probe written; search the CS2 folder for 'ze_collective devmap probe'");
 }
 
 function cacheEntities(parentCosmetics = true) {
@@ -20295,9 +20541,8 @@ function prepareTeleportIndicator() {
 }
 
 function createCampaignFinaleSource() {
-  const campaign = state.campaign ?? {};
-  const position = campaign.finaleAnchor ?? state.startPoint?.position ?? vec();
-  const direction = campaign.finaleDirection ?? state.startPoint?.direction ?? vec(1, 0, 0);
+  const position = state.startPoint?.position ?? vec();
+  const direction = state.startPoint?.direction ?? vec(1, 0, 0);
   return {
     index: `campaign_finale_source:${state.roundBootstrapSerial}`,
     id: "#campaign_finale_source",
@@ -20973,6 +21218,7 @@ function beginRound() {
     failRuntime(`level data validation failed: ${error}`);
     return;
   }
+  applyDevmapRound();
   waitForRequiredEntities(bootstrapSerial, Instance.GetGameTime() + REQUIRED_ENTITY_WAIT_TIMEOUT);
 }
 
@@ -21000,16 +21246,10 @@ function waitForRequiredEntities(bootstrapSerial, deadline) {
   state.roundBootstrapPending = false;
   prepareTeleportIndicator();
 
-  if (state.campaign.stageIndex === FINALE_STAGE_INDEX && state.campaign.finaleAnchor) {
-    const direction = state.campaign.finaleDirection ?? vec(1, 0, 0);
-    state.startPoint = Object.freeze({
-      name: "finale",
-      position: clone(state.campaign.finaleAnchor),
-      direction: clone(direction),
-    });
-  } else {
-    state.startPoint = START_POINTS[Math.floor(Math.random() * START_POINTS.length)];
-  }
+  // Discard legacy anchors restored by a script reload as well as old round data.
+  state.campaign.finaleAnchor = undefined;
+  state.campaign.finaleDirection = undefined;
+  state.startPoint = START_POINTS[Math.floor(Math.random() * START_POINTS.length)];
   state.currentDirection = clone(state.startPoint.direction);
   state.nextBridgeStart = clone(state.startPoint.position);
   state.nextEntry = add(
@@ -23101,7 +23341,8 @@ function processGenerationQueuesBudgeted() {
 }
 
 function chooseLevel(index, trackItemDesire = true) {
-  if (state.debugStageId) {
+  // A devmap goes through ordinary selection below so world limits still steer it.
+  if (state.debugStageId && !devmapActive()) {
     const level = DEBUG_HOOKS.levelDefinition(state.debugStageId);
     if (!level) throw new Error(`debug stage '${state.debugStageId}' is no longer present in the stage data`);
     const runtime = buildLevel(
@@ -23214,8 +23455,9 @@ function chooseLevel(index, trackItemDesire = true) {
   const entry = state.nextEntry, incoming = state.currentDirection;
   const allowed = campaignAllowedDirections(entry, incoming);
   const options = [];
-  for (const level of LEVELS) {
-    if (level.id === state.lastLevelId) continue;
+  const testing = devmapActive();
+  for (const level of testing ? [devmap.level] : LEVELS) {
+    if (!testing && level.id === state.lastLevelId) continue;
     for (const mirrored of [false, true]) options.push({ level, mirrored });
   }
   // Filtering a uniformly shuffled pool gives the same random order among
@@ -33014,6 +33256,7 @@ function useHeldItem(pawn) {
 function handlePlayerChat(event) {
   genericEventChat(event);
   processChatterCurseChat(event);
+  devmapChat(event);
 }
 
 function sampleUseInputs(pawns) {
@@ -36968,8 +37211,14 @@ function startHardCodedStageEvent(runtime) {
 
 // Source map_server_printout, sent ::STAGE_ENTRY_MSG_DELAY after postspawn.
 function announceLevelEntry(level) {
-  if (!level?.name) return;
-  const text = `Now entering: '${level.name}' by '${level.author}' [${level.id}]`;
+  // A devmap may have a blank name; Source still printed its entry line.
+  if (!level?.name && !String(level?.id ?? "").startsWith("devmap:")) return;
+  if (devmapActive() && level.id === devmap.level.id) {
+    schedule(0.7, () => announce("[DEVMAP ENABLED]"));
+    schedule(1.71, () => announce("type !testrace in chat to test this stage in the race-ending"));
+    return;
+  }
+  const text = `Now entering: '${level.name}' by '${level.author}' [${displayLevelId(level.id)}]`;
   schedule(0.7, () => announce(text));
 }
 
@@ -37594,6 +37843,8 @@ function checkEnd(now) {
 function isStageGoalLevel(runtime) {
   if (!runtime) return false;
   if (runtime.debugEndingSnapshot) return true;
+  // Source `debugged`: a devmap test repeats its stage with no ending.
+  if (devmapActive()) return false;
   const stage = stageSnapshotForRuntime(runtime);
   if (stage.infiniteMode) return state.infiniteCheckout?.passed === true;
   return (runtime.stageLevel ?? state.campaign.stageLevelCount) >= stage.stageGoal;
