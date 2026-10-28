@@ -767,11 +767,11 @@
     "Case09": "",
     "Case08": "",
     "Case07": "",
-    "Case06": "",
-    "Case05": "",
-    "Case04": "",
-    "Case03": "",
-    "Case02": "",
+    "Case06": "6",
+    "Case05": "5",
+    "Case04": "4",
+    "Case03": "3",
+    "Case02": "2",
     "Case01": "1",
     "vscripts": "",
     "targetname": "[PR#]ZDHelper",
@@ -832,7 +832,7 @@
       {
         "output": "OnCase02",
         "target": "[PR#]DoNothing",
-        "input": "Use",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -840,7 +840,7 @@
       {
         "output": "OnCase03",
         "target": "[PR#]DoNothing",
-        "input": "Use",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -864,7 +864,7 @@
       {
         "output": "OnCase04",
         "target": "[PR#]DoNothing",
-        "input": "Use",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -880,7 +880,7 @@
       {
         "output": "OnCase05",
         "target": "[PR#]DoNothing",
-        "input": "Use",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -888,7 +888,7 @@
       {
         "output": "OnCase06",
         "target": "[PR#]DoNothing",
-        "input": "Use",
+        "input": "Trigger",
         "param": "",
         "delay": 0,
         "limit": -1
@@ -7744,8 +7744,7 @@
     "origin": "4816.000000 1642.689941 -7256.000000",
     "angles": "90.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "411",
-    "precomputed_vis_clusters": "2520 2527 2529 2532 2535 2536 2537 2539 2540 2541 2542 2543 2544 2545 2546 2548 2549 2554 2555 2558 2564 2571 2573 2575 2576 2578 2579 2580 2585 2586 2589 2590 2598 2599 2672 2686 2690"
+    "hammerUniqueId": "411"
   },
   {
     "CanBePickedUp": "1",
@@ -40662,8 +40661,7 @@
     "origin": "6508.000000 3262.000000 -7216.000000",
     "angles": "90.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "30357",
-    "precomputed_vis_clusters": "2719 2724 2726 2792 2796 2803 2805 2806 2808 2810 2813 2814 2815 2818 2820 2823 2825 2826 2827 2828 2829 2830 2831 2832 2833 2835 2836 2837 2838 2839 2840 2841 2850 2854"
+    "hammerUniqueId": "30357"
   },
   {
     "PassthroughCaller": "0",
@@ -42727,7 +42725,7 @@
         "target": "[PR#]item_goliath_24",
         "input": "Disable",
         "param": "",
-        "delay": 5.199999809265137,
+        "delay": 5.300000190734863,
         "limit": -1
       },
       {
@@ -56248,7 +56246,7 @@
     "Filter06": "",
     "Filter05": "",
     "Filter04": "",
-    "Filter03": "[PR#]nohumanos",
+    "Filter03": "",
     "Filter02": "[PR#]nobalrogcontext",
     "Filter01": "[PR#]zombies",
     "filtertype": "0",
@@ -128309,8 +128307,7 @@
     "origin": "8604.000000 2140.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73970",
-    "precomputed_vis_clusters": "2636 2903"
+    "hammerUniqueId": "73970"
   },
   {
     "bakedshadowindex": "1",
@@ -128379,8 +128376,7 @@
     "origin": "10620.000000 2148.000000 12364.937500",
     "angles": "89.999947 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73974",
-    "precomputed_vis_clusters": "2903"
+    "hammerUniqueId": "73974"
   },
   {
     "bakedshadowindex": "2",
@@ -128449,8 +128445,7 @@
     "origin": "8412.000000 1564.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73978",
-    "precomputed_vis_clusters": "2636 2903"
+    "hammerUniqueId": "73978"
   },
   {
     "bakedshadowindex": "1",
@@ -128519,8 +128514,7 @@
     "origin": "8412.000000 1756.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73982",
-    "precomputed_vis_clusters": "2636 2903"
+    "hammerUniqueId": "73982"
   },
   {
     "bakedshadowindex": "2",
@@ -128589,8 +128583,7 @@
     "origin": "8412.000000 1948.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73986",
-    "precomputed_vis_clusters": "2636"
+    "hammerUniqueId": "73986"
   },
   {
     "bakedshadowindex": "2",
@@ -128659,8 +128652,7 @@
     "origin": "8988.000000 2140.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73990",
-    "precomputed_vis_clusters": "2636 2903"
+    "hammerUniqueId": "73990"
   },
   {
     "bakedshadowindex": "1",
@@ -128729,8 +128721,7 @@
     "origin": "8796.000000 2140.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73994",
-    "precomputed_vis_clusters": "2636 2903"
+    "hammerUniqueId": "73994"
   },
   {
     "bakedshadowindex": "1",
@@ -128799,8 +128790,7 @@
     "origin": "10908.000000 2148.000000 12364.937500",
     "angles": "89.999947 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "73998",
-    "precomputed_vis_clusters": "2903"
+    "hammerUniqueId": "73998"
   },
   {
     "bakedshadowindex": "2",
@@ -128869,8 +128859,7 @@
     "origin": "11100.000000 1956.000000 12364.937500",
     "angles": "89.999947 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "74002",
-    "precomputed_vis_clusters": "2903"
+    "hammerUniqueId": "74002"
   },
   {
     "bakedshadowindex": "2",
@@ -128939,8 +128928,7 @@
     "origin": "11100.000000 1572.000000 12364.937500",
     "angles": "89.999947 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "74006",
-    "precomputed_vis_clusters": "2903 3009"
+    "hammerUniqueId": "74006"
   },
   {
     "bakedshadowindex": "1",
@@ -129009,8 +128997,7 @@
     "origin": "11100.000000 1764.000000 12364.937500",
     "angles": "89.999947 270.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "74010",
-    "precomputed_vis_clusters": "2903"
+    "hammerUniqueId": "74010"
   },
   {
     "bakedshadowindex": "1",
@@ -129079,7 +129066,6 @@
     "origin": "8408.000000 2138.000000 12364.937500",
     "angles": "89.999947 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "74014",
-    "precomputed_vis_clusters": "2636"
+    "hammerUniqueId": "74014"
   }
 ]
