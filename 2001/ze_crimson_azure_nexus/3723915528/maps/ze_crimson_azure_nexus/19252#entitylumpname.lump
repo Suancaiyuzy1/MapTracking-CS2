@@ -184,7 +184,7 @@
         "output": "OnHurtPlayer",
         "target": "!activator",
         "input": "Keyvalue",
-        "param": "speed 0.2",
+        "param": "speed 0.75",
         "delay": 0,
         "limit": -1
       },
@@ -193,7 +193,7 @@
         "target": "!activator",
         "input": "Keyvalue",
         "param": "speed 1",
-        "delay": 1.5,
+        "delay": 1,
         "limit": -1
       }
     ]
