@@ -95638,15 +95638,6 @@
     "hammerUniqueId": "25574"
   },
   {
-    "cs_script": "scripts/vscripts/script_blade.vjs",
-    "targetname": "[PR#]script_blade",
-    "classname": "point_script",
-    "origin": "10295.731445 12384.000000 -6204.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25575"
-  },
-  {
     "PostSpawnInheritAngles": "0",
     "PostSpawnDirectionVariance": "0.150000",
     "PostSpawnDirection": "0.000000 0.000000 0.000000",
