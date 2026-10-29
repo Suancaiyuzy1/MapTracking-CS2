@@ -145,7 +145,7 @@
     "thick_min": "10",
     "targetname": "[PR#]item_electro_tesla",
     "classname": "info_particle_system",
-    "origin": "0.000000 0.000000 24.000000",
+    "origin": "-4.000000 0.000000 24.000000",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5113",

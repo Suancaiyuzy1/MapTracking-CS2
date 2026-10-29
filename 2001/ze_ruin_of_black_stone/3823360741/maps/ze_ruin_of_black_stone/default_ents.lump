@@ -25586,7 +25586,7 @@
     "vscripts": "",
     "targetname": "[PR#]ex2_ending_laser_maker1",
     "classname": "env_entity_maker",
-    "origin": "10496.000000 -5952.000000 -320.000000",
+    "origin": "10496.000000 -5952.000000 -316.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5186"
@@ -25607,7 +25607,7 @@
     "vscripts": "",
     "targetname": "[PR#]ex2_ending_laser_maker2",
     "classname": "env_entity_maker",
-    "origin": "10496.000000 -5952.000000 -340.000000",
+    "origin": "10496.000000 -5952.000000 -336.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5187"
@@ -25628,7 +25628,7 @@
     "vscripts": "",
     "targetname": "[PR#]ex2_ending_laser_maker3",
     "classname": "env_entity_maker",
-    "origin": "10496.000000 -5952.000000 -360.000000",
+    "origin": "10496.000000 -5952.000000 -364.000000",
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "5188"
@@ -30830,6 +30830,22 @@
         "input": "Stop",
         "param": "",
         "delay": 26,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]boss_hud_script",
+        "input": "RunScriptInput",
+        "param": "Resetbosshud",
+        "delay": 0,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]boss_hud_script",
+        "input": "RunScriptInput",
+        "param": "Settextex2",
+        "delay": 1,
         "limit": -1
       }
     ]
@@ -46152,7 +46168,7 @@
     "hammerUniqueId": "5969"
   },
   {
-    "force": "4000",
+    "force": "5000",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic",
     "spawnflags": "30",
@@ -46165,7 +46181,7 @@
     "hammerUniqueId": "5978"
   },
   {
-    "force": "4800",
+    "force": "4000",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic",
     "spawnflags": "30",
@@ -46191,7 +46207,7 @@
     "hammerUniqueId": "5980"
   },
   {
-    "force": "4800",
+    "force": "5000",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic",
     "spawnflags": "30",
@@ -46285,7 +46301,7 @@
   },
   {
     "dampAllRotation": "0",
-    "angularlimit": "200.000000",
+    "angularlimit": "500.000000",
     "attach1": "[PR#]npc_first_boss_physic",
     "spawnflags": "0",
     "vscripts": "",
@@ -48066,7 +48082,7 @@
     ]
   },
   {
-    "force": "3500",
+    "force": "4500",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "30",
@@ -48079,7 +48095,7 @@
     "hammerUniqueId": "6155"
   },
   {
-    "force": "2500",
+    "force": "4000",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "30",
@@ -48092,7 +48108,7 @@
     "hammerUniqueId": "6156"
   },
   {
-    "force": "2500",
+    "force": "4500",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "30",
@@ -48105,7 +48121,7 @@
     "hammerUniqueId": "6157"
   },
   {
-    "force": "3500",
+    "force": "4000",
     "forcetime": "0.030000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "30",
@@ -48185,7 +48201,7 @@
     "model": "maps/ze_ruin_of_black_stone/entities/npc_first_boss_physic1_6159.vmdl"
   },
   {
-    "force": "2000",
+    "force": "1800",
     "forcetime": "0.100000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "30",
@@ -48199,7 +48215,7 @@
   },
   {
     "dampAllRotation": "0",
-    "angularlimit": "500.000000",
+    "angularlimit": "200.000000",
     "attach1": "[PR#]npc_first_boss_physic1",
     "spawnflags": "0",
     "vscripts": "",
