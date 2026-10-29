@@ -50,6 +50,9 @@ const dialogueQueue = [];
 // キュー処理中フラグ
 let processingQueue = false;
 
+// 現在の言語（初期状態は日本語）
+let currentLanguage = "ja";
+
 
 /* =========================================================
    キャラクター定義
@@ -65,7 +68,7 @@ const CHARACTERS =
 
     B:
     {
-        name: "アルビオンだったもの",
+        name: "アルビオンだった存在のモノ",
         portrait: "B"
     },
 
@@ -90,6 +93,47 @@ const CHARACTERS =
     F:
     {
         name: "ここに名前",
+        portrait: "F"
+    }
+};
+
+// 英語表示用キャラクター名
+// portrait は日本語版と共通のものを使用
+const CHARACTERS_EN =
+{
+    A:
+    {
+        name: "Dr. Albion",
+        portrait: "A"
+    },
+
+    B:
+    {
+        name: "Albion(?)",
+        portrait: "B"
+    },
+
+    C:
+    {
+        name: "Unnamed",
+        portrait: "C"
+    },
+
+    D:
+    {
+        name: "Unnamed",
+        portrait: "D"
+    },
+
+    E:
+    {
+        name: "Unnamed",
+        portrait: "E"
+    },
+
+    F:
+    {
+        name: "Unnamed",
         portrait: "F"
     }
 };
@@ -131,7 +175,7 @@ const SCENARIOS =
         {
             character: "A",
             message: "(あともう少しで...)"
-        },
+        }
 
     ],
 
@@ -157,60 +201,85 @@ const SCENARIOS =
         }
 
     ],
+};
 
-
+// 英語版シナリオ
+// 英語訳が存在しないシナリオは、日本語版へ自動的にフォールバックする
+const SCENARIOS_EN =
+{
     // -----------------------------------------------------
-    // Scenario04：
+    // Scenario01:
     // -----------------------------------------------------
-    Scenario04:
+    Scenario01:
     [
         {
             character: "A",
-            message: ""
+            message: "(I'm running low on cognitive enhancers...)"
         },
 
         {
             character: "A",
-            message: ""
-        },
-
-        {
-            character: "A",
-            message: ""
+            message: "(I just hope my body can hold out a little longer...)"
         }
     ],
 
 
     // -----------------------------------------------------
-    // Scenario05：
+    // Scenario02:
     // -----------------------------------------------------
-    Scenario05:
+    Scenario02:
     [
         {
             character: "A",
-            message: ""
+            message: "(Just a little further...)"
         },
 
         {
             character: "A",
-            message: ""
-        },
-
-        {
-            character: "A",
-            message: ""
-        },
-
-        {
-            character: "A",
-            message: ""
-        },
-
-        {
-            character: "A",
-            message: ""
+            message: "(I'm almost there...)"
         }
-    ]
+
+    ],
+
+    // -----------------------------------------------------
+    // Scenario02:
+    // -----------------------------------------------------
+    Scenario02:
+    [
+        {
+            character: "A",
+            message: "(Just a little further...)"
+        },
+
+        {
+            character: "A",
+            message: "(I'm almost there...)"
+        }
+
+    ],
+
+    // -----------------------------------------------------
+    // Scenario03：
+    // -----------------------------------------------------
+    Scenario03:
+    [
+        {
+            character: "B",
+            message: "□□□□ □□□□？"
+        },
+
+        {
+            character: "B",
+            message: "□□□□ □□□□..."
+        },
+
+        {
+            character: "B",
+            message: "□□□□"
+        }
+
+    ],
+
 };
 
 
@@ -812,7 +881,8 @@ async function ShowFirstDialogue(
 async function ProcessDialogue(
     character,
     message,
-    isFinal
+    isFinal,
+    language
 )
 {
     const hud = GetDialogueHud();
@@ -831,8 +901,13 @@ async function ProcessDialogue(
        キャラクター情報取得
        ----------------------------------------------------- */
 
+    const characterTable =
+        language === "en"
+            ? CHARACTERS_EN
+            : CHARACTERS;
+
     const characterData =
-        CHARACTERS[character];
+        characterTable[character];
 
     if (!characterData)
     {
@@ -1116,14 +1191,16 @@ async function ProcessDialogue(
 function AddDialogue(
     character,
     message,
-    isFinal = false
+    isFinal = false,
+    language = currentLanguage
 )
 {
     dialogueQueue.push(
     {
         character: character,
         message: message,
-        isFinal: isFinal
+        isFinal: isFinal,
+        language: language
     });
 
     ProcessDialogueQueue();
@@ -1153,7 +1230,8 @@ async function ProcessDialogueQueue()
         await ProcessDialogue(
             dialogue.character,
             dialogue.message,
-            dialogue.isFinal
+            dialogue.isFinal,
+            dialogue.language
         );
 
         // 最後の台詞以外は次の台詞まで待機
@@ -1175,8 +1253,18 @@ async function ProcessDialogueQueue()
 
 function PlayScenario(scenarioName)
 {
+    // シナリオ開始時点の言語を確定する
+    // 英語訳がない場合はシナリオ全体を日本語で再生する
+    const scenarioLanguage =
+        currentLanguage === "en" &&
+        SCENARIOS_EN[scenarioName]
+            ? "en"
+            : "ja";
+
     const scenario =
-        SCENARIOS[scenarioName];
+        scenarioLanguage === "en"
+            ? SCENARIOS_EN[scenarioName]
+            : SCENARIOS[scenarioName];
 
     // シナリオの存在確認
     if (!scenario)
@@ -1216,7 +1304,8 @@ function PlayScenario(scenarioName)
         AddDialogue(
             dialogue.character,
             dialogue.message,
-            isFinal
+            isFinal,
+            scenarioLanguage
         );
     }
 }
@@ -1430,5 +1519,27 @@ Instance.OnScriptInput(
     () =>
     {
         ClearDialogue();
+    }
+);
+
+
+// 英語モードへ切り替え
+Instance.OnScriptInput(
+    "EnableEnglish",
+    () =>
+    {
+        currentLanguage = "en";
+        Instance.Msg("Dialogue language: English");
+    }
+);
+
+
+// 日本語モードへ切り替え
+Instance.OnScriptInput(
+    "EnableJapanese",
+    () =>
+    {
+        currentLanguage = "ja";
+        Instance.Msg("Dialogue language: Japanese");
     }
 );
