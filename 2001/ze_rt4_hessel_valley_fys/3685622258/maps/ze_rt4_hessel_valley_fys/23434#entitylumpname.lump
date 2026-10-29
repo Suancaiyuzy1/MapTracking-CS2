@@ -870,14 +870,6 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "[PR#]laser_fade",
-        "input": "Fade",
-        "param": "",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]Item_ice_relay",
         "input": "Disable",
         "param": "",
@@ -903,7 +895,7 @@
       {
         "output": "OnStartTouch",
         "target": "[PR#]Item_ice_relay",
-        "input": "Disable",
+        "input": "Enable",
         "param": "",
         "delay": 8.020000457763672,
         "limit": -1

@@ -13,7 +13,7 @@
     "local.origin": "0.000000 0.000000 0.000000",
     "useLocalOffset": "0",
     "parentAttachmentName": "",
-    "parentname": "[PR#]extra_water_move",
+    "parentname": "[PR#]item_rock_par",
     "vscripts": "",
     "targetname": "[PR#]item_rock_text_trigger",
     "classname": "trigger_multiple",
@@ -278,7 +278,7 @@
         "target": "[PR#]item_rock_hurt",
         "input": "Kill",
         "param": "",
-        "delay": 3,
+        "delay": 2.799999952316284,
         "limit": -1
       },
       {

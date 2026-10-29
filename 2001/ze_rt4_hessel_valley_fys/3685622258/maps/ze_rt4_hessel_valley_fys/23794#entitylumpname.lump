@@ -405,7 +405,7 @@
   },
   {
     "InitialDelay": "0.000000",
-    "RefireTime": "30.000000",
+    "RefireTime": "40.000000",
     "UpperRandomBound": "0.000000",
     "LowerRandomBound": "0.000000",
     "PauseAfterFiring": "0",
@@ -450,7 +450,7 @@
     "color": "0 140 255",
     "fullbright": "0",
     "enabled": "1",
-    "message": "\u95F4\u9694CD\uFF1A10\n\u5B58\u50A8CD\uFF1A30\n\u5F53\u524D\u5B58\u50A8\u6B21\u6570:\n\n",
+    "message": "\u95F4\u9694CD\uFF1A10\n\u5B58\u50A8CD\uFF1A40\n\u5F53\u524D\u5B58\u50A8\u6B21\u6570:\n\n",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
     "object_culling": "0",

@@ -44109,7 +44109,7 @@
     "clientSideEntity": "0",
     "Filter10": "",
     "Filter09": "[PR#]hero_bs_filter",
-    "Filter08": "",
+    "Filter08": "[PR#]hero_filter",
     "Filter07": "[PR#]item_tlbk_filter",
     "Filter06": "[PR#]item_liuying_filter",
     "Filter05": "[PR#]item_yaolan_filter",
@@ -97957,19 +97957,5 @@
     "angles": "0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "25875"
-  },
-  {
-    "rendercolor": "255 0 0",
-    "renderamt": "150",
-    "holdtime": "0.5",
-    "duration": "0.5",
-    "spawnflags": "0",
-    "vscripts": "",
-    "targetname": "[PR#]laser_fade",
-    "classname": "env_fade",
-    "origin": "9961.107422 11296.000000 -5696.000000",
-    "angles": "0.000000 270.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "25884"
   }
 ]
