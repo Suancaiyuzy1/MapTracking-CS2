@@ -575,7 +575,7 @@
     "forgivedelay": "3.000000",
     "damagemodel": "0",
     "damagetype": "0",
-    "damagecap": "0",
+    "damagecap": "60",
     "damage": "60",
     "master": "",
     "filtername": "[PR#]human",
@@ -619,7 +619,7 @@
         "target": "!activator",
         "input": "Keyvalue",
         "param": "speed 1",
-        "delay": 1,
+        "delay": 0.5,
         "limit": -1
       }
     ]

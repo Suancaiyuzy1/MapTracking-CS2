@@ -4,8 +4,8 @@
 [
   {
     "triggeronstarttouch": "0",
-    "speed": "800",
-    "pushdir": "-10.000000 0.000000 0.000000",
+    "speed": "650",
+    "pushdir": "0.000000 0.000000 0.000000",
     "filtername": "[PR#]king_filter",
     "spawnflags": "4097",
     "globalname": "",
@@ -17,13 +17,13 @@
     "parentAttachmentName": "",
     "parentname": "",
     "vscripts": "",
-    "targetname": "[PR#]king_push_WW",
+    "targetname": "[PR#]king_push_AA",
     "classname": "trigger_push",
-    "origin": "-2.000000 1.000000 -3.500000",
-    "angles": "-0.000000 0.000000 0.000000",
+    "origin": "-2.000000 -1.316895 -3.500000",
+    "angles": "-0.000000 89.999947 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "20601",
-    "model": "maps/ze_crimson_azure_nexus/entities/king_push_ww_20601.vmdl",
+    "hammerUniqueId": "20780",
+    "model": "maps/ze_crimson_azure_nexus/entities/king_push_aa_20780.vmdl",
     "_template_lump_ent_index": "0",
     "connections": [
       {

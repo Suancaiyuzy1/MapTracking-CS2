@@ -9,8 +9,8 @@
     "stopsound": "",
     "startsound": "",
     "blockdamage": "0.000000",
-    "movedistance": "8500.000000",
-    "speed": "1800",
+    "movedistance": "10000.000000",
+    "speed": "2000",
     "MoveWithoutPushingBlockers": "0",
     "NoInterpolate": "0",
     "authoredposition": "0",
@@ -87,8 +87,8 @@
         "output": "OnHurtPlayer",
         "target": "!activator",
         "input": "Ignitelifetime",
-        "param": "3",
-        "delay": 0,
+        "param": "1",
+        "delay": 2,
         "limit": -1
       },
       {
@@ -104,7 +104,7 @@
         "target": "!activator",
         "input": "Keyvalue",
         "param": "speed 1",
-        "delay": 1.399999976158142,
+        "delay": 2,
         "limit": -1
       }
     ]

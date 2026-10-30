@@ -174,14 +174,6 @@
       },
       {
         "output": "OnPass",
-        "target": "[PR#]npc_maker",
-        "input": "ForceSpawn",
-        "param": "",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnPass",
         "target": "[PR#]npc_start_relay",
         "input": "Trigger",
         "param": "",
@@ -218,6 +210,14 @@
         "input": "Start",
         "param": "",
         "delay": 85,
+        "limit": -1
+      },
+      {
+        "output": "OnPass",
+        "target": "[PR#]npc_finder",
+        "input": "FindEntity",
+        "param": "",
+        "delay": 0,
         "limit": -1
       }
     ]

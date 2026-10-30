@@ -10,12 +10,12 @@
     "startsound": "",
     "blockdamage": "0.000000",
     "movedistance": "2800.000000",
-    "speed": "450",
+    "speed": "200",
     "MoveWithoutPushingBlockers": "0",
     "NoInterpolate": "0",
     "authoredposition": "0",
     "startposition": "0.000000",
-    "spawnflags": "8",
+    "spawnflags": "0",
     "movedir": "0.000000 0.000000 0.000000",
     "lightmapstatic": "0",
     "rendertocubemaps": "0",
@@ -39,8 +39,8 @@
     "origin": "-2.855469 -0.068359 15.232178",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "20635",
-    "model": "maps/ze_crimson_azure_nexus/entities/king_laser_move_20635.vmdl",
+    "hammerUniqueId": "20760",
+    "model": "maps/ze_crimson_azure_nexus/entities/king_laser_move_20760.vmdl",
     "_template_lump_ent_index": "0",
     "connections": [
       {
@@ -144,10 +144,10 @@
     "vscripts": "",
     "targetname": "[PR#]king_laser_par",
     "classname": "info_particle_system",
-    "origin": "-1.855469 -0.068359 -3.792969",
+    "origin": "9.277344 -0.068359 -3.792969",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "20630",
+    "hammerUniqueId": "20771",
     "_template_lump_ent_index": "1"
   },
   {
@@ -161,7 +161,7 @@
     "origin": "-0.791992 -32.068359 -0.914856",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "20637",
+    "hammerUniqueId": "20762",
     "_template_lump_ent_index": "2",
     "connections": [
       {
@@ -177,7 +177,7 @@
         "target": "[PR#]king_laser_move",
         "input": "SetSpeed",
         "param": "600",
-        "delay": 0.20000000298023224,
+        "delay": 0.5,
         "limit": -1
       },
       {
@@ -192,16 +192,40 @@
         "output": "OnSpawn",
         "target": "[PR#]king_laser_move",
         "input": "SetSpeed",
-        "param": "1000",
-        "delay": 0.4000000059604645,
+        "param": "1200",
+        "delay": 1,
         "limit": -1
       },
       {
         "output": "OnSpawn",
         "target": "[PR#]king_laser_move",
         "input": "SetSpeed",
-        "param": "1400",
+        "param": "1800",
+        "delay": 1.5,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]king_laser_move",
+        "input": "SetSpeed",
+        "param": "450",
+        "delay": 0.25,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]king_laser_move",
+        "input": "SetSpeed",
+        "param": "850",
         "delay": 0.75,
+        "limit": -1
+      },
+      {
+        "output": "OnSpawn",
+        "target": "[PR#]king_laser_move",
+        "input": "SetSpeed",
+        "param": "1450",
+        "delay": 1.25,
         "limit": -1
       }
     ]
@@ -232,8 +256,8 @@
     "origin": "3.644531 5.931641 119.232178",
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "20633",
-    "model": "maps/ze_crimson_azure_nexus/entities/king_laser_hurt_20633.vmdl",
+    "hammerUniqueId": "20758",
+    "model": "maps/ze_crimson_azure_nexus/entities/king_laser_hurt_20758.vmdl",
     "_template_lump_ent_index": "3",
     "connections": [
       {
@@ -322,6 +346,14 @@
         "input": "Keyvalue",
         "param": "speed 1",
         "delay": 1,
+        "limit": -1
+      },
+      {
+        "output": "OnHurtPlayer",
+        "target": "[PR#]king_mp",
+        "input": "Add",
+        "param": "1",
+        "delay": 0,
         "limit": -1
       }
     ]
