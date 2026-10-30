@@ -4761,94 +4761,6 @@
     ]
   },
   {
-    "wait": "1.000000",
-    "filtername": "[PR#]ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]drdiff2finish",
-    "classname": "trigger_multiple",
-    "origin": "-448.000000 -14304.000000 -2496.000000",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "9571",
-    "model": "maps/ze_mkzk_scarab_v4_remake/entities/drdiff2finish_9571.vmdl",
-    "_template_lump_ent_index": "88",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]mgdrdiff3log",
-        "input": "SetValue",
-        "param": "1",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "Say \u0022\u5DF2\u89E3\u9501\u56F0\u96BE\u96BE\u5EA6\u0022",
-        "delay": 0,
-        "limit": 1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]ct",
-    "spawnflags": "1",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "",
-    "vscripts": "",
-    "targetname": "[PR#]drdiff3finish",
-    "classname": "trigger_multiple",
-    "origin": "-448.000000 -14336.000000 -2496.000000",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "9573",
-    "model": "maps/ze_mkzk_scarab_v4_remake/entities/drdiff3finish_9573.vmdl",
-    "_template_lump_ent_index": "89",
-    "connections": [
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]mgdrdiff4log",
-        "input": "SetValue",
-        "param": "1",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]servercommand1",
-        "input": "Command",
-        "param": "Say \u0022\u5DF2\u89E3\u9501\u5012\u6597\u96BE\u5EA6\u0022",
-        "delay": 0,
-        "limit": 1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "[PR#]mgdrdiff3log",
-        "input": "SetValue",
-        "param": "1",
-        "delay": 0,
-        "limit": 1
-      }
-    ]
-  },
-  {
     "wait": "0.010000",
     "filtername": "[PR#]t",
     "spawnflags": "4097",
@@ -4868,7 +4780,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9049",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drtrespawn1_9049.vmdl",
-    "_template_lump_ent_index": "90",
+    "_template_lump_ent_index": "88",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4900,7 +4812,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9056",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drtrespawn2_9056.vmdl",
-    "_template_lump_ent_index": "91",
+    "_template_lump_ent_index": "89",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -4932,7 +4844,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "8007",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/mgdrdeathtrigger_8007.vmdl",
-    "_template_lump_ent_index": "92",
+    "_template_lump_ent_index": "90",
     "connections": [
       {
         "output": "OnEndTouch",
@@ -4964,7 +4876,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "9590",
     "model": "maps/ze_mkzk_scarab_v4_remake/entities/drcount_9590.vmdl",
-    "_template_lump_ent_index": "93",
+    "_template_lump_ent_index": "91",
     "connections": [
       {
         "output": "OnStartTouch",
@@ -5067,7 +4979,7 @@
     "angles": "0.000000 -179.999954 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "11851",
-    "_template_lump_ent_index": "94"
+    "_template_lump_ent_index": "92"
   },
   {
     "depth_render_offset": "0.125000",
@@ -5104,7 +5016,7 @@
     "angles": "0.000000 -179.999924 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12441",
-    "_template_lump_ent_index": "95"
+    "_template_lump_ent_index": "93"
   },
   {
     "depth_render_offset": "0.125000",
@@ -5141,6 +5053,6 @@
     "angles": "0.000000 -179.999893 90.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "12442",
-    "_template_lump_ent_index": "96"
+    "_template_lump_ent_index": "94"
   }
 ]

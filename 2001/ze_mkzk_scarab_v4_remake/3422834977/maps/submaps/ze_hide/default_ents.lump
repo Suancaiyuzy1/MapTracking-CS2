@@ -1794,14 +1794,6 @@
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "AddContext",
-        "param": "cd:\u002B\u002B1",
-        "delay": 0,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
         "target": "[PR#]sm_case",
         "input": "PickRandom",
         "param": "",
@@ -1831,6 +1823,14 @@
         "param": "",
         "delay": 7,
         "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]script",
+        "input": "RunScriptInput",
+        "param": "EnableGrenades",
+        "delay": 1,
+        "limit": 1
       }
     ]
   },
