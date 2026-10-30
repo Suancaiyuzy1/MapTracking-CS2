@@ -40860,7 +40860,7 @@
         "input": "KeyValue",
         "param": "gravity 1",
         "delay": 3,
-        "limit": 1
+        "limit": -1
       },
       {
         "output": "OnStartTouch",
