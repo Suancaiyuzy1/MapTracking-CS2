@@ -134,10 +134,7 @@ async function FlashBossScreen()
         return;
 
 
-    /* -----------------------------------------------------
-       白フラッシュ開始
-       ----------------------------------------------------- */
-
+    // 白フラッシュ開始
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -149,19 +146,11 @@ async function FlashBossScreen()
     });
 
 
-    /* -----------------------------------------------------
-       画面全体をしっかり白くする
-       -----------------------------------------------------
-       一瞬だけ完全な白画面を維持する。
-       ----------------------------------------------------- */
-
+    // 一瞬だけ完全な白画面を維持
     await Instance.Delay(0.30);
 
 
-    /* -----------------------------------------------------
-       白フラッシュ終了
-       ----------------------------------------------------- */
-
+    // 白フラッシュ終了
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -180,13 +169,11 @@ async function FlashBossScreen()
 
 function PlayBossPip()
 {
-    // マップ上のboss_pipを取得
     const sound =
         Instance.FindEntityByName(
             BOSS_SOUND_NAME
         );
 
-    // boss_pipが存在しない場合
     if (!sound)
     {
         Instance.Msg(
@@ -232,10 +219,7 @@ async function ShowBossEncounter(bossId)
         return;
 
 
-    /* -----------------------------------------------------
-       Bossデータを取得
-       ----------------------------------------------------- */
-
+    // Bossデータを取得
     const boss = BOSS_DATA[bossId];
 
     if (!boss)
@@ -248,10 +232,7 @@ async function ShowBossEncounter(bossId)
     }
 
 
-    /* -----------------------------------------------------
-       表示前にテキストを非表示へ戻す
-       ----------------------------------------------------- */
-
+    // 表示前にテキストを非表示へ戻す
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -277,10 +258,7 @@ async function ShowBossEncounter(bossId)
     });
 
 
-    /* -----------------------------------------------------
-       白フラッシュをリセット
-       ----------------------------------------------------- */
-
+    // 白フラッシュをリセット
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -292,10 +270,7 @@ async function ShowBossEncounter(bossId)
     });
 
 
-    /* -----------------------------------------------------
-       Boss名を設定
-       ----------------------------------------------------- */
-
+    // Boss名を設定
     ForEachPlayer((playerSlot) =>
     {
         hud.SetDialogVariableStringForPlayer(
@@ -314,10 +289,7 @@ async function ShowBossEncounter(bossId)
     });
 
 
-    /* -----------------------------------------------------
-       Boss HUD表示開始
-       ----------------------------------------------------- */
-
+    // Boss HUD表示開始
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -329,20 +301,12 @@ async function ShowBossEncounter(bossId)
     });
 
 
-    /* -----------------------------------------------------
-       エンブレム出現＋白フラッシュ＋Boss登場SE
-       ----------------------------------------------------- */
-
+    // エンブレム出現＋白フラッシュ＋Boss登場SE
     await Instance.Delay(BOSS_INITIAL_DELAY);
 
-
-    // 画面を一瞬だけ白く光らせる
     FlashBossScreen();
 
-
-    // Boss登場SE
     PlayBossPip();
-
 
     Instance.Msg(
         "BossEncounter: " +
@@ -350,10 +314,7 @@ async function ShowBossEncounter(bossId)
     );
 
 
-    /* -----------------------------------------------------
-       テキスト演出
-       ----------------------------------------------------- */
-
+    // テキスト演出
     (async () =>
     {
         // 日本語Boss名を表示
@@ -399,10 +360,7 @@ async function ShowBossEncounter(bossId)
     })();
 
 
-    /* -----------------------------------------------------
-       一定時間後に自動退場
-       ----------------------------------------------------- */
-
+    // 一定時間後に自動退場
     (async () =>
     {
         await Instance.Delay(BOSS_DISPLAY_TIME);
@@ -424,10 +382,7 @@ async function HideBossEncounterAnimated()
         return;
 
 
-    /* -----------------------------------------------------
-       英語Boss名を消す
-       ----------------------------------------------------- */
-
+    // 英語Boss名を消す
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -442,10 +397,7 @@ async function HideBossEncounterAnimated()
     await Instance.Delay(EXIT_LINE_DELAY);
 
 
-    /* -----------------------------------------------------
-       ラインを消す
-       ----------------------------------------------------- */
-
+    // ラインを消す
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -460,10 +412,7 @@ async function HideBossEncounterAnimated()
     await Instance.Delay(EXIT_NAME_DELAY);
 
 
-    /* -----------------------------------------------------
-       日本語Boss名を消す
-       ----------------------------------------------------- */
-
+    // 日本語Boss名を消す
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -478,10 +427,7 @@ async function HideBossEncounterAnimated()
     await Instance.Delay(EXIT_CONTAINER_DELAY);
 
 
-    /* -----------------------------------------------------
-       Boss HUD全体を消す
-       ----------------------------------------------------- */
-
+    // Boss HUD全体を消す
     ForEachPlayer((playerSlot) =>
     {
         hud.SetHasClassForPlayer(
@@ -573,7 +519,6 @@ function HideBossEncounter()
    Hammerから呼び出すBossイベント
    ========================================================= */
 
-
 // Boss01
 Instance.OnScriptInput(
     "boss01",
@@ -624,11 +569,7 @@ Instance.OnScriptInput(
 );
 
 
-/* =========================================================
-   Boss HUD強制非表示
-   Hammerから HideBossEncounter を送ると実行
-   ========================================================= */
-
+// 強制非表示
 Instance.OnScriptInput(
     "HideBossEncounter",
     () =>

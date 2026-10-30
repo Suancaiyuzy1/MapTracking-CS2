@@ -88,6 +88,36 @@
     transition-duration: 0.25s;
     transition-timing-function: ease-out;
 }
+.DialogueSlot.DialogueSpeakerActive .Name {
+    font-size: 26px;
+    color: #66E6FFFF;
+    text-shadow: 0px 0px 2px #000000FF, 0px 0px 6px #000000FF, 0px 0px 12px #66E6FFFF;
+}
+.DialogueSlot.DialogueSpeakerInactive .Name {
+    font-size: 24px;
+    color: #FFFFFFFF;
+    opacity: 0.80;
+    text-shadow: 0px 0px 2px #000000FF, 0px 0px 4px #000000FF;
+}
+.NameLine {
+    width: 180px;
+    height: 2px;
+    margin-top: 1px;
+    margin-bottom: 3px;
+    background-color: #FFFFFFFF;
+    opacity: 0.30;
+    transition-property: width, opacity;
+    transition-duration: 0.25s;
+    transition-timing-function: ease-out;
+}
+.DialogueSlot.DialogueSpeakerActive .NameLine {
+    width: 180px;
+    opacity: 0.55;
+}
+.DialogueSlot.DialogueSpeakerInactive .NameLine {
+    width: 150px;
+    opacity: 0.22;
+}
 .Message {
     font-size: 20px;
     color: white;
@@ -218,34 +248,4 @@
 }
 .DialogueSlot.ShowPortraitF .PortraitF {
     visibility: visible;
-}
-.DialogueSlot.DialogueSpeakerActive .Name {
-    font-size: 26px;
-    color: #66E6FFFF;
-    text-shadow: 0px 0px 2px #000000FF, 0px 0px 6px #000000FF, 0px 0px 12px #66E6FFFF;
-}
-.DialogueSlot.DialogueSpeakerInactive .Name {
-    font-size: 24px;
-    color: #FFFFFFFF;
-    opacity: 0.80;
-    text-shadow: 0px 0px 2px #000000FF, 0px 0px 4px #000000FF;
-}
-.NameLine {
-    width: 180px;
-    height: 2px;
-    margin-top: 1px;
-    margin-bottom: 3px;
-    background-color: #FFFFFFFF;
-    opacity: 0.30;
-    transition-property: width, opacity;
-    transition-duration: 0.25s;
-    transition-timing-function: ease-out;
-}
-.DialogueSlot.DialogueSpeakerActive .NameLine {
-    width: 180px;
-    opacity: 0.55;
-}
-.DialogueSlot.DialogueSpeakerInactive .NameLine {
-    width: 150px;
-    opacity: 0.22;
 }

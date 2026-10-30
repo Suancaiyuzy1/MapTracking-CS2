@@ -24,6 +24,20 @@
     horizontal-align: center;
     vertical-align: center;
 }
+.TitleBackgroundMainView {
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    overflow: noclip;
+}
+.TitleBackgroundMainImage {
+    width: 100%;
+    height: 100%;
+    horizontal-align: center;
+    vertical-align: center;
+    opacity: 1.0;
+}
 .TitleBackgroundView {
     width: 100%;
     height: 100%;
@@ -46,7 +60,7 @@
     height: 100%;
     horizontal-align: left;
     vertical-align: top;
-    opacity: 1.0;
+    opacity: 0.8;
 }
 #title_background_panel.BackgroundMove {
     transform: translateX(-50%);
@@ -119,15 +133,7 @@
 .TitleDescriptionFirst {
     margin-top: 140px;
 }
-#title_description_01.TitleDescriptionFirstVisible {
-    opacity: 1.0;
-    transform: translateY(0px);
-}
-#title_description_02.TitleDescriptionVisible {
-    opacity: 1.0;
-    transform: translateY(0px);
-}
-#title_description_03.TitleDescriptionVisible {
+#title_description_01.TitleDescriptionFirstVisible,#title_description_02.TitleDescriptionVisible,#title_description_03.TitleDescriptionVisible {
     opacity: 1.0;
     transform: translateY(0px);
 }
