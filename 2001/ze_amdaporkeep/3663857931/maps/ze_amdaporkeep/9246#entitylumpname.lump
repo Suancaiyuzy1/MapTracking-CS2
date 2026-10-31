@@ -159,7 +159,7 @@
         "target": "!caller",
         "input": "RemoveContext",
         "param": "Holy",
-        "delay": 15,
+        "delay": 10,
         "limit": 1
       },
       {

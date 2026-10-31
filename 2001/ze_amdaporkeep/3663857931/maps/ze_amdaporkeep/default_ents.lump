@@ -53593,7 +53593,7 @@
         "output": "OnTrigger",
         "target": "!activator",
         "input": "AddOutput",
-        "param": "OnUser1\u003E!activator\u003EKeyValues\u003Espeed 1.05\u003E0\u003E1",
+        "param": "OnUser1\u003E!activator\u003EKeyValues\u003Espeed 1.08\u003E0\u003E1",
         "delay": 0,
         "limit": -1
       },
@@ -56071,7 +56071,7 @@
         "target": "[PR#]Player_Dark_Knight",
         "input": "SetDamageFilter",
         "param": "",
-        "delay": 0.019999999552965164,
+        "delay": 0.10000000149011612,
         "limit": 1
       },
       {
@@ -56097,6 +56097,14 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "[PR#]Player_Dark_Knight",
+        "input": "RemoveContext",
+        "param": "Invinc",
+        "delay": 0.019999999552965164,
+        "limit": -1
       }
     ]
   },
@@ -56878,6 +56886,94 @@
         "param": "",
         "delay": 0,
         "limit": 1
+      }
+    ]
+  },
+  {
+    "ResponseContext": "Invinc",
+    "Negated": "1",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+    "classname": "filter_activator_context",
+    "origin": "-13971.000000 -8727.000000 5128.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9327",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "!activator",
+        "input": "SetDamageFilter",
+        "param": "",
+        "delay": 5,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "ResponseContext": "Invinc",
+    "Negated": "1",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+    "classname": "filter_activator_context",
+    "origin": "-13971.000000 -8711.000000 5128.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9328",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "!activator",
+        "input": "SetDamageFilter",
+        "param": "[PR#]Filter_Burn_Damage",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "ResponseContext": "Invinc",
+    "Negated": "1",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]Item_Dark_Knight_Astrologer_Bole_Filter",
+    "classname": "filter_activator_context",
+    "origin": "-13971.000000 -8695.000000 5128.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9329",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "!activator",
+        "input": "SetDamageFilter",
+        "param": "[PR#]Filter_Sonic_Damage",
+        "delay": 0,
+        "limit": -1
+      }
+    ]
+  },
+  {
+    "ResponseContext": "Invinc",
+    "Negated": "1",
+    "clientSideEntity": "0",
+    "vscripts": "",
+    "targetname": "[PR#]Item_Dark_Knight_Astrologer_ResistZM_Filter",
+    "classname": "filter_activator_context",
+    "origin": "-13971.000000 -8679.000000 5128.000000",
+    "angles": "0.000000 0.000000 0.000000",
+    "scales": "1.000000 1.000000 1.000000",
+    "hammerUniqueId": "9330",
+    "connections": [
+      {
+        "output": "OnPass",
+        "target": "!activator",
+        "input": "SetDamageFilter",
+        "param": "[PR#]Filter_No_Zombie",
+        "delay": 0,
+        "limit": -1
       }
     ]
   }

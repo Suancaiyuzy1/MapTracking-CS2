@@ -239,6 +239,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnSoundFinished",
+        "target": "[PR#]FFXIV_Victory",
+        "input": "SetSoundEventName",
+        "param": "[PR#]FFXIV_Victory",
+        "delay": 0,
+        "limit": 1
       }
     ]
   },
@@ -1424,7 +1432,7 @@
       {
         "output": "OnCase01",
         "target": "[PR#]FFXIV_Victory",
-        "input": "Kill",
+        "input": "SetSoundEventName",
         "param": "",
         "delay": 0,
         "limit": 1
@@ -1432,7 +1440,7 @@
       {
         "output": "OnCase02",
         "target": "[PR#]FFXIV_Victory",
-        "input": "Kill",
+        "input": "SetSoundEventName",
         "param": "",
         "delay": 0,
         "limit": 1

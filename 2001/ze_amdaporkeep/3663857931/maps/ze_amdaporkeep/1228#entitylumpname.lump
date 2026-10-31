@@ -7,7 +7,7 @@
     "add_attribute": "",
     "ResponseContext": "",
     "wait": "1.000000",
-    "filtername": "[PR#]Filter_Team_HM_NoDK",
+    "filtername": "[PR#]Filter_Team_Human",
     "spawnflags": "1",
     "globalname": "",
     "StartDisabled": "0",
@@ -29,16 +29,16 @@
     "connections": [
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Sonic_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Bole_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
         "param": "",
         "delay": 5,
         "limit": -1

@@ -424,7 +424,7 @@
         "target": "[PR#]ZM_Flying_Sprites_Button",
         "input": "Unlock",
         "param": "",
-        "delay": 55,
+        "delay": 65,
         "limit": -1
       },
       {
@@ -432,7 +432,7 @@
         "target": "[PR#]ZM_Flying_Sprites_Recast",
         "input": "Start",
         "param": "",
-        "delay": 55,
+        "delay": 65,
         "limit": -1
       },
       {
@@ -718,7 +718,7 @@
         "output": "OnPass",
         "target": "!activator",
         "input": "KeyValues",
-        "param": "speed 1.20",
+        "param": "speed 1.23",
         "delay": 0,
         "limit": -1
       }

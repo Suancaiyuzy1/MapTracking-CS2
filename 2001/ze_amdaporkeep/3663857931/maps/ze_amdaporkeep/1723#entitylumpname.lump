@@ -1184,32 +1184,32 @@
       },
       {
         "output": "OnCase04",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_No_Zombie",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_ResistZM_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase04",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
         "param": "",
         "delay": 10,
         "limit": -1
       },
       {
         "output": "OnCase05",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Sonic_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Bole_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase05",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
         "param": "",
         "delay": 5,
         "limit": -1
@@ -1224,10 +1224,10 @@
       },
       {
         "output": "OnCase06",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
         "param": "",
-        "delay": 1,
+        "delay": 1.5,
         "limit": -1
       },
       {
@@ -1288,16 +1288,16 @@
       },
       {
         "output": "OnCase12",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_No_Zombie",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_ResistZM_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnCase12",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
         "param": "",
         "delay": 10,
         "limit": -1
@@ -1370,7 +1370,7 @@
         "output": "OnCase20",
         "target": "[PR#]Item_Samurai_Ulti_Counter",
         "input": "Add",
-        "param": "1",
+        "param": "2",
         "delay": 0,
         "limit": 1
       },
@@ -1378,7 +1378,7 @@
         "output": "OnCase20",
         "target": "[PR#]Item_Samurai_Ulti_Counter",
         "input": "Subtract",
-        "param": "1",
+        "param": "2",
         "delay": 10,
         "limit": 1
       },

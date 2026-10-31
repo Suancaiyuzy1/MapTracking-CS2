@@ -820,98 +820,71 @@
         "target": "[PR#]Item_Elidibus_Filter_Gift",
         "input": "TestActivator",
         "param": "",
-        "delay": 0.019999999552965164,
+        "delay": 0.10000000149011612,
         "limit": -1
-      }
-    ]
-  },
-  {
-    "wait": "1.000000",
-    "filtername": "[PR#]Filter_Team_HM_NoDK",
-    "spawnflags": "268435457",
-    "globalname": "",
-    "StartDisabled": "1",
-    "local.scales": "0.000000 0.000000 0.000000",
-    "local.angles": "0.000000 0.000000 0.000000",
-    "local.origin": "0.000000 0.000000 0.000000",
-    "useLocalOffset": "0",
-    "parentAttachmentName": "",
-    "parentname": "[PR#]Item_Astrologer_Elite",
-    "add_modifier": "",
-    "add_attribute": "",
-    "ResponseContext": "",
-    "vscripts": "",
-    "targetname": "[PR#]Item_Astrologer_Trigger",
-    "classname": "trigger_multiple",
-    "origin": "0.000000 0.000000 -20.000000",
-    "angles": "-0.000000 0.000000 0.000000",
-    "scales": "1.000000 1.000000 1.000000",
-    "hammerUniqueId": "6900",
-    "model": "maps/ze_amdaporkeep/entities/item_astrologer_trigger_6900.vmdl",
-    "_template_lump_ent_index": "13",
-    "connections": [
+      },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 0,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Invincibility_Filter",
+        "input": "TestActivator",
+        "param": "",
+        "delay": 7.5,
+        "limit": -1
+      },
+      {
+        "output": "OnStartTouch",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 1,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 2,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 3,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 4,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
+        "param": "",
         "delay": 5,
         "limit": -1
       },
       {
         "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
-        "param": "[PR#]Filter_Burn_Damage",
-        "delay": 6,
-        "limit": -1
-      },
-      {
-        "output": "OnStartTouch",
-        "target": "!activator",
-        "input": "SetDamageFilter",
+        "target": "[PR#]Item_Dark_Knight_Astrologer_Sun_Filter",
+        "input": "TestActivator",
         "param": "",
-        "delay": 7.5,
+        "delay": 6,
         "limit": -1
       }
     ]
@@ -942,7 +915,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1618",
-    "_template_lump_ent_index": "14"
+    "_template_lump_ent_index": "13"
   },
   {
     "entityIndexSelection": "0",
@@ -970,7 +943,7 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1617",
-    "_template_lump_ent_index": "15"
+    "_template_lump_ent_index": "14"
   },
   {
     "add_modifier": "",
@@ -1017,7 +990,7 @@
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "1323",
     "model": "maps/ze_amdaporkeep/entities/item_astrologer_play_button_1323.vmdl",
-    "_template_lump_ent_index": "16",
+    "_template_lump_ent_index": "15",
     "connections": [
       {
         "output": "OnPressed",
@@ -1055,6 +1028,6 @@
     "angles": "-0.000000 0.000000 0.000000",
     "scales": "1.000000 1.000000 1.000000",
     "hammerUniqueId": "7045",
-    "_template_lump_ent_index": "17"
+    "_template_lump_ent_index": "16"
   }
 ]

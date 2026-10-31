@@ -48,7 +48,7 @@
         "target": "[PR#]Item_Elidibus_Filter_Gift",
         "input": "TestActivator",
         "param": "",
-        "delay": 0.019999999552965164,
+        "delay": 0.10000000149011612,
         "limit": -1
       }
     ]

@@ -1333,6 +1333,14 @@
         "param": "",
         "delay": 0,
         "limit": -1
+      },
+      {
+        "output": "OnHitMin",
+        "target": "[PR#]Player_Dark_Knight",
+        "input": "RemoveContext",
+        "param": "Invinc",
+        "delay": 0.019999999552965164,
+        "limit": -1
       }
     ]
   },
@@ -1425,6 +1433,14 @@
         "target": "!activator",
         "input": "SetDamageFilter",
         "param": "[PR#]Filter_Nada",
+        "delay": 0.019999999552965164,
+        "limit": -1
+      },
+      {
+        "output": "OnTrigger",
+        "target": "!activator",
+        "input": "AddContext",
+        "param": "Invinc:1",
         "delay": 0,
         "limit": -1
       }
